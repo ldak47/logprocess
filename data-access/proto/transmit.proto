@@ -1,0 +1,27 @@
+syntax = "proto2";
+
+package transmit;
+option cc_generic_services = true;
+
+message MapEntry {
+    required string key = 1;
+    required string value = 2;
+}
+
+message TransmitRequest {
+    repeated MapEntry values = 1;
+}
+
+message TransmitResponse {
+    enum Res_Status {
+        SUCCEED = 0;
+        FAILED = 1;
+    }
+
+    required Res_Status status = 1;
+    optional string error = 2;
+}
+
+service TransmitService {
+    rpc transmit(TransmitRequest) returns(TransmitResponse);
+}

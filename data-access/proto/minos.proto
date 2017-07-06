@@ -1,0 +1,141 @@
+syntax = "proto2";
+
+package baidu.minos;
+option cc_generic_services = true;
+
+message PbRecordHeader {
+    optional int64 body_length = 5;
+    optional int64 record_id = 6;
+    optional int64 timestamp_in_log = 10;
+    optional int64 timestamp_in_filename = 11;
+    optional int64 timestamp_when_send = 12;
+    optional int32 partition_id = 19;
+    optional string external_checkpoint = 22;
+}
+
+message PbRecord {
+    optional PbRecordHeader header = 1;
+    optional bytes body = 2;
+}
+
+message UserAccountMessage {
+    optional string token = 1; // required
+}
+
+message BrokerResponse {
+    enum Status {
+        SUCCEED = 1;
+        FAILED = 2;
+    }
+    optional Status status = 1; // required
+    optional string error_message = 2;
+}
+
+// for light weight api begin
+message SubscribeRecordRequest {
+    optional int32 topic_id = 1; // required
+    optional int64 partition_group_id = 2; // required
+    optional UserAccountMessage account = 3; // required
+    optional int64 data_package_id = 4; // required
+    optional int32 record_count = 5 [default = 1];
+}
+
+message SubscribeRecordResponse {
+    enum Status {
+        SUCCEED = 1;
+        NO_DATA_LEFT = 2;
+        RECORD_ID_TOO_SMALL = 3;
+        NO_SUCH_PARTITION_GROUP = 4;
+        FAILED = 99;
+    }
+    required Status status = 1; // required
+    optional string error_message = 2;
+    repeated PbRecord data = 3;
+    optional int64 cur_data_package_id = 4;
+}
+
+message InitSubscriberBrokerRequest {
+    enum Type {
+        TIMESTAMP = 1;
+        RECORD_ID = 2;
+    };
+    // get the segment by record_id or timestamp
+    optional Type type = 1 [default = TIMESTAMP]; // required
+    optional int32 topic_id = 2; // required
+    optional int64 partition_group_id = 3; // required
+    optional bool need_progress = 4 [default = true];
+    optional UserAccountMessage account = 5; // required
+    enum StartRecordType {
+        OLDEST_RECORD = 1;
+        NEWEST_RECORD = 2;
+    }
+    //if type is RECORD_ID, start_record_type is required
+    optional StartRecordType start_record_type = 6 [default = NEWEST_RECORD];
+    //if type is TIMESTAMP, start_timestamp is required
+    optional int64 start_timestamp = 7;
+}
+
+// for light weight api, response for init SubscriberBroker
+message InitSubscriberBrokerResponse {
+    enum Status {
+        SUCCEED = 0;
+        FAILED = 1;
+        STARTING = 2;
+    }
+    required Status status = 1; // required
+    optional string error_message = 2;
+}
+
+// for light weight api, uninit SubscriberBroker
+message UninitSubscriberBrokerRequest {
+    optional int32 topic_id = 1; // required
+    optional int64 partition_group_id = 2; // required
+    optional UserAccountMessage account = 3; // required
+}
+
+// progress for each partition
+message PartitionProgress {
+    optional int64 partition_id = 1; // required
+    optional int64 last_sended_max_record_id = 2; // required
+    optional int64 cur_sended_max_record_id = 3; // required
+}
+
+message PartitionGroupProgress {
+    optional int32 topic_id = 1; // required
+    optional int32 partition_group_id = 2; // required
+    optional int64 cur_data_package_id = 3;
+    optional int64 cur_partition_id = 4;
+    repeated PartitionProgress progress = 5;
+    optional UserAccountMessage account = 6; // required
+}
+
+// set partition_group progress
+message SetPartitionGroupProgressRequest {
+    optional PartitionGroupProgress pg_progress = 1; // required
+}
+
+// get partition_group progress
+message GetPartitionGroupProgressRequest {
+    optional int32 topic_id = 1; // required
+    optional int64 partition_group_id = 2; // required
+    optional UserAccountMessage account = 3; // required
+}
+
+message GetPartitionGroupProgressResponse {
+    enum Status {
+        SUCCEED = 0;
+        FAILED = 1;
+    }
+    required Status status = 1; // required
+    optional string error_message = 2;
+    optional PartitionGroupProgress pg_progress= 3;
+}
+
+// for subscribe
+service BrokerService {
+    rpc init_subscriber(InitSubscriberBrokerRequest) returns(InitSubscriberBrokerResponse);
+    rpc uninit_subscriber(UninitSubscriberBrokerRequest) returns(BrokerResponse);
+    rpc set_partition_group_progress(SetPartitionGroupProgressRequest) returns(BrokerResponse);
+    rpc get_partition_group_progress(GetPartitionGroupProgressRequest) returns(GetPartitionGroupProgressResponse);
+    rpc subscribe_record(SubscribeRecordRequest) returns(SubscribeRecordResponse);
+}
