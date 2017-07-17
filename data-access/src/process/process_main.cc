@@ -30,12 +30,18 @@ bool LoadConfig (libconfig::Config &cfg) {
 }
 
 int main (int argc, char *argv[]) {
+    if (argc < 2) {
+        LOG(ERROR) << "argc 2 should be port";
+        exit(-1);
+    }
+    
     libconfig::Config cfg;
     if (!LoadConfig(cfg)) {
         exit(-1);
     }
+
     libconfig::Setting &root = cfg.getRoot();
-    ProcessAdapt process_adapter(root["process"]);
+    ProcessAdapt process_adapter(root["process"], argv[1]);
     if (process_adapter.GetErrFlag()) {
         exit(-1);
     }

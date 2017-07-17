@@ -6,7 +6,9 @@
 #include "gflags/gflags.h"
 #include "libconfig.h++"
 #include <string>
+#include <regex>
 #include <boost/lockfree/queue.hpp>
+#include <boost/algorithm/string.hpp>
 
 namespace dataaccess {
     
@@ -21,16 +23,25 @@ class DataAccesser {
 public:
     DataAccesser(std::string server_addr,
                  int rpc_timeout,
-                 const libconfig::Setting &minos_cfg
+                 const libconfig::Setting &minos_cfg,
+                 const std::vector<std::string> &support_type,
+                 const libconfig::Setting &srcids_cfg
                  );
     ~DataAccesser();
-    bool Start(const libconfig::Setting &minos_cfg);
+    bool Start(const libconfig::Setting &minos_cfg,
+               const std::vector<std::string> &support_type,
+               const libconfig::Setting &sricds_cfg);
     bool Stop();
     void Subscribe(std::shared_ptr<boost::lockfree::queue<void *>> lockfreequeue);
     void InitMinosPipe();
     std::string GetError () const {
         return failure_str;
     }
+    
+    bool filter(const std::string &msg);
+    bool ParseLegalSrcids(const std::vector<std::string> &types, const libconfig::Setting &srcids_cfg);
+    std::set<std::string> legalsrcids;
+    
 private:
     std::string server_addr_;
     int rpc_timeout_;

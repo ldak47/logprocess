@@ -1,0 +1,64 @@
+syntax = "proto2";
+
+package manage;
+option cc_generic_services = true;
+
+message FiledConfig {
+    required string field = 1;
+    required string regex = 2;
+}
+
+message SetLogFieldConfigRequest {
+    required string application = 1;
+    repeated FiledConfig fieldconfigs = 2;
+}
+
+message SetLogFieldConfigResponse {
+    enum Res_Status {
+        SUCCEED = 0;
+        FAILED = 1;
+    }
+
+    required Res_Status status = 1;
+    optional string error = 2;
+}
+
+message GetLogFieldConfigRequest {
+    optional string application = 1;
+    optional string field = 2;
+}
+
+message GetLogFieldConfigResponse {
+    enum Res_Status {
+        SUCCEED = 0;
+        FAILED = 1;
+    }
+
+    required Res_Status status = 1;
+    optional string error = 2;
+    repeated FiledConfig fieldconfigs = 3;
+}
+
+message GetLogTransmitStatRequest {
+    optional string application = 1;
+    optional bool logtype = 2; //0:notice 1:warning
+    required int64 startime = 3;
+    required int64 endtime = 4;
+}
+
+message GetLogTransmitStatResponse {
+    enum Res_Status {
+        SUCCEED = 0;
+        FAILED = 1;
+    }
+
+    required Res_Status status = 1;
+    optional string error = 2;
+    required int64 num = 3; 
+}
+
+service ManageService {
+    rpc SetLogFieldConfig(SetLogFieldConfigRequest) returns(SetLogFieldConfigResponse);
+    rpc GetLogFieldConfig(GetLogFieldConfigRequest) returns(GetLogFieldConfigResponse);
+    rpc GetLogTransmitStat(GetLogTransmitStatRequest) returns(GetLogTransmitStatResponse);
+}

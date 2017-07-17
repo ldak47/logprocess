@@ -68,6 +68,20 @@ TEST(test_function, test_simple_function) {
     LOG(INFO) << "args is const reference and reference: " << modify_add5(&a);
 }
  
+TEST(test_function, test_class_function) {
+    class ca {
+    public:
+        bool func(int a) {
+            LOG(INFO) << "aaa: " << a;
+        }
+    };
+
+    ca o;
+    std::function<bool (int)> f = std::bind(&ca::func, o, std::placeholders::_1);
+    f(1);
+    std::vector<std::function<bool (int *)>> chk_;
+}
+
 int main (int argc, char *argv[]) {
     ::google::SetStderrLogging(::google::GLOG_FATAL);
     FLAGS_logbufsecs = 0;

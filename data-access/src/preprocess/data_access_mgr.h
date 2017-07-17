@@ -4,9 +4,9 @@ namespace dataaccess {
 
 class DataAccesserMgr {
 public:
-    DataAccesserMgr(const libconfig::Setting &cfg);
+    DataAccesserMgr(const libconfig::Setting &cfg, const std::vector<std::string> &support_type, const libconfig::Setting &srcids_cfg);
     ~DataAccesserMgr();
-    bool Start(const libconfig::Setting &minos_cfg);
+    bool Start(const libconfig::Setting &minos_cfg, const std::vector<std::string> &support_type, const libconfig::Setting &srcids_cfg);
     void Stop();
 
 private:

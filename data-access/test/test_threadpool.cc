@@ -41,9 +41,12 @@ bool test (ThreadPool &thread_pool) {
     return true;
 }
 
-TEST (test1, test) {
+TEST (test1, test_delaytast) {
     ThreadPool thread_pool(30);
-    EXPECT_EQ(true, test(thread_pool));
+    Task taskminos(std::bind(&minostask, 1, 2));
+    thread_pool.AddDelayTask(1000 * 5000, taskminos);
+    while (1);
+    //EXPECT_EQ(true, test(thread_pool));
 }
 
 int main (int argc, char *argv[]) {

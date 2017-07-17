@@ -4,12 +4,15 @@ namespace dataaccess {
 
 std::string DataAccesserExcept[] = {
     "CLIENT_CREATE_FAIL",
-    "PARTITION ILLEGAL"
+    "PARTITION ILLEGAL",
+    "LEGALSRCIDS ILLEGAL"
 };
 
 DataAccesser::DataAccesser (std::string server_addr,
                             int rpc_timeout,
-                            const libconfig::Setting &minos_cfg
+                            const libconfig::Setting &minos_cfg,
+                            const std::vector<std::string> &support_type,
+                            const libconfig::Setting &srcids_cfg
                            ): status_(INITING), 
                               server_addr_(server_addr),
                               rpc_timeout_(rpc_timeout),
@@ -24,12 +27,33 @@ DataAccesser::DataAccesser (std::string server_addr,
         failure_str = DataAccesserExcept[0];
         LOG(WARNING) << "DataAccesser construct fail with reason " << failure_str;
     } else {
-        Start(minos_cfg);
+        Start(minos_cfg, support_type, srcids_cfg);
     }
 }
 
 DataAccesser::~DataAccesser () {
     client_.reset(0);
+}
+
+bool DataAccesser::filter (const std::string &msg) {
+    if (msg.find("WARNING") != std::string::npos) {
+        return false;
+    }
+
+    try {
+        std::string srcid_regex = " srcid\\[(\\d+)\\] ";
+        std::regex reg(srcid_regex.c_str());
+        std::smatch res;
+        regex_search(msg, res, reg);
+        std::string srcid = res.str(1);
+        if (legalsrcids.find(srcid) == legalsrcids.end()) {
+            return false;
+        }
+    } catch (std::exception &err) {
+        return false;
+    }
+
+    return true;
 }
 
 bool DataAccesser::minos_arg_parse (const libconfig::Setting &minos_cfg) {
@@ -77,14 +101,20 @@ void DataAccesser::Subscribe (std::shared_ptr<boost::lockfree::queue<void *>> lo
             if (response.status() != baidu::minos::SubscribeRecordResponse::SUCCEED &&
                 response.status() != baidu::minos::SubscribeRecordResponse::NO_DATA_LEFT) {
                 //not SUCCEED and not NO_DATA_LEFT, so that the broker pipelet happen except, need initsub again
+                //LOG(WARNING) << "not SUCCEED and not NO_DATA_LEFT(status code: " << response.status() << "), so that the broker pipelet happen except, need initsub again";
                 InitMinosPipe();
             } else {
                 if (!res) {
                     //rpc request fail
                     LOG(WARNING) << "subscribe request fail";
                 } else {
-                    //other cases.....
-                    LOG(WARNING) << "subscribe request get data fail, errormessage: " << response.error_message() << ", requestmsg: " << request.ShortDebugString() << ", errorcode: " << response.status() << ", cur_data_package_id: " << response.cur_data_package_id();
+                    //other cases(such as 'no data left.'), have a rest.....
+                    if (response.error_message() == "no data left.") {
+                        std::chrono::seconds duration(2);
+                        std::this_thread::sleep_for(duration);
+                    } else {
+                        LOG(WARNING) << "subscribe request get data fail, errormessage: " << response.error_message() << ", requestmsg: " << request.ShortDebugString() << ", errorcode: " << response.status() << ", cur_data_package_id: " << response.cur_data_package_id();
+                    }
                 }
             }
 
@@ -107,7 +137,7 @@ void DataAccesser::Subscribe (std::shared_ptr<boost::lockfree::queue<void *>> lo
                 }
             }
 
-            if (body_len) {
+            if (body_len && filter(body)) {
                 RawBody *newbody = new RawBody(body);
                 lockfreequeue->push((void *)newbody);
                 ++access_cnt_;
@@ -141,12 +171,13 @@ void DataAccesser::InitMinosPipe () {
     init_request.set_start_timestamp(time(0));
     init_request.set_start_record_type(baidu::minos::InitSubscriberBrokerRequest::NEWEST_RECORD);
 
+    LOG(INFO) << "begin init minos mq broker...";
     bool res = client_->InitSub(&init_request, &init_response, 0);
     while (!res || init_response.status() != baidu::minos::InitSubscriberBrokerResponse::SUCCEED) {
+        LOG(INFO) << "init-status is : " << init_response.status();
         if (res && init_response.status() == baidu::minos::InitSubscriberBrokerResponse::STARTING) {
             std::chrono::seconds duration(10);
             std::this_thread::sleep_for(duration);
-            return;
         }
      
         init_response.Clear();   
@@ -158,8 +189,41 @@ void DataAccesser::InitMinosPipe () {
     LOG(INFO) << "partition " << partition_ << " initsub success";
 }
 
-bool DataAccesser::Start (const libconfig::Setting &minos_cfg) {
+bool DataAccesser::ParseLegalSrcids (const std::vector<std::string> &support_type,
+                                     const libconfig::Setting &srcids_cfg) {
+    for (std::string i: support_type) {
+        std::string srcids;
+        try {
+            srcids_cfg.lookupValue(i.c_str(), srcids);
+            if (srcids != "") {
+                std::vector<std::string> tmp;
+                boost::algorithm::split(tmp, srcids, boost::algorithm::is_any_of("|"));
+                for (auto j: tmp) {
+                    legalsrcids.insert(j);
+                }
+            } else {        
+                failure_str = DataAccesserExcept[2];
+                LOG(WARNING) << "DataAccesser ParseLegalSrcids fail with cfg is null";
+                return false;
+            }
+        } catch (std::exception &err) {
+            failure_str = DataAccesserExcept[2];
+            LOG(WARNING) << "DataAccesser ParseLegalSrcids fail with " << err.what();
+            return false;
+        }
+    }
+
+    return true;
+}
+
+bool DataAccesser::Start (const libconfig::Setting &minos_cfg, 
+                          const std::vector<std::string> &support_type,
+                          const libconfig::Setting &srcids_cfg) {
     if (!minos_arg_parse(minos_cfg)) {
+        LOG(WARNING) << "DataAccesser Start fail with reason " << failure_str;
+        return false;
+    }
+    if (!ParseLegalSrcids(support_type, srcids_cfg)) {
         LOG(WARNING) << "DataAccesser Start fail with reason " << failure_str;
         return false;
     }

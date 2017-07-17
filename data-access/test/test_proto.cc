@@ -126,6 +126,27 @@ TEST(test_proto, test_proto_init) {
     Subscribe(client, 17);
 }
 
+TEST(test_proto, test_process) {
+    std::unique_ptr<RpcAdaptClient::PushDataRpcClient::PushClientHook> client;
+    client.reset(new RpcAdaptClient::PushDataRpcClient::PushClientHook("127.0.0.1:20000", 3000));
+
+    process::SetCheckListConfigRequest request;
+    std::string application = "weather";
+    process::CheckListCond cond;
+    process::SrcidConfig *src_cfg = cond.add_srcids();
+    src_cfg->set_srcid("4178");
+    src_cfg->set_cond(process::condEqual);
+    request.set_application(application);
+    request.set_allocated_cond(&cond);
+    
+    process::SetCheckListConfigResponse response;
+    bool res = client->SetCheckListConfig(&request, &response, 0);
+    request.release_cond();
+
+    EXPECT_EQ(res, true);
+    EXPECT_EQ(response.status(), process::TransmitResponse_Res_Status_SUCCEED);
+}
+
 int main (int argc, char *argv[]) {
     google::SetStderrLogging(google::GLOG_FATAL);
     FLAGS_logbufsecs = 0;

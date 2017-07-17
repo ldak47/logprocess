@@ -1,6 +1,7 @@
 #include "gtest/gtest.h"
 #include "glog/logging.h"
 #include "factory.h"
+#include <vector>
 
 /* test_factory_baseclass is factory base class */
 class test_factory_baseclass {
@@ -51,7 +52,7 @@ public:
 };
 
 /* test_factory_subclass2 is another derived class which based on test_factory_baseclass */
-class test_factory_subclass2 : public test_factory_baseclass {   
+class test_factory_subclass2 : public test_factory_baseclass {
 public:
     test_factory_subclass2(){
         LOG(INFO) << "sub class 2 construct";

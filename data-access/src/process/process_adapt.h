@@ -5,28 +5,43 @@
 
 namespace dataprocess {
 
-    class ProcessAdapt : public transmit::TransmitService {
+    class ProcessAdapt : public process::ProcessService {
         std::unique_ptr<ThreadPool> thread_pool_;
-        Process_Impl process_impl_;
+        std::unique_ptr<Process_Impl> process_impl_;
         bool err_flag_;
         std::string server_addr_;
         std::unique_ptr<sofa::pbrpc::RpcServer> rpc_server_;
         
         bool Init(const libconfig::Setting &cfg);
     public:
-        ProcessAdapt(const libconfig::Setting &cfg);
+        ProcessAdapt(const libconfig::Setting &cfg, const std::string &port);
         ~ProcessAdapt();
-        bool Start(const libconfig::Setting &cfg);
+        bool Start(const libconfig::Setting &cfg, const std::string &port);
         bool GetErrFlag(){return err_flag_;}
 
-        void transmit(::google::protobuf::RpcController *cntl,
-                         const transmit::TransmitRequest *request,
-                         transmit::TransmitResponse *response,
+        void Transmit(::google::protobuf::RpcController *cntl,
+                         const process::TransmitRequest *request,
+                         process::TransmitResponse *response,
                          ::google::protobuf::Closure *done);
 
-        void DataReceive_action(const transmit::TransmitRequest *request,
-                                transmit::TransmitResponse *response,
+        void DataReceive_action(const process::TransmitRequest *request,
+                                process::TransmitResponse *response,
                                 ::google::protobuf::Closure *done); 
+
+        void SetCheckListConfig (::google::protobuf::RpcController *cntl,
+                                 const process::SetCheckListConfigRequest *request,
+                                 process::SetCheckListConfigResponse *response,
+                                 ::google::protobuf::Closure *done);
+
+        void GetCheckListConfig (::google::protobuf::RpcController *cntl,
+                                 const process::GetCheckListConfigRequest *request,
+                                 process::GetCheckListConfigResponse *response,
+                                 ::google::protobuf::Closure *done);
+        
+        void GetLogProcessStat (::google::protobuf::RpcController *cntl,
+                                const process::GetLogProcessStatRequest *request,
+                                process::GetLogProcessStatResponse *response,
+                                ::google::protobuf::Closure *done);
     };
 };
 

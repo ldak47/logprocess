@@ -31,6 +31,19 @@ TEST (test, test_libconfig) {
     }
 }
 
+TEST(test, za) {
+    libconfig::Config cfg;
+    try {
+        cfg.readFile("../conf/data-access.cfg");
+    } catch (const libconfig::FileIOException &fioerr) {
+        LOG(WARNING) << "I/O error while reading file example.cfg";
+        return;
+    }
+
+    const libconfig::Setting &root = cfg.getRoot();
+    const libconfig::Setting &sup = root["support_type"];
+}
+
 int main (int argc, char *argv[]) {
     ::google::SetStderrLogging(google::GLOG_FATAL);
     FLAGS_logbufsecs = 0;

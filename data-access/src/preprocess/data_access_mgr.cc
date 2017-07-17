@@ -19,14 +19,14 @@ static void *ThreadFunc (void *arg) {
     return NULL;
 }
 
-DataAccesserMgr::DataAccesserMgr (const libconfig::Setting &cfg) {
-    q_len_ = ParseQueueLen(cfg);
+DataAccesserMgr::DataAccesserMgr (const libconfig::Setting &minos_cfg, const std::vector<std::string> &support_type, const libconfig::Setting &srcids_cfg) {
+    q_len_ = ParseQueueLen(minos_cfg);
     InitTransmitQueue(q_len_);
     
-    pullers_num_ = ParsePullersNum(cfg);
-    ParseBrokerServerAddr(cfg);
-    ParseRpcTimeout(cfg);
-    if (!Start(cfg)) {
+    pullers_num_ = ParsePullersNum(minos_cfg);
+    ParseBrokerServerAddr(minos_cfg);
+    ParseRpcTimeout(minos_cfg);
+    if (!Start(minos_cfg, support_type, srcids_cfg)) {
         for (auto i: common::Range(0, accessers_.size())) {
             DataAccesser *accesser = accessers_[i];
             delete accesser;
@@ -40,11 +40,12 @@ DataAccesserMgr::~DataAccesserMgr() {
     Stop();
 }
 
-bool DataAccesserMgr::Start(const libconfig::Setting &minos_cfg) {
+bool DataAccesserMgr::Start(const libconfig::Setting &minos_cfg, const std::vector<std::string> &support_type, const libconfig::Setting &srcids_cfg) {
     libconfig::Setting &cfg = minos_cfg["accessers"];
     //for (auto i: common::Range(0, pullers_num_)) {
+    LOG(INFO) << "DataAccesserMgr start...";
     for (auto i: common::Range(0, 1)) {
-        DataAccesser *accesser = new DataAccesser(broker_server_addr_, rpc_timeout_, cfg[i]);
+        DataAccesser *accesser = new DataAccesser(broker_server_addr_, rpc_timeout_, cfg[i], support_type, srcids_cfg);
         if (!accesser || "" != accesser->GetError()) {
             if (!accesser) {
                 LOG(ERROR) << "accesser construct fail";

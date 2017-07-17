@@ -1,0 +1,2 @@
+/usr/bin/ar cq libminos_client.a  CMakeFiles/minos_client.dir/minos.pb.cc.o CMakeFiles/minos_client.dir/rpc_client.cc.o CMakeFiles/minos_client.dir/transmit.pb.cc.o
+/usr/bin/ranlib libminos_client.a

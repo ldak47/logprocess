@@ -6,7 +6,7 @@ include_directories(${PROTO_DIR})
 include_directories(${COMMON_DIR})
 link_directories(${THIRDPARTY_LIB_DIR})
 
-set(DATAPROCESS_MAIN_SRC process_main.cc process_impl.cc process_adapt.cc)
+set(DATAPROCESS_MAIN_SRC process_main.cc process_impl.cc process_adapt.cc process_chklist.cc process_chklist_item.cc)
 add_executable(dataprocess ${DATAPROCESS_MAIN_SRC})
 target_link_libraries(dataprocess minos_client)
 target_link_libraries(dataprocess access)

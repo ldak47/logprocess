@@ -1,6 +1,6 @@
 syntax = "proto2";
 
-package transmit;
+package process;
 option cc_generic_services = true;
 
 message MapEntry {
@@ -22,6 +22,115 @@ message TransmitResponse {
     optional string error = 2;
 }
 
-service TransmitService {
-    rpc transmit(TransmitRequest) returns(TransmitResponse);
+enum CondType {
+    condIn = 1;
+    condNotIn = 2;
+    condIs = 3;
+
+    condExist = 4;
+    condNotExist = 5;
+
+    condEqual = 6;
+    condPartEqual = 7;
+    condNotEqual = 8;
+
+    condLarger = 9;
+    condSmaller = 10;
+
+    condIsFront = 11;
+    condIsBehind = 12;
+}
+
+message SrcidConfig {
+    required string srcid = 1;
+    required CondType cond = 2;
+}
+
+message ScanCondSeWord {
+    required string searchword = 1;
+    required CondType cond = 2;
+}
+
+message LocationInfo {
+    optional string province = 1;
+    optional string city = 2;
+    required CondType cond = 3;
+}
+
+message CookieConfig {
+    required string cookie = 1;
+    required CondType cond = 2;
+}
+
+message ClusterConfig {
+    required string cluster = 1;
+    required CondType cond = 2;
+}
+
+message CheckListCond {
+    repeated SrcidConfig srcids = 1;
+    repeated ScanCondSeWord sewords = 2;
+    repeated LocationInfo lbs = 3;
+    repeated CookieConfig cookie = 4;
+    repeated ClusterConfig cluster = 5;
+    repeated SrcidConfig res_srcid = 6;
+}
+
+message SetCheckListConfigRequest {
+    required string application = 1;
+    required CheckListCond cond = 2;
+}
+
+message SetCheckListConfigResponse {
+    enum Res_Status {
+        SUCCEED = 0;
+        FAILED = 1;
+    }
+
+    required Res_Status status = 1;
+    optional string error = 2;
+}
+
+message GetCheckListConfigRequest {
+    required string application = 1;
+}
+
+message GetCheckListConfigResponse {
+    enum Res_Status {
+        SUCCEED = 0;
+        FAILED = 1;
+    }
+
+    required Res_Status status = 1;
+    optional string error = 2;
+    repeated CheckListCond cond = 3;
+}
+
+message GetLogProcessStatRequest {
+    required string application = 1;
+    required int64 startime = 2;
+    required int64 endtime = 3;
+    optional int32 startindex = 4;
+    optional int32 endindex = 5;
+    optional CheckListCond cond = 6;
+}
+
+message GetLogProcessStatResponse {
+    enum Res_Status {
+        SUCCEED = 0;
+        FAILED = 1;
+    }
+
+    required Res_Status status = 1;
+    optional string error = 2;
+    required int64 count = 3;
+    repeated string iteminfos = 4;
+}
+
+service ProcessService {
+    rpc Transmit(TransmitRequest) returns(TransmitResponse);
+
+    rpc SetCheckListConfig(SetCheckListConfigRequest) returns(SetCheckListConfigResponse);
+    rpc GetCheckListConfig(GetCheckListConfigRequest) returns(GetCheckListConfigResponse);
+    rpc GetLogProcessStat(GetLogProcessStatRequest) returns(GetLogProcessStatResponse);
 }

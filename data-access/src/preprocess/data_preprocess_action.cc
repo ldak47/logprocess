@@ -10,9 +10,9 @@ void Data_PreProcess (void *arg) {
 }
 */
 
-void DataFieldRuler::LoadConfig (const libconfig::Setting &cfg, const std::vector<std::string> &types) {
+void DataFieldRuler::LoadConfig (const libconfig::Setting &cfg, const std::vector<std::string> &types, const libconfig::Setting &srcid_cfg) {
     for (auto i: common::Range(0, types.size())) {
-        std::string tp = types[i];
+        std::string tp = types[i], srcids = "";
         
         std::map<std::string, std::string> field_regexes = app_field_regexes_[tp];
         libconfig::Setting &tpcfg = cfg[tp.c_str()];
@@ -24,11 +24,26 @@ void DataFieldRuler::LoadConfig (const libconfig::Setting &cfg, const std::vecto
             field_regexes[field] = regex;
         }
         app_field_regexes_[tp] = field_regexes;
+
+        srcid_cfg.lookupValue(tp.c_str(), srcids);
+        std::vector<std::string> tmp;
+        boost::algorithm::split(tmp, srcids, boost::algorithm::is_any_of("|"));
+        for (auto i: tmp) {
+            srcid_type[i] = tp;
+        }
     }
 }
 
 std::map<std::string, std::string> DataFieldRuler::GetRule (std::string app) {
     return app_field_regexes_[app];
+}
+
+std::string DataFieldRuler::GetType (std::string srcid) {
+    if (srcid_type.find(srcid) == srcid_type.end()) {
+        return "";
+    }
+
+    return srcid_type[srcid];
 }
 
 };

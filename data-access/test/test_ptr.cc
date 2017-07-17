@@ -180,6 +180,21 @@ TEST(test_ptr, test_shared_ptr_copy_on_write) {
     }
 }
 
+TEST(test_ptr, unique_ptr_vec) {
+    class base {
+    public:
+        virtual bool dosome(int a) = 0;
+    };
+
+    class derive1 : public base {
+    public:
+        virtual bool dosome (int a) {
+            LOG(INFO) << "AAA: " << a;
+        }
+    };
+    
+}
+
 int main (int argc, char *argv[]) {
     ::google::SetStderrLogging(::google::GLOG_FATAL);
     FLAGS_logbufsecs = 0;
