@@ -8,8 +8,8 @@ DEFINE_int32(RPC_SERVER_MAX_OUTFLOW, -1, "the max output flow (out MB/s) for rpc
 
 namespace dataprocess {
     
-    ProcessAdapt::ProcessAdapt (const libconfig::Setting &cfg, const std::string &port):err_flag_(false), server_addr_(FLAGS_RPC_SERVER_IPADDR)  {
-        err_flag_ = !(Init(cfg));
+    ProcessAdapt::ProcessAdapt (const libconfig::Setting &cfg, const std::string &port, const std::vector<std::string> &types):err_flag_(false), server_addr_(FLAGS_RPC_SERVER_IPADDR)  {
+        err_flag_ = !(Init(cfg, types, stoi(port)));
         if (!err_flag_) {
             err_flag_ = !(Start(cfg, port));
         }
@@ -55,7 +55,7 @@ namespace dataprocess {
         return true;
     }
 
-    bool ProcessAdapt::Init (const libconfig::Setting &cfg) {
+    bool ProcessAdapt::Init (const libconfig::Setting &cfg, const std::vector<std::string> &types, int port) {
         int workernum = FLAGS_RPC_SERVER_WORKER_NUM;
         try {
             cfg.lookupValue("worker_num", workernum);
@@ -94,7 +94,7 @@ namespace dataprocess {
         }
 
         try {
-            process_impl_.reset(new Process_Impl(cfg));
+            process_impl_.reset(new Process_Impl(cfg, types, port));
             if (!process_impl_.get()) {
                 LOG(ERROR) << "process_impl_ create fail.";
                 err_flag_ = true;

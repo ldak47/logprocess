@@ -8,16 +8,41 @@
 #include <chrono>
 #include <thread>
 #include <mutex>
+#include <unistd.h>
 #include "process_chklist_item.h"
 #include "rocksdb.h"
+#include "cJSON/cJSON.h"
+#include "process_storage.h"
+#include "time_trans.h"
+#include <boost/algorithm/string.hpp>
 
 namespace dataprocess {
     
     class Process_Impl {
+        std::string GetCurrPath () {
+            char *file_path_getcwd;
+            file_path_getcwd = (char *)malloc(80);
+            getcwd(file_path_getcwd, 80);
+            std::string curpath = file_path_getcwd;
+            free(file_path_getcwd);
+            return curpath;
+        }
+
+        std::map<std::string, StorageImpl *> storager;
+        void Storage(std::string type,
+                     std::string key,
+                     const std::map<std::string, std::string> &kv,
+                     bool debug = false);
+        std::vector<std::string> Read(std::string type, time_t start, time_t end = -1);
+        std::vector<std::map<std::string, std::string>> ReadFromRocksdb(std::string application, 
+                                                                        time_t start,
+                                                                        time_t end);
+        
         std::mutex mtx;
         std::map<std::string, std::vector<checklist_item *>> checklists;
-        void CheckAbnormal(const std::string &type,
+        void CheckAbnormal(std::string type,
                            const process::TransmitRequest *request);
+
         
         std::map<std::string, std::vector<std::unique_ptr<common::Rocksdb>>> dbs;
         
@@ -46,7 +71,7 @@ namespace dataprocess {
         std::map<std::string, std::string> request2kv(const process::TransmitRequest *request, bool debug = false);
         
     public:
-        Process_Impl(const libconfig::Setting &dbcfg);
+        Process_Impl(const libconfig::Setting &dbcfg, const std::vector<std::string> &types, int port);
         ~Process_Impl(){
             std::map<std::string, std::vector<checklist_item *>>::iterator it = checklists.begin();
             for (; it != checklists.end(); it++) {
@@ -54,6 +79,12 @@ namespace dataprocess {
                 for (auto checklist: chks) {
                     delete checklist;
                 }
+            }
+
+            std::map<std::string, StorageImpl *>::iterator iter = storager.begin();
+            for (; iter != storager.end(); iter++) {
+                StorageImpl *storageimpler = iter->second;
+                delete storageimpler;
             }
         }
         void DataReceive(const process::TransmitRequest *request,

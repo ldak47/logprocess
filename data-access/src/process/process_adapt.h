@@ -12,9 +12,9 @@ namespace dataprocess {
         std::string server_addr_;
         std::unique_ptr<sofa::pbrpc::RpcServer> rpc_server_;
         
-        bool Init(const libconfig::Setting &cfg);
+        bool Init(const libconfig::Setting &cfg, const std::vector<std::string> &types, int port);
     public:
-        ProcessAdapt(const libconfig::Setting &cfg, const std::string &port);
+        ProcessAdapt(const libconfig::Setting &cfg, const std::string &port, const std::vector<std::string> &types);
         ~ProcessAdapt();
         bool Start(const libconfig::Setting &cfg, const std::string &port);
         bool GetErrFlag(){return err_flag_;}

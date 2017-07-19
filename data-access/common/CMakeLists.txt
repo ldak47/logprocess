@@ -1,5 +1,5 @@
 
-set(COMMON_SRC thread_pool.cc util.cc rocksdb.cc redis.cc consistent_hash.cc)
+set(COMMON_SRC thread_pool.cc util.cc rocksdb.cc redis.cc consistent_hash.cc time_trans.cc)
 
 include_directories(${COMMON_DIR})
 include_directories(${THIRDPARTY_INCLUDE_DIR})

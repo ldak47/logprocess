@@ -57,6 +57,7 @@ add_executable(test_test ${TEST_TEST_SRC})
 target_link_libraries(test_test glog)
 target_link_libraries(test_test gtest)
 target_link_libraries(test_test pthread)
+target_link_libraries(test_test common)
 
 add_executable(test_regex ${TEST_REGEX_SRC})
 target_link_libraries(test_regex glog)

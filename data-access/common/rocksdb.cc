@@ -1,14 +1,14 @@
 #include "rocksdb.h"
 #include "range_iterator.h"
-#include "glog/logging.h"
 
 namespace common {
 
-void Rocksdb::default_setup (const char *dir, std::initializer_list<std::string> columnfamily) {
+void Rocksdb::default_setup (const char *dir, std::vector<std::string> columnfamily) {
     const std::string path = dir;
     
     //create the DB if it's not already present
     options_.create_if_missing = true;
+    options_.merge_operator.reset(new ProcessMerge);
     rocksdb::Status s = rocksdb::DB::Open(options_, path, &db_);
     if (!s.ok()) {
         err_flag_ = (int)s.code();
@@ -33,20 +33,27 @@ void Rocksdb::default_setup (const char *dir, std::initializer_list<std::string>
     //Optimize RocksDB. This is the easiest way to get RocksDB to perform well
     options_.IncreaseParallelism();
     options_.OptimizeLevelStyleCompaction();
+    if (!options_.merge_operator.get()) {
+       options_.merge_operator.reset(new ProcessMerge);
+    }
     
-    s = rocksdb::DB::Open(options_, path, column_families, &cfs_, &db_);
+    if (columnfamily.size()) {
+        s = rocksdb::DB::Open(options_, path, column_families, &cfs_, &db_);
+    } else {
+        s = rocksdb::DB::Open(options_, path, &db_);
+    }
     if (!s.ok()) {
         err_flag_ = (int)s.code();
     }
 
-    std::initializer_list<std::string>::iterator it = columnfamily.begin();
+    std::vector<std::string>::iterator it = columnfamily.begin();
     for (auto i: Range(0, columnfamily.size())) {
         cfmap_[*it] = cfs_[i + 1];
         ++it;
     }
 }
     
-Rocksdb::Rocksdb (const char *dir, std::initializer_list<std::string> columnfamily):err_flag_(0), db_(nullptr) {
+Rocksdb::Rocksdb (const char *dir, std::vector<std::string> columnfamily):err_flag_(0), db_(nullptr) {
     default_setup(dir, columnfamily);
 }
 
@@ -63,13 +70,13 @@ bool Rocksdb::Put (const std::string key, const std::string value, std::string c
     rocksdb::WriteOptions wopt;
     wopt.disableWAL = 0;
     if (cf == "") {
-        s = db_->Put(wopt, rocksdb::Slice(key.c_str()), rocksdb::Slice(value.c_str()));
+        s = db_->Merge(wopt, rocksdb::Slice(key.c_str()), rocksdb::Slice(value.c_str()));
     } else {
         std::map<std::string, rocksdb::ColumnFamilyHandle *>::iterator it = cfmap_.find(cf);
         if (cfmap_.end() == it) {
             return false;
         }
-        s = db_->Put(wopt, it->second, rocksdb::Slice(key.c_str()), rocksdb::Slice(value.c_str()));
+        s = db_->Merge(wopt, it->second, rocksdb::Slice(key.c_str()), rocksdb::Slice(value.c_str()));
     }
     err_flag_ = s.code();
     return (true == s.ok()) ? true : false;
@@ -95,7 +102,7 @@ bool Rocksdb::RangeScan (const std::string key_start, const std::string key_end,
         std::unique_ptr<rocksdb::Iterator> it;
         if (cf == "") {
             it.reset(db_->NewIterator(rocksdb::ReadOptions()));
-            for (it->Seek(rocksdb::Slice(key_start.c_str())); it->Valid() && stoi(it->key().ToString()) <= stoi(key_end); it->Next()) {
+            for (it->Seek(rocksdb::Slice(key_start.c_str())); it->Valid() && stoll(it->key().ToString()) <= stoll(key_end); it->Next()) {
                 values.push_back(it->value().ToString());
             }
             return true;
@@ -104,7 +111,7 @@ bool Rocksdb::RangeScan (const std::string key_start, const std::string key_end,
                 rocksdb::ColumnFamilyHandle *handle = cfmap_.find(cf)->second;
                 if (handle) {
                     it.reset(db_->NewIterator(rocksdb::ReadOptions(), handle));
-                    for (it->Seek(rocksdb::Slice(key_start.c_str())); it->Valid() && stoi(it->key().ToString()) <= stoi(key_end); it->Next()) {
+                    for (it->Seek(rocksdb::Slice(key_start.c_str())); it->Valid() && stoll(it->key().ToString()) <= stoll(key_end); it->Next()) {
                         values.push_back(it->value().ToString());
                     }
 
@@ -189,7 +196,7 @@ WriteBatcher *Rocksdb::BatchInit () {
     return handle;
 }
 
-void Rocksdb::BacthAddAction (WriteBatcher *handle, std::string action, std::initializer_list<std::string> args, std::string &err, rocksdb::ColumnFamilyHandle *cf) {
+void Rocksdb::BacthAddAction (WriteBatcher *handle, std::string action, std::vector<std::string> args, std::string &err, rocksdb::ColumnFamilyHandle *cf) {
     handle->add_action(action, args, err, cf);
 }
 
