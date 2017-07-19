@@ -8,6 +8,49 @@
 
 using namespace rocksdb;
 
+class ProcessMerge : public rocksdb::MergeOperator {
+public:
+    virtual bool FullMergeV2 (const MergeOperationInput &merge_in,
+                              MergeOperationOutput *merge_out) const override {
+        merge_out->new_value.clear();
+        if (merge_in.existing_value != nullptr) {
+            merge_out->new_value.assign(merge_in.existing_value->data(), merge_in.existing_value->size());
+        }
+
+        for (const rocksdb::Slice& m : merge_in.operand_list) {
+            merge_out->new_value.append("|");
+            merge_out->new_value.append(m.data(), m.size());
+        }
+
+        return true;
+    }
+
+    const char* Name() const override { return "ProcessMerge"; }
+};
+
+TEST(test, merge) {
+    //DB* db;
+    //rocksdb::Options options;
+    //Status s = DB::Open(options, "./rocksdb_test_cf", &db);
+
+    common::Rocksdb rdb("./rocksdb_test_cf");
+
+    //options.create_if_missing = true;
+    //options.merge_operator.reset(new ProcessMerge);
+    //s = rocksdb::DB::Open(options, "/tmp/rocksmergetest", &db);
+    //assert(s.ok());
+
+    std::string value = "aaaaa", k = "1", v;
+    rdb.Put(k, value);
+    rdb.Get(k, v);
+    std::cout << "0: " << v << std::endl;
+
+    value = "bbbbb";
+    rdb.Put(k, value);
+    rdb.Get(k, v);
+    std::cout << "1: " << v << std::endl;
+}
+
 TEST(test_rocksdb, sim) { 
   Options options;
   options.create_if_missing = true;
@@ -93,7 +136,8 @@ TEST(test_rocksdb, set_get_without_cf) {
     LOG(INFO) << "put: " << rdb.Get(key, val) << ", val: " << val;
     LOG(INFO) << "err_flag_: " << rdb.err_flag_;
 */
-        rdb->Put("1", "a", "cf1");
+return;
+    
         rdb->Put("2", "b", "cf1");
         rdb->Put("3", "c", "cf1");
         rdb->Put("4", "d", "cf1");
