@@ -118,6 +118,30 @@ minos_client/fast:
 	cd /home/work/data-access && $(MAKE) -f proto/CMakeFiles/minos_client.dir/build.make proto/CMakeFiles/minos_client.dir/build
 .PHONY : minos_client/fast
 
+manage.pb.o: manage.pb.cc.o
+.PHONY : manage.pb.o
+
+# target to build an object file
+manage.pb.cc.o:
+	cd /home/work/data-access && $(MAKE) -f proto/CMakeFiles/minos_client.dir/build.make proto/CMakeFiles/minos_client.dir/manage.pb.cc.o
+.PHONY : manage.pb.cc.o
+
+manage.pb.i: manage.pb.cc.i
+.PHONY : manage.pb.i
+
+# target to preprocess a source file
+manage.pb.cc.i:
+	cd /home/work/data-access && $(MAKE) -f proto/CMakeFiles/minos_client.dir/build.make proto/CMakeFiles/minos_client.dir/manage.pb.cc.i
+.PHONY : manage.pb.cc.i
+
+manage.pb.s: manage.pb.cc.s
+.PHONY : manage.pb.s
+
+# target to generate assembly for a file
+manage.pb.cc.s:
+	cd /home/work/data-access && $(MAKE) -f proto/CMakeFiles/minos_client.dir/build.make proto/CMakeFiles/minos_client.dir/manage.pb.cc.s
+.PHONY : manage.pb.cc.s
+
 minos.pb.o: minos.pb.cc.o
 .PHONY : minos.pb.o
 
@@ -199,6 +223,9 @@ help:
 	@echo "... minos_client"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... manage.pb.o"
+	@echo "... manage.pb.i"
+	@echo "... manage.pb.s"
 	@echo "... minos.pb.o"
 	@echo "... minos.pb.i"
 	@echo "... minos.pb.s"

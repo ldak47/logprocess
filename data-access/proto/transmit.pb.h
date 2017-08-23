@@ -36,20 +36,32 @@ void protobuf_AssignDesc_transmit_2eproto();
 void protobuf_ShutdownFile_transmit_2eproto();
 
 class MapEntry;
+class MapEntries;
 class TransmitRequest;
 class TransmitResponse;
+class TypeConfig;
 class SrcidConfig;
 class ScanCondSeWord;
 class LocationInfo;
 class CookieConfig;
 class ClusterConfig;
+class SidConfig;
+class ResnoConfig;
 class CheckListCond;
 class SetCheckListConfigRequest;
 class SetCheckListConfigResponse;
 class GetCheckListConfigRequest;
+class CheckListConfigResponseInfo;
 class GetCheckListConfigResponse;
 class GetLogProcessStatRequest;
 class GetLogProcessStatResponse;
+class SetStorageFieldConfigRequest;
+class SetStorageFieldConfigResponse;
+class GetStorageFieldConfigRequest;
+class StorageFieldConfigResponseInfo;
+class GetStorageFieldConfigResponse;
+class ClearRocksdbDataRequest;
+class ClearRocksdbDataResponse;
 
 enum TransmitResponse_Res_Status {
   TransmitResponse_Res_Status_SUCCEED = 0,
@@ -108,6 +120,26 @@ inline bool GetCheckListConfigResponse_Res_Status_Parse(
   return ::google::protobuf::internal::ParseNamedEnum<GetCheckListConfigResponse_Res_Status>(
     GetCheckListConfigResponse_Res_Status_descriptor(), name, value);
 }
+enum GetLogProcessStatRequest_SourceFrom {
+  GetLogProcessStatRequest_SourceFrom_Rocksdb = 0,
+  GetLogProcessStatRequest_SourceFrom_QueryTrie = 1,
+  GetLogProcessStatRequest_SourceFrom_Redis = 2
+};
+bool GetLogProcessStatRequest_SourceFrom_IsValid(int value);
+const GetLogProcessStatRequest_SourceFrom GetLogProcessStatRequest_SourceFrom_SourceFrom_MIN = GetLogProcessStatRequest_SourceFrom_Rocksdb;
+const GetLogProcessStatRequest_SourceFrom GetLogProcessStatRequest_SourceFrom_SourceFrom_MAX = GetLogProcessStatRequest_SourceFrom_Redis;
+const int GetLogProcessStatRequest_SourceFrom_SourceFrom_ARRAYSIZE = GetLogProcessStatRequest_SourceFrom_SourceFrom_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* GetLogProcessStatRequest_SourceFrom_descriptor();
+inline const ::std::string& GetLogProcessStatRequest_SourceFrom_Name(GetLogProcessStatRequest_SourceFrom value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    GetLogProcessStatRequest_SourceFrom_descriptor(), value);
+}
+inline bool GetLogProcessStatRequest_SourceFrom_Parse(
+    const ::std::string& name, GetLogProcessStatRequest_SourceFrom* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<GetLogProcessStatRequest_SourceFrom>(
+    GetLogProcessStatRequest_SourceFrom_descriptor(), name, value);
+}
 enum GetLogProcessStatResponse_Res_Status {
   GetLogProcessStatResponse_Res_Status_SUCCEED = 0,
   GetLogProcessStatResponse_Res_Status_FAILED = 1
@@ -126,6 +158,44 @@ inline bool GetLogProcessStatResponse_Res_Status_Parse(
     const ::std::string& name, GetLogProcessStatResponse_Res_Status* value) {
   return ::google::protobuf::internal::ParseNamedEnum<GetLogProcessStatResponse_Res_Status>(
     GetLogProcessStatResponse_Res_Status_descriptor(), name, value);
+}
+enum SetStorageFieldConfigResponse_Res_Status {
+  SetStorageFieldConfigResponse_Res_Status_SUCCEED = 0,
+  SetStorageFieldConfigResponse_Res_Status_FAILED = 1
+};
+bool SetStorageFieldConfigResponse_Res_Status_IsValid(int value);
+const SetStorageFieldConfigResponse_Res_Status SetStorageFieldConfigResponse_Res_Status_Res_Status_MIN = SetStorageFieldConfigResponse_Res_Status_SUCCEED;
+const SetStorageFieldConfigResponse_Res_Status SetStorageFieldConfigResponse_Res_Status_Res_Status_MAX = SetStorageFieldConfigResponse_Res_Status_FAILED;
+const int SetStorageFieldConfigResponse_Res_Status_Res_Status_ARRAYSIZE = SetStorageFieldConfigResponse_Res_Status_Res_Status_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* SetStorageFieldConfigResponse_Res_Status_descriptor();
+inline const ::std::string& SetStorageFieldConfigResponse_Res_Status_Name(SetStorageFieldConfigResponse_Res_Status value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    SetStorageFieldConfigResponse_Res_Status_descriptor(), value);
+}
+inline bool SetStorageFieldConfigResponse_Res_Status_Parse(
+    const ::std::string& name, SetStorageFieldConfigResponse_Res_Status* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<SetStorageFieldConfigResponse_Res_Status>(
+    SetStorageFieldConfigResponse_Res_Status_descriptor(), name, value);
+}
+enum ClearRocksdbDataResponse_Res_Status {
+  ClearRocksdbDataResponse_Res_Status_SUCCEED = 0,
+  ClearRocksdbDataResponse_Res_Status_FAILED = 1
+};
+bool ClearRocksdbDataResponse_Res_Status_IsValid(int value);
+const ClearRocksdbDataResponse_Res_Status ClearRocksdbDataResponse_Res_Status_Res_Status_MIN = ClearRocksdbDataResponse_Res_Status_SUCCEED;
+const ClearRocksdbDataResponse_Res_Status ClearRocksdbDataResponse_Res_Status_Res_Status_MAX = ClearRocksdbDataResponse_Res_Status_FAILED;
+const int ClearRocksdbDataResponse_Res_Status_Res_Status_ARRAYSIZE = ClearRocksdbDataResponse_Res_Status_Res_Status_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* ClearRocksdbDataResponse_Res_Status_descriptor();
+inline const ::std::string& ClearRocksdbDataResponse_Res_Status_Name(ClearRocksdbDataResponse_Res_Status value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    ClearRocksdbDataResponse_Res_Status_descriptor(), value);
+}
+inline bool ClearRocksdbDataResponse_Res_Status_Parse(
+    const ::std::string& name, ClearRocksdbDataResponse_Res_Status* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<ClearRocksdbDataResponse_Res_Status>(
+    ClearRocksdbDataResponse_Res_Status_descriptor(), name, value);
 }
 enum CondType {
   condIn = 1,
@@ -211,7 +281,7 @@ class MapEntry : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required string key = 1;
+  // required string Key = 1;
   inline bool has_key() const;
   inline void clear_key();
   static const int kKeyFieldNumber = 1;
@@ -223,7 +293,7 @@ class MapEntry : public ::google::protobuf::Message {
   inline ::std::string* release_key();
   inline void set_allocated_key(::std::string* key);
 
-  // required string value = 2;
+  // required string Value = 2;
   inline bool has_value() const;
   inline void clear_value();
   static const int kValueFieldNumber = 2;
@@ -254,6 +324,88 @@ class MapEntry : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static MapEntry* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class MapEntries : public ::google::protobuf::Message {
+ public:
+  MapEntries();
+  virtual ~MapEntries();
+
+  MapEntries(const MapEntries& from);
+
+  inline MapEntries& operator=(const MapEntries& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const MapEntries& default_instance();
+
+  void Swap(MapEntries* other);
+
+  // implements Message ----------------------------------------------
+
+  MapEntries* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const MapEntries& from);
+  void MergeFrom(const MapEntries& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // repeated .process.MapEntry Item = 1;
+  inline int item_size() const;
+  inline void clear_item();
+  static const int kItemFieldNumber = 1;
+  inline const ::process::MapEntry& item(int index) const;
+  inline ::process::MapEntry* mutable_item(int index);
+  inline ::process::MapEntry* add_item();
+  inline const ::google::protobuf::RepeatedPtrField< ::process::MapEntry >&
+      item() const;
+  inline ::google::protobuf::RepeatedPtrField< ::process::MapEntry >*
+      mutable_item();
+
+  // @@protoc_insertion_point(class_scope:process.MapEntries)
+ private:
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::google::protobuf::RepeatedPtrField< ::process::MapEntry > item_;
+  friend void  protobuf_AddDesc_transmit_2eproto();
+  friend void protobuf_AssignDesc_transmit_2eproto();
+  friend void protobuf_ShutdownFile_transmit_2eproto();
+
+  void InitAsDefaultInstance();
+  static MapEntries* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -310,7 +462,7 @@ class TransmitRequest : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // repeated .process.MapEntry values = 1;
+  // repeated .process.MapEntry Values = 1;
   inline int values_size() const;
   inline void clear_values();
   static const int kValuesFieldNumber = 1;
@@ -416,14 +568,14 @@ class TransmitResponse : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required .process.TransmitResponse.Res_Status status = 1;
+  // required .process.TransmitResponse.Res_Status Status = 1;
   inline bool has_status() const;
   inline void clear_status();
   static const int kStatusFieldNumber = 1;
   inline ::process::TransmitResponse_Res_Status status() const;
   inline void set_status(::process::TransmitResponse_Res_Status value);
 
-  // optional string error = 2;
+  // optional string Error = 2;
   inline bool has_error() const;
   inline void clear_error();
   static const int kErrorFieldNumber = 2;
@@ -454,6 +606,100 @@ class TransmitResponse : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static TransmitResponse* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class TypeConfig : public ::google::protobuf::Message {
+ public:
+  TypeConfig();
+  virtual ~TypeConfig();
+
+  TypeConfig(const TypeConfig& from);
+
+  inline TypeConfig& operator=(const TypeConfig& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const TypeConfig& default_instance();
+
+  void Swap(TypeConfig* other);
+
+  // implements Message ----------------------------------------------
+
+  TypeConfig* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const TypeConfig& from);
+  void MergeFrom(const TypeConfig& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required string Type = 1;
+  inline bool has_type() const;
+  inline void clear_type();
+  static const int kTypeFieldNumber = 1;
+  inline const ::std::string& type() const;
+  inline void set_type(const ::std::string& value);
+  inline void set_type(const char* value);
+  inline void set_type(const char* value, size_t size);
+  inline ::std::string* mutable_type();
+  inline ::std::string* release_type();
+  inline void set_allocated_type(::std::string* type);
+
+  // required .process.CondType Cond = 2;
+  inline bool has_cond() const;
+  inline void clear_cond();
+  static const int kCondFieldNumber = 2;
+  inline ::process::CondType cond() const;
+  inline void set_cond(::process::CondType value);
+
+  // @@protoc_insertion_point(class_scope:process.TypeConfig)
+ private:
+  inline void set_has_type();
+  inline void clear_has_type();
+  inline void set_has_cond();
+  inline void clear_has_cond();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::std::string* type_;
+  int cond_;
+  friend void  protobuf_AddDesc_transmit_2eproto();
+  friend void protobuf_AssignDesc_transmit_2eproto();
+  friend void protobuf_ShutdownFile_transmit_2eproto();
+
+  void InitAsDefaultInstance();
+  static TypeConfig* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -510,7 +756,7 @@ class SrcidConfig : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required string srcid = 1;
+  // required string Srcid = 1;
   inline bool has_srcid() const;
   inline void clear_srcid();
   static const int kSrcidFieldNumber = 1;
@@ -522,7 +768,7 @@ class SrcidConfig : public ::google::protobuf::Message {
   inline ::std::string* release_srcid();
   inline void set_allocated_srcid(::std::string* srcid);
 
-  // required .process.CondType cond = 2;
+  // required .process.CondType Cond = 2;
   inline bool has_cond() const;
   inline void clear_cond();
   static const int kCondFieldNumber = 2;
@@ -604,7 +850,7 @@ class ScanCondSeWord : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required string searchword = 1;
+  // required string Searchword = 1;
   inline bool has_searchword() const;
   inline void clear_searchword();
   static const int kSearchwordFieldNumber = 1;
@@ -616,7 +862,7 @@ class ScanCondSeWord : public ::google::protobuf::Message {
   inline ::std::string* release_searchword();
   inline void set_allocated_searchword(::std::string* searchword);
 
-  // required .process.CondType cond = 2;
+  // required .process.CondType Cond = 2;
   inline bool has_cond() const;
   inline void clear_cond();
   static const int kCondFieldNumber = 2;
@@ -698,7 +944,7 @@ class LocationInfo : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // optional string province = 1;
+  // optional string Province = 1;
   inline bool has_province() const;
   inline void clear_province();
   static const int kProvinceFieldNumber = 1;
@@ -710,7 +956,7 @@ class LocationInfo : public ::google::protobuf::Message {
   inline ::std::string* release_province();
   inline void set_allocated_province(::std::string* province);
 
-  // optional string city = 2;
+  // optional string City = 2;
   inline bool has_city() const;
   inline void clear_city();
   static const int kCityFieldNumber = 2;
@@ -722,7 +968,7 @@ class LocationInfo : public ::google::protobuf::Message {
   inline ::std::string* release_city();
   inline void set_allocated_city(::std::string* city);
 
-  // required .process.CondType cond = 3;
+  // required .process.CondType Cond = 3;
   inline bool has_cond() const;
   inline void clear_cond();
   static const int kCondFieldNumber = 3;
@@ -807,7 +1053,7 @@ class CookieConfig : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required string cookie = 1;
+  // required string Cookie = 1;
   inline bool has_cookie() const;
   inline void clear_cookie();
   static const int kCookieFieldNumber = 1;
@@ -819,7 +1065,7 @@ class CookieConfig : public ::google::protobuf::Message {
   inline ::std::string* release_cookie();
   inline void set_allocated_cookie(::std::string* cookie);
 
-  // required .process.CondType cond = 2;
+  // required .process.CondType Cond = 2;
   inline bool has_cond() const;
   inline void clear_cond();
   static const int kCondFieldNumber = 2;
@@ -901,7 +1147,7 @@ class ClusterConfig : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required string cluster = 1;
+  // required string Cluster = 1;
   inline bool has_cluster() const;
   inline void clear_cluster();
   static const int kClusterFieldNumber = 1;
@@ -913,7 +1159,7 @@ class ClusterConfig : public ::google::protobuf::Message {
   inline ::std::string* release_cluster();
   inline void set_allocated_cluster(::std::string* cluster);
 
-  // required .process.CondType cond = 2;
+  // required .process.CondType Cond = 2;
   inline bool has_cond() const;
   inline void clear_cond();
   static const int kCondFieldNumber = 2;
@@ -939,6 +1185,194 @@ class ClusterConfig : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static ClusterConfig* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class SidConfig : public ::google::protobuf::Message {
+ public:
+  SidConfig();
+  virtual ~SidConfig();
+
+  SidConfig(const SidConfig& from);
+
+  inline SidConfig& operator=(const SidConfig& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const SidConfig& default_instance();
+
+  void Swap(SidConfig* other);
+
+  // implements Message ----------------------------------------------
+
+  SidConfig* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const SidConfig& from);
+  void MergeFrom(const SidConfig& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required string Sid = 1;
+  inline bool has_sid() const;
+  inline void clear_sid();
+  static const int kSidFieldNumber = 1;
+  inline const ::std::string& sid() const;
+  inline void set_sid(const ::std::string& value);
+  inline void set_sid(const char* value);
+  inline void set_sid(const char* value, size_t size);
+  inline ::std::string* mutable_sid();
+  inline ::std::string* release_sid();
+  inline void set_allocated_sid(::std::string* sid);
+
+  // required .process.CondType Cond = 2;
+  inline bool has_cond() const;
+  inline void clear_cond();
+  static const int kCondFieldNumber = 2;
+  inline ::process::CondType cond() const;
+  inline void set_cond(::process::CondType value);
+
+  // @@protoc_insertion_point(class_scope:process.SidConfig)
+ private:
+  inline void set_has_sid();
+  inline void clear_has_sid();
+  inline void set_has_cond();
+  inline void clear_has_cond();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::std::string* sid_;
+  int cond_;
+  friend void  protobuf_AddDesc_transmit_2eproto();
+  friend void protobuf_AssignDesc_transmit_2eproto();
+  friend void protobuf_ShutdownFile_transmit_2eproto();
+
+  void InitAsDefaultInstance();
+  static SidConfig* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ResnoConfig : public ::google::protobuf::Message {
+ public:
+  ResnoConfig();
+  virtual ~ResnoConfig();
+
+  ResnoConfig(const ResnoConfig& from);
+
+  inline ResnoConfig& operator=(const ResnoConfig& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ResnoConfig& default_instance();
+
+  void Swap(ResnoConfig* other);
+
+  // implements Message ----------------------------------------------
+
+  ResnoConfig* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ResnoConfig& from);
+  void MergeFrom(const ResnoConfig& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required string Resno = 1;
+  inline bool has_resno() const;
+  inline void clear_resno();
+  static const int kResnoFieldNumber = 1;
+  inline const ::std::string& resno() const;
+  inline void set_resno(const ::std::string& value);
+  inline void set_resno(const char* value);
+  inline void set_resno(const char* value, size_t size);
+  inline ::std::string* mutable_resno();
+  inline ::std::string* release_resno();
+  inline void set_allocated_resno(::std::string* resno);
+
+  // required .process.CondType Cond = 2;
+  inline bool has_cond() const;
+  inline void clear_cond();
+  static const int kCondFieldNumber = 2;
+  inline ::process::CondType cond() const;
+  inline void set_cond(::process::CondType value);
+
+  // @@protoc_insertion_point(class_scope:process.ResnoConfig)
+ private:
+  inline void set_has_resno();
+  inline void clear_has_resno();
+  inline void set_has_cond();
+  inline void clear_has_cond();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::std::string* resno_;
+  int cond_;
+  friend void  protobuf_AddDesc_transmit_2eproto();
+  friend void protobuf_AssignDesc_transmit_2eproto();
+  friend void protobuf_ShutdownFile_transmit_2eproto();
+
+  void InitAsDefaultInstance();
+  static ResnoConfig* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -995,7 +1429,7 @@ class CheckListCond : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // repeated .process.SrcidConfig srcids = 1;
+  // repeated .process.SrcidConfig Srcids = 1;
   inline int srcids_size() const;
   inline void clear_srcids();
   static const int kSrcidsFieldNumber = 1;
@@ -1007,7 +1441,7 @@ class CheckListCond : public ::google::protobuf::Message {
   inline ::google::protobuf::RepeatedPtrField< ::process::SrcidConfig >*
       mutable_srcids();
 
-  // repeated .process.ScanCondSeWord sewords = 2;
+  // repeated .process.ScanCondSeWord Sewords = 2;
   inline int sewords_size() const;
   inline void clear_sewords();
   static const int kSewordsFieldNumber = 2;
@@ -1019,7 +1453,7 @@ class CheckListCond : public ::google::protobuf::Message {
   inline ::google::protobuf::RepeatedPtrField< ::process::ScanCondSeWord >*
       mutable_sewords();
 
-  // repeated .process.LocationInfo lbs = 3;
+  // repeated .process.LocationInfo Lbs = 3;
   inline int lbs_size() const;
   inline void clear_lbs();
   static const int kLbsFieldNumber = 3;
@@ -1031,7 +1465,7 @@ class CheckListCond : public ::google::protobuf::Message {
   inline ::google::protobuf::RepeatedPtrField< ::process::LocationInfo >*
       mutable_lbs();
 
-  // repeated .process.CookieConfig cookie = 4;
+  // repeated .process.CookieConfig Cookie = 4;
   inline int cookie_size() const;
   inline void clear_cookie();
   static const int kCookieFieldNumber = 4;
@@ -1043,7 +1477,7 @@ class CheckListCond : public ::google::protobuf::Message {
   inline ::google::protobuf::RepeatedPtrField< ::process::CookieConfig >*
       mutable_cookie();
 
-  // repeated .process.ClusterConfig cluster = 5;
+  // repeated .process.ClusterConfig Cluster = 5;
   inline int cluster_size() const;
   inline void clear_cluster();
   static const int kClusterFieldNumber = 5;
@@ -1055,20 +1489,58 @@ class CheckListCond : public ::google::protobuf::Message {
   inline ::google::protobuf::RepeatedPtrField< ::process::ClusterConfig >*
       mutable_cluster();
 
-  // repeated .process.SrcidConfig res_srcid = 6;
-  inline int res_srcid_size() const;
-  inline void clear_res_srcid();
-  static const int kResSrcidFieldNumber = 6;
-  inline const ::process::SrcidConfig& res_srcid(int index) const;
-  inline ::process::SrcidConfig* mutable_res_srcid(int index);
-  inline ::process::SrcidConfig* add_res_srcid();
-  inline const ::google::protobuf::RepeatedPtrField< ::process::SrcidConfig >&
-      res_srcid() const;
-  inline ::google::protobuf::RepeatedPtrField< ::process::SrcidConfig >*
-      mutable_res_srcid();
+  // repeated .process.SidConfig Sid = 6;
+  inline int sid_size() const;
+  inline void clear_sid();
+  static const int kSidFieldNumber = 6;
+  inline const ::process::SidConfig& sid(int index) const;
+  inline ::process::SidConfig* mutable_sid(int index);
+  inline ::process::SidConfig* add_sid();
+  inline const ::google::protobuf::RepeatedPtrField< ::process::SidConfig >&
+      sid() const;
+  inline ::google::protobuf::RepeatedPtrField< ::process::SidConfig >*
+      mutable_sid();
+
+  // repeated .process.ResnoConfig Resno = 7;
+  inline int resno_size() const;
+  inline void clear_resno();
+  static const int kResnoFieldNumber = 7;
+  inline const ::process::ResnoConfig& resno(int index) const;
+  inline ::process::ResnoConfig* mutable_resno(int index);
+  inline ::process::ResnoConfig* add_resno();
+  inline const ::google::protobuf::RepeatedPtrField< ::process::ResnoConfig >&
+      resno() const;
+  inline ::google::protobuf::RepeatedPtrField< ::process::ResnoConfig >*
+      mutable_resno();
+
+  // repeated .process.TypeConfig Type = 8;
+  inline int type_size() const;
+  inline void clear_type();
+  static const int kTypeFieldNumber = 8;
+  inline const ::process::TypeConfig& type(int index) const;
+  inline ::process::TypeConfig* mutable_type(int index);
+  inline ::process::TypeConfig* add_type();
+  inline const ::google::protobuf::RepeatedPtrField< ::process::TypeConfig >&
+      type() const;
+  inline ::google::protobuf::RepeatedPtrField< ::process::TypeConfig >*
+      mutable_type();
+
+  // optional string Description = 9;
+  inline bool has_description() const;
+  inline void clear_description();
+  static const int kDescriptionFieldNumber = 9;
+  inline const ::std::string& description() const;
+  inline void set_description(const ::std::string& value);
+  inline void set_description(const char* value);
+  inline void set_description(const char* value, size_t size);
+  inline ::std::string* mutable_description();
+  inline ::std::string* release_description();
+  inline void set_allocated_description(::std::string* description);
 
   // @@protoc_insertion_point(class_scope:process.CheckListCond)
  private:
+  inline void set_has_description();
+  inline void clear_has_description();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
@@ -1079,7 +1551,10 @@ class CheckListCond : public ::google::protobuf::Message {
   ::google::protobuf::RepeatedPtrField< ::process::LocationInfo > lbs_;
   ::google::protobuf::RepeatedPtrField< ::process::CookieConfig > cookie_;
   ::google::protobuf::RepeatedPtrField< ::process::ClusterConfig > cluster_;
-  ::google::protobuf::RepeatedPtrField< ::process::SrcidConfig > res_srcid_;
+  ::google::protobuf::RepeatedPtrField< ::process::SidConfig > sid_;
+  ::google::protobuf::RepeatedPtrField< ::process::ResnoConfig > resno_;
+  ::google::protobuf::RepeatedPtrField< ::process::TypeConfig > type_;
+  ::std::string* description_;
   friend void  protobuf_AddDesc_transmit_2eproto();
   friend void protobuf_AssignDesc_transmit_2eproto();
   friend void protobuf_ShutdownFile_transmit_2eproto();
@@ -1142,10 +1617,24 @@ class SetCheckListConfigRequest : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required string application = 1;
+  // required bool Op = 1;
+  inline bool has_op() const;
+  inline void clear_op();
+  static const int kOpFieldNumber = 1;
+  inline bool op() const;
+  inline void set_op(bool value);
+
+  // optional uint32 Index = 2;
+  inline bool has_index() const;
+  inline void clear_index();
+  static const int kIndexFieldNumber = 2;
+  inline ::google::protobuf::uint32 index() const;
+  inline void set_index(::google::protobuf::uint32 value);
+
+  // required string Application = 3;
   inline bool has_application() const;
   inline void clear_application();
-  static const int kApplicationFieldNumber = 1;
+  static const int kApplicationFieldNumber = 3;
   inline const ::std::string& application() const;
   inline void set_application(const ::std::string& value);
   inline void set_application(const char* value);
@@ -1154,10 +1643,10 @@ class SetCheckListConfigRequest : public ::google::protobuf::Message {
   inline ::std::string* release_application();
   inline void set_allocated_application(::std::string* application);
 
-  // required .process.CheckListCond cond = 2;
+  // optional .process.CheckListCond Cond = 4;
   inline bool has_cond() const;
   inline void clear_cond();
-  static const int kCondFieldNumber = 2;
+  static const int kCondFieldNumber = 4;
   inline const ::process::CheckListCond& cond() const;
   inline ::process::CheckListCond* mutable_cond();
   inline ::process::CheckListCond* release_cond();
@@ -1165,6 +1654,10 @@ class SetCheckListConfigRequest : public ::google::protobuf::Message {
 
   // @@protoc_insertion_point(class_scope:process.SetCheckListConfigRequest)
  private:
+  inline void set_has_op();
+  inline void clear_has_op();
+  inline void set_has_index();
+  inline void clear_has_index();
   inline void set_has_application();
   inline void clear_has_application();
   inline void set_has_cond();
@@ -1174,6 +1667,8 @@ class SetCheckListConfigRequest : public ::google::protobuf::Message {
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
+  bool op_;
+  ::google::protobuf::uint32 index_;
   ::std::string* application_;
   ::process::CheckListCond* cond_;
   friend void  protobuf_AddDesc_transmit_2eproto();
@@ -1262,14 +1757,14 @@ class SetCheckListConfigResponse : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required .process.SetCheckListConfigResponse.Res_Status status = 1;
+  // required .process.SetCheckListConfigResponse.Res_Status Status = 1;
   inline bool has_status() const;
   inline void clear_status();
   static const int kStatusFieldNumber = 1;
   inline ::process::SetCheckListConfigResponse_Res_Status status() const;
   inline void set_status(::process::SetCheckListConfigResponse_Res_Status value);
 
-  // optional string error = 2;
+  // optional string Error = 2;
   inline bool has_error() const;
   inline void clear_error();
   static const int kErrorFieldNumber = 2;
@@ -1356,7 +1851,7 @@ class GetCheckListConfigRequest : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required string application = 1;
+  // required string Application = 1;
   inline bool has_application() const;
   inline void clear_application();
   static const int kApplicationFieldNumber = 1;
@@ -1368,22 +1863,160 @@ class GetCheckListConfigRequest : public ::google::protobuf::Message {
   inline ::std::string* release_application();
   inline void set_allocated_application(::std::string* application);
 
+  // optional uint32 Index = 2;
+  inline bool has_index() const;
+  inline void clear_index();
+  static const int kIndexFieldNumber = 2;
+  inline ::google::protobuf::uint32 index() const;
+  inline void set_index(::google::protobuf::uint32 value);
+
+  // optional uint64 Startime = 3;
+  inline bool has_startime() const;
+  inline void clear_startime();
+  static const int kStartimeFieldNumber = 3;
+  inline ::google::protobuf::uint64 startime() const;
+  inline void set_startime(::google::protobuf::uint64 value);
+
+  // optional uint64 Endime = 4;
+  inline bool has_endime() const;
+  inline void clear_endime();
+  static const int kEndimeFieldNumber = 4;
+  inline ::google::protobuf::uint64 endime() const;
+  inline void set_endime(::google::protobuf::uint64 value);
+
   // @@protoc_insertion_point(class_scope:process.GetCheckListConfigRequest)
  private:
   inline void set_has_application();
   inline void clear_has_application();
+  inline void set_has_index();
+  inline void clear_has_index();
+  inline void set_has_startime();
+  inline void clear_has_startime();
+  inline void set_has_endime();
+  inline void clear_has_endime();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
   ::std::string* application_;
+  ::google::protobuf::uint64 startime_;
+  ::google::protobuf::uint64 endime_;
+  ::google::protobuf::uint32 index_;
   friend void  protobuf_AddDesc_transmit_2eproto();
   friend void protobuf_AssignDesc_transmit_2eproto();
   friend void protobuf_ShutdownFile_transmit_2eproto();
 
   void InitAsDefaultInstance();
   static GetCheckListConfigRequest* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class CheckListConfigResponseInfo : public ::google::protobuf::Message {
+ public:
+  CheckListConfigResponseInfo();
+  virtual ~CheckListConfigResponseInfo();
+
+  CheckListConfigResponseInfo(const CheckListConfigResponseInfo& from);
+
+  inline CheckListConfigResponseInfo& operator=(const CheckListConfigResponseInfo& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const CheckListConfigResponseInfo& default_instance();
+
+  void Swap(CheckListConfigResponseInfo* other);
+
+  // implements Message ----------------------------------------------
+
+  CheckListConfigResponseInfo* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const CheckListConfigResponseInfo& from);
+  void MergeFrom(const CheckListConfigResponseInfo& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .process.CheckListCond Cond = 1;
+  inline bool has_cond() const;
+  inline void clear_cond();
+  static const int kCondFieldNumber = 1;
+  inline const ::process::CheckListCond& cond() const;
+  inline ::process::CheckListCond* mutable_cond();
+  inline ::process::CheckListCond* release_cond();
+  inline void set_allocated_cond(::process::CheckListCond* cond);
+
+  // required uint32 Hit_count = 2;
+  inline bool has_hit_count() const;
+  inline void clear_hit_count();
+  static const int kHitCountFieldNumber = 2;
+  inline ::google::protobuf::uint32 hit_count() const;
+  inline void set_hit_count(::google::protobuf::uint32 value);
+
+  // repeated string Hit_info = 3;
+  inline int hit_info_size() const;
+  inline void clear_hit_info();
+  static const int kHitInfoFieldNumber = 3;
+  inline const ::std::string& hit_info(int index) const;
+  inline ::std::string* mutable_hit_info(int index);
+  inline void set_hit_info(int index, const ::std::string& value);
+  inline void set_hit_info(int index, const char* value);
+  inline void set_hit_info(int index, const char* value, size_t size);
+  inline ::std::string* add_hit_info();
+  inline void add_hit_info(const ::std::string& value);
+  inline void add_hit_info(const char* value);
+  inline void add_hit_info(const char* value, size_t size);
+  inline const ::google::protobuf::RepeatedPtrField< ::std::string>& hit_info() const;
+  inline ::google::protobuf::RepeatedPtrField< ::std::string>* mutable_hit_info();
+
+  // @@protoc_insertion_point(class_scope:process.CheckListConfigResponseInfo)
+ private:
+  inline void set_has_cond();
+  inline void clear_has_cond();
+  inline void set_has_hit_count();
+  inline void clear_has_hit_count();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::process::CheckListCond* cond_;
+  ::google::protobuf::RepeatedPtrField< ::std::string> hit_info_;
+  ::google::protobuf::uint32 hit_count_;
+  friend void  protobuf_AddDesc_transmit_2eproto();
+  friend void protobuf_AssignDesc_transmit_2eproto();
+  friend void protobuf_ShutdownFile_transmit_2eproto();
+
+  void InitAsDefaultInstance();
+  static CheckListConfigResponseInfo* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -1464,14 +2097,14 @@ class GetCheckListConfigResponse : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required .process.GetCheckListConfigResponse.Res_Status status = 1;
+  // required .process.GetCheckListConfigResponse.Res_Status Status = 1;
   inline bool has_status() const;
   inline void clear_status();
   static const int kStatusFieldNumber = 1;
   inline ::process::GetCheckListConfigResponse_Res_Status status() const;
   inline void set_status(::process::GetCheckListConfigResponse_Res_Status value);
 
-  // optional string error = 2;
+  // optional string Error = 2;
   inline bool has_error() const;
   inline void clear_error();
   static const int kErrorFieldNumber = 2;
@@ -1483,7 +2116,7 @@ class GetCheckListConfigResponse : public ::google::protobuf::Message {
   inline ::std::string* release_error();
   inline void set_allocated_error(::std::string* error);
 
-  // repeated .process.CheckListCond cond = 3;
+  // repeated .process.CheckListCond Cond = 3;
   inline int cond_size() const;
   inline void clear_cond();
   static const int kCondFieldNumber = 3;
@@ -1569,9 +2202,34 @@ class GetLogProcessStatRequest : public ::google::protobuf::Message {
 
   // nested types ----------------------------------------------------
 
+  typedef GetLogProcessStatRequest_SourceFrom SourceFrom;
+  static const SourceFrom Rocksdb = GetLogProcessStatRequest_SourceFrom_Rocksdb;
+  static const SourceFrom QueryTrie = GetLogProcessStatRequest_SourceFrom_QueryTrie;
+  static const SourceFrom Redis = GetLogProcessStatRequest_SourceFrom_Redis;
+  static inline bool SourceFrom_IsValid(int value) {
+    return GetLogProcessStatRequest_SourceFrom_IsValid(value);
+  }
+  static const SourceFrom SourceFrom_MIN =
+    GetLogProcessStatRequest_SourceFrom_SourceFrom_MIN;
+  static const SourceFrom SourceFrom_MAX =
+    GetLogProcessStatRequest_SourceFrom_SourceFrom_MAX;
+  static const int SourceFrom_ARRAYSIZE =
+    GetLogProcessStatRequest_SourceFrom_SourceFrom_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor*
+  SourceFrom_descriptor() {
+    return GetLogProcessStatRequest_SourceFrom_descriptor();
+  }
+  static inline const ::std::string& SourceFrom_Name(SourceFrom value) {
+    return GetLogProcessStatRequest_SourceFrom_Name(value);
+  }
+  static inline bool SourceFrom_Parse(const ::std::string& name,
+      SourceFrom* value) {
+    return GetLogProcessStatRequest_SourceFrom_Parse(name, value);
+  }
+
   // accessors -------------------------------------------------------
 
-  // required string application = 1;
+  // optional string Application = 1;
   inline bool has_application() const;
   inline void clear_application();
   static const int kApplicationFieldNumber = 1;
@@ -1583,68 +2241,155 @@ class GetLogProcessStatRequest : public ::google::protobuf::Message {
   inline ::std::string* release_application();
   inline void set_allocated_application(::std::string* application);
 
-  // required int64 startime = 2;
+  // optional string Querystr = 2;
+  inline bool has_querystr() const;
+  inline void clear_querystr();
+  static const int kQuerystrFieldNumber = 2;
+  inline const ::std::string& querystr() const;
+  inline void set_querystr(const ::std::string& value);
+  inline void set_querystr(const char* value);
+  inline void set_querystr(const char* value, size_t size);
+  inline ::std::string* mutable_querystr();
+  inline ::std::string* release_querystr();
+  inline void set_allocated_querystr(::std::string* querystr);
+
+  // optional string Cookieid = 3;
+  inline bool has_cookieid() const;
+  inline void clear_cookieid();
+  static const int kCookieidFieldNumber = 3;
+  inline const ::std::string& cookieid() const;
+  inline void set_cookieid(const ::std::string& value);
+  inline void set_cookieid(const char* value);
+  inline void set_cookieid(const char* value, size_t size);
+  inline ::std::string* mutable_cookieid();
+  inline ::std::string* release_cookieid();
+  inline void set_allocated_cookieid(::std::string* cookieid);
+
+  // optional string Srcid = 4;
+  inline bool has_srcid() const;
+  inline void clear_srcid();
+  static const int kSrcidFieldNumber = 4;
+  inline const ::std::string& srcid() const;
+  inline void set_srcid(const ::std::string& value);
+  inline void set_srcid(const char* value);
+  inline void set_srcid(const char* value, size_t size);
+  inline ::std::string* mutable_srcid();
+  inline ::std::string* release_srcid();
+  inline void set_allocated_srcid(::std::string* srcid);
+
+  // optional uint64 Startime = 5;
   inline bool has_startime() const;
   inline void clear_startime();
-  static const int kStartimeFieldNumber = 2;
-  inline ::google::protobuf::int64 startime() const;
-  inline void set_startime(::google::protobuf::int64 value);
+  static const int kStartimeFieldNumber = 5;
+  inline ::google::protobuf::uint64 startime() const;
+  inline void set_startime(::google::protobuf::uint64 value);
 
-  // required int64 endtime = 3;
+  // optional uint64 Endtime = 6;
   inline bool has_endtime() const;
   inline void clear_endtime();
-  static const int kEndtimeFieldNumber = 3;
-  inline ::google::protobuf::int64 endtime() const;
-  inline void set_endtime(::google::protobuf::int64 value);
+  static const int kEndtimeFieldNumber = 6;
+  inline ::google::protobuf::uint64 endtime() const;
+  inline void set_endtime(::google::protobuf::uint64 value);
 
-  // optional int32 startindex = 4;
-  inline bool has_startindex() const;
-  inline void clear_startindex();
-  static const int kStartindexFieldNumber = 4;
-  inline ::google::protobuf::int32 startindex() const;
-  inline void set_startindex(::google::protobuf::int32 value);
-
-  // optional int32 endindex = 5;
-  inline bool has_endindex() const;
-  inline void clear_endindex();
-  static const int kEndindexFieldNumber = 5;
-  inline ::google::protobuf::int32 endindex() const;
-  inline void set_endindex(::google::protobuf::int32 value);
-
-  // optional .process.CheckListCond cond = 6;
+  // optional .process.CheckListCond Cond = 7;
   inline bool has_cond() const;
   inline void clear_cond();
-  static const int kCondFieldNumber = 6;
+  static const int kCondFieldNumber = 7;
   inline const ::process::CheckListCond& cond() const;
   inline ::process::CheckListCond* mutable_cond();
   inline ::process::CheckListCond* release_cond();
   inline void set_allocated_cond(::process::CheckListCond* cond);
 
+  // repeated string Selectfields = 8;
+  inline int selectfields_size() const;
+  inline void clear_selectfields();
+  static const int kSelectfieldsFieldNumber = 8;
+  inline const ::std::string& selectfields(int index) const;
+  inline ::std::string* mutable_selectfields(int index);
+  inline void set_selectfields(int index, const ::std::string& value);
+  inline void set_selectfields(int index, const char* value);
+  inline void set_selectfields(int index, const char* value, size_t size);
+  inline ::std::string* add_selectfields();
+  inline void add_selectfields(const ::std::string& value);
+  inline void add_selectfields(const char* value);
+  inline void add_selectfields(const char* value, size_t size);
+  inline const ::google::protobuf::RepeatedPtrField< ::std::string>& selectfields() const;
+  inline ::google::protobuf::RepeatedPtrField< ::std::string>* mutable_selectfields();
+
+  // optional string Sortfield = 9;
+  inline bool has_sortfield() const;
+  inline void clear_sortfield();
+  static const int kSortfieldFieldNumber = 9;
+  inline const ::std::string& sortfield() const;
+  inline void set_sortfield(const ::std::string& value);
+  inline void set_sortfield(const char* value);
+  inline void set_sortfield(const char* value, size_t size);
+  inline ::std::string* mutable_sortfield();
+  inline ::std::string* release_sortfield();
+  inline void set_allocated_sortfield(::std::string* sortfield);
+
+  // required .process.GetLogProcessStatRequest.SourceFrom Getfrom = 10;
+  inline bool has_getfrom() const;
+  inline void clear_getfrom();
+  static const int kGetfromFieldNumber = 10;
+  inline ::process::GetLogProcessStatRequest_SourceFrom getfrom() const;
+  inline void set_getfrom(::process::GetLogProcessStatRequest_SourceFrom value);
+
+  // optional uint32 Start = 11;
+  inline bool has_start() const;
+  inline void clear_start();
+  static const int kStartFieldNumber = 11;
+  inline ::google::protobuf::uint32 start() const;
+  inline void set_start(::google::protobuf::uint32 value);
+
+  // optional uint32 End = 12;
+  inline bool has_end() const;
+  inline void clear_end();
+  static const int kEndFieldNumber = 12;
+  inline ::google::protobuf::uint32 end() const;
+  inline void set_end(::google::protobuf::uint32 value);
+
   // @@protoc_insertion_point(class_scope:process.GetLogProcessStatRequest)
  private:
   inline void set_has_application();
   inline void clear_has_application();
+  inline void set_has_querystr();
+  inline void clear_has_querystr();
+  inline void set_has_cookieid();
+  inline void clear_has_cookieid();
+  inline void set_has_srcid();
+  inline void clear_has_srcid();
   inline void set_has_startime();
   inline void clear_has_startime();
   inline void set_has_endtime();
   inline void clear_has_endtime();
-  inline void set_has_startindex();
-  inline void clear_has_startindex();
-  inline void set_has_endindex();
-  inline void clear_has_endindex();
   inline void set_has_cond();
   inline void clear_has_cond();
+  inline void set_has_sortfield();
+  inline void clear_has_sortfield();
+  inline void set_has_getfrom();
+  inline void clear_has_getfrom();
+  inline void set_has_start();
+  inline void clear_has_start();
+  inline void set_has_end();
+  inline void clear_has_end();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
   ::std::string* application_;
-  ::google::protobuf::int64 startime_;
-  ::google::protobuf::int64 endtime_;
-  ::google::protobuf::int32 startindex_;
-  ::google::protobuf::int32 endindex_;
+  ::std::string* querystr_;
+  ::std::string* cookieid_;
+  ::std::string* srcid_;
+  ::google::protobuf::uint64 startime_;
+  ::google::protobuf::uint64 endtime_;
   ::process::CheckListCond* cond_;
+  ::google::protobuf::RepeatedPtrField< ::std::string> selectfields_;
+  ::std::string* sortfield_;
+  int getfrom_;
+  ::google::protobuf::uint32 start_;
+  ::google::protobuf::uint32 end_;
   friend void  protobuf_AddDesc_transmit_2eproto();
   friend void protobuf_AssignDesc_transmit_2eproto();
   friend void protobuf_ShutdownFile_transmit_2eproto();
@@ -1731,14 +2476,14 @@ class GetLogProcessStatResponse : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required .process.GetLogProcessStatResponse.Res_Status status = 1;
+  // required .process.GetLogProcessStatResponse.Res_Status Status = 1;
   inline bool has_status() const;
   inline void clear_status();
   static const int kStatusFieldNumber = 1;
   inline ::process::GetLogProcessStatResponse_Res_Status status() const;
   inline void set_status(::process::GetLogProcessStatResponse_Res_Status value);
 
-  // optional string error = 2;
+  // optional string Error = 2;
   inline bool has_error() const;
   inline void clear_error();
   static const int kErrorFieldNumber = 2;
@@ -1750,28 +2495,36 @@ class GetLogProcessStatResponse : public ::google::protobuf::Message {
   inline ::std::string* release_error();
   inline void set_allocated_error(::std::string* error);
 
-  // required int64 count = 3;
+  // required uint64 Count = 3;
   inline bool has_count() const;
   inline void clear_count();
   static const int kCountFieldNumber = 3;
-  inline ::google::protobuf::int64 count() const;
-  inline void set_count(::google::protobuf::int64 value);
+  inline ::google::protobuf::uint64 count() const;
+  inline void set_count(::google::protobuf::uint64 value);
 
-  // repeated string iteminfos = 4;
+  // repeated .process.MapEntries Iteminfos = 4;
   inline int iteminfos_size() const;
   inline void clear_iteminfos();
   static const int kIteminfosFieldNumber = 4;
-  inline const ::std::string& iteminfos(int index) const;
-  inline ::std::string* mutable_iteminfos(int index);
-  inline void set_iteminfos(int index, const ::std::string& value);
-  inline void set_iteminfos(int index, const char* value);
-  inline void set_iteminfos(int index, const char* value, size_t size);
-  inline ::std::string* add_iteminfos();
-  inline void add_iteminfos(const ::std::string& value);
-  inline void add_iteminfos(const char* value);
-  inline void add_iteminfos(const char* value, size_t size);
-  inline const ::google::protobuf::RepeatedPtrField< ::std::string>& iteminfos() const;
-  inline ::google::protobuf::RepeatedPtrField< ::std::string>* mutable_iteminfos();
+  inline const ::process::MapEntries& iteminfos(int index) const;
+  inline ::process::MapEntries* mutable_iteminfos(int index);
+  inline ::process::MapEntries* add_iteminfos();
+  inline const ::google::protobuf::RepeatedPtrField< ::process::MapEntries >&
+      iteminfos() const;
+  inline ::google::protobuf::RepeatedPtrField< ::process::MapEntries >*
+      mutable_iteminfos();
+
+  // optional string Result = 5;
+  inline bool has_result() const;
+  inline void clear_result();
+  static const int kResultFieldNumber = 5;
+  inline const ::std::string& result() const;
+  inline void set_result(const ::std::string& value);
+  inline void set_result(const char* value);
+  inline void set_result(const char* value, size_t size);
+  inline ::std::string* mutable_result();
+  inline ::std::string* release_result();
+  inline void set_allocated_result(::std::string* result);
 
   // @@protoc_insertion_point(class_scope:process.GetLogProcessStatResponse)
  private:
@@ -1781,14 +2534,17 @@ class GetLogProcessStatResponse : public ::google::protobuf::Message {
   inline void clear_has_error();
   inline void set_has_count();
   inline void clear_has_count();
+  inline void set_has_result();
+  inline void clear_has_result();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
   ::std::string* error_;
-  ::google::protobuf::int64 count_;
-  ::google::protobuf::RepeatedPtrField< ::std::string> iteminfos_;
+  ::google::protobuf::uint64 count_;
+  ::google::protobuf::RepeatedPtrField< ::process::MapEntries > iteminfos_;
+  ::std::string* result_;
   int status_;
   friend void  protobuf_AddDesc_transmit_2eproto();
   friend void protobuf_AssignDesc_transmit_2eproto();
@@ -1796,6 +2552,724 @@ class GetLogProcessStatResponse : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static GetLogProcessStatResponse* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class SetStorageFieldConfigRequest : public ::google::protobuf::Message {
+ public:
+  SetStorageFieldConfigRequest();
+  virtual ~SetStorageFieldConfigRequest();
+
+  SetStorageFieldConfigRequest(const SetStorageFieldConfigRequest& from);
+
+  inline SetStorageFieldConfigRequest& operator=(const SetStorageFieldConfigRequest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const SetStorageFieldConfigRequest& default_instance();
+
+  void Swap(SetStorageFieldConfigRequest* other);
+
+  // implements Message ----------------------------------------------
+
+  SetStorageFieldConfigRequest* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const SetStorageFieldConfigRequest& from);
+  void MergeFrom(const SetStorageFieldConfigRequest& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required string Application = 1;
+  inline bool has_application() const;
+  inline void clear_application();
+  static const int kApplicationFieldNumber = 1;
+  inline const ::std::string& application() const;
+  inline void set_application(const ::std::string& value);
+  inline void set_application(const char* value);
+  inline void set_application(const char* value, size_t size);
+  inline ::std::string* mutable_application();
+  inline ::std::string* release_application();
+  inline void set_allocated_application(::std::string* application);
+
+  // required bool Op = 2;
+  inline bool has_op() const;
+  inline void clear_op();
+  static const int kOpFieldNumber = 2;
+  inline bool op() const;
+  inline void set_op(bool value);
+
+  // repeated string Fields = 3;
+  inline int fields_size() const;
+  inline void clear_fields();
+  static const int kFieldsFieldNumber = 3;
+  inline const ::std::string& fields(int index) const;
+  inline ::std::string* mutable_fields(int index);
+  inline void set_fields(int index, const ::std::string& value);
+  inline void set_fields(int index, const char* value);
+  inline void set_fields(int index, const char* value, size_t size);
+  inline ::std::string* add_fields();
+  inline void add_fields(const ::std::string& value);
+  inline void add_fields(const char* value);
+  inline void add_fields(const char* value, size_t size);
+  inline const ::google::protobuf::RepeatedPtrField< ::std::string>& fields() const;
+  inline ::google::protobuf::RepeatedPtrField< ::std::string>* mutable_fields();
+
+  // @@protoc_insertion_point(class_scope:process.SetStorageFieldConfigRequest)
+ private:
+  inline void set_has_application();
+  inline void clear_has_application();
+  inline void set_has_op();
+  inline void clear_has_op();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::std::string* application_;
+  ::google::protobuf::RepeatedPtrField< ::std::string> fields_;
+  bool op_;
+  friend void  protobuf_AddDesc_transmit_2eproto();
+  friend void protobuf_AssignDesc_transmit_2eproto();
+  friend void protobuf_ShutdownFile_transmit_2eproto();
+
+  void InitAsDefaultInstance();
+  static SetStorageFieldConfigRequest* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class SetStorageFieldConfigResponse : public ::google::protobuf::Message {
+ public:
+  SetStorageFieldConfigResponse();
+  virtual ~SetStorageFieldConfigResponse();
+
+  SetStorageFieldConfigResponse(const SetStorageFieldConfigResponse& from);
+
+  inline SetStorageFieldConfigResponse& operator=(const SetStorageFieldConfigResponse& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const SetStorageFieldConfigResponse& default_instance();
+
+  void Swap(SetStorageFieldConfigResponse* other);
+
+  // implements Message ----------------------------------------------
+
+  SetStorageFieldConfigResponse* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const SetStorageFieldConfigResponse& from);
+  void MergeFrom(const SetStorageFieldConfigResponse& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  typedef SetStorageFieldConfigResponse_Res_Status Res_Status;
+  static const Res_Status SUCCEED = SetStorageFieldConfigResponse_Res_Status_SUCCEED;
+  static const Res_Status FAILED = SetStorageFieldConfigResponse_Res_Status_FAILED;
+  static inline bool Res_Status_IsValid(int value) {
+    return SetStorageFieldConfigResponse_Res_Status_IsValid(value);
+  }
+  static const Res_Status Res_Status_MIN =
+    SetStorageFieldConfigResponse_Res_Status_Res_Status_MIN;
+  static const Res_Status Res_Status_MAX =
+    SetStorageFieldConfigResponse_Res_Status_Res_Status_MAX;
+  static const int Res_Status_ARRAYSIZE =
+    SetStorageFieldConfigResponse_Res_Status_Res_Status_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor*
+  Res_Status_descriptor() {
+    return SetStorageFieldConfigResponse_Res_Status_descriptor();
+  }
+  static inline const ::std::string& Res_Status_Name(Res_Status value) {
+    return SetStorageFieldConfigResponse_Res_Status_Name(value);
+  }
+  static inline bool Res_Status_Parse(const ::std::string& name,
+      Res_Status* value) {
+    return SetStorageFieldConfigResponse_Res_Status_Parse(name, value);
+  }
+
+  // accessors -------------------------------------------------------
+
+  // required .process.SetStorageFieldConfigResponse.Res_Status Status = 1;
+  inline bool has_status() const;
+  inline void clear_status();
+  static const int kStatusFieldNumber = 1;
+  inline ::process::SetStorageFieldConfigResponse_Res_Status status() const;
+  inline void set_status(::process::SetStorageFieldConfigResponse_Res_Status value);
+
+  // optional string Error = 2;
+  inline bool has_error() const;
+  inline void clear_error();
+  static const int kErrorFieldNumber = 2;
+  inline const ::std::string& error() const;
+  inline void set_error(const ::std::string& value);
+  inline void set_error(const char* value);
+  inline void set_error(const char* value, size_t size);
+  inline ::std::string* mutable_error();
+  inline ::std::string* release_error();
+  inline void set_allocated_error(::std::string* error);
+
+  // @@protoc_insertion_point(class_scope:process.SetStorageFieldConfigResponse)
+ private:
+  inline void set_has_status();
+  inline void clear_has_status();
+  inline void set_has_error();
+  inline void clear_has_error();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::std::string* error_;
+  int status_;
+  friend void  protobuf_AddDesc_transmit_2eproto();
+  friend void protobuf_AssignDesc_transmit_2eproto();
+  friend void protobuf_ShutdownFile_transmit_2eproto();
+
+  void InitAsDefaultInstance();
+  static SetStorageFieldConfigResponse* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class GetStorageFieldConfigRequest : public ::google::protobuf::Message {
+ public:
+  GetStorageFieldConfigRequest();
+  virtual ~GetStorageFieldConfigRequest();
+
+  GetStorageFieldConfigRequest(const GetStorageFieldConfigRequest& from);
+
+  inline GetStorageFieldConfigRequest& operator=(const GetStorageFieldConfigRequest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const GetStorageFieldConfigRequest& default_instance();
+
+  void Swap(GetStorageFieldConfigRequest* other);
+
+  // implements Message ----------------------------------------------
+
+  GetStorageFieldConfigRequest* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const GetStorageFieldConfigRequest& from);
+  void MergeFrom(const GetStorageFieldConfigRequest& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional string Application = 1;
+  inline bool has_application() const;
+  inline void clear_application();
+  static const int kApplicationFieldNumber = 1;
+  inline const ::std::string& application() const;
+  inline void set_application(const ::std::string& value);
+  inline void set_application(const char* value);
+  inline void set_application(const char* value, size_t size);
+  inline ::std::string* mutable_application();
+  inline ::std::string* release_application();
+  inline void set_allocated_application(::std::string* application);
+
+  // @@protoc_insertion_point(class_scope:process.GetStorageFieldConfigRequest)
+ private:
+  inline void set_has_application();
+  inline void clear_has_application();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::std::string* application_;
+  friend void  protobuf_AddDesc_transmit_2eproto();
+  friend void protobuf_AssignDesc_transmit_2eproto();
+  friend void protobuf_ShutdownFile_transmit_2eproto();
+
+  void InitAsDefaultInstance();
+  static GetStorageFieldConfigRequest* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class StorageFieldConfigResponseInfo : public ::google::protobuf::Message {
+ public:
+  StorageFieldConfigResponseInfo();
+  virtual ~StorageFieldConfigResponseInfo();
+
+  StorageFieldConfigResponseInfo(const StorageFieldConfigResponseInfo& from);
+
+  inline StorageFieldConfigResponseInfo& operator=(const StorageFieldConfigResponseInfo& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const StorageFieldConfigResponseInfo& default_instance();
+
+  void Swap(StorageFieldConfigResponseInfo* other);
+
+  // implements Message ----------------------------------------------
+
+  StorageFieldConfigResponseInfo* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const StorageFieldConfigResponseInfo& from);
+  void MergeFrom(const StorageFieldConfigResponseInfo& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required string Application = 1;
+  inline bool has_application() const;
+  inline void clear_application();
+  static const int kApplicationFieldNumber = 1;
+  inline const ::std::string& application() const;
+  inline void set_application(const ::std::string& value);
+  inline void set_application(const char* value);
+  inline void set_application(const char* value, size_t size);
+  inline ::std::string* mutable_application();
+  inline ::std::string* release_application();
+  inline void set_allocated_application(::std::string* application);
+
+  // repeated string Fields = 2;
+  inline int fields_size() const;
+  inline void clear_fields();
+  static const int kFieldsFieldNumber = 2;
+  inline const ::std::string& fields(int index) const;
+  inline ::std::string* mutable_fields(int index);
+  inline void set_fields(int index, const ::std::string& value);
+  inline void set_fields(int index, const char* value);
+  inline void set_fields(int index, const char* value, size_t size);
+  inline ::std::string* add_fields();
+  inline void add_fields(const ::std::string& value);
+  inline void add_fields(const char* value);
+  inline void add_fields(const char* value, size_t size);
+  inline const ::google::protobuf::RepeatedPtrField< ::std::string>& fields() const;
+  inline ::google::protobuf::RepeatedPtrField< ::std::string>* mutable_fields();
+
+  // @@protoc_insertion_point(class_scope:process.StorageFieldConfigResponseInfo)
+ private:
+  inline void set_has_application();
+  inline void clear_has_application();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::std::string* application_;
+  ::google::protobuf::RepeatedPtrField< ::std::string> fields_;
+  friend void  protobuf_AddDesc_transmit_2eproto();
+  friend void protobuf_AssignDesc_transmit_2eproto();
+  friend void protobuf_ShutdownFile_transmit_2eproto();
+
+  void InitAsDefaultInstance();
+  static StorageFieldConfigResponseInfo* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class GetStorageFieldConfigResponse : public ::google::protobuf::Message {
+ public:
+  GetStorageFieldConfigResponse();
+  virtual ~GetStorageFieldConfigResponse();
+
+  GetStorageFieldConfigResponse(const GetStorageFieldConfigResponse& from);
+
+  inline GetStorageFieldConfigResponse& operator=(const GetStorageFieldConfigResponse& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const GetStorageFieldConfigResponse& default_instance();
+
+  void Swap(GetStorageFieldConfigResponse* other);
+
+  // implements Message ----------------------------------------------
+
+  GetStorageFieldConfigResponse* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const GetStorageFieldConfigResponse& from);
+  void MergeFrom(const GetStorageFieldConfigResponse& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // repeated .process.StorageFieldConfigResponseInfo Checklists = 1;
+  inline int checklists_size() const;
+  inline void clear_checklists();
+  static const int kChecklistsFieldNumber = 1;
+  inline const ::process::StorageFieldConfigResponseInfo& checklists(int index) const;
+  inline ::process::StorageFieldConfigResponseInfo* mutable_checklists(int index);
+  inline ::process::StorageFieldConfigResponseInfo* add_checklists();
+  inline const ::google::protobuf::RepeatedPtrField< ::process::StorageFieldConfigResponseInfo >&
+      checklists() const;
+  inline ::google::protobuf::RepeatedPtrField< ::process::StorageFieldConfigResponseInfo >*
+      mutable_checklists();
+
+  // @@protoc_insertion_point(class_scope:process.GetStorageFieldConfigResponse)
+ private:
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::google::protobuf::RepeatedPtrField< ::process::StorageFieldConfigResponseInfo > checklists_;
+  friend void  protobuf_AddDesc_transmit_2eproto();
+  friend void protobuf_AssignDesc_transmit_2eproto();
+  friend void protobuf_ShutdownFile_transmit_2eproto();
+
+  void InitAsDefaultInstance();
+  static GetStorageFieldConfigResponse* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ClearRocksdbDataRequest : public ::google::protobuf::Message {
+ public:
+  ClearRocksdbDataRequest();
+  virtual ~ClearRocksdbDataRequest();
+
+  ClearRocksdbDataRequest(const ClearRocksdbDataRequest& from);
+
+  inline ClearRocksdbDataRequest& operator=(const ClearRocksdbDataRequest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ClearRocksdbDataRequest& default_instance();
+
+  void Swap(ClearRocksdbDataRequest* other);
+
+  // implements Message ----------------------------------------------
+
+  ClearRocksdbDataRequest* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ClearRocksdbDataRequest& from);
+  void MergeFrom(const ClearRocksdbDataRequest& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required string Application = 1;
+  inline bool has_application() const;
+  inline void clear_application();
+  static const int kApplicationFieldNumber = 1;
+  inline const ::std::string& application() const;
+  inline void set_application(const ::std::string& value);
+  inline void set_application(const char* value);
+  inline void set_application(const char* value, size_t size);
+  inline ::std::string* mutable_application();
+  inline ::std::string* release_application();
+  inline void set_allocated_application(::std::string* application);
+
+  // required uint64 Startime = 2;
+  inline bool has_startime() const;
+  inline void clear_startime();
+  static const int kStartimeFieldNumber = 2;
+  inline ::google::protobuf::uint64 startime() const;
+  inline void set_startime(::google::protobuf::uint64 value);
+
+  // required uint64 Endtime = 3;
+  inline bool has_endtime() const;
+  inline void clear_endtime();
+  static const int kEndtimeFieldNumber = 3;
+  inline ::google::protobuf::uint64 endtime() const;
+  inline void set_endtime(::google::protobuf::uint64 value);
+
+  // @@protoc_insertion_point(class_scope:process.ClearRocksdbDataRequest)
+ private:
+  inline void set_has_application();
+  inline void clear_has_application();
+  inline void set_has_startime();
+  inline void clear_has_startime();
+  inline void set_has_endtime();
+  inline void clear_has_endtime();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::std::string* application_;
+  ::google::protobuf::uint64 startime_;
+  ::google::protobuf::uint64 endtime_;
+  friend void  protobuf_AddDesc_transmit_2eproto();
+  friend void protobuf_AssignDesc_transmit_2eproto();
+  friend void protobuf_ShutdownFile_transmit_2eproto();
+
+  void InitAsDefaultInstance();
+  static ClearRocksdbDataRequest* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ClearRocksdbDataResponse : public ::google::protobuf::Message {
+ public:
+  ClearRocksdbDataResponse();
+  virtual ~ClearRocksdbDataResponse();
+
+  ClearRocksdbDataResponse(const ClearRocksdbDataResponse& from);
+
+  inline ClearRocksdbDataResponse& operator=(const ClearRocksdbDataResponse& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ClearRocksdbDataResponse& default_instance();
+
+  void Swap(ClearRocksdbDataResponse* other);
+
+  // implements Message ----------------------------------------------
+
+  ClearRocksdbDataResponse* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ClearRocksdbDataResponse& from);
+  void MergeFrom(const ClearRocksdbDataResponse& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  typedef ClearRocksdbDataResponse_Res_Status Res_Status;
+  static const Res_Status SUCCEED = ClearRocksdbDataResponse_Res_Status_SUCCEED;
+  static const Res_Status FAILED = ClearRocksdbDataResponse_Res_Status_FAILED;
+  static inline bool Res_Status_IsValid(int value) {
+    return ClearRocksdbDataResponse_Res_Status_IsValid(value);
+  }
+  static const Res_Status Res_Status_MIN =
+    ClearRocksdbDataResponse_Res_Status_Res_Status_MIN;
+  static const Res_Status Res_Status_MAX =
+    ClearRocksdbDataResponse_Res_Status_Res_Status_MAX;
+  static const int Res_Status_ARRAYSIZE =
+    ClearRocksdbDataResponse_Res_Status_Res_Status_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor*
+  Res_Status_descriptor() {
+    return ClearRocksdbDataResponse_Res_Status_descriptor();
+  }
+  static inline const ::std::string& Res_Status_Name(Res_Status value) {
+    return ClearRocksdbDataResponse_Res_Status_Name(value);
+  }
+  static inline bool Res_Status_Parse(const ::std::string& name,
+      Res_Status* value) {
+    return ClearRocksdbDataResponse_Res_Status_Parse(name, value);
+  }
+
+  // accessors -------------------------------------------------------
+
+  // required .process.ClearRocksdbDataResponse.Res_Status Status = 1;
+  inline bool has_status() const;
+  inline void clear_status();
+  static const int kStatusFieldNumber = 1;
+  inline ::process::ClearRocksdbDataResponse_Res_Status status() const;
+  inline void set_status(::process::ClearRocksdbDataResponse_Res_Status value);
+
+  // optional string Error = 2;
+  inline bool has_error() const;
+  inline void clear_error();
+  static const int kErrorFieldNumber = 2;
+  inline const ::std::string& error() const;
+  inline void set_error(const ::std::string& value);
+  inline void set_error(const char* value);
+  inline void set_error(const char* value, size_t size);
+  inline ::std::string* mutable_error();
+  inline ::std::string* release_error();
+  inline void set_allocated_error(::std::string* error);
+
+  // @@protoc_insertion_point(class_scope:process.ClearRocksdbDataResponse)
+ private:
+  inline void set_has_status();
+  inline void clear_has_status();
+  inline void set_has_error();
+  inline void clear_has_error();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::std::string* error_;
+  int status_;
+  friend void  protobuf_AddDesc_transmit_2eproto();
+  friend void protobuf_AssignDesc_transmit_2eproto();
+  friend void protobuf_ShutdownFile_transmit_2eproto();
+
+  void InitAsDefaultInstance();
+  static ClearRocksdbDataResponse* default_instance_;
 };
 // ===================================================================
 
@@ -1824,9 +3298,21 @@ class ProcessService : public ::google::protobuf::Service {
                        const ::process::GetCheckListConfigRequest* request,
                        ::process::GetCheckListConfigResponse* response,
                        ::google::protobuf::Closure* done);
+  virtual void SetStorageFieldConfig(::google::protobuf::RpcController* controller,
+                       const ::process::SetStorageFieldConfigRequest* request,
+                       ::process::SetStorageFieldConfigResponse* response,
+                       ::google::protobuf::Closure* done);
+  virtual void GetStorageFieldConfig(::google::protobuf::RpcController* controller,
+                       const ::process::GetStorageFieldConfigRequest* request,
+                       ::process::GetStorageFieldConfigResponse* response,
+                       ::google::protobuf::Closure* done);
   virtual void GetLogProcessStat(::google::protobuf::RpcController* controller,
                        const ::process::GetLogProcessStatRequest* request,
                        ::process::GetLogProcessStatResponse* response,
+                       ::google::protobuf::Closure* done);
+  virtual void ClearRocksdbData(::google::protobuf::RpcController* controller,
+                       const ::process::ClearRocksdbDataRequest* request,
+                       ::process::ClearRocksdbDataResponse* response,
                        ::google::protobuf::Closure* done);
 
   // implements Service ----------------------------------------------
@@ -1869,9 +3355,21 @@ class ProcessService_Stub : public ProcessService {
                        const ::process::GetCheckListConfigRequest* request,
                        ::process::GetCheckListConfigResponse* response,
                        ::google::protobuf::Closure* done);
+  void SetStorageFieldConfig(::google::protobuf::RpcController* controller,
+                       const ::process::SetStorageFieldConfigRequest* request,
+                       ::process::SetStorageFieldConfigResponse* response,
+                       ::google::protobuf::Closure* done);
+  void GetStorageFieldConfig(::google::protobuf::RpcController* controller,
+                       const ::process::GetStorageFieldConfigRequest* request,
+                       ::process::GetStorageFieldConfigResponse* response,
+                       ::google::protobuf::Closure* done);
   void GetLogProcessStat(::google::protobuf::RpcController* controller,
                        const ::process::GetLogProcessStatRequest* request,
                        ::process::GetLogProcessStatResponse* response,
+                       ::google::protobuf::Closure* done);
+  void ClearRocksdbData(::google::protobuf::RpcController* controller,
+                       const ::process::ClearRocksdbDataRequest* request,
+                       ::process::ClearRocksdbDataResponse* response,
                        ::google::protobuf::Closure* done);
  private:
   ::google::protobuf::RpcChannel* channel_;
@@ -1887,7 +3385,7 @@ class ProcessService_Stub : public ProcessService {
 
 // MapEntry
 
-// required string key = 1;
+// required string Key = 1;
 inline bool MapEntry::has_key() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -1904,7 +3402,7 @@ inline void MapEntry::clear_key() {
   clear_has_key();
 }
 inline const ::std::string& MapEntry::key() const {
-  // @@protoc_insertion_point(field_get:process.MapEntry.key)
+  // @@protoc_insertion_point(field_get:process.MapEntry.Key)
   return *key_;
 }
 inline void MapEntry::set_key(const ::std::string& value) {
@@ -1913,7 +3411,7 @@ inline void MapEntry::set_key(const ::std::string& value) {
     key_ = new ::std::string;
   }
   key_->assign(value);
-  // @@protoc_insertion_point(field_set:process.MapEntry.key)
+  // @@protoc_insertion_point(field_set:process.MapEntry.Key)
 }
 inline void MapEntry::set_key(const char* value) {
   set_has_key();
@@ -1921,7 +3419,7 @@ inline void MapEntry::set_key(const char* value) {
     key_ = new ::std::string;
   }
   key_->assign(value);
-  // @@protoc_insertion_point(field_set_char:process.MapEntry.key)
+  // @@protoc_insertion_point(field_set_char:process.MapEntry.Key)
 }
 inline void MapEntry::set_key(const char* value, size_t size) {
   set_has_key();
@@ -1929,14 +3427,14 @@ inline void MapEntry::set_key(const char* value, size_t size) {
     key_ = new ::std::string;
   }
   key_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:process.MapEntry.key)
+  // @@protoc_insertion_point(field_set_pointer:process.MapEntry.Key)
 }
 inline ::std::string* MapEntry::mutable_key() {
   set_has_key();
   if (key_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     key_ = new ::std::string;
   }
-  // @@protoc_insertion_point(field_mutable:process.MapEntry.key)
+  // @@protoc_insertion_point(field_mutable:process.MapEntry.Key)
   return key_;
 }
 inline ::std::string* MapEntry::release_key() {
@@ -1960,10 +3458,10 @@ inline void MapEntry::set_allocated_key(::std::string* key) {
     clear_has_key();
     key_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
-  // @@protoc_insertion_point(field_set_allocated:process.MapEntry.key)
+  // @@protoc_insertion_point(field_set_allocated:process.MapEntry.Key)
 }
 
-// required string value = 2;
+// required string Value = 2;
 inline bool MapEntry::has_value() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -1980,7 +3478,7 @@ inline void MapEntry::clear_value() {
   clear_has_value();
 }
 inline const ::std::string& MapEntry::value() const {
-  // @@protoc_insertion_point(field_get:process.MapEntry.value)
+  // @@protoc_insertion_point(field_get:process.MapEntry.Value)
   return *value_;
 }
 inline void MapEntry::set_value(const ::std::string& value) {
@@ -1989,7 +3487,7 @@ inline void MapEntry::set_value(const ::std::string& value) {
     value_ = new ::std::string;
   }
   value_->assign(value);
-  // @@protoc_insertion_point(field_set:process.MapEntry.value)
+  // @@protoc_insertion_point(field_set:process.MapEntry.Value)
 }
 inline void MapEntry::set_value(const char* value) {
   set_has_value();
@@ -1997,7 +3495,7 @@ inline void MapEntry::set_value(const char* value) {
     value_ = new ::std::string;
   }
   value_->assign(value);
-  // @@protoc_insertion_point(field_set_char:process.MapEntry.value)
+  // @@protoc_insertion_point(field_set_char:process.MapEntry.Value)
 }
 inline void MapEntry::set_value(const char* value, size_t size) {
   set_has_value();
@@ -2005,14 +3503,14 @@ inline void MapEntry::set_value(const char* value, size_t size) {
     value_ = new ::std::string;
   }
   value_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:process.MapEntry.value)
+  // @@protoc_insertion_point(field_set_pointer:process.MapEntry.Value)
 }
 inline ::std::string* MapEntry::mutable_value() {
   set_has_value();
   if (value_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     value_ = new ::std::string;
   }
-  // @@protoc_insertion_point(field_mutable:process.MapEntry.value)
+  // @@protoc_insertion_point(field_mutable:process.MapEntry.Value)
   return value_;
 }
 inline ::std::string* MapEntry::release_value() {
@@ -2036,14 +3534,48 @@ inline void MapEntry::set_allocated_value(::std::string* value) {
     clear_has_value();
     value_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
-  // @@protoc_insertion_point(field_set_allocated:process.MapEntry.value)
+  // @@protoc_insertion_point(field_set_allocated:process.MapEntry.Value)
+}
+
+// -------------------------------------------------------------------
+
+// MapEntries
+
+// repeated .process.MapEntry Item = 1;
+inline int MapEntries::item_size() const {
+  return item_.size();
+}
+inline void MapEntries::clear_item() {
+  item_.Clear();
+}
+inline const ::process::MapEntry& MapEntries::item(int index) const {
+  // @@protoc_insertion_point(field_get:process.MapEntries.Item)
+  return item_.Get(index);
+}
+inline ::process::MapEntry* MapEntries::mutable_item(int index) {
+  // @@protoc_insertion_point(field_mutable:process.MapEntries.Item)
+  return item_.Mutable(index);
+}
+inline ::process::MapEntry* MapEntries::add_item() {
+  // @@protoc_insertion_point(field_add:process.MapEntries.Item)
+  return item_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::process::MapEntry >&
+MapEntries::item() const {
+  // @@protoc_insertion_point(field_list:process.MapEntries.Item)
+  return item_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::process::MapEntry >*
+MapEntries::mutable_item() {
+  // @@protoc_insertion_point(field_mutable_list:process.MapEntries.Item)
+  return &item_;
 }
 
 // -------------------------------------------------------------------
 
 // TransmitRequest
 
-// repeated .process.MapEntry values = 1;
+// repeated .process.MapEntry Values = 1;
 inline int TransmitRequest::values_size() const {
   return values_.size();
 }
@@ -2051,25 +3583,25 @@ inline void TransmitRequest::clear_values() {
   values_.Clear();
 }
 inline const ::process::MapEntry& TransmitRequest::values(int index) const {
-  // @@protoc_insertion_point(field_get:process.TransmitRequest.values)
+  // @@protoc_insertion_point(field_get:process.TransmitRequest.Values)
   return values_.Get(index);
 }
 inline ::process::MapEntry* TransmitRequest::mutable_values(int index) {
-  // @@protoc_insertion_point(field_mutable:process.TransmitRequest.values)
+  // @@protoc_insertion_point(field_mutable:process.TransmitRequest.Values)
   return values_.Mutable(index);
 }
 inline ::process::MapEntry* TransmitRequest::add_values() {
-  // @@protoc_insertion_point(field_add:process.TransmitRequest.values)
+  // @@protoc_insertion_point(field_add:process.TransmitRequest.Values)
   return values_.Add();
 }
 inline const ::google::protobuf::RepeatedPtrField< ::process::MapEntry >&
 TransmitRequest::values() const {
-  // @@protoc_insertion_point(field_list:process.TransmitRequest.values)
+  // @@protoc_insertion_point(field_list:process.TransmitRequest.Values)
   return values_;
 }
 inline ::google::protobuf::RepeatedPtrField< ::process::MapEntry >*
 TransmitRequest::mutable_values() {
-  // @@protoc_insertion_point(field_mutable_list:process.TransmitRequest.values)
+  // @@protoc_insertion_point(field_mutable_list:process.TransmitRequest.Values)
   return &values_;
 }
 
@@ -2077,7 +3609,7 @@ TransmitRequest::mutable_values() {
 
 // TransmitResponse
 
-// required .process.TransmitResponse.Res_Status status = 1;
+// required .process.TransmitResponse.Res_Status Status = 1;
 inline bool TransmitResponse::has_status() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -2092,17 +3624,17 @@ inline void TransmitResponse::clear_status() {
   clear_has_status();
 }
 inline ::process::TransmitResponse_Res_Status TransmitResponse::status() const {
-  // @@protoc_insertion_point(field_get:process.TransmitResponse.status)
+  // @@protoc_insertion_point(field_get:process.TransmitResponse.Status)
   return static_cast< ::process::TransmitResponse_Res_Status >(status_);
 }
 inline void TransmitResponse::set_status(::process::TransmitResponse_Res_Status value) {
   assert(::process::TransmitResponse_Res_Status_IsValid(value));
   set_has_status();
   status_ = value;
-  // @@protoc_insertion_point(field_set:process.TransmitResponse.status)
+  // @@protoc_insertion_point(field_set:process.TransmitResponse.Status)
 }
 
-// optional string error = 2;
+// optional string Error = 2;
 inline bool TransmitResponse::has_error() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -2119,7 +3651,7 @@ inline void TransmitResponse::clear_error() {
   clear_has_error();
 }
 inline const ::std::string& TransmitResponse::error() const {
-  // @@protoc_insertion_point(field_get:process.TransmitResponse.error)
+  // @@protoc_insertion_point(field_get:process.TransmitResponse.Error)
   return *error_;
 }
 inline void TransmitResponse::set_error(const ::std::string& value) {
@@ -2128,7 +3660,7 @@ inline void TransmitResponse::set_error(const ::std::string& value) {
     error_ = new ::std::string;
   }
   error_->assign(value);
-  // @@protoc_insertion_point(field_set:process.TransmitResponse.error)
+  // @@protoc_insertion_point(field_set:process.TransmitResponse.Error)
 }
 inline void TransmitResponse::set_error(const char* value) {
   set_has_error();
@@ -2136,7 +3668,7 @@ inline void TransmitResponse::set_error(const char* value) {
     error_ = new ::std::string;
   }
   error_->assign(value);
-  // @@protoc_insertion_point(field_set_char:process.TransmitResponse.error)
+  // @@protoc_insertion_point(field_set_char:process.TransmitResponse.Error)
 }
 inline void TransmitResponse::set_error(const char* value, size_t size) {
   set_has_error();
@@ -2144,14 +3676,14 @@ inline void TransmitResponse::set_error(const char* value, size_t size) {
     error_ = new ::std::string;
   }
   error_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:process.TransmitResponse.error)
+  // @@protoc_insertion_point(field_set_pointer:process.TransmitResponse.Error)
 }
 inline ::std::string* TransmitResponse::mutable_error() {
   set_has_error();
   if (error_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     error_ = new ::std::string;
   }
-  // @@protoc_insertion_point(field_mutable:process.TransmitResponse.error)
+  // @@protoc_insertion_point(field_mutable:process.TransmitResponse.Error)
   return error_;
 }
 inline ::std::string* TransmitResponse::release_error() {
@@ -2175,14 +3707,119 @@ inline void TransmitResponse::set_allocated_error(::std::string* error) {
     clear_has_error();
     error_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
-  // @@protoc_insertion_point(field_set_allocated:process.TransmitResponse.error)
+  // @@protoc_insertion_point(field_set_allocated:process.TransmitResponse.Error)
+}
+
+// -------------------------------------------------------------------
+
+// TypeConfig
+
+// required string Type = 1;
+inline bool TypeConfig::has_type() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void TypeConfig::set_has_type() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void TypeConfig::clear_has_type() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void TypeConfig::clear_type() {
+  if (type_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    type_->clear();
+  }
+  clear_has_type();
+}
+inline const ::std::string& TypeConfig::type() const {
+  // @@protoc_insertion_point(field_get:process.TypeConfig.Type)
+  return *type_;
+}
+inline void TypeConfig::set_type(const ::std::string& value) {
+  set_has_type();
+  if (type_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    type_ = new ::std::string;
+  }
+  type_->assign(value);
+  // @@protoc_insertion_point(field_set:process.TypeConfig.Type)
+}
+inline void TypeConfig::set_type(const char* value) {
+  set_has_type();
+  if (type_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    type_ = new ::std::string;
+  }
+  type_->assign(value);
+  // @@protoc_insertion_point(field_set_char:process.TypeConfig.Type)
+}
+inline void TypeConfig::set_type(const char* value, size_t size) {
+  set_has_type();
+  if (type_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    type_ = new ::std::string;
+  }
+  type_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:process.TypeConfig.Type)
+}
+inline ::std::string* TypeConfig::mutable_type() {
+  set_has_type();
+  if (type_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    type_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:process.TypeConfig.Type)
+  return type_;
+}
+inline ::std::string* TypeConfig::release_type() {
+  clear_has_type();
+  if (type_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = type_;
+    type_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void TypeConfig::set_allocated_type(::std::string* type) {
+  if (type_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete type_;
+  }
+  if (type) {
+    set_has_type();
+    type_ = type;
+  } else {
+    clear_has_type();
+    type_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:process.TypeConfig.Type)
+}
+
+// required .process.CondType Cond = 2;
+inline bool TypeConfig::has_cond() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void TypeConfig::set_has_cond() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void TypeConfig::clear_has_cond() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void TypeConfig::clear_cond() {
+  cond_ = 1;
+  clear_has_cond();
+}
+inline ::process::CondType TypeConfig::cond() const {
+  // @@protoc_insertion_point(field_get:process.TypeConfig.Cond)
+  return static_cast< ::process::CondType >(cond_);
+}
+inline void TypeConfig::set_cond(::process::CondType value) {
+  assert(::process::CondType_IsValid(value));
+  set_has_cond();
+  cond_ = value;
+  // @@protoc_insertion_point(field_set:process.TypeConfig.Cond)
 }
 
 // -------------------------------------------------------------------
 
 // SrcidConfig
 
-// required string srcid = 1;
+// required string Srcid = 1;
 inline bool SrcidConfig::has_srcid() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -2199,7 +3836,7 @@ inline void SrcidConfig::clear_srcid() {
   clear_has_srcid();
 }
 inline const ::std::string& SrcidConfig::srcid() const {
-  // @@protoc_insertion_point(field_get:process.SrcidConfig.srcid)
+  // @@protoc_insertion_point(field_get:process.SrcidConfig.Srcid)
   return *srcid_;
 }
 inline void SrcidConfig::set_srcid(const ::std::string& value) {
@@ -2208,7 +3845,7 @@ inline void SrcidConfig::set_srcid(const ::std::string& value) {
     srcid_ = new ::std::string;
   }
   srcid_->assign(value);
-  // @@protoc_insertion_point(field_set:process.SrcidConfig.srcid)
+  // @@protoc_insertion_point(field_set:process.SrcidConfig.Srcid)
 }
 inline void SrcidConfig::set_srcid(const char* value) {
   set_has_srcid();
@@ -2216,7 +3853,7 @@ inline void SrcidConfig::set_srcid(const char* value) {
     srcid_ = new ::std::string;
   }
   srcid_->assign(value);
-  // @@protoc_insertion_point(field_set_char:process.SrcidConfig.srcid)
+  // @@protoc_insertion_point(field_set_char:process.SrcidConfig.Srcid)
 }
 inline void SrcidConfig::set_srcid(const char* value, size_t size) {
   set_has_srcid();
@@ -2224,14 +3861,14 @@ inline void SrcidConfig::set_srcid(const char* value, size_t size) {
     srcid_ = new ::std::string;
   }
   srcid_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:process.SrcidConfig.srcid)
+  // @@protoc_insertion_point(field_set_pointer:process.SrcidConfig.Srcid)
 }
 inline ::std::string* SrcidConfig::mutable_srcid() {
   set_has_srcid();
   if (srcid_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     srcid_ = new ::std::string;
   }
-  // @@protoc_insertion_point(field_mutable:process.SrcidConfig.srcid)
+  // @@protoc_insertion_point(field_mutable:process.SrcidConfig.Srcid)
   return srcid_;
 }
 inline ::std::string* SrcidConfig::release_srcid() {
@@ -2255,10 +3892,10 @@ inline void SrcidConfig::set_allocated_srcid(::std::string* srcid) {
     clear_has_srcid();
     srcid_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
-  // @@protoc_insertion_point(field_set_allocated:process.SrcidConfig.srcid)
+  // @@protoc_insertion_point(field_set_allocated:process.SrcidConfig.Srcid)
 }
 
-// required .process.CondType cond = 2;
+// required .process.CondType Cond = 2;
 inline bool SrcidConfig::has_cond() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -2273,21 +3910,21 @@ inline void SrcidConfig::clear_cond() {
   clear_has_cond();
 }
 inline ::process::CondType SrcidConfig::cond() const {
-  // @@protoc_insertion_point(field_get:process.SrcidConfig.cond)
+  // @@protoc_insertion_point(field_get:process.SrcidConfig.Cond)
   return static_cast< ::process::CondType >(cond_);
 }
 inline void SrcidConfig::set_cond(::process::CondType value) {
   assert(::process::CondType_IsValid(value));
   set_has_cond();
   cond_ = value;
-  // @@protoc_insertion_point(field_set:process.SrcidConfig.cond)
+  // @@protoc_insertion_point(field_set:process.SrcidConfig.Cond)
 }
 
 // -------------------------------------------------------------------
 
 // ScanCondSeWord
 
-// required string searchword = 1;
+// required string Searchword = 1;
 inline bool ScanCondSeWord::has_searchword() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -2304,7 +3941,7 @@ inline void ScanCondSeWord::clear_searchword() {
   clear_has_searchword();
 }
 inline const ::std::string& ScanCondSeWord::searchword() const {
-  // @@protoc_insertion_point(field_get:process.ScanCondSeWord.searchword)
+  // @@protoc_insertion_point(field_get:process.ScanCondSeWord.Searchword)
   return *searchword_;
 }
 inline void ScanCondSeWord::set_searchword(const ::std::string& value) {
@@ -2313,7 +3950,7 @@ inline void ScanCondSeWord::set_searchword(const ::std::string& value) {
     searchword_ = new ::std::string;
   }
   searchword_->assign(value);
-  // @@protoc_insertion_point(field_set:process.ScanCondSeWord.searchword)
+  // @@protoc_insertion_point(field_set:process.ScanCondSeWord.Searchword)
 }
 inline void ScanCondSeWord::set_searchword(const char* value) {
   set_has_searchword();
@@ -2321,7 +3958,7 @@ inline void ScanCondSeWord::set_searchword(const char* value) {
     searchword_ = new ::std::string;
   }
   searchword_->assign(value);
-  // @@protoc_insertion_point(field_set_char:process.ScanCondSeWord.searchword)
+  // @@protoc_insertion_point(field_set_char:process.ScanCondSeWord.Searchword)
 }
 inline void ScanCondSeWord::set_searchword(const char* value, size_t size) {
   set_has_searchword();
@@ -2329,14 +3966,14 @@ inline void ScanCondSeWord::set_searchword(const char* value, size_t size) {
     searchword_ = new ::std::string;
   }
   searchword_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:process.ScanCondSeWord.searchword)
+  // @@protoc_insertion_point(field_set_pointer:process.ScanCondSeWord.Searchword)
 }
 inline ::std::string* ScanCondSeWord::mutable_searchword() {
   set_has_searchword();
   if (searchword_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     searchword_ = new ::std::string;
   }
-  // @@protoc_insertion_point(field_mutable:process.ScanCondSeWord.searchword)
+  // @@protoc_insertion_point(field_mutable:process.ScanCondSeWord.Searchword)
   return searchword_;
 }
 inline ::std::string* ScanCondSeWord::release_searchword() {
@@ -2360,10 +3997,10 @@ inline void ScanCondSeWord::set_allocated_searchword(::std::string* searchword) 
     clear_has_searchword();
     searchword_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
-  // @@protoc_insertion_point(field_set_allocated:process.ScanCondSeWord.searchword)
+  // @@protoc_insertion_point(field_set_allocated:process.ScanCondSeWord.Searchword)
 }
 
-// required .process.CondType cond = 2;
+// required .process.CondType Cond = 2;
 inline bool ScanCondSeWord::has_cond() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -2378,21 +4015,21 @@ inline void ScanCondSeWord::clear_cond() {
   clear_has_cond();
 }
 inline ::process::CondType ScanCondSeWord::cond() const {
-  // @@protoc_insertion_point(field_get:process.ScanCondSeWord.cond)
+  // @@protoc_insertion_point(field_get:process.ScanCondSeWord.Cond)
   return static_cast< ::process::CondType >(cond_);
 }
 inline void ScanCondSeWord::set_cond(::process::CondType value) {
   assert(::process::CondType_IsValid(value));
   set_has_cond();
   cond_ = value;
-  // @@protoc_insertion_point(field_set:process.ScanCondSeWord.cond)
+  // @@protoc_insertion_point(field_set:process.ScanCondSeWord.Cond)
 }
 
 // -------------------------------------------------------------------
 
 // LocationInfo
 
-// optional string province = 1;
+// optional string Province = 1;
 inline bool LocationInfo::has_province() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -2409,7 +4046,7 @@ inline void LocationInfo::clear_province() {
   clear_has_province();
 }
 inline const ::std::string& LocationInfo::province() const {
-  // @@protoc_insertion_point(field_get:process.LocationInfo.province)
+  // @@protoc_insertion_point(field_get:process.LocationInfo.Province)
   return *province_;
 }
 inline void LocationInfo::set_province(const ::std::string& value) {
@@ -2418,7 +4055,7 @@ inline void LocationInfo::set_province(const ::std::string& value) {
     province_ = new ::std::string;
   }
   province_->assign(value);
-  // @@protoc_insertion_point(field_set:process.LocationInfo.province)
+  // @@protoc_insertion_point(field_set:process.LocationInfo.Province)
 }
 inline void LocationInfo::set_province(const char* value) {
   set_has_province();
@@ -2426,7 +4063,7 @@ inline void LocationInfo::set_province(const char* value) {
     province_ = new ::std::string;
   }
   province_->assign(value);
-  // @@protoc_insertion_point(field_set_char:process.LocationInfo.province)
+  // @@protoc_insertion_point(field_set_char:process.LocationInfo.Province)
 }
 inline void LocationInfo::set_province(const char* value, size_t size) {
   set_has_province();
@@ -2434,14 +4071,14 @@ inline void LocationInfo::set_province(const char* value, size_t size) {
     province_ = new ::std::string;
   }
   province_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:process.LocationInfo.province)
+  // @@protoc_insertion_point(field_set_pointer:process.LocationInfo.Province)
 }
 inline ::std::string* LocationInfo::mutable_province() {
   set_has_province();
   if (province_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     province_ = new ::std::string;
   }
-  // @@protoc_insertion_point(field_mutable:process.LocationInfo.province)
+  // @@protoc_insertion_point(field_mutable:process.LocationInfo.Province)
   return province_;
 }
 inline ::std::string* LocationInfo::release_province() {
@@ -2465,10 +4102,10 @@ inline void LocationInfo::set_allocated_province(::std::string* province) {
     clear_has_province();
     province_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
-  // @@protoc_insertion_point(field_set_allocated:process.LocationInfo.province)
+  // @@protoc_insertion_point(field_set_allocated:process.LocationInfo.Province)
 }
 
-// optional string city = 2;
+// optional string City = 2;
 inline bool LocationInfo::has_city() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -2485,7 +4122,7 @@ inline void LocationInfo::clear_city() {
   clear_has_city();
 }
 inline const ::std::string& LocationInfo::city() const {
-  // @@protoc_insertion_point(field_get:process.LocationInfo.city)
+  // @@protoc_insertion_point(field_get:process.LocationInfo.City)
   return *city_;
 }
 inline void LocationInfo::set_city(const ::std::string& value) {
@@ -2494,7 +4131,7 @@ inline void LocationInfo::set_city(const ::std::string& value) {
     city_ = new ::std::string;
   }
   city_->assign(value);
-  // @@protoc_insertion_point(field_set:process.LocationInfo.city)
+  // @@protoc_insertion_point(field_set:process.LocationInfo.City)
 }
 inline void LocationInfo::set_city(const char* value) {
   set_has_city();
@@ -2502,7 +4139,7 @@ inline void LocationInfo::set_city(const char* value) {
     city_ = new ::std::string;
   }
   city_->assign(value);
-  // @@protoc_insertion_point(field_set_char:process.LocationInfo.city)
+  // @@protoc_insertion_point(field_set_char:process.LocationInfo.City)
 }
 inline void LocationInfo::set_city(const char* value, size_t size) {
   set_has_city();
@@ -2510,14 +4147,14 @@ inline void LocationInfo::set_city(const char* value, size_t size) {
     city_ = new ::std::string;
   }
   city_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:process.LocationInfo.city)
+  // @@protoc_insertion_point(field_set_pointer:process.LocationInfo.City)
 }
 inline ::std::string* LocationInfo::mutable_city() {
   set_has_city();
   if (city_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     city_ = new ::std::string;
   }
-  // @@protoc_insertion_point(field_mutable:process.LocationInfo.city)
+  // @@protoc_insertion_point(field_mutable:process.LocationInfo.City)
   return city_;
 }
 inline ::std::string* LocationInfo::release_city() {
@@ -2541,10 +4178,10 @@ inline void LocationInfo::set_allocated_city(::std::string* city) {
     clear_has_city();
     city_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
-  // @@protoc_insertion_point(field_set_allocated:process.LocationInfo.city)
+  // @@protoc_insertion_point(field_set_allocated:process.LocationInfo.City)
 }
 
-// required .process.CondType cond = 3;
+// required .process.CondType Cond = 3;
 inline bool LocationInfo::has_cond() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
@@ -2559,21 +4196,21 @@ inline void LocationInfo::clear_cond() {
   clear_has_cond();
 }
 inline ::process::CondType LocationInfo::cond() const {
-  // @@protoc_insertion_point(field_get:process.LocationInfo.cond)
+  // @@protoc_insertion_point(field_get:process.LocationInfo.Cond)
   return static_cast< ::process::CondType >(cond_);
 }
 inline void LocationInfo::set_cond(::process::CondType value) {
   assert(::process::CondType_IsValid(value));
   set_has_cond();
   cond_ = value;
-  // @@protoc_insertion_point(field_set:process.LocationInfo.cond)
+  // @@protoc_insertion_point(field_set:process.LocationInfo.Cond)
 }
 
 // -------------------------------------------------------------------
 
 // CookieConfig
 
-// required string cookie = 1;
+// required string Cookie = 1;
 inline bool CookieConfig::has_cookie() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -2590,7 +4227,7 @@ inline void CookieConfig::clear_cookie() {
   clear_has_cookie();
 }
 inline const ::std::string& CookieConfig::cookie() const {
-  // @@protoc_insertion_point(field_get:process.CookieConfig.cookie)
+  // @@protoc_insertion_point(field_get:process.CookieConfig.Cookie)
   return *cookie_;
 }
 inline void CookieConfig::set_cookie(const ::std::string& value) {
@@ -2599,7 +4236,7 @@ inline void CookieConfig::set_cookie(const ::std::string& value) {
     cookie_ = new ::std::string;
   }
   cookie_->assign(value);
-  // @@protoc_insertion_point(field_set:process.CookieConfig.cookie)
+  // @@protoc_insertion_point(field_set:process.CookieConfig.Cookie)
 }
 inline void CookieConfig::set_cookie(const char* value) {
   set_has_cookie();
@@ -2607,7 +4244,7 @@ inline void CookieConfig::set_cookie(const char* value) {
     cookie_ = new ::std::string;
   }
   cookie_->assign(value);
-  // @@protoc_insertion_point(field_set_char:process.CookieConfig.cookie)
+  // @@protoc_insertion_point(field_set_char:process.CookieConfig.Cookie)
 }
 inline void CookieConfig::set_cookie(const char* value, size_t size) {
   set_has_cookie();
@@ -2615,14 +4252,14 @@ inline void CookieConfig::set_cookie(const char* value, size_t size) {
     cookie_ = new ::std::string;
   }
   cookie_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:process.CookieConfig.cookie)
+  // @@protoc_insertion_point(field_set_pointer:process.CookieConfig.Cookie)
 }
 inline ::std::string* CookieConfig::mutable_cookie() {
   set_has_cookie();
   if (cookie_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     cookie_ = new ::std::string;
   }
-  // @@protoc_insertion_point(field_mutable:process.CookieConfig.cookie)
+  // @@protoc_insertion_point(field_mutable:process.CookieConfig.Cookie)
   return cookie_;
 }
 inline ::std::string* CookieConfig::release_cookie() {
@@ -2646,10 +4283,10 @@ inline void CookieConfig::set_allocated_cookie(::std::string* cookie) {
     clear_has_cookie();
     cookie_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
-  // @@protoc_insertion_point(field_set_allocated:process.CookieConfig.cookie)
+  // @@protoc_insertion_point(field_set_allocated:process.CookieConfig.Cookie)
 }
 
-// required .process.CondType cond = 2;
+// required .process.CondType Cond = 2;
 inline bool CookieConfig::has_cond() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -2664,21 +4301,21 @@ inline void CookieConfig::clear_cond() {
   clear_has_cond();
 }
 inline ::process::CondType CookieConfig::cond() const {
-  // @@protoc_insertion_point(field_get:process.CookieConfig.cond)
+  // @@protoc_insertion_point(field_get:process.CookieConfig.Cond)
   return static_cast< ::process::CondType >(cond_);
 }
 inline void CookieConfig::set_cond(::process::CondType value) {
   assert(::process::CondType_IsValid(value));
   set_has_cond();
   cond_ = value;
-  // @@protoc_insertion_point(field_set:process.CookieConfig.cond)
+  // @@protoc_insertion_point(field_set:process.CookieConfig.Cond)
 }
 
 // -------------------------------------------------------------------
 
 // ClusterConfig
 
-// required string cluster = 1;
+// required string Cluster = 1;
 inline bool ClusterConfig::has_cluster() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -2695,7 +4332,7 @@ inline void ClusterConfig::clear_cluster() {
   clear_has_cluster();
 }
 inline const ::std::string& ClusterConfig::cluster() const {
-  // @@protoc_insertion_point(field_get:process.ClusterConfig.cluster)
+  // @@protoc_insertion_point(field_get:process.ClusterConfig.Cluster)
   return *cluster_;
 }
 inline void ClusterConfig::set_cluster(const ::std::string& value) {
@@ -2704,7 +4341,7 @@ inline void ClusterConfig::set_cluster(const ::std::string& value) {
     cluster_ = new ::std::string;
   }
   cluster_->assign(value);
-  // @@protoc_insertion_point(field_set:process.ClusterConfig.cluster)
+  // @@protoc_insertion_point(field_set:process.ClusterConfig.Cluster)
 }
 inline void ClusterConfig::set_cluster(const char* value) {
   set_has_cluster();
@@ -2712,7 +4349,7 @@ inline void ClusterConfig::set_cluster(const char* value) {
     cluster_ = new ::std::string;
   }
   cluster_->assign(value);
-  // @@protoc_insertion_point(field_set_char:process.ClusterConfig.cluster)
+  // @@protoc_insertion_point(field_set_char:process.ClusterConfig.Cluster)
 }
 inline void ClusterConfig::set_cluster(const char* value, size_t size) {
   set_has_cluster();
@@ -2720,14 +4357,14 @@ inline void ClusterConfig::set_cluster(const char* value, size_t size) {
     cluster_ = new ::std::string;
   }
   cluster_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:process.ClusterConfig.cluster)
+  // @@protoc_insertion_point(field_set_pointer:process.ClusterConfig.Cluster)
 }
 inline ::std::string* ClusterConfig::mutable_cluster() {
   set_has_cluster();
   if (cluster_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     cluster_ = new ::std::string;
   }
-  // @@protoc_insertion_point(field_mutable:process.ClusterConfig.cluster)
+  // @@protoc_insertion_point(field_mutable:process.ClusterConfig.Cluster)
   return cluster_;
 }
 inline ::std::string* ClusterConfig::release_cluster() {
@@ -2751,10 +4388,10 @@ inline void ClusterConfig::set_allocated_cluster(::std::string* cluster) {
     clear_has_cluster();
     cluster_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
-  // @@protoc_insertion_point(field_set_allocated:process.ClusterConfig.cluster)
+  // @@protoc_insertion_point(field_set_allocated:process.ClusterConfig.Cluster)
 }
 
-// required .process.CondType cond = 2;
+// required .process.CondType Cond = 2;
 inline bool ClusterConfig::has_cond() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -2769,21 +4406,231 @@ inline void ClusterConfig::clear_cond() {
   clear_has_cond();
 }
 inline ::process::CondType ClusterConfig::cond() const {
-  // @@protoc_insertion_point(field_get:process.ClusterConfig.cond)
+  // @@protoc_insertion_point(field_get:process.ClusterConfig.Cond)
   return static_cast< ::process::CondType >(cond_);
 }
 inline void ClusterConfig::set_cond(::process::CondType value) {
   assert(::process::CondType_IsValid(value));
   set_has_cond();
   cond_ = value;
-  // @@protoc_insertion_point(field_set:process.ClusterConfig.cond)
+  // @@protoc_insertion_point(field_set:process.ClusterConfig.Cond)
+}
+
+// -------------------------------------------------------------------
+
+// SidConfig
+
+// required string Sid = 1;
+inline bool SidConfig::has_sid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void SidConfig::set_has_sid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void SidConfig::clear_has_sid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void SidConfig::clear_sid() {
+  if (sid_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    sid_->clear();
+  }
+  clear_has_sid();
+}
+inline const ::std::string& SidConfig::sid() const {
+  // @@protoc_insertion_point(field_get:process.SidConfig.Sid)
+  return *sid_;
+}
+inline void SidConfig::set_sid(const ::std::string& value) {
+  set_has_sid();
+  if (sid_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    sid_ = new ::std::string;
+  }
+  sid_->assign(value);
+  // @@protoc_insertion_point(field_set:process.SidConfig.Sid)
+}
+inline void SidConfig::set_sid(const char* value) {
+  set_has_sid();
+  if (sid_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    sid_ = new ::std::string;
+  }
+  sid_->assign(value);
+  // @@protoc_insertion_point(field_set_char:process.SidConfig.Sid)
+}
+inline void SidConfig::set_sid(const char* value, size_t size) {
+  set_has_sid();
+  if (sid_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    sid_ = new ::std::string;
+  }
+  sid_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:process.SidConfig.Sid)
+}
+inline ::std::string* SidConfig::mutable_sid() {
+  set_has_sid();
+  if (sid_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    sid_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:process.SidConfig.Sid)
+  return sid_;
+}
+inline ::std::string* SidConfig::release_sid() {
+  clear_has_sid();
+  if (sid_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = sid_;
+    sid_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void SidConfig::set_allocated_sid(::std::string* sid) {
+  if (sid_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete sid_;
+  }
+  if (sid) {
+    set_has_sid();
+    sid_ = sid;
+  } else {
+    clear_has_sid();
+    sid_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:process.SidConfig.Sid)
+}
+
+// required .process.CondType Cond = 2;
+inline bool SidConfig::has_cond() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void SidConfig::set_has_cond() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void SidConfig::clear_has_cond() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void SidConfig::clear_cond() {
+  cond_ = 1;
+  clear_has_cond();
+}
+inline ::process::CondType SidConfig::cond() const {
+  // @@protoc_insertion_point(field_get:process.SidConfig.Cond)
+  return static_cast< ::process::CondType >(cond_);
+}
+inline void SidConfig::set_cond(::process::CondType value) {
+  assert(::process::CondType_IsValid(value));
+  set_has_cond();
+  cond_ = value;
+  // @@protoc_insertion_point(field_set:process.SidConfig.Cond)
+}
+
+// -------------------------------------------------------------------
+
+// ResnoConfig
+
+// required string Resno = 1;
+inline bool ResnoConfig::has_resno() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ResnoConfig::set_has_resno() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ResnoConfig::clear_has_resno() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ResnoConfig::clear_resno() {
+  if (resno_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    resno_->clear();
+  }
+  clear_has_resno();
+}
+inline const ::std::string& ResnoConfig::resno() const {
+  // @@protoc_insertion_point(field_get:process.ResnoConfig.Resno)
+  return *resno_;
+}
+inline void ResnoConfig::set_resno(const ::std::string& value) {
+  set_has_resno();
+  if (resno_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    resno_ = new ::std::string;
+  }
+  resno_->assign(value);
+  // @@protoc_insertion_point(field_set:process.ResnoConfig.Resno)
+}
+inline void ResnoConfig::set_resno(const char* value) {
+  set_has_resno();
+  if (resno_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    resno_ = new ::std::string;
+  }
+  resno_->assign(value);
+  // @@protoc_insertion_point(field_set_char:process.ResnoConfig.Resno)
+}
+inline void ResnoConfig::set_resno(const char* value, size_t size) {
+  set_has_resno();
+  if (resno_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    resno_ = new ::std::string;
+  }
+  resno_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:process.ResnoConfig.Resno)
+}
+inline ::std::string* ResnoConfig::mutable_resno() {
+  set_has_resno();
+  if (resno_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    resno_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:process.ResnoConfig.Resno)
+  return resno_;
+}
+inline ::std::string* ResnoConfig::release_resno() {
+  clear_has_resno();
+  if (resno_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = resno_;
+    resno_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void ResnoConfig::set_allocated_resno(::std::string* resno) {
+  if (resno_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete resno_;
+  }
+  if (resno) {
+    set_has_resno();
+    resno_ = resno;
+  } else {
+    clear_has_resno();
+    resno_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:process.ResnoConfig.Resno)
+}
+
+// required .process.CondType Cond = 2;
+inline bool ResnoConfig::has_cond() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ResnoConfig::set_has_cond() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ResnoConfig::clear_has_cond() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ResnoConfig::clear_cond() {
+  cond_ = 1;
+  clear_has_cond();
+}
+inline ::process::CondType ResnoConfig::cond() const {
+  // @@protoc_insertion_point(field_get:process.ResnoConfig.Cond)
+  return static_cast< ::process::CondType >(cond_);
+}
+inline void ResnoConfig::set_cond(::process::CondType value) {
+  assert(::process::CondType_IsValid(value));
+  set_has_cond();
+  cond_ = value;
+  // @@protoc_insertion_point(field_set:process.ResnoConfig.Cond)
 }
 
 // -------------------------------------------------------------------
 
 // CheckListCond
 
-// repeated .process.SrcidConfig srcids = 1;
+// repeated .process.SrcidConfig Srcids = 1;
 inline int CheckListCond::srcids_size() const {
   return srcids_.size();
 }
@@ -2791,29 +4638,29 @@ inline void CheckListCond::clear_srcids() {
   srcids_.Clear();
 }
 inline const ::process::SrcidConfig& CheckListCond::srcids(int index) const {
-  // @@protoc_insertion_point(field_get:process.CheckListCond.srcids)
+  // @@protoc_insertion_point(field_get:process.CheckListCond.Srcids)
   return srcids_.Get(index);
 }
 inline ::process::SrcidConfig* CheckListCond::mutable_srcids(int index) {
-  // @@protoc_insertion_point(field_mutable:process.CheckListCond.srcids)
+  // @@protoc_insertion_point(field_mutable:process.CheckListCond.Srcids)
   return srcids_.Mutable(index);
 }
 inline ::process::SrcidConfig* CheckListCond::add_srcids() {
-  // @@protoc_insertion_point(field_add:process.CheckListCond.srcids)
+  // @@protoc_insertion_point(field_add:process.CheckListCond.Srcids)
   return srcids_.Add();
 }
 inline const ::google::protobuf::RepeatedPtrField< ::process::SrcidConfig >&
 CheckListCond::srcids() const {
-  // @@protoc_insertion_point(field_list:process.CheckListCond.srcids)
+  // @@protoc_insertion_point(field_list:process.CheckListCond.Srcids)
   return srcids_;
 }
 inline ::google::protobuf::RepeatedPtrField< ::process::SrcidConfig >*
 CheckListCond::mutable_srcids() {
-  // @@protoc_insertion_point(field_mutable_list:process.CheckListCond.srcids)
+  // @@protoc_insertion_point(field_mutable_list:process.CheckListCond.Srcids)
   return &srcids_;
 }
 
-// repeated .process.ScanCondSeWord sewords = 2;
+// repeated .process.ScanCondSeWord Sewords = 2;
 inline int CheckListCond::sewords_size() const {
   return sewords_.size();
 }
@@ -2821,29 +4668,29 @@ inline void CheckListCond::clear_sewords() {
   sewords_.Clear();
 }
 inline const ::process::ScanCondSeWord& CheckListCond::sewords(int index) const {
-  // @@protoc_insertion_point(field_get:process.CheckListCond.sewords)
+  // @@protoc_insertion_point(field_get:process.CheckListCond.Sewords)
   return sewords_.Get(index);
 }
 inline ::process::ScanCondSeWord* CheckListCond::mutable_sewords(int index) {
-  // @@protoc_insertion_point(field_mutable:process.CheckListCond.sewords)
+  // @@protoc_insertion_point(field_mutable:process.CheckListCond.Sewords)
   return sewords_.Mutable(index);
 }
 inline ::process::ScanCondSeWord* CheckListCond::add_sewords() {
-  // @@protoc_insertion_point(field_add:process.CheckListCond.sewords)
+  // @@protoc_insertion_point(field_add:process.CheckListCond.Sewords)
   return sewords_.Add();
 }
 inline const ::google::protobuf::RepeatedPtrField< ::process::ScanCondSeWord >&
 CheckListCond::sewords() const {
-  // @@protoc_insertion_point(field_list:process.CheckListCond.sewords)
+  // @@protoc_insertion_point(field_list:process.CheckListCond.Sewords)
   return sewords_;
 }
 inline ::google::protobuf::RepeatedPtrField< ::process::ScanCondSeWord >*
 CheckListCond::mutable_sewords() {
-  // @@protoc_insertion_point(field_mutable_list:process.CheckListCond.sewords)
+  // @@protoc_insertion_point(field_mutable_list:process.CheckListCond.Sewords)
   return &sewords_;
 }
 
-// repeated .process.LocationInfo lbs = 3;
+// repeated .process.LocationInfo Lbs = 3;
 inline int CheckListCond::lbs_size() const {
   return lbs_.size();
 }
@@ -2851,29 +4698,29 @@ inline void CheckListCond::clear_lbs() {
   lbs_.Clear();
 }
 inline const ::process::LocationInfo& CheckListCond::lbs(int index) const {
-  // @@protoc_insertion_point(field_get:process.CheckListCond.lbs)
+  // @@protoc_insertion_point(field_get:process.CheckListCond.Lbs)
   return lbs_.Get(index);
 }
 inline ::process::LocationInfo* CheckListCond::mutable_lbs(int index) {
-  // @@protoc_insertion_point(field_mutable:process.CheckListCond.lbs)
+  // @@protoc_insertion_point(field_mutable:process.CheckListCond.Lbs)
   return lbs_.Mutable(index);
 }
 inline ::process::LocationInfo* CheckListCond::add_lbs() {
-  // @@protoc_insertion_point(field_add:process.CheckListCond.lbs)
+  // @@protoc_insertion_point(field_add:process.CheckListCond.Lbs)
   return lbs_.Add();
 }
 inline const ::google::protobuf::RepeatedPtrField< ::process::LocationInfo >&
 CheckListCond::lbs() const {
-  // @@protoc_insertion_point(field_list:process.CheckListCond.lbs)
+  // @@protoc_insertion_point(field_list:process.CheckListCond.Lbs)
   return lbs_;
 }
 inline ::google::protobuf::RepeatedPtrField< ::process::LocationInfo >*
 CheckListCond::mutable_lbs() {
-  // @@protoc_insertion_point(field_mutable_list:process.CheckListCond.lbs)
+  // @@protoc_insertion_point(field_mutable_list:process.CheckListCond.Lbs)
   return &lbs_;
 }
 
-// repeated .process.CookieConfig cookie = 4;
+// repeated .process.CookieConfig Cookie = 4;
 inline int CheckListCond::cookie_size() const {
   return cookie_.size();
 }
@@ -2881,29 +4728,29 @@ inline void CheckListCond::clear_cookie() {
   cookie_.Clear();
 }
 inline const ::process::CookieConfig& CheckListCond::cookie(int index) const {
-  // @@protoc_insertion_point(field_get:process.CheckListCond.cookie)
+  // @@protoc_insertion_point(field_get:process.CheckListCond.Cookie)
   return cookie_.Get(index);
 }
 inline ::process::CookieConfig* CheckListCond::mutable_cookie(int index) {
-  // @@protoc_insertion_point(field_mutable:process.CheckListCond.cookie)
+  // @@protoc_insertion_point(field_mutable:process.CheckListCond.Cookie)
   return cookie_.Mutable(index);
 }
 inline ::process::CookieConfig* CheckListCond::add_cookie() {
-  // @@protoc_insertion_point(field_add:process.CheckListCond.cookie)
+  // @@protoc_insertion_point(field_add:process.CheckListCond.Cookie)
   return cookie_.Add();
 }
 inline const ::google::protobuf::RepeatedPtrField< ::process::CookieConfig >&
 CheckListCond::cookie() const {
-  // @@protoc_insertion_point(field_list:process.CheckListCond.cookie)
+  // @@protoc_insertion_point(field_list:process.CheckListCond.Cookie)
   return cookie_;
 }
 inline ::google::protobuf::RepeatedPtrField< ::process::CookieConfig >*
 CheckListCond::mutable_cookie() {
-  // @@protoc_insertion_point(field_mutable_list:process.CheckListCond.cookie)
+  // @@protoc_insertion_point(field_mutable_list:process.CheckListCond.Cookie)
   return &cookie_;
 }
 
-// repeated .process.ClusterConfig cluster = 5;
+// repeated .process.ClusterConfig Cluster = 5;
 inline int CheckListCond::cluster_size() const {
   return cluster_.size();
 }
@@ -2911,71 +4758,255 @@ inline void CheckListCond::clear_cluster() {
   cluster_.Clear();
 }
 inline const ::process::ClusterConfig& CheckListCond::cluster(int index) const {
-  // @@protoc_insertion_point(field_get:process.CheckListCond.cluster)
+  // @@protoc_insertion_point(field_get:process.CheckListCond.Cluster)
   return cluster_.Get(index);
 }
 inline ::process::ClusterConfig* CheckListCond::mutable_cluster(int index) {
-  // @@protoc_insertion_point(field_mutable:process.CheckListCond.cluster)
+  // @@protoc_insertion_point(field_mutable:process.CheckListCond.Cluster)
   return cluster_.Mutable(index);
 }
 inline ::process::ClusterConfig* CheckListCond::add_cluster() {
-  // @@protoc_insertion_point(field_add:process.CheckListCond.cluster)
+  // @@protoc_insertion_point(field_add:process.CheckListCond.Cluster)
   return cluster_.Add();
 }
 inline const ::google::protobuf::RepeatedPtrField< ::process::ClusterConfig >&
 CheckListCond::cluster() const {
-  // @@protoc_insertion_point(field_list:process.CheckListCond.cluster)
+  // @@protoc_insertion_point(field_list:process.CheckListCond.Cluster)
   return cluster_;
 }
 inline ::google::protobuf::RepeatedPtrField< ::process::ClusterConfig >*
 CheckListCond::mutable_cluster() {
-  // @@protoc_insertion_point(field_mutable_list:process.CheckListCond.cluster)
+  // @@protoc_insertion_point(field_mutable_list:process.CheckListCond.Cluster)
   return &cluster_;
 }
 
-// repeated .process.SrcidConfig res_srcid = 6;
-inline int CheckListCond::res_srcid_size() const {
-  return res_srcid_.size();
+// repeated .process.SidConfig Sid = 6;
+inline int CheckListCond::sid_size() const {
+  return sid_.size();
 }
-inline void CheckListCond::clear_res_srcid() {
-  res_srcid_.Clear();
+inline void CheckListCond::clear_sid() {
+  sid_.Clear();
 }
-inline const ::process::SrcidConfig& CheckListCond::res_srcid(int index) const {
-  // @@protoc_insertion_point(field_get:process.CheckListCond.res_srcid)
-  return res_srcid_.Get(index);
+inline const ::process::SidConfig& CheckListCond::sid(int index) const {
+  // @@protoc_insertion_point(field_get:process.CheckListCond.Sid)
+  return sid_.Get(index);
 }
-inline ::process::SrcidConfig* CheckListCond::mutable_res_srcid(int index) {
-  // @@protoc_insertion_point(field_mutable:process.CheckListCond.res_srcid)
-  return res_srcid_.Mutable(index);
+inline ::process::SidConfig* CheckListCond::mutable_sid(int index) {
+  // @@protoc_insertion_point(field_mutable:process.CheckListCond.Sid)
+  return sid_.Mutable(index);
 }
-inline ::process::SrcidConfig* CheckListCond::add_res_srcid() {
-  // @@protoc_insertion_point(field_add:process.CheckListCond.res_srcid)
-  return res_srcid_.Add();
+inline ::process::SidConfig* CheckListCond::add_sid() {
+  // @@protoc_insertion_point(field_add:process.CheckListCond.Sid)
+  return sid_.Add();
 }
-inline const ::google::protobuf::RepeatedPtrField< ::process::SrcidConfig >&
-CheckListCond::res_srcid() const {
-  // @@protoc_insertion_point(field_list:process.CheckListCond.res_srcid)
-  return res_srcid_;
+inline const ::google::protobuf::RepeatedPtrField< ::process::SidConfig >&
+CheckListCond::sid() const {
+  // @@protoc_insertion_point(field_list:process.CheckListCond.Sid)
+  return sid_;
 }
-inline ::google::protobuf::RepeatedPtrField< ::process::SrcidConfig >*
-CheckListCond::mutable_res_srcid() {
-  // @@protoc_insertion_point(field_mutable_list:process.CheckListCond.res_srcid)
-  return &res_srcid_;
+inline ::google::protobuf::RepeatedPtrField< ::process::SidConfig >*
+CheckListCond::mutable_sid() {
+  // @@protoc_insertion_point(field_mutable_list:process.CheckListCond.Sid)
+  return &sid_;
+}
+
+// repeated .process.ResnoConfig Resno = 7;
+inline int CheckListCond::resno_size() const {
+  return resno_.size();
+}
+inline void CheckListCond::clear_resno() {
+  resno_.Clear();
+}
+inline const ::process::ResnoConfig& CheckListCond::resno(int index) const {
+  // @@protoc_insertion_point(field_get:process.CheckListCond.Resno)
+  return resno_.Get(index);
+}
+inline ::process::ResnoConfig* CheckListCond::mutable_resno(int index) {
+  // @@protoc_insertion_point(field_mutable:process.CheckListCond.Resno)
+  return resno_.Mutable(index);
+}
+inline ::process::ResnoConfig* CheckListCond::add_resno() {
+  // @@protoc_insertion_point(field_add:process.CheckListCond.Resno)
+  return resno_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::process::ResnoConfig >&
+CheckListCond::resno() const {
+  // @@protoc_insertion_point(field_list:process.CheckListCond.Resno)
+  return resno_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::process::ResnoConfig >*
+CheckListCond::mutable_resno() {
+  // @@protoc_insertion_point(field_mutable_list:process.CheckListCond.Resno)
+  return &resno_;
+}
+
+// repeated .process.TypeConfig Type = 8;
+inline int CheckListCond::type_size() const {
+  return type_.size();
+}
+inline void CheckListCond::clear_type() {
+  type_.Clear();
+}
+inline const ::process::TypeConfig& CheckListCond::type(int index) const {
+  // @@protoc_insertion_point(field_get:process.CheckListCond.Type)
+  return type_.Get(index);
+}
+inline ::process::TypeConfig* CheckListCond::mutable_type(int index) {
+  // @@protoc_insertion_point(field_mutable:process.CheckListCond.Type)
+  return type_.Mutable(index);
+}
+inline ::process::TypeConfig* CheckListCond::add_type() {
+  // @@protoc_insertion_point(field_add:process.CheckListCond.Type)
+  return type_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::process::TypeConfig >&
+CheckListCond::type() const {
+  // @@protoc_insertion_point(field_list:process.CheckListCond.Type)
+  return type_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::process::TypeConfig >*
+CheckListCond::mutable_type() {
+  // @@protoc_insertion_point(field_mutable_list:process.CheckListCond.Type)
+  return &type_;
+}
+
+// optional string Description = 9;
+inline bool CheckListCond::has_description() const {
+  return (_has_bits_[0] & 0x00000100u) != 0;
+}
+inline void CheckListCond::set_has_description() {
+  _has_bits_[0] |= 0x00000100u;
+}
+inline void CheckListCond::clear_has_description() {
+  _has_bits_[0] &= ~0x00000100u;
+}
+inline void CheckListCond::clear_description() {
+  if (description_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    description_->clear();
+  }
+  clear_has_description();
+}
+inline const ::std::string& CheckListCond::description() const {
+  // @@protoc_insertion_point(field_get:process.CheckListCond.Description)
+  return *description_;
+}
+inline void CheckListCond::set_description(const ::std::string& value) {
+  set_has_description();
+  if (description_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    description_ = new ::std::string;
+  }
+  description_->assign(value);
+  // @@protoc_insertion_point(field_set:process.CheckListCond.Description)
+}
+inline void CheckListCond::set_description(const char* value) {
+  set_has_description();
+  if (description_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    description_ = new ::std::string;
+  }
+  description_->assign(value);
+  // @@protoc_insertion_point(field_set_char:process.CheckListCond.Description)
+}
+inline void CheckListCond::set_description(const char* value, size_t size) {
+  set_has_description();
+  if (description_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    description_ = new ::std::string;
+  }
+  description_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:process.CheckListCond.Description)
+}
+inline ::std::string* CheckListCond::mutable_description() {
+  set_has_description();
+  if (description_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    description_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:process.CheckListCond.Description)
+  return description_;
+}
+inline ::std::string* CheckListCond::release_description() {
+  clear_has_description();
+  if (description_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = description_;
+    description_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void CheckListCond::set_allocated_description(::std::string* description) {
+  if (description_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete description_;
+  }
+  if (description) {
+    set_has_description();
+    description_ = description;
+  } else {
+    clear_has_description();
+    description_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:process.CheckListCond.Description)
 }
 
 // -------------------------------------------------------------------
 
 // SetCheckListConfigRequest
 
-// required string application = 1;
-inline bool SetCheckListConfigRequest::has_application() const {
+// required bool Op = 1;
+inline bool SetCheckListConfigRequest::has_op() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void SetCheckListConfigRequest::set_has_application() {
+inline void SetCheckListConfigRequest::set_has_op() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void SetCheckListConfigRequest::clear_has_application() {
+inline void SetCheckListConfigRequest::clear_has_op() {
   _has_bits_[0] &= ~0x00000001u;
+}
+inline void SetCheckListConfigRequest::clear_op() {
+  op_ = false;
+  clear_has_op();
+}
+inline bool SetCheckListConfigRequest::op() const {
+  // @@protoc_insertion_point(field_get:process.SetCheckListConfigRequest.Op)
+  return op_;
+}
+inline void SetCheckListConfigRequest::set_op(bool value) {
+  set_has_op();
+  op_ = value;
+  // @@protoc_insertion_point(field_set:process.SetCheckListConfigRequest.Op)
+}
+
+// optional uint32 Index = 2;
+inline bool SetCheckListConfigRequest::has_index() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void SetCheckListConfigRequest::set_has_index() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void SetCheckListConfigRequest::clear_has_index() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void SetCheckListConfigRequest::clear_index() {
+  index_ = 0u;
+  clear_has_index();
+}
+inline ::google::protobuf::uint32 SetCheckListConfigRequest::index() const {
+  // @@protoc_insertion_point(field_get:process.SetCheckListConfigRequest.Index)
+  return index_;
+}
+inline void SetCheckListConfigRequest::set_index(::google::protobuf::uint32 value) {
+  set_has_index();
+  index_ = value;
+  // @@protoc_insertion_point(field_set:process.SetCheckListConfigRequest.Index)
+}
+
+// required string Application = 3;
+inline bool SetCheckListConfigRequest::has_application() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void SetCheckListConfigRequest::set_has_application() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void SetCheckListConfigRequest::clear_has_application() {
+  _has_bits_[0] &= ~0x00000004u;
 }
 inline void SetCheckListConfigRequest::clear_application() {
   if (application_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
@@ -2984,7 +5015,7 @@ inline void SetCheckListConfigRequest::clear_application() {
   clear_has_application();
 }
 inline const ::std::string& SetCheckListConfigRequest::application() const {
-  // @@protoc_insertion_point(field_get:process.SetCheckListConfigRequest.application)
+  // @@protoc_insertion_point(field_get:process.SetCheckListConfigRequest.Application)
   return *application_;
 }
 inline void SetCheckListConfigRequest::set_application(const ::std::string& value) {
@@ -2993,7 +5024,7 @@ inline void SetCheckListConfigRequest::set_application(const ::std::string& valu
     application_ = new ::std::string;
   }
   application_->assign(value);
-  // @@protoc_insertion_point(field_set:process.SetCheckListConfigRequest.application)
+  // @@protoc_insertion_point(field_set:process.SetCheckListConfigRequest.Application)
 }
 inline void SetCheckListConfigRequest::set_application(const char* value) {
   set_has_application();
@@ -3001,7 +5032,7 @@ inline void SetCheckListConfigRequest::set_application(const char* value) {
     application_ = new ::std::string;
   }
   application_->assign(value);
-  // @@protoc_insertion_point(field_set_char:process.SetCheckListConfigRequest.application)
+  // @@protoc_insertion_point(field_set_char:process.SetCheckListConfigRequest.Application)
 }
 inline void SetCheckListConfigRequest::set_application(const char* value, size_t size) {
   set_has_application();
@@ -3009,14 +5040,14 @@ inline void SetCheckListConfigRequest::set_application(const char* value, size_t
     application_ = new ::std::string;
   }
   application_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:process.SetCheckListConfigRequest.application)
+  // @@protoc_insertion_point(field_set_pointer:process.SetCheckListConfigRequest.Application)
 }
 inline ::std::string* SetCheckListConfigRequest::mutable_application() {
   set_has_application();
   if (application_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     application_ = new ::std::string;
   }
-  // @@protoc_insertion_point(field_mutable:process.SetCheckListConfigRequest.application)
+  // @@protoc_insertion_point(field_mutable:process.SetCheckListConfigRequest.Application)
   return application_;
 }
 inline ::std::string* SetCheckListConfigRequest::release_application() {
@@ -3040,31 +5071,31 @@ inline void SetCheckListConfigRequest::set_allocated_application(::std::string* 
     clear_has_application();
     application_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
-  // @@protoc_insertion_point(field_set_allocated:process.SetCheckListConfigRequest.application)
+  // @@protoc_insertion_point(field_set_allocated:process.SetCheckListConfigRequest.Application)
 }
 
-// required .process.CheckListCond cond = 2;
+// optional .process.CheckListCond Cond = 4;
 inline bool SetCheckListConfigRequest::has_cond() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
+  return (_has_bits_[0] & 0x00000008u) != 0;
 }
 inline void SetCheckListConfigRequest::set_has_cond() {
-  _has_bits_[0] |= 0x00000002u;
+  _has_bits_[0] |= 0x00000008u;
 }
 inline void SetCheckListConfigRequest::clear_has_cond() {
-  _has_bits_[0] &= ~0x00000002u;
+  _has_bits_[0] &= ~0x00000008u;
 }
 inline void SetCheckListConfigRequest::clear_cond() {
   if (cond_ != NULL) cond_->::process::CheckListCond::Clear();
   clear_has_cond();
 }
 inline const ::process::CheckListCond& SetCheckListConfigRequest::cond() const {
-  // @@protoc_insertion_point(field_get:process.SetCheckListConfigRequest.cond)
+  // @@protoc_insertion_point(field_get:process.SetCheckListConfigRequest.Cond)
   return cond_ != NULL ? *cond_ : *default_instance_->cond_;
 }
 inline ::process::CheckListCond* SetCheckListConfigRequest::mutable_cond() {
   set_has_cond();
   if (cond_ == NULL) cond_ = new ::process::CheckListCond;
-  // @@protoc_insertion_point(field_mutable:process.SetCheckListConfigRequest.cond)
+  // @@protoc_insertion_point(field_mutable:process.SetCheckListConfigRequest.Cond)
   return cond_;
 }
 inline ::process::CheckListCond* SetCheckListConfigRequest::release_cond() {
@@ -3081,14 +5112,14 @@ inline void SetCheckListConfigRequest::set_allocated_cond(::process::CheckListCo
   } else {
     clear_has_cond();
   }
-  // @@protoc_insertion_point(field_set_allocated:process.SetCheckListConfigRequest.cond)
+  // @@protoc_insertion_point(field_set_allocated:process.SetCheckListConfigRequest.Cond)
 }
 
 // -------------------------------------------------------------------
 
 // SetCheckListConfigResponse
 
-// required .process.SetCheckListConfigResponse.Res_Status status = 1;
+// required .process.SetCheckListConfigResponse.Res_Status Status = 1;
 inline bool SetCheckListConfigResponse::has_status() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -3103,17 +5134,17 @@ inline void SetCheckListConfigResponse::clear_status() {
   clear_has_status();
 }
 inline ::process::SetCheckListConfigResponse_Res_Status SetCheckListConfigResponse::status() const {
-  // @@protoc_insertion_point(field_get:process.SetCheckListConfigResponse.status)
+  // @@protoc_insertion_point(field_get:process.SetCheckListConfigResponse.Status)
   return static_cast< ::process::SetCheckListConfigResponse_Res_Status >(status_);
 }
 inline void SetCheckListConfigResponse::set_status(::process::SetCheckListConfigResponse_Res_Status value) {
   assert(::process::SetCheckListConfigResponse_Res_Status_IsValid(value));
   set_has_status();
   status_ = value;
-  // @@protoc_insertion_point(field_set:process.SetCheckListConfigResponse.status)
+  // @@protoc_insertion_point(field_set:process.SetCheckListConfigResponse.Status)
 }
 
-// optional string error = 2;
+// optional string Error = 2;
 inline bool SetCheckListConfigResponse::has_error() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -3130,7 +5161,7 @@ inline void SetCheckListConfigResponse::clear_error() {
   clear_has_error();
 }
 inline const ::std::string& SetCheckListConfigResponse::error() const {
-  // @@protoc_insertion_point(field_get:process.SetCheckListConfigResponse.error)
+  // @@protoc_insertion_point(field_get:process.SetCheckListConfigResponse.Error)
   return *error_;
 }
 inline void SetCheckListConfigResponse::set_error(const ::std::string& value) {
@@ -3139,7 +5170,7 @@ inline void SetCheckListConfigResponse::set_error(const ::std::string& value) {
     error_ = new ::std::string;
   }
   error_->assign(value);
-  // @@protoc_insertion_point(field_set:process.SetCheckListConfigResponse.error)
+  // @@protoc_insertion_point(field_set:process.SetCheckListConfigResponse.Error)
 }
 inline void SetCheckListConfigResponse::set_error(const char* value) {
   set_has_error();
@@ -3147,7 +5178,7 @@ inline void SetCheckListConfigResponse::set_error(const char* value) {
     error_ = new ::std::string;
   }
   error_->assign(value);
-  // @@protoc_insertion_point(field_set_char:process.SetCheckListConfigResponse.error)
+  // @@protoc_insertion_point(field_set_char:process.SetCheckListConfigResponse.Error)
 }
 inline void SetCheckListConfigResponse::set_error(const char* value, size_t size) {
   set_has_error();
@@ -3155,14 +5186,14 @@ inline void SetCheckListConfigResponse::set_error(const char* value, size_t size
     error_ = new ::std::string;
   }
   error_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:process.SetCheckListConfigResponse.error)
+  // @@protoc_insertion_point(field_set_pointer:process.SetCheckListConfigResponse.Error)
 }
 inline ::std::string* SetCheckListConfigResponse::mutable_error() {
   set_has_error();
   if (error_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     error_ = new ::std::string;
   }
-  // @@protoc_insertion_point(field_mutable:process.SetCheckListConfigResponse.error)
+  // @@protoc_insertion_point(field_mutable:process.SetCheckListConfigResponse.Error)
   return error_;
 }
 inline ::std::string* SetCheckListConfigResponse::release_error() {
@@ -3186,14 +5217,14 @@ inline void SetCheckListConfigResponse::set_allocated_error(::std::string* error
     clear_has_error();
     error_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
-  // @@protoc_insertion_point(field_set_allocated:process.SetCheckListConfigResponse.error)
+  // @@protoc_insertion_point(field_set_allocated:process.SetCheckListConfigResponse.Error)
 }
 
 // -------------------------------------------------------------------
 
 // GetCheckListConfigRequest
 
-// required string application = 1;
+// required string Application = 1;
 inline bool GetCheckListConfigRequest::has_application() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -3210,7 +5241,7 @@ inline void GetCheckListConfigRequest::clear_application() {
   clear_has_application();
 }
 inline const ::std::string& GetCheckListConfigRequest::application() const {
-  // @@protoc_insertion_point(field_get:process.GetCheckListConfigRequest.application)
+  // @@protoc_insertion_point(field_get:process.GetCheckListConfigRequest.Application)
   return *application_;
 }
 inline void GetCheckListConfigRequest::set_application(const ::std::string& value) {
@@ -3219,7 +5250,7 @@ inline void GetCheckListConfigRequest::set_application(const ::std::string& valu
     application_ = new ::std::string;
   }
   application_->assign(value);
-  // @@protoc_insertion_point(field_set:process.GetCheckListConfigRequest.application)
+  // @@protoc_insertion_point(field_set:process.GetCheckListConfigRequest.Application)
 }
 inline void GetCheckListConfigRequest::set_application(const char* value) {
   set_has_application();
@@ -3227,7 +5258,7 @@ inline void GetCheckListConfigRequest::set_application(const char* value) {
     application_ = new ::std::string;
   }
   application_->assign(value);
-  // @@protoc_insertion_point(field_set_char:process.GetCheckListConfigRequest.application)
+  // @@protoc_insertion_point(field_set_char:process.GetCheckListConfigRequest.Application)
 }
 inline void GetCheckListConfigRequest::set_application(const char* value, size_t size) {
   set_has_application();
@@ -3235,14 +5266,14 @@ inline void GetCheckListConfigRequest::set_application(const char* value, size_t
     application_ = new ::std::string;
   }
   application_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:process.GetCheckListConfigRequest.application)
+  // @@protoc_insertion_point(field_set_pointer:process.GetCheckListConfigRequest.Application)
 }
 inline ::std::string* GetCheckListConfigRequest::mutable_application() {
   set_has_application();
   if (application_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     application_ = new ::std::string;
   }
-  // @@protoc_insertion_point(field_mutable:process.GetCheckListConfigRequest.application)
+  // @@protoc_insertion_point(field_mutable:process.GetCheckListConfigRequest.Application)
   return application_;
 }
 inline ::std::string* GetCheckListConfigRequest::release_application() {
@@ -3266,14 +5297,209 @@ inline void GetCheckListConfigRequest::set_allocated_application(::std::string* 
     clear_has_application();
     application_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
-  // @@protoc_insertion_point(field_set_allocated:process.GetCheckListConfigRequest.application)
+  // @@protoc_insertion_point(field_set_allocated:process.GetCheckListConfigRequest.Application)
+}
+
+// optional uint32 Index = 2;
+inline bool GetCheckListConfigRequest::has_index() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void GetCheckListConfigRequest::set_has_index() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void GetCheckListConfigRequest::clear_has_index() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void GetCheckListConfigRequest::clear_index() {
+  index_ = 0u;
+  clear_has_index();
+}
+inline ::google::protobuf::uint32 GetCheckListConfigRequest::index() const {
+  // @@protoc_insertion_point(field_get:process.GetCheckListConfigRequest.Index)
+  return index_;
+}
+inline void GetCheckListConfigRequest::set_index(::google::protobuf::uint32 value) {
+  set_has_index();
+  index_ = value;
+  // @@protoc_insertion_point(field_set:process.GetCheckListConfigRequest.Index)
+}
+
+// optional uint64 Startime = 3;
+inline bool GetCheckListConfigRequest::has_startime() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void GetCheckListConfigRequest::set_has_startime() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void GetCheckListConfigRequest::clear_has_startime() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void GetCheckListConfigRequest::clear_startime() {
+  startime_ = GOOGLE_ULONGLONG(0);
+  clear_has_startime();
+}
+inline ::google::protobuf::uint64 GetCheckListConfigRequest::startime() const {
+  // @@protoc_insertion_point(field_get:process.GetCheckListConfigRequest.Startime)
+  return startime_;
+}
+inline void GetCheckListConfigRequest::set_startime(::google::protobuf::uint64 value) {
+  set_has_startime();
+  startime_ = value;
+  // @@protoc_insertion_point(field_set:process.GetCheckListConfigRequest.Startime)
+}
+
+// optional uint64 Endime = 4;
+inline bool GetCheckListConfigRequest::has_endime() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void GetCheckListConfigRequest::set_has_endime() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void GetCheckListConfigRequest::clear_has_endime() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void GetCheckListConfigRequest::clear_endime() {
+  endime_ = GOOGLE_ULONGLONG(0);
+  clear_has_endime();
+}
+inline ::google::protobuf::uint64 GetCheckListConfigRequest::endime() const {
+  // @@protoc_insertion_point(field_get:process.GetCheckListConfigRequest.Endime)
+  return endime_;
+}
+inline void GetCheckListConfigRequest::set_endime(::google::protobuf::uint64 value) {
+  set_has_endime();
+  endime_ = value;
+  // @@protoc_insertion_point(field_set:process.GetCheckListConfigRequest.Endime)
+}
+
+// -------------------------------------------------------------------
+
+// CheckListConfigResponseInfo
+
+// required .process.CheckListCond Cond = 1;
+inline bool CheckListConfigResponseInfo::has_cond() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void CheckListConfigResponseInfo::set_has_cond() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void CheckListConfigResponseInfo::clear_has_cond() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void CheckListConfigResponseInfo::clear_cond() {
+  if (cond_ != NULL) cond_->::process::CheckListCond::Clear();
+  clear_has_cond();
+}
+inline const ::process::CheckListCond& CheckListConfigResponseInfo::cond() const {
+  // @@protoc_insertion_point(field_get:process.CheckListConfigResponseInfo.Cond)
+  return cond_ != NULL ? *cond_ : *default_instance_->cond_;
+}
+inline ::process::CheckListCond* CheckListConfigResponseInfo::mutable_cond() {
+  set_has_cond();
+  if (cond_ == NULL) cond_ = new ::process::CheckListCond;
+  // @@protoc_insertion_point(field_mutable:process.CheckListConfigResponseInfo.Cond)
+  return cond_;
+}
+inline ::process::CheckListCond* CheckListConfigResponseInfo::release_cond() {
+  clear_has_cond();
+  ::process::CheckListCond* temp = cond_;
+  cond_ = NULL;
+  return temp;
+}
+inline void CheckListConfigResponseInfo::set_allocated_cond(::process::CheckListCond* cond) {
+  delete cond_;
+  cond_ = cond;
+  if (cond) {
+    set_has_cond();
+  } else {
+    clear_has_cond();
+  }
+  // @@protoc_insertion_point(field_set_allocated:process.CheckListConfigResponseInfo.Cond)
+}
+
+// required uint32 Hit_count = 2;
+inline bool CheckListConfigResponseInfo::has_hit_count() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void CheckListConfigResponseInfo::set_has_hit_count() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void CheckListConfigResponseInfo::clear_has_hit_count() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void CheckListConfigResponseInfo::clear_hit_count() {
+  hit_count_ = 0u;
+  clear_has_hit_count();
+}
+inline ::google::protobuf::uint32 CheckListConfigResponseInfo::hit_count() const {
+  // @@protoc_insertion_point(field_get:process.CheckListConfigResponseInfo.Hit_count)
+  return hit_count_;
+}
+inline void CheckListConfigResponseInfo::set_hit_count(::google::protobuf::uint32 value) {
+  set_has_hit_count();
+  hit_count_ = value;
+  // @@protoc_insertion_point(field_set:process.CheckListConfigResponseInfo.Hit_count)
+}
+
+// repeated string Hit_info = 3;
+inline int CheckListConfigResponseInfo::hit_info_size() const {
+  return hit_info_.size();
+}
+inline void CheckListConfigResponseInfo::clear_hit_info() {
+  hit_info_.Clear();
+}
+inline const ::std::string& CheckListConfigResponseInfo::hit_info(int index) const {
+  // @@protoc_insertion_point(field_get:process.CheckListConfigResponseInfo.Hit_info)
+  return hit_info_.Get(index);
+}
+inline ::std::string* CheckListConfigResponseInfo::mutable_hit_info(int index) {
+  // @@protoc_insertion_point(field_mutable:process.CheckListConfigResponseInfo.Hit_info)
+  return hit_info_.Mutable(index);
+}
+inline void CheckListConfigResponseInfo::set_hit_info(int index, const ::std::string& value) {
+  // @@protoc_insertion_point(field_set:process.CheckListConfigResponseInfo.Hit_info)
+  hit_info_.Mutable(index)->assign(value);
+}
+inline void CheckListConfigResponseInfo::set_hit_info(int index, const char* value) {
+  hit_info_.Mutable(index)->assign(value);
+  // @@protoc_insertion_point(field_set_char:process.CheckListConfigResponseInfo.Hit_info)
+}
+inline void CheckListConfigResponseInfo::set_hit_info(int index, const char* value, size_t size) {
+  hit_info_.Mutable(index)->assign(
+    reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:process.CheckListConfigResponseInfo.Hit_info)
+}
+inline ::std::string* CheckListConfigResponseInfo::add_hit_info() {
+  return hit_info_.Add();
+}
+inline void CheckListConfigResponseInfo::add_hit_info(const ::std::string& value) {
+  hit_info_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add:process.CheckListConfigResponseInfo.Hit_info)
+}
+inline void CheckListConfigResponseInfo::add_hit_info(const char* value) {
+  hit_info_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add_char:process.CheckListConfigResponseInfo.Hit_info)
+}
+inline void CheckListConfigResponseInfo::add_hit_info(const char* value, size_t size) {
+  hit_info_.Add()->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_add_pointer:process.CheckListConfigResponseInfo.Hit_info)
+}
+inline const ::google::protobuf::RepeatedPtrField< ::std::string>&
+CheckListConfigResponseInfo::hit_info() const {
+  // @@protoc_insertion_point(field_list:process.CheckListConfigResponseInfo.Hit_info)
+  return hit_info_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::std::string>*
+CheckListConfigResponseInfo::mutable_hit_info() {
+  // @@protoc_insertion_point(field_mutable_list:process.CheckListConfigResponseInfo.Hit_info)
+  return &hit_info_;
 }
 
 // -------------------------------------------------------------------
 
 // GetCheckListConfigResponse
 
-// required .process.GetCheckListConfigResponse.Res_Status status = 1;
+// required .process.GetCheckListConfigResponse.Res_Status Status = 1;
 inline bool GetCheckListConfigResponse::has_status() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -3288,17 +5514,17 @@ inline void GetCheckListConfigResponse::clear_status() {
   clear_has_status();
 }
 inline ::process::GetCheckListConfigResponse_Res_Status GetCheckListConfigResponse::status() const {
-  // @@protoc_insertion_point(field_get:process.GetCheckListConfigResponse.status)
+  // @@protoc_insertion_point(field_get:process.GetCheckListConfigResponse.Status)
   return static_cast< ::process::GetCheckListConfigResponse_Res_Status >(status_);
 }
 inline void GetCheckListConfigResponse::set_status(::process::GetCheckListConfigResponse_Res_Status value) {
   assert(::process::GetCheckListConfigResponse_Res_Status_IsValid(value));
   set_has_status();
   status_ = value;
-  // @@protoc_insertion_point(field_set:process.GetCheckListConfigResponse.status)
+  // @@protoc_insertion_point(field_set:process.GetCheckListConfigResponse.Status)
 }
 
-// optional string error = 2;
+// optional string Error = 2;
 inline bool GetCheckListConfigResponse::has_error() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -3315,7 +5541,7 @@ inline void GetCheckListConfigResponse::clear_error() {
   clear_has_error();
 }
 inline const ::std::string& GetCheckListConfigResponse::error() const {
-  // @@protoc_insertion_point(field_get:process.GetCheckListConfigResponse.error)
+  // @@protoc_insertion_point(field_get:process.GetCheckListConfigResponse.Error)
   return *error_;
 }
 inline void GetCheckListConfigResponse::set_error(const ::std::string& value) {
@@ -3324,7 +5550,7 @@ inline void GetCheckListConfigResponse::set_error(const ::std::string& value) {
     error_ = new ::std::string;
   }
   error_->assign(value);
-  // @@protoc_insertion_point(field_set:process.GetCheckListConfigResponse.error)
+  // @@protoc_insertion_point(field_set:process.GetCheckListConfigResponse.Error)
 }
 inline void GetCheckListConfigResponse::set_error(const char* value) {
   set_has_error();
@@ -3332,7 +5558,7 @@ inline void GetCheckListConfigResponse::set_error(const char* value) {
     error_ = new ::std::string;
   }
   error_->assign(value);
-  // @@protoc_insertion_point(field_set_char:process.GetCheckListConfigResponse.error)
+  // @@protoc_insertion_point(field_set_char:process.GetCheckListConfigResponse.Error)
 }
 inline void GetCheckListConfigResponse::set_error(const char* value, size_t size) {
   set_has_error();
@@ -3340,14 +5566,14 @@ inline void GetCheckListConfigResponse::set_error(const char* value, size_t size
     error_ = new ::std::string;
   }
   error_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:process.GetCheckListConfigResponse.error)
+  // @@protoc_insertion_point(field_set_pointer:process.GetCheckListConfigResponse.Error)
 }
 inline ::std::string* GetCheckListConfigResponse::mutable_error() {
   set_has_error();
   if (error_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     error_ = new ::std::string;
   }
-  // @@protoc_insertion_point(field_mutable:process.GetCheckListConfigResponse.error)
+  // @@protoc_insertion_point(field_mutable:process.GetCheckListConfigResponse.Error)
   return error_;
 }
 inline ::std::string* GetCheckListConfigResponse::release_error() {
@@ -3371,10 +5597,10 @@ inline void GetCheckListConfigResponse::set_allocated_error(::std::string* error
     clear_has_error();
     error_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
-  // @@protoc_insertion_point(field_set_allocated:process.GetCheckListConfigResponse.error)
+  // @@protoc_insertion_point(field_set_allocated:process.GetCheckListConfigResponse.Error)
 }
 
-// repeated .process.CheckListCond cond = 3;
+// repeated .process.CheckListCond Cond = 3;
 inline int GetCheckListConfigResponse::cond_size() const {
   return cond_.size();
 }
@@ -3382,25 +5608,25 @@ inline void GetCheckListConfigResponse::clear_cond() {
   cond_.Clear();
 }
 inline const ::process::CheckListCond& GetCheckListConfigResponse::cond(int index) const {
-  // @@protoc_insertion_point(field_get:process.GetCheckListConfigResponse.cond)
+  // @@protoc_insertion_point(field_get:process.GetCheckListConfigResponse.Cond)
   return cond_.Get(index);
 }
 inline ::process::CheckListCond* GetCheckListConfigResponse::mutable_cond(int index) {
-  // @@protoc_insertion_point(field_mutable:process.GetCheckListConfigResponse.cond)
+  // @@protoc_insertion_point(field_mutable:process.GetCheckListConfigResponse.Cond)
   return cond_.Mutable(index);
 }
 inline ::process::CheckListCond* GetCheckListConfigResponse::add_cond() {
-  // @@protoc_insertion_point(field_add:process.GetCheckListConfigResponse.cond)
+  // @@protoc_insertion_point(field_add:process.GetCheckListConfigResponse.Cond)
   return cond_.Add();
 }
 inline const ::google::protobuf::RepeatedPtrField< ::process::CheckListCond >&
 GetCheckListConfigResponse::cond() const {
-  // @@protoc_insertion_point(field_list:process.GetCheckListConfigResponse.cond)
+  // @@protoc_insertion_point(field_list:process.GetCheckListConfigResponse.Cond)
   return cond_;
 }
 inline ::google::protobuf::RepeatedPtrField< ::process::CheckListCond >*
 GetCheckListConfigResponse::mutable_cond() {
-  // @@protoc_insertion_point(field_mutable_list:process.GetCheckListConfigResponse.cond)
+  // @@protoc_insertion_point(field_mutable_list:process.GetCheckListConfigResponse.Cond)
   return &cond_;
 }
 
@@ -3408,7 +5634,7 @@ GetCheckListConfigResponse::mutable_cond() {
 
 // GetLogProcessStatRequest
 
-// required string application = 1;
+// optional string Application = 1;
 inline bool GetLogProcessStatRequest::has_application() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -3425,7 +5651,7 @@ inline void GetLogProcessStatRequest::clear_application() {
   clear_has_application();
 }
 inline const ::std::string& GetLogProcessStatRequest::application() const {
-  // @@protoc_insertion_point(field_get:process.GetLogProcessStatRequest.application)
+  // @@protoc_insertion_point(field_get:process.GetLogProcessStatRequest.Application)
   return *application_;
 }
 inline void GetLogProcessStatRequest::set_application(const ::std::string& value) {
@@ -3434,7 +5660,7 @@ inline void GetLogProcessStatRequest::set_application(const ::std::string& value
     application_ = new ::std::string;
   }
   application_->assign(value);
-  // @@protoc_insertion_point(field_set:process.GetLogProcessStatRequest.application)
+  // @@protoc_insertion_point(field_set:process.GetLogProcessStatRequest.Application)
 }
 inline void GetLogProcessStatRequest::set_application(const char* value) {
   set_has_application();
@@ -3442,7 +5668,7 @@ inline void GetLogProcessStatRequest::set_application(const char* value) {
     application_ = new ::std::string;
   }
   application_->assign(value);
-  // @@protoc_insertion_point(field_set_char:process.GetLogProcessStatRequest.application)
+  // @@protoc_insertion_point(field_set_char:process.GetLogProcessStatRequest.Application)
 }
 inline void GetLogProcessStatRequest::set_application(const char* value, size_t size) {
   set_has_application();
@@ -3450,14 +5676,14 @@ inline void GetLogProcessStatRequest::set_application(const char* value, size_t 
     application_ = new ::std::string;
   }
   application_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:process.GetLogProcessStatRequest.application)
+  // @@protoc_insertion_point(field_set_pointer:process.GetLogProcessStatRequest.Application)
 }
 inline ::std::string* GetLogProcessStatRequest::mutable_application() {
   set_has_application();
   if (application_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     application_ = new ::std::string;
   }
-  // @@protoc_insertion_point(field_mutable:process.GetLogProcessStatRequest.application)
+  // @@protoc_insertion_point(field_mutable:process.GetLogProcessStatRequest.Application)
   return application_;
 }
 inline ::std::string* GetLogProcessStatRequest::release_application() {
@@ -3481,127 +5707,307 @@ inline void GetLogProcessStatRequest::set_allocated_application(::std::string* a
     clear_has_application();
     application_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
-  // @@protoc_insertion_point(field_set_allocated:process.GetLogProcessStatRequest.application)
+  // @@protoc_insertion_point(field_set_allocated:process.GetLogProcessStatRequest.Application)
 }
 
-// required int64 startime = 2;
-inline bool GetLogProcessStatRequest::has_startime() const {
+// optional string Querystr = 2;
+inline bool GetLogProcessStatRequest::has_querystr() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void GetLogProcessStatRequest::set_has_startime() {
+inline void GetLogProcessStatRequest::set_has_querystr() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void GetLogProcessStatRequest::clear_has_startime() {
+inline void GetLogProcessStatRequest::clear_has_querystr() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void GetLogProcessStatRequest::clear_startime() {
-  startime_ = GOOGLE_LONGLONG(0);
-  clear_has_startime();
+inline void GetLogProcessStatRequest::clear_querystr() {
+  if (querystr_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    querystr_->clear();
+  }
+  clear_has_querystr();
 }
-inline ::google::protobuf::int64 GetLogProcessStatRequest::startime() const {
-  // @@protoc_insertion_point(field_get:process.GetLogProcessStatRequest.startime)
-  return startime_;
+inline const ::std::string& GetLogProcessStatRequest::querystr() const {
+  // @@protoc_insertion_point(field_get:process.GetLogProcessStatRequest.Querystr)
+  return *querystr_;
 }
-inline void GetLogProcessStatRequest::set_startime(::google::protobuf::int64 value) {
-  set_has_startime();
-  startime_ = value;
-  // @@protoc_insertion_point(field_set:process.GetLogProcessStatRequest.startime)
+inline void GetLogProcessStatRequest::set_querystr(const ::std::string& value) {
+  set_has_querystr();
+  if (querystr_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    querystr_ = new ::std::string;
+  }
+  querystr_->assign(value);
+  // @@protoc_insertion_point(field_set:process.GetLogProcessStatRequest.Querystr)
+}
+inline void GetLogProcessStatRequest::set_querystr(const char* value) {
+  set_has_querystr();
+  if (querystr_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    querystr_ = new ::std::string;
+  }
+  querystr_->assign(value);
+  // @@protoc_insertion_point(field_set_char:process.GetLogProcessStatRequest.Querystr)
+}
+inline void GetLogProcessStatRequest::set_querystr(const char* value, size_t size) {
+  set_has_querystr();
+  if (querystr_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    querystr_ = new ::std::string;
+  }
+  querystr_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:process.GetLogProcessStatRequest.Querystr)
+}
+inline ::std::string* GetLogProcessStatRequest::mutable_querystr() {
+  set_has_querystr();
+  if (querystr_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    querystr_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:process.GetLogProcessStatRequest.Querystr)
+  return querystr_;
+}
+inline ::std::string* GetLogProcessStatRequest::release_querystr() {
+  clear_has_querystr();
+  if (querystr_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = querystr_;
+    querystr_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void GetLogProcessStatRequest::set_allocated_querystr(::std::string* querystr) {
+  if (querystr_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete querystr_;
+  }
+  if (querystr) {
+    set_has_querystr();
+    querystr_ = querystr;
+  } else {
+    clear_has_querystr();
+    querystr_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:process.GetLogProcessStatRequest.Querystr)
 }
 
-// required int64 endtime = 3;
-inline bool GetLogProcessStatRequest::has_endtime() const {
+// optional string Cookieid = 3;
+inline bool GetLogProcessStatRequest::has_cookieid() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void GetLogProcessStatRequest::set_has_endtime() {
+inline void GetLogProcessStatRequest::set_has_cookieid() {
   _has_bits_[0] |= 0x00000004u;
 }
-inline void GetLogProcessStatRequest::clear_has_endtime() {
+inline void GetLogProcessStatRequest::clear_has_cookieid() {
   _has_bits_[0] &= ~0x00000004u;
 }
-inline void GetLogProcessStatRequest::clear_endtime() {
-  endtime_ = GOOGLE_LONGLONG(0);
-  clear_has_endtime();
+inline void GetLogProcessStatRequest::clear_cookieid() {
+  if (cookieid_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    cookieid_->clear();
+  }
+  clear_has_cookieid();
 }
-inline ::google::protobuf::int64 GetLogProcessStatRequest::endtime() const {
-  // @@protoc_insertion_point(field_get:process.GetLogProcessStatRequest.endtime)
-  return endtime_;
+inline const ::std::string& GetLogProcessStatRequest::cookieid() const {
+  // @@protoc_insertion_point(field_get:process.GetLogProcessStatRequest.Cookieid)
+  return *cookieid_;
 }
-inline void GetLogProcessStatRequest::set_endtime(::google::protobuf::int64 value) {
-  set_has_endtime();
-  endtime_ = value;
-  // @@protoc_insertion_point(field_set:process.GetLogProcessStatRequest.endtime)
+inline void GetLogProcessStatRequest::set_cookieid(const ::std::string& value) {
+  set_has_cookieid();
+  if (cookieid_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    cookieid_ = new ::std::string;
+  }
+  cookieid_->assign(value);
+  // @@protoc_insertion_point(field_set:process.GetLogProcessStatRequest.Cookieid)
+}
+inline void GetLogProcessStatRequest::set_cookieid(const char* value) {
+  set_has_cookieid();
+  if (cookieid_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    cookieid_ = new ::std::string;
+  }
+  cookieid_->assign(value);
+  // @@protoc_insertion_point(field_set_char:process.GetLogProcessStatRequest.Cookieid)
+}
+inline void GetLogProcessStatRequest::set_cookieid(const char* value, size_t size) {
+  set_has_cookieid();
+  if (cookieid_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    cookieid_ = new ::std::string;
+  }
+  cookieid_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:process.GetLogProcessStatRequest.Cookieid)
+}
+inline ::std::string* GetLogProcessStatRequest::mutable_cookieid() {
+  set_has_cookieid();
+  if (cookieid_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    cookieid_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:process.GetLogProcessStatRequest.Cookieid)
+  return cookieid_;
+}
+inline ::std::string* GetLogProcessStatRequest::release_cookieid() {
+  clear_has_cookieid();
+  if (cookieid_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = cookieid_;
+    cookieid_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void GetLogProcessStatRequest::set_allocated_cookieid(::std::string* cookieid) {
+  if (cookieid_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete cookieid_;
+  }
+  if (cookieid) {
+    set_has_cookieid();
+    cookieid_ = cookieid;
+  } else {
+    clear_has_cookieid();
+    cookieid_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:process.GetLogProcessStatRequest.Cookieid)
 }
 
-// optional int32 startindex = 4;
-inline bool GetLogProcessStatRequest::has_startindex() const {
+// optional string Srcid = 4;
+inline bool GetLogProcessStatRequest::has_srcid() const {
   return (_has_bits_[0] & 0x00000008u) != 0;
 }
-inline void GetLogProcessStatRequest::set_has_startindex() {
+inline void GetLogProcessStatRequest::set_has_srcid() {
   _has_bits_[0] |= 0x00000008u;
 }
-inline void GetLogProcessStatRequest::clear_has_startindex() {
+inline void GetLogProcessStatRequest::clear_has_srcid() {
   _has_bits_[0] &= ~0x00000008u;
 }
-inline void GetLogProcessStatRequest::clear_startindex() {
-  startindex_ = 0;
-  clear_has_startindex();
+inline void GetLogProcessStatRequest::clear_srcid() {
+  if (srcid_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    srcid_->clear();
+  }
+  clear_has_srcid();
 }
-inline ::google::protobuf::int32 GetLogProcessStatRequest::startindex() const {
-  // @@protoc_insertion_point(field_get:process.GetLogProcessStatRequest.startindex)
-  return startindex_;
+inline const ::std::string& GetLogProcessStatRequest::srcid() const {
+  // @@protoc_insertion_point(field_get:process.GetLogProcessStatRequest.Srcid)
+  return *srcid_;
 }
-inline void GetLogProcessStatRequest::set_startindex(::google::protobuf::int32 value) {
-  set_has_startindex();
-  startindex_ = value;
-  // @@protoc_insertion_point(field_set:process.GetLogProcessStatRequest.startindex)
+inline void GetLogProcessStatRequest::set_srcid(const ::std::string& value) {
+  set_has_srcid();
+  if (srcid_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    srcid_ = new ::std::string;
+  }
+  srcid_->assign(value);
+  // @@protoc_insertion_point(field_set:process.GetLogProcessStatRequest.Srcid)
+}
+inline void GetLogProcessStatRequest::set_srcid(const char* value) {
+  set_has_srcid();
+  if (srcid_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    srcid_ = new ::std::string;
+  }
+  srcid_->assign(value);
+  // @@protoc_insertion_point(field_set_char:process.GetLogProcessStatRequest.Srcid)
+}
+inline void GetLogProcessStatRequest::set_srcid(const char* value, size_t size) {
+  set_has_srcid();
+  if (srcid_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    srcid_ = new ::std::string;
+  }
+  srcid_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:process.GetLogProcessStatRequest.Srcid)
+}
+inline ::std::string* GetLogProcessStatRequest::mutable_srcid() {
+  set_has_srcid();
+  if (srcid_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    srcid_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:process.GetLogProcessStatRequest.Srcid)
+  return srcid_;
+}
+inline ::std::string* GetLogProcessStatRequest::release_srcid() {
+  clear_has_srcid();
+  if (srcid_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = srcid_;
+    srcid_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void GetLogProcessStatRequest::set_allocated_srcid(::std::string* srcid) {
+  if (srcid_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete srcid_;
+  }
+  if (srcid) {
+    set_has_srcid();
+    srcid_ = srcid;
+  } else {
+    clear_has_srcid();
+    srcid_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:process.GetLogProcessStatRequest.Srcid)
 }
 
-// optional int32 endindex = 5;
-inline bool GetLogProcessStatRequest::has_endindex() const {
+// optional uint64 Startime = 5;
+inline bool GetLogProcessStatRequest::has_startime() const {
   return (_has_bits_[0] & 0x00000010u) != 0;
 }
-inline void GetLogProcessStatRequest::set_has_endindex() {
+inline void GetLogProcessStatRequest::set_has_startime() {
   _has_bits_[0] |= 0x00000010u;
 }
-inline void GetLogProcessStatRequest::clear_has_endindex() {
+inline void GetLogProcessStatRequest::clear_has_startime() {
   _has_bits_[0] &= ~0x00000010u;
 }
-inline void GetLogProcessStatRequest::clear_endindex() {
-  endindex_ = 0;
-  clear_has_endindex();
+inline void GetLogProcessStatRequest::clear_startime() {
+  startime_ = GOOGLE_ULONGLONG(0);
+  clear_has_startime();
 }
-inline ::google::protobuf::int32 GetLogProcessStatRequest::endindex() const {
-  // @@protoc_insertion_point(field_get:process.GetLogProcessStatRequest.endindex)
-  return endindex_;
+inline ::google::protobuf::uint64 GetLogProcessStatRequest::startime() const {
+  // @@protoc_insertion_point(field_get:process.GetLogProcessStatRequest.Startime)
+  return startime_;
 }
-inline void GetLogProcessStatRequest::set_endindex(::google::protobuf::int32 value) {
-  set_has_endindex();
-  endindex_ = value;
-  // @@protoc_insertion_point(field_set:process.GetLogProcessStatRequest.endindex)
+inline void GetLogProcessStatRequest::set_startime(::google::protobuf::uint64 value) {
+  set_has_startime();
+  startime_ = value;
+  // @@protoc_insertion_point(field_set:process.GetLogProcessStatRequest.Startime)
 }
 
-// optional .process.CheckListCond cond = 6;
-inline bool GetLogProcessStatRequest::has_cond() const {
+// optional uint64 Endtime = 6;
+inline bool GetLogProcessStatRequest::has_endtime() const {
   return (_has_bits_[0] & 0x00000020u) != 0;
 }
-inline void GetLogProcessStatRequest::set_has_cond() {
+inline void GetLogProcessStatRequest::set_has_endtime() {
   _has_bits_[0] |= 0x00000020u;
 }
-inline void GetLogProcessStatRequest::clear_has_cond() {
+inline void GetLogProcessStatRequest::clear_has_endtime() {
   _has_bits_[0] &= ~0x00000020u;
+}
+inline void GetLogProcessStatRequest::clear_endtime() {
+  endtime_ = GOOGLE_ULONGLONG(0);
+  clear_has_endtime();
+}
+inline ::google::protobuf::uint64 GetLogProcessStatRequest::endtime() const {
+  // @@protoc_insertion_point(field_get:process.GetLogProcessStatRequest.Endtime)
+  return endtime_;
+}
+inline void GetLogProcessStatRequest::set_endtime(::google::protobuf::uint64 value) {
+  set_has_endtime();
+  endtime_ = value;
+  // @@protoc_insertion_point(field_set:process.GetLogProcessStatRequest.Endtime)
+}
+
+// optional .process.CheckListCond Cond = 7;
+inline bool GetLogProcessStatRequest::has_cond() const {
+  return (_has_bits_[0] & 0x00000040u) != 0;
+}
+inline void GetLogProcessStatRequest::set_has_cond() {
+  _has_bits_[0] |= 0x00000040u;
+}
+inline void GetLogProcessStatRequest::clear_has_cond() {
+  _has_bits_[0] &= ~0x00000040u;
 }
 inline void GetLogProcessStatRequest::clear_cond() {
   if (cond_ != NULL) cond_->::process::CheckListCond::Clear();
   clear_has_cond();
 }
 inline const ::process::CheckListCond& GetLogProcessStatRequest::cond() const {
-  // @@protoc_insertion_point(field_get:process.GetLogProcessStatRequest.cond)
+  // @@protoc_insertion_point(field_get:process.GetLogProcessStatRequest.Cond)
   return cond_ != NULL ? *cond_ : *default_instance_->cond_;
 }
 inline ::process::CheckListCond* GetLogProcessStatRequest::mutable_cond() {
   set_has_cond();
   if (cond_ == NULL) cond_ = new ::process::CheckListCond;
-  // @@protoc_insertion_point(field_mutable:process.GetLogProcessStatRequest.cond)
+  // @@protoc_insertion_point(field_mutable:process.GetLogProcessStatRequest.Cond)
   return cond_;
 }
 inline ::process::CheckListCond* GetLogProcessStatRequest::release_cond() {
@@ -3618,14 +6024,217 @@ inline void GetLogProcessStatRequest::set_allocated_cond(::process::CheckListCon
   } else {
     clear_has_cond();
   }
-  // @@protoc_insertion_point(field_set_allocated:process.GetLogProcessStatRequest.cond)
+  // @@protoc_insertion_point(field_set_allocated:process.GetLogProcessStatRequest.Cond)
+}
+
+// repeated string Selectfields = 8;
+inline int GetLogProcessStatRequest::selectfields_size() const {
+  return selectfields_.size();
+}
+inline void GetLogProcessStatRequest::clear_selectfields() {
+  selectfields_.Clear();
+}
+inline const ::std::string& GetLogProcessStatRequest::selectfields(int index) const {
+  // @@protoc_insertion_point(field_get:process.GetLogProcessStatRequest.Selectfields)
+  return selectfields_.Get(index);
+}
+inline ::std::string* GetLogProcessStatRequest::mutable_selectfields(int index) {
+  // @@protoc_insertion_point(field_mutable:process.GetLogProcessStatRequest.Selectfields)
+  return selectfields_.Mutable(index);
+}
+inline void GetLogProcessStatRequest::set_selectfields(int index, const ::std::string& value) {
+  // @@protoc_insertion_point(field_set:process.GetLogProcessStatRequest.Selectfields)
+  selectfields_.Mutable(index)->assign(value);
+}
+inline void GetLogProcessStatRequest::set_selectfields(int index, const char* value) {
+  selectfields_.Mutable(index)->assign(value);
+  // @@protoc_insertion_point(field_set_char:process.GetLogProcessStatRequest.Selectfields)
+}
+inline void GetLogProcessStatRequest::set_selectfields(int index, const char* value, size_t size) {
+  selectfields_.Mutable(index)->assign(
+    reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:process.GetLogProcessStatRequest.Selectfields)
+}
+inline ::std::string* GetLogProcessStatRequest::add_selectfields() {
+  return selectfields_.Add();
+}
+inline void GetLogProcessStatRequest::add_selectfields(const ::std::string& value) {
+  selectfields_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add:process.GetLogProcessStatRequest.Selectfields)
+}
+inline void GetLogProcessStatRequest::add_selectfields(const char* value) {
+  selectfields_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add_char:process.GetLogProcessStatRequest.Selectfields)
+}
+inline void GetLogProcessStatRequest::add_selectfields(const char* value, size_t size) {
+  selectfields_.Add()->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_add_pointer:process.GetLogProcessStatRequest.Selectfields)
+}
+inline const ::google::protobuf::RepeatedPtrField< ::std::string>&
+GetLogProcessStatRequest::selectfields() const {
+  // @@protoc_insertion_point(field_list:process.GetLogProcessStatRequest.Selectfields)
+  return selectfields_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::std::string>*
+GetLogProcessStatRequest::mutable_selectfields() {
+  // @@protoc_insertion_point(field_mutable_list:process.GetLogProcessStatRequest.Selectfields)
+  return &selectfields_;
+}
+
+// optional string Sortfield = 9;
+inline bool GetLogProcessStatRequest::has_sortfield() const {
+  return (_has_bits_[0] & 0x00000100u) != 0;
+}
+inline void GetLogProcessStatRequest::set_has_sortfield() {
+  _has_bits_[0] |= 0x00000100u;
+}
+inline void GetLogProcessStatRequest::clear_has_sortfield() {
+  _has_bits_[0] &= ~0x00000100u;
+}
+inline void GetLogProcessStatRequest::clear_sortfield() {
+  if (sortfield_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    sortfield_->clear();
+  }
+  clear_has_sortfield();
+}
+inline const ::std::string& GetLogProcessStatRequest::sortfield() const {
+  // @@protoc_insertion_point(field_get:process.GetLogProcessStatRequest.Sortfield)
+  return *sortfield_;
+}
+inline void GetLogProcessStatRequest::set_sortfield(const ::std::string& value) {
+  set_has_sortfield();
+  if (sortfield_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    sortfield_ = new ::std::string;
+  }
+  sortfield_->assign(value);
+  // @@protoc_insertion_point(field_set:process.GetLogProcessStatRequest.Sortfield)
+}
+inline void GetLogProcessStatRequest::set_sortfield(const char* value) {
+  set_has_sortfield();
+  if (sortfield_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    sortfield_ = new ::std::string;
+  }
+  sortfield_->assign(value);
+  // @@protoc_insertion_point(field_set_char:process.GetLogProcessStatRequest.Sortfield)
+}
+inline void GetLogProcessStatRequest::set_sortfield(const char* value, size_t size) {
+  set_has_sortfield();
+  if (sortfield_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    sortfield_ = new ::std::string;
+  }
+  sortfield_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:process.GetLogProcessStatRequest.Sortfield)
+}
+inline ::std::string* GetLogProcessStatRequest::mutable_sortfield() {
+  set_has_sortfield();
+  if (sortfield_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    sortfield_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:process.GetLogProcessStatRequest.Sortfield)
+  return sortfield_;
+}
+inline ::std::string* GetLogProcessStatRequest::release_sortfield() {
+  clear_has_sortfield();
+  if (sortfield_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = sortfield_;
+    sortfield_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void GetLogProcessStatRequest::set_allocated_sortfield(::std::string* sortfield) {
+  if (sortfield_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete sortfield_;
+  }
+  if (sortfield) {
+    set_has_sortfield();
+    sortfield_ = sortfield;
+  } else {
+    clear_has_sortfield();
+    sortfield_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:process.GetLogProcessStatRequest.Sortfield)
+}
+
+// required .process.GetLogProcessStatRequest.SourceFrom Getfrom = 10;
+inline bool GetLogProcessStatRequest::has_getfrom() const {
+  return (_has_bits_[0] & 0x00000200u) != 0;
+}
+inline void GetLogProcessStatRequest::set_has_getfrom() {
+  _has_bits_[0] |= 0x00000200u;
+}
+inline void GetLogProcessStatRequest::clear_has_getfrom() {
+  _has_bits_[0] &= ~0x00000200u;
+}
+inline void GetLogProcessStatRequest::clear_getfrom() {
+  getfrom_ = 0;
+  clear_has_getfrom();
+}
+inline ::process::GetLogProcessStatRequest_SourceFrom GetLogProcessStatRequest::getfrom() const {
+  // @@protoc_insertion_point(field_get:process.GetLogProcessStatRequest.Getfrom)
+  return static_cast< ::process::GetLogProcessStatRequest_SourceFrom >(getfrom_);
+}
+inline void GetLogProcessStatRequest::set_getfrom(::process::GetLogProcessStatRequest_SourceFrom value) {
+  assert(::process::GetLogProcessStatRequest_SourceFrom_IsValid(value));
+  set_has_getfrom();
+  getfrom_ = value;
+  // @@protoc_insertion_point(field_set:process.GetLogProcessStatRequest.Getfrom)
+}
+
+// optional uint32 Start = 11;
+inline bool GetLogProcessStatRequest::has_start() const {
+  return (_has_bits_[0] & 0x00000400u) != 0;
+}
+inline void GetLogProcessStatRequest::set_has_start() {
+  _has_bits_[0] |= 0x00000400u;
+}
+inline void GetLogProcessStatRequest::clear_has_start() {
+  _has_bits_[0] &= ~0x00000400u;
+}
+inline void GetLogProcessStatRequest::clear_start() {
+  start_ = 0u;
+  clear_has_start();
+}
+inline ::google::protobuf::uint32 GetLogProcessStatRequest::start() const {
+  // @@protoc_insertion_point(field_get:process.GetLogProcessStatRequest.Start)
+  return start_;
+}
+inline void GetLogProcessStatRequest::set_start(::google::protobuf::uint32 value) {
+  set_has_start();
+  start_ = value;
+  // @@protoc_insertion_point(field_set:process.GetLogProcessStatRequest.Start)
+}
+
+// optional uint32 End = 12;
+inline bool GetLogProcessStatRequest::has_end() const {
+  return (_has_bits_[0] & 0x00000800u) != 0;
+}
+inline void GetLogProcessStatRequest::set_has_end() {
+  _has_bits_[0] |= 0x00000800u;
+}
+inline void GetLogProcessStatRequest::clear_has_end() {
+  _has_bits_[0] &= ~0x00000800u;
+}
+inline void GetLogProcessStatRequest::clear_end() {
+  end_ = 0u;
+  clear_has_end();
+}
+inline ::google::protobuf::uint32 GetLogProcessStatRequest::end() const {
+  // @@protoc_insertion_point(field_get:process.GetLogProcessStatRequest.End)
+  return end_;
+}
+inline void GetLogProcessStatRequest::set_end(::google::protobuf::uint32 value) {
+  set_has_end();
+  end_ = value;
+  // @@protoc_insertion_point(field_set:process.GetLogProcessStatRequest.End)
 }
 
 // -------------------------------------------------------------------
 
 // GetLogProcessStatResponse
 
-// required .process.GetLogProcessStatResponse.Res_Status status = 1;
+// required .process.GetLogProcessStatResponse.Res_Status Status = 1;
 inline bool GetLogProcessStatResponse::has_status() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -3640,17 +6249,17 @@ inline void GetLogProcessStatResponse::clear_status() {
   clear_has_status();
 }
 inline ::process::GetLogProcessStatResponse_Res_Status GetLogProcessStatResponse::status() const {
-  // @@protoc_insertion_point(field_get:process.GetLogProcessStatResponse.status)
+  // @@protoc_insertion_point(field_get:process.GetLogProcessStatResponse.Status)
   return static_cast< ::process::GetLogProcessStatResponse_Res_Status >(status_);
 }
 inline void GetLogProcessStatResponse::set_status(::process::GetLogProcessStatResponse_Res_Status value) {
   assert(::process::GetLogProcessStatResponse_Res_Status_IsValid(value));
   set_has_status();
   status_ = value;
-  // @@protoc_insertion_point(field_set:process.GetLogProcessStatResponse.status)
+  // @@protoc_insertion_point(field_set:process.GetLogProcessStatResponse.Status)
 }
 
-// optional string error = 2;
+// optional string Error = 2;
 inline bool GetLogProcessStatResponse::has_error() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -3667,7 +6276,7 @@ inline void GetLogProcessStatResponse::clear_error() {
   clear_has_error();
 }
 inline const ::std::string& GetLogProcessStatResponse::error() const {
-  // @@protoc_insertion_point(field_get:process.GetLogProcessStatResponse.error)
+  // @@protoc_insertion_point(field_get:process.GetLogProcessStatResponse.Error)
   return *error_;
 }
 inline void GetLogProcessStatResponse::set_error(const ::std::string& value) {
@@ -3676,7 +6285,7 @@ inline void GetLogProcessStatResponse::set_error(const ::std::string& value) {
     error_ = new ::std::string;
   }
   error_->assign(value);
-  // @@protoc_insertion_point(field_set:process.GetLogProcessStatResponse.error)
+  // @@protoc_insertion_point(field_set:process.GetLogProcessStatResponse.Error)
 }
 inline void GetLogProcessStatResponse::set_error(const char* value) {
   set_has_error();
@@ -3684,7 +6293,7 @@ inline void GetLogProcessStatResponse::set_error(const char* value) {
     error_ = new ::std::string;
   }
   error_->assign(value);
-  // @@protoc_insertion_point(field_set_char:process.GetLogProcessStatResponse.error)
+  // @@protoc_insertion_point(field_set_char:process.GetLogProcessStatResponse.Error)
 }
 inline void GetLogProcessStatResponse::set_error(const char* value, size_t size) {
   set_has_error();
@@ -3692,14 +6301,14 @@ inline void GetLogProcessStatResponse::set_error(const char* value, size_t size)
     error_ = new ::std::string;
   }
   error_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:process.GetLogProcessStatResponse.error)
+  // @@protoc_insertion_point(field_set_pointer:process.GetLogProcessStatResponse.Error)
 }
 inline ::std::string* GetLogProcessStatResponse::mutable_error() {
   set_has_error();
   if (error_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     error_ = new ::std::string;
   }
-  // @@protoc_insertion_point(field_mutable:process.GetLogProcessStatResponse.error)
+  // @@protoc_insertion_point(field_mutable:process.GetLogProcessStatResponse.Error)
   return error_;
 }
 inline ::std::string* GetLogProcessStatResponse::release_error() {
@@ -3723,10 +6332,10 @@ inline void GetLogProcessStatResponse::set_allocated_error(::std::string* error)
     clear_has_error();
     error_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
-  // @@protoc_insertion_point(field_set_allocated:process.GetLogProcessStatResponse.error)
+  // @@protoc_insertion_point(field_set_allocated:process.GetLogProcessStatResponse.Error)
 }
 
-// required int64 count = 3;
+// required uint64 Count = 3;
 inline bool GetLogProcessStatResponse::has_count() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
@@ -3737,71 +6346,867 @@ inline void GetLogProcessStatResponse::clear_has_count() {
   _has_bits_[0] &= ~0x00000004u;
 }
 inline void GetLogProcessStatResponse::clear_count() {
-  count_ = GOOGLE_LONGLONG(0);
+  count_ = GOOGLE_ULONGLONG(0);
   clear_has_count();
 }
-inline ::google::protobuf::int64 GetLogProcessStatResponse::count() const {
-  // @@protoc_insertion_point(field_get:process.GetLogProcessStatResponse.count)
+inline ::google::protobuf::uint64 GetLogProcessStatResponse::count() const {
+  // @@protoc_insertion_point(field_get:process.GetLogProcessStatResponse.Count)
   return count_;
 }
-inline void GetLogProcessStatResponse::set_count(::google::protobuf::int64 value) {
+inline void GetLogProcessStatResponse::set_count(::google::protobuf::uint64 value) {
   set_has_count();
   count_ = value;
-  // @@protoc_insertion_point(field_set:process.GetLogProcessStatResponse.count)
+  // @@protoc_insertion_point(field_set:process.GetLogProcessStatResponse.Count)
 }
 
-// repeated string iteminfos = 4;
+// repeated .process.MapEntries Iteminfos = 4;
 inline int GetLogProcessStatResponse::iteminfos_size() const {
   return iteminfos_.size();
 }
 inline void GetLogProcessStatResponse::clear_iteminfos() {
   iteminfos_.Clear();
 }
-inline const ::std::string& GetLogProcessStatResponse::iteminfos(int index) const {
-  // @@protoc_insertion_point(field_get:process.GetLogProcessStatResponse.iteminfos)
+inline const ::process::MapEntries& GetLogProcessStatResponse::iteminfos(int index) const {
+  // @@protoc_insertion_point(field_get:process.GetLogProcessStatResponse.Iteminfos)
   return iteminfos_.Get(index);
 }
-inline ::std::string* GetLogProcessStatResponse::mutable_iteminfos(int index) {
-  // @@protoc_insertion_point(field_mutable:process.GetLogProcessStatResponse.iteminfos)
+inline ::process::MapEntries* GetLogProcessStatResponse::mutable_iteminfos(int index) {
+  // @@protoc_insertion_point(field_mutable:process.GetLogProcessStatResponse.Iteminfos)
   return iteminfos_.Mutable(index);
 }
-inline void GetLogProcessStatResponse::set_iteminfos(int index, const ::std::string& value) {
-  // @@protoc_insertion_point(field_set:process.GetLogProcessStatResponse.iteminfos)
-  iteminfos_.Mutable(index)->assign(value);
-}
-inline void GetLogProcessStatResponse::set_iteminfos(int index, const char* value) {
-  iteminfos_.Mutable(index)->assign(value);
-  // @@protoc_insertion_point(field_set_char:process.GetLogProcessStatResponse.iteminfos)
-}
-inline void GetLogProcessStatResponse::set_iteminfos(int index, const char* value, size_t size) {
-  iteminfos_.Mutable(index)->assign(
-    reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:process.GetLogProcessStatResponse.iteminfos)
-}
-inline ::std::string* GetLogProcessStatResponse::add_iteminfos() {
+inline ::process::MapEntries* GetLogProcessStatResponse::add_iteminfos() {
+  // @@protoc_insertion_point(field_add:process.GetLogProcessStatResponse.Iteminfos)
   return iteminfos_.Add();
 }
-inline void GetLogProcessStatResponse::add_iteminfos(const ::std::string& value) {
-  iteminfos_.Add()->assign(value);
-  // @@protoc_insertion_point(field_add:process.GetLogProcessStatResponse.iteminfos)
-}
-inline void GetLogProcessStatResponse::add_iteminfos(const char* value) {
-  iteminfos_.Add()->assign(value);
-  // @@protoc_insertion_point(field_add_char:process.GetLogProcessStatResponse.iteminfos)
-}
-inline void GetLogProcessStatResponse::add_iteminfos(const char* value, size_t size) {
-  iteminfos_.Add()->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_add_pointer:process.GetLogProcessStatResponse.iteminfos)
-}
-inline const ::google::protobuf::RepeatedPtrField< ::std::string>&
+inline const ::google::protobuf::RepeatedPtrField< ::process::MapEntries >&
 GetLogProcessStatResponse::iteminfos() const {
-  // @@protoc_insertion_point(field_list:process.GetLogProcessStatResponse.iteminfos)
+  // @@protoc_insertion_point(field_list:process.GetLogProcessStatResponse.Iteminfos)
   return iteminfos_;
 }
-inline ::google::protobuf::RepeatedPtrField< ::std::string>*
+inline ::google::protobuf::RepeatedPtrField< ::process::MapEntries >*
 GetLogProcessStatResponse::mutable_iteminfos() {
-  // @@protoc_insertion_point(field_mutable_list:process.GetLogProcessStatResponse.iteminfos)
+  // @@protoc_insertion_point(field_mutable_list:process.GetLogProcessStatResponse.Iteminfos)
   return &iteminfos_;
+}
+
+// optional string Result = 5;
+inline bool GetLogProcessStatResponse::has_result() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void GetLogProcessStatResponse::set_has_result() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void GetLogProcessStatResponse::clear_has_result() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void GetLogProcessStatResponse::clear_result() {
+  if (result_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    result_->clear();
+  }
+  clear_has_result();
+}
+inline const ::std::string& GetLogProcessStatResponse::result() const {
+  // @@protoc_insertion_point(field_get:process.GetLogProcessStatResponse.Result)
+  return *result_;
+}
+inline void GetLogProcessStatResponse::set_result(const ::std::string& value) {
+  set_has_result();
+  if (result_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    result_ = new ::std::string;
+  }
+  result_->assign(value);
+  // @@protoc_insertion_point(field_set:process.GetLogProcessStatResponse.Result)
+}
+inline void GetLogProcessStatResponse::set_result(const char* value) {
+  set_has_result();
+  if (result_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    result_ = new ::std::string;
+  }
+  result_->assign(value);
+  // @@protoc_insertion_point(field_set_char:process.GetLogProcessStatResponse.Result)
+}
+inline void GetLogProcessStatResponse::set_result(const char* value, size_t size) {
+  set_has_result();
+  if (result_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    result_ = new ::std::string;
+  }
+  result_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:process.GetLogProcessStatResponse.Result)
+}
+inline ::std::string* GetLogProcessStatResponse::mutable_result() {
+  set_has_result();
+  if (result_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    result_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:process.GetLogProcessStatResponse.Result)
+  return result_;
+}
+inline ::std::string* GetLogProcessStatResponse::release_result() {
+  clear_has_result();
+  if (result_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = result_;
+    result_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void GetLogProcessStatResponse::set_allocated_result(::std::string* result) {
+  if (result_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete result_;
+  }
+  if (result) {
+    set_has_result();
+    result_ = result;
+  } else {
+    clear_has_result();
+    result_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:process.GetLogProcessStatResponse.Result)
+}
+
+// -------------------------------------------------------------------
+
+// SetStorageFieldConfigRequest
+
+// required string Application = 1;
+inline bool SetStorageFieldConfigRequest::has_application() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void SetStorageFieldConfigRequest::set_has_application() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void SetStorageFieldConfigRequest::clear_has_application() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void SetStorageFieldConfigRequest::clear_application() {
+  if (application_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    application_->clear();
+  }
+  clear_has_application();
+}
+inline const ::std::string& SetStorageFieldConfigRequest::application() const {
+  // @@protoc_insertion_point(field_get:process.SetStorageFieldConfigRequest.Application)
+  return *application_;
+}
+inline void SetStorageFieldConfigRequest::set_application(const ::std::string& value) {
+  set_has_application();
+  if (application_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    application_ = new ::std::string;
+  }
+  application_->assign(value);
+  // @@protoc_insertion_point(field_set:process.SetStorageFieldConfigRequest.Application)
+}
+inline void SetStorageFieldConfigRequest::set_application(const char* value) {
+  set_has_application();
+  if (application_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    application_ = new ::std::string;
+  }
+  application_->assign(value);
+  // @@protoc_insertion_point(field_set_char:process.SetStorageFieldConfigRequest.Application)
+}
+inline void SetStorageFieldConfigRequest::set_application(const char* value, size_t size) {
+  set_has_application();
+  if (application_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    application_ = new ::std::string;
+  }
+  application_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:process.SetStorageFieldConfigRequest.Application)
+}
+inline ::std::string* SetStorageFieldConfigRequest::mutable_application() {
+  set_has_application();
+  if (application_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    application_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:process.SetStorageFieldConfigRequest.Application)
+  return application_;
+}
+inline ::std::string* SetStorageFieldConfigRequest::release_application() {
+  clear_has_application();
+  if (application_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = application_;
+    application_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void SetStorageFieldConfigRequest::set_allocated_application(::std::string* application) {
+  if (application_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete application_;
+  }
+  if (application) {
+    set_has_application();
+    application_ = application;
+  } else {
+    clear_has_application();
+    application_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:process.SetStorageFieldConfigRequest.Application)
+}
+
+// required bool Op = 2;
+inline bool SetStorageFieldConfigRequest::has_op() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void SetStorageFieldConfigRequest::set_has_op() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void SetStorageFieldConfigRequest::clear_has_op() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void SetStorageFieldConfigRequest::clear_op() {
+  op_ = false;
+  clear_has_op();
+}
+inline bool SetStorageFieldConfigRequest::op() const {
+  // @@protoc_insertion_point(field_get:process.SetStorageFieldConfigRequest.Op)
+  return op_;
+}
+inline void SetStorageFieldConfigRequest::set_op(bool value) {
+  set_has_op();
+  op_ = value;
+  // @@protoc_insertion_point(field_set:process.SetStorageFieldConfigRequest.Op)
+}
+
+// repeated string Fields = 3;
+inline int SetStorageFieldConfigRequest::fields_size() const {
+  return fields_.size();
+}
+inline void SetStorageFieldConfigRequest::clear_fields() {
+  fields_.Clear();
+}
+inline const ::std::string& SetStorageFieldConfigRequest::fields(int index) const {
+  // @@protoc_insertion_point(field_get:process.SetStorageFieldConfigRequest.Fields)
+  return fields_.Get(index);
+}
+inline ::std::string* SetStorageFieldConfigRequest::mutable_fields(int index) {
+  // @@protoc_insertion_point(field_mutable:process.SetStorageFieldConfigRequest.Fields)
+  return fields_.Mutable(index);
+}
+inline void SetStorageFieldConfigRequest::set_fields(int index, const ::std::string& value) {
+  // @@protoc_insertion_point(field_set:process.SetStorageFieldConfigRequest.Fields)
+  fields_.Mutable(index)->assign(value);
+}
+inline void SetStorageFieldConfigRequest::set_fields(int index, const char* value) {
+  fields_.Mutable(index)->assign(value);
+  // @@protoc_insertion_point(field_set_char:process.SetStorageFieldConfigRequest.Fields)
+}
+inline void SetStorageFieldConfigRequest::set_fields(int index, const char* value, size_t size) {
+  fields_.Mutable(index)->assign(
+    reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:process.SetStorageFieldConfigRequest.Fields)
+}
+inline ::std::string* SetStorageFieldConfigRequest::add_fields() {
+  return fields_.Add();
+}
+inline void SetStorageFieldConfigRequest::add_fields(const ::std::string& value) {
+  fields_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add:process.SetStorageFieldConfigRequest.Fields)
+}
+inline void SetStorageFieldConfigRequest::add_fields(const char* value) {
+  fields_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add_char:process.SetStorageFieldConfigRequest.Fields)
+}
+inline void SetStorageFieldConfigRequest::add_fields(const char* value, size_t size) {
+  fields_.Add()->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_add_pointer:process.SetStorageFieldConfigRequest.Fields)
+}
+inline const ::google::protobuf::RepeatedPtrField< ::std::string>&
+SetStorageFieldConfigRequest::fields() const {
+  // @@protoc_insertion_point(field_list:process.SetStorageFieldConfigRequest.Fields)
+  return fields_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::std::string>*
+SetStorageFieldConfigRequest::mutable_fields() {
+  // @@protoc_insertion_point(field_mutable_list:process.SetStorageFieldConfigRequest.Fields)
+  return &fields_;
+}
+
+// -------------------------------------------------------------------
+
+// SetStorageFieldConfigResponse
+
+// required .process.SetStorageFieldConfigResponse.Res_Status Status = 1;
+inline bool SetStorageFieldConfigResponse::has_status() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void SetStorageFieldConfigResponse::set_has_status() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void SetStorageFieldConfigResponse::clear_has_status() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void SetStorageFieldConfigResponse::clear_status() {
+  status_ = 0;
+  clear_has_status();
+}
+inline ::process::SetStorageFieldConfigResponse_Res_Status SetStorageFieldConfigResponse::status() const {
+  // @@protoc_insertion_point(field_get:process.SetStorageFieldConfigResponse.Status)
+  return static_cast< ::process::SetStorageFieldConfigResponse_Res_Status >(status_);
+}
+inline void SetStorageFieldConfigResponse::set_status(::process::SetStorageFieldConfigResponse_Res_Status value) {
+  assert(::process::SetStorageFieldConfigResponse_Res_Status_IsValid(value));
+  set_has_status();
+  status_ = value;
+  // @@protoc_insertion_point(field_set:process.SetStorageFieldConfigResponse.Status)
+}
+
+// optional string Error = 2;
+inline bool SetStorageFieldConfigResponse::has_error() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void SetStorageFieldConfigResponse::set_has_error() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void SetStorageFieldConfigResponse::clear_has_error() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void SetStorageFieldConfigResponse::clear_error() {
+  if (error_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    error_->clear();
+  }
+  clear_has_error();
+}
+inline const ::std::string& SetStorageFieldConfigResponse::error() const {
+  // @@protoc_insertion_point(field_get:process.SetStorageFieldConfigResponse.Error)
+  return *error_;
+}
+inline void SetStorageFieldConfigResponse::set_error(const ::std::string& value) {
+  set_has_error();
+  if (error_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    error_ = new ::std::string;
+  }
+  error_->assign(value);
+  // @@protoc_insertion_point(field_set:process.SetStorageFieldConfigResponse.Error)
+}
+inline void SetStorageFieldConfigResponse::set_error(const char* value) {
+  set_has_error();
+  if (error_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    error_ = new ::std::string;
+  }
+  error_->assign(value);
+  // @@protoc_insertion_point(field_set_char:process.SetStorageFieldConfigResponse.Error)
+}
+inline void SetStorageFieldConfigResponse::set_error(const char* value, size_t size) {
+  set_has_error();
+  if (error_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    error_ = new ::std::string;
+  }
+  error_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:process.SetStorageFieldConfigResponse.Error)
+}
+inline ::std::string* SetStorageFieldConfigResponse::mutable_error() {
+  set_has_error();
+  if (error_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    error_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:process.SetStorageFieldConfigResponse.Error)
+  return error_;
+}
+inline ::std::string* SetStorageFieldConfigResponse::release_error() {
+  clear_has_error();
+  if (error_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = error_;
+    error_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void SetStorageFieldConfigResponse::set_allocated_error(::std::string* error) {
+  if (error_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete error_;
+  }
+  if (error) {
+    set_has_error();
+    error_ = error;
+  } else {
+    clear_has_error();
+    error_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:process.SetStorageFieldConfigResponse.Error)
+}
+
+// -------------------------------------------------------------------
+
+// GetStorageFieldConfigRequest
+
+// optional string Application = 1;
+inline bool GetStorageFieldConfigRequest::has_application() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void GetStorageFieldConfigRequest::set_has_application() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void GetStorageFieldConfigRequest::clear_has_application() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void GetStorageFieldConfigRequest::clear_application() {
+  if (application_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    application_->clear();
+  }
+  clear_has_application();
+}
+inline const ::std::string& GetStorageFieldConfigRequest::application() const {
+  // @@protoc_insertion_point(field_get:process.GetStorageFieldConfigRequest.Application)
+  return *application_;
+}
+inline void GetStorageFieldConfigRequest::set_application(const ::std::string& value) {
+  set_has_application();
+  if (application_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    application_ = new ::std::string;
+  }
+  application_->assign(value);
+  // @@protoc_insertion_point(field_set:process.GetStorageFieldConfigRequest.Application)
+}
+inline void GetStorageFieldConfigRequest::set_application(const char* value) {
+  set_has_application();
+  if (application_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    application_ = new ::std::string;
+  }
+  application_->assign(value);
+  // @@protoc_insertion_point(field_set_char:process.GetStorageFieldConfigRequest.Application)
+}
+inline void GetStorageFieldConfigRequest::set_application(const char* value, size_t size) {
+  set_has_application();
+  if (application_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    application_ = new ::std::string;
+  }
+  application_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:process.GetStorageFieldConfigRequest.Application)
+}
+inline ::std::string* GetStorageFieldConfigRequest::mutable_application() {
+  set_has_application();
+  if (application_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    application_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:process.GetStorageFieldConfigRequest.Application)
+  return application_;
+}
+inline ::std::string* GetStorageFieldConfigRequest::release_application() {
+  clear_has_application();
+  if (application_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = application_;
+    application_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void GetStorageFieldConfigRequest::set_allocated_application(::std::string* application) {
+  if (application_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete application_;
+  }
+  if (application) {
+    set_has_application();
+    application_ = application;
+  } else {
+    clear_has_application();
+    application_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:process.GetStorageFieldConfigRequest.Application)
+}
+
+// -------------------------------------------------------------------
+
+// StorageFieldConfigResponseInfo
+
+// required string Application = 1;
+inline bool StorageFieldConfigResponseInfo::has_application() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void StorageFieldConfigResponseInfo::set_has_application() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void StorageFieldConfigResponseInfo::clear_has_application() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void StorageFieldConfigResponseInfo::clear_application() {
+  if (application_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    application_->clear();
+  }
+  clear_has_application();
+}
+inline const ::std::string& StorageFieldConfigResponseInfo::application() const {
+  // @@protoc_insertion_point(field_get:process.StorageFieldConfigResponseInfo.Application)
+  return *application_;
+}
+inline void StorageFieldConfigResponseInfo::set_application(const ::std::string& value) {
+  set_has_application();
+  if (application_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    application_ = new ::std::string;
+  }
+  application_->assign(value);
+  // @@protoc_insertion_point(field_set:process.StorageFieldConfigResponseInfo.Application)
+}
+inline void StorageFieldConfigResponseInfo::set_application(const char* value) {
+  set_has_application();
+  if (application_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    application_ = new ::std::string;
+  }
+  application_->assign(value);
+  // @@protoc_insertion_point(field_set_char:process.StorageFieldConfigResponseInfo.Application)
+}
+inline void StorageFieldConfigResponseInfo::set_application(const char* value, size_t size) {
+  set_has_application();
+  if (application_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    application_ = new ::std::string;
+  }
+  application_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:process.StorageFieldConfigResponseInfo.Application)
+}
+inline ::std::string* StorageFieldConfigResponseInfo::mutable_application() {
+  set_has_application();
+  if (application_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    application_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:process.StorageFieldConfigResponseInfo.Application)
+  return application_;
+}
+inline ::std::string* StorageFieldConfigResponseInfo::release_application() {
+  clear_has_application();
+  if (application_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = application_;
+    application_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void StorageFieldConfigResponseInfo::set_allocated_application(::std::string* application) {
+  if (application_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete application_;
+  }
+  if (application) {
+    set_has_application();
+    application_ = application;
+  } else {
+    clear_has_application();
+    application_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:process.StorageFieldConfigResponseInfo.Application)
+}
+
+// repeated string Fields = 2;
+inline int StorageFieldConfigResponseInfo::fields_size() const {
+  return fields_.size();
+}
+inline void StorageFieldConfigResponseInfo::clear_fields() {
+  fields_.Clear();
+}
+inline const ::std::string& StorageFieldConfigResponseInfo::fields(int index) const {
+  // @@protoc_insertion_point(field_get:process.StorageFieldConfigResponseInfo.Fields)
+  return fields_.Get(index);
+}
+inline ::std::string* StorageFieldConfigResponseInfo::mutable_fields(int index) {
+  // @@protoc_insertion_point(field_mutable:process.StorageFieldConfigResponseInfo.Fields)
+  return fields_.Mutable(index);
+}
+inline void StorageFieldConfigResponseInfo::set_fields(int index, const ::std::string& value) {
+  // @@protoc_insertion_point(field_set:process.StorageFieldConfigResponseInfo.Fields)
+  fields_.Mutable(index)->assign(value);
+}
+inline void StorageFieldConfigResponseInfo::set_fields(int index, const char* value) {
+  fields_.Mutable(index)->assign(value);
+  // @@protoc_insertion_point(field_set_char:process.StorageFieldConfigResponseInfo.Fields)
+}
+inline void StorageFieldConfigResponseInfo::set_fields(int index, const char* value, size_t size) {
+  fields_.Mutable(index)->assign(
+    reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:process.StorageFieldConfigResponseInfo.Fields)
+}
+inline ::std::string* StorageFieldConfigResponseInfo::add_fields() {
+  return fields_.Add();
+}
+inline void StorageFieldConfigResponseInfo::add_fields(const ::std::string& value) {
+  fields_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add:process.StorageFieldConfigResponseInfo.Fields)
+}
+inline void StorageFieldConfigResponseInfo::add_fields(const char* value) {
+  fields_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add_char:process.StorageFieldConfigResponseInfo.Fields)
+}
+inline void StorageFieldConfigResponseInfo::add_fields(const char* value, size_t size) {
+  fields_.Add()->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_add_pointer:process.StorageFieldConfigResponseInfo.Fields)
+}
+inline const ::google::protobuf::RepeatedPtrField< ::std::string>&
+StorageFieldConfigResponseInfo::fields() const {
+  // @@protoc_insertion_point(field_list:process.StorageFieldConfigResponseInfo.Fields)
+  return fields_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::std::string>*
+StorageFieldConfigResponseInfo::mutable_fields() {
+  // @@protoc_insertion_point(field_mutable_list:process.StorageFieldConfigResponseInfo.Fields)
+  return &fields_;
+}
+
+// -------------------------------------------------------------------
+
+// GetStorageFieldConfigResponse
+
+// repeated .process.StorageFieldConfigResponseInfo Checklists = 1;
+inline int GetStorageFieldConfigResponse::checklists_size() const {
+  return checklists_.size();
+}
+inline void GetStorageFieldConfigResponse::clear_checklists() {
+  checklists_.Clear();
+}
+inline const ::process::StorageFieldConfigResponseInfo& GetStorageFieldConfigResponse::checklists(int index) const {
+  // @@protoc_insertion_point(field_get:process.GetStorageFieldConfigResponse.Checklists)
+  return checklists_.Get(index);
+}
+inline ::process::StorageFieldConfigResponseInfo* GetStorageFieldConfigResponse::mutable_checklists(int index) {
+  // @@protoc_insertion_point(field_mutable:process.GetStorageFieldConfigResponse.Checklists)
+  return checklists_.Mutable(index);
+}
+inline ::process::StorageFieldConfigResponseInfo* GetStorageFieldConfigResponse::add_checklists() {
+  // @@protoc_insertion_point(field_add:process.GetStorageFieldConfigResponse.Checklists)
+  return checklists_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::process::StorageFieldConfigResponseInfo >&
+GetStorageFieldConfigResponse::checklists() const {
+  // @@protoc_insertion_point(field_list:process.GetStorageFieldConfigResponse.Checklists)
+  return checklists_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::process::StorageFieldConfigResponseInfo >*
+GetStorageFieldConfigResponse::mutable_checklists() {
+  // @@protoc_insertion_point(field_mutable_list:process.GetStorageFieldConfigResponse.Checklists)
+  return &checklists_;
+}
+
+// -------------------------------------------------------------------
+
+// ClearRocksdbDataRequest
+
+// required string Application = 1;
+inline bool ClearRocksdbDataRequest::has_application() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ClearRocksdbDataRequest::set_has_application() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ClearRocksdbDataRequest::clear_has_application() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ClearRocksdbDataRequest::clear_application() {
+  if (application_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    application_->clear();
+  }
+  clear_has_application();
+}
+inline const ::std::string& ClearRocksdbDataRequest::application() const {
+  // @@protoc_insertion_point(field_get:process.ClearRocksdbDataRequest.Application)
+  return *application_;
+}
+inline void ClearRocksdbDataRequest::set_application(const ::std::string& value) {
+  set_has_application();
+  if (application_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    application_ = new ::std::string;
+  }
+  application_->assign(value);
+  // @@protoc_insertion_point(field_set:process.ClearRocksdbDataRequest.Application)
+}
+inline void ClearRocksdbDataRequest::set_application(const char* value) {
+  set_has_application();
+  if (application_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    application_ = new ::std::string;
+  }
+  application_->assign(value);
+  // @@protoc_insertion_point(field_set_char:process.ClearRocksdbDataRequest.Application)
+}
+inline void ClearRocksdbDataRequest::set_application(const char* value, size_t size) {
+  set_has_application();
+  if (application_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    application_ = new ::std::string;
+  }
+  application_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:process.ClearRocksdbDataRequest.Application)
+}
+inline ::std::string* ClearRocksdbDataRequest::mutable_application() {
+  set_has_application();
+  if (application_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    application_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:process.ClearRocksdbDataRequest.Application)
+  return application_;
+}
+inline ::std::string* ClearRocksdbDataRequest::release_application() {
+  clear_has_application();
+  if (application_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = application_;
+    application_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void ClearRocksdbDataRequest::set_allocated_application(::std::string* application) {
+  if (application_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete application_;
+  }
+  if (application) {
+    set_has_application();
+    application_ = application;
+  } else {
+    clear_has_application();
+    application_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:process.ClearRocksdbDataRequest.Application)
+}
+
+// required uint64 Startime = 2;
+inline bool ClearRocksdbDataRequest::has_startime() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ClearRocksdbDataRequest::set_has_startime() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ClearRocksdbDataRequest::clear_has_startime() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ClearRocksdbDataRequest::clear_startime() {
+  startime_ = GOOGLE_ULONGLONG(0);
+  clear_has_startime();
+}
+inline ::google::protobuf::uint64 ClearRocksdbDataRequest::startime() const {
+  // @@protoc_insertion_point(field_get:process.ClearRocksdbDataRequest.Startime)
+  return startime_;
+}
+inline void ClearRocksdbDataRequest::set_startime(::google::protobuf::uint64 value) {
+  set_has_startime();
+  startime_ = value;
+  // @@protoc_insertion_point(field_set:process.ClearRocksdbDataRequest.Startime)
+}
+
+// required uint64 Endtime = 3;
+inline bool ClearRocksdbDataRequest::has_endtime() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void ClearRocksdbDataRequest::set_has_endtime() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void ClearRocksdbDataRequest::clear_has_endtime() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void ClearRocksdbDataRequest::clear_endtime() {
+  endtime_ = GOOGLE_ULONGLONG(0);
+  clear_has_endtime();
+}
+inline ::google::protobuf::uint64 ClearRocksdbDataRequest::endtime() const {
+  // @@protoc_insertion_point(field_get:process.ClearRocksdbDataRequest.Endtime)
+  return endtime_;
+}
+inline void ClearRocksdbDataRequest::set_endtime(::google::protobuf::uint64 value) {
+  set_has_endtime();
+  endtime_ = value;
+  // @@protoc_insertion_point(field_set:process.ClearRocksdbDataRequest.Endtime)
+}
+
+// -------------------------------------------------------------------
+
+// ClearRocksdbDataResponse
+
+// required .process.ClearRocksdbDataResponse.Res_Status Status = 1;
+inline bool ClearRocksdbDataResponse::has_status() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ClearRocksdbDataResponse::set_has_status() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ClearRocksdbDataResponse::clear_has_status() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ClearRocksdbDataResponse::clear_status() {
+  status_ = 0;
+  clear_has_status();
+}
+inline ::process::ClearRocksdbDataResponse_Res_Status ClearRocksdbDataResponse::status() const {
+  // @@protoc_insertion_point(field_get:process.ClearRocksdbDataResponse.Status)
+  return static_cast< ::process::ClearRocksdbDataResponse_Res_Status >(status_);
+}
+inline void ClearRocksdbDataResponse::set_status(::process::ClearRocksdbDataResponse_Res_Status value) {
+  assert(::process::ClearRocksdbDataResponse_Res_Status_IsValid(value));
+  set_has_status();
+  status_ = value;
+  // @@protoc_insertion_point(field_set:process.ClearRocksdbDataResponse.Status)
+}
+
+// optional string Error = 2;
+inline bool ClearRocksdbDataResponse::has_error() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ClearRocksdbDataResponse::set_has_error() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ClearRocksdbDataResponse::clear_has_error() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ClearRocksdbDataResponse::clear_error() {
+  if (error_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    error_->clear();
+  }
+  clear_has_error();
+}
+inline const ::std::string& ClearRocksdbDataResponse::error() const {
+  // @@protoc_insertion_point(field_get:process.ClearRocksdbDataResponse.Error)
+  return *error_;
+}
+inline void ClearRocksdbDataResponse::set_error(const ::std::string& value) {
+  set_has_error();
+  if (error_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    error_ = new ::std::string;
+  }
+  error_->assign(value);
+  // @@protoc_insertion_point(field_set:process.ClearRocksdbDataResponse.Error)
+}
+inline void ClearRocksdbDataResponse::set_error(const char* value) {
+  set_has_error();
+  if (error_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    error_ = new ::std::string;
+  }
+  error_->assign(value);
+  // @@protoc_insertion_point(field_set_char:process.ClearRocksdbDataResponse.Error)
+}
+inline void ClearRocksdbDataResponse::set_error(const char* value, size_t size) {
+  set_has_error();
+  if (error_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    error_ = new ::std::string;
+  }
+  error_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:process.ClearRocksdbDataResponse.Error)
+}
+inline ::std::string* ClearRocksdbDataResponse::mutable_error() {
+  set_has_error();
+  if (error_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    error_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:process.ClearRocksdbDataResponse.Error)
+  return error_;
+}
+inline ::std::string* ClearRocksdbDataResponse::release_error() {
+  clear_has_error();
+  if (error_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = error_;
+    error_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void ClearRocksdbDataResponse::set_allocated_error(::std::string* error) {
+  if (error_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete error_;
+  }
+  if (error) {
+    set_has_error();
+    error_ = error;
+  } else {
+    clear_has_error();
+    error_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:process.ClearRocksdbDataResponse.Error)
 }
 
 
@@ -3828,10 +7233,25 @@ template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::process::GetCheckListConfigResponse_Res_Status>() {
   return ::process::GetCheckListConfigResponse_Res_Status_descriptor();
 }
+template <> struct is_proto_enum< ::process::GetLogProcessStatRequest_SourceFrom> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::process::GetLogProcessStatRequest_SourceFrom>() {
+  return ::process::GetLogProcessStatRequest_SourceFrom_descriptor();
+}
 template <> struct is_proto_enum< ::process::GetLogProcessStatResponse_Res_Status> : ::google::protobuf::internal::true_type {};
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::process::GetLogProcessStatResponse_Res_Status>() {
   return ::process::GetLogProcessStatResponse_Res_Status_descriptor();
+}
+template <> struct is_proto_enum< ::process::SetStorageFieldConfigResponse_Res_Status> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::process::SetStorageFieldConfigResponse_Res_Status>() {
+  return ::process::SetStorageFieldConfigResponse_Res_Status_descriptor();
+}
+template <> struct is_proto_enum< ::process::ClearRocksdbDataResponse_Res_Status> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::process::ClearRocksdbDataResponse_Res_Status>() {
+  return ::process::ClearRocksdbDataResponse_Res_Status_descriptor();
 }
 template <> struct is_proto_enum< ::process::CondType> : ::google::protobuf::internal::true_type {};
 template <>

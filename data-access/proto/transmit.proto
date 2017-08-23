@@ -4,12 +4,16 @@ package process;
 option cc_generic_services = true;
 
 message MapEntry {
-    required string key = 1;
-    required string value = 2;
+    required string Key = 1;
+    required string Value = 2;
+}
+
+message MapEntries {
+    repeated MapEntry Item = 1;
 }
 
 message TransmitRequest {
-    repeated MapEntry values = 1;
+    repeated MapEntry Values = 1;
 }
 
 message TransmitResponse {
@@ -18,8 +22,8 @@ message TransmitResponse {
         FAILED = 1;
     }
 
-    required Res_Status status = 1;
-    optional string error = 2;
+    required Res_Status Status = 1;
+    optional string Error = 2;
 }
 
 enum CondType {
@@ -41,44 +45,64 @@ enum CondType {
     condIsBehind = 12;
 }
 
+message TypeConfig {
+    required string Type = 1;
+    required CondType Cond = 2;
+}
+
 message SrcidConfig {
-    required string srcid = 1;
-    required CondType cond = 2;
+    required string Srcid = 1;
+    required CondType Cond = 2;
 }
 
 message ScanCondSeWord {
-    required string searchword = 1;
-    required CondType cond = 2;
+    required string Searchword = 1;
+    required CondType Cond = 2;
 }
 
 message LocationInfo {
-    optional string province = 1;
-    optional string city = 2;
-    required CondType cond = 3;
+    optional string Province = 1;
+    optional string City = 2;
+    required CondType Cond = 3;
 }
 
 message CookieConfig {
-    required string cookie = 1;
-    required CondType cond = 2;
+    required string Cookie = 1;
+    required CondType Cond = 2;
 }
 
 message ClusterConfig {
-    required string cluster = 1;
-    required CondType cond = 2;
+    required string Cluster = 1;
+    required CondType Cond = 2;
+}
+
+message SidConfig {
+    required string Sid = 1;
+    required CondType Cond = 2;
+}
+
+message ResnoConfig {
+    required string Resno = 1;
+    required CondType Cond = 2;
 }
 
 message CheckListCond {
-    repeated SrcidConfig srcids = 1;
-    repeated ScanCondSeWord sewords = 2;
-    repeated LocationInfo lbs = 3;
-    repeated CookieConfig cookie = 4;
-    repeated ClusterConfig cluster = 5;
-    repeated SrcidConfig res_srcid = 6;
+    repeated SrcidConfig Srcids = 1;
+    repeated ScanCondSeWord Sewords = 2;
+    repeated LocationInfo Lbs = 3;
+    repeated CookieConfig Cookie = 4;
+    repeated ClusterConfig Cluster = 5;
+    repeated SidConfig Sid = 6;
+    repeated ResnoConfig Resno = 7;
+    repeated TypeConfig Type = 8;
+    optional string Description = 9;
 }
 
 message SetCheckListConfigRequest {
-    required string application = 1;
-    required CheckListCond cond = 2;
+    required bool Op = 1;           //true: add|false: del
+    optional uint32 Index = 2;
+    required string Application = 3;
+    optional CheckListCond Cond = 4;
 }
 
 message SetCheckListConfigResponse {
@@ -87,12 +111,21 @@ message SetCheckListConfigResponse {
         FAILED = 1;
     }
 
-    required Res_Status status = 1;
-    optional string error = 2;
+    required Res_Status Status = 1;
+    optional string Error = 2;
 }
 
 message GetCheckListConfigRequest {
-    required string application = 1;
+    required string Application = 1;
+    optional uint32 Index = 2;
+    optional uint64 Startime = 3;
+    optional uint64 Endime = 4;
+}
+
+message CheckListConfigResponseInfo {
+    required CheckListCond Cond = 1;
+    required uint32 Hit_count = 2;
+    repeated string Hit_info = 3;
 }
 
 message GetCheckListConfigResponse {
@@ -101,18 +134,32 @@ message GetCheckListConfigResponse {
         FAILED = 1;
     }
 
-    required Res_Status status = 1;
-    optional string error = 2;
-    repeated CheckListCond cond = 3;
+    required Res_Status Status = 1;
+    optional string Error = 2;
+    repeated CheckListCond Cond = 3;
+    
 }
 
 message GetLogProcessStatRequest {
-    required string application = 1;
-    required int64 startime = 2;
-    required int64 endtime = 3;
-    optional int32 startindex = 4;
-    optional int32 endindex = 5;
-    optional CheckListCond cond = 6;
+    enum SourceFrom {
+        Rocksdb = 0;
+        QueryTrie = 1;
+        Redis = 2;
+    }
+
+    optional string Application = 1;
+    optional string Querystr = 2;
+    optional string Cookieid = 3;
+    optional string Srcid = 4;
+    optional uint64 Startime = 5;
+    optional uint64 Endtime = 6;
+    optional CheckListCond Cond = 7;
+    repeated string Selectfields = 8;
+    optional string Sortfield = 9;
+    required SourceFrom Getfrom = 10;
+
+    optional uint32 Start = 11;
+    optional uint32 End = 12;
 }
 
 message GetLogProcessStatResponse {
@@ -121,10 +168,56 @@ message GetLogProcessStatResponse {
         FAILED = 1;
     }
 
-    required Res_Status status = 1;
-    optional string error = 2;
-    required int64 count = 3;
-    repeated string iteminfos = 4;
+    required Res_Status Status = 1;
+    optional string Error = 2;
+    required uint64 Count = 3;
+    repeated MapEntries Iteminfos = 4;
+    optional string Result = 5;
+}
+
+message SetStorageFieldConfigRequest {
+    required string Application = 1;
+    required bool Op = 2;           //false:del true:add
+    repeated string Fields = 3;
+}
+
+message SetStorageFieldConfigResponse {
+    enum Res_Status {
+        SUCCEED = 0;
+        FAILED = 1;
+    }
+
+    required Res_Status Status = 1;
+    optional string Error = 2;
+}
+
+message GetStorageFieldConfigRequest {
+    optional string Application = 1;
+}
+
+message StorageFieldConfigResponseInfo {
+    required string Application = 1;
+    repeated string Fields = 2;
+}
+
+message GetStorageFieldConfigResponse {
+    repeated StorageFieldConfigResponseInfo Checklists = 1;
+}
+
+message ClearRocksdbDataRequest {
+    required string Application = 1;
+    required uint64 Startime = 2;
+    required uint64 Endtime = 3;
+}
+
+message ClearRocksdbDataResponse {
+    enum Res_Status {
+        SUCCEED = 0;
+        FAILED = 1;
+    }
+
+    required Res_Status Status = 1;
+    optional string Error = 2;
 }
 
 service ProcessService {
@@ -132,5 +225,10 @@ service ProcessService {
 
     rpc SetCheckListConfig(SetCheckListConfigRequest) returns(SetCheckListConfigResponse);
     rpc GetCheckListConfig(GetCheckListConfigRequest) returns(GetCheckListConfigResponse);
+
+    rpc SetStorageFieldConfig(SetStorageFieldConfigRequest) returns(SetStorageFieldConfigResponse);
+    rpc GetStorageFieldConfig(GetStorageFieldConfigRequest) returns(GetStorageFieldConfigResponse);
+
     rpc GetLogProcessStat(GetLogProcessStatRequest) returns(GetLogProcessStatResponse);
+    rpc ClearRocksdbData(ClearRocksdbDataRequest) returns(ClearRocksdbDataResponse);
 }

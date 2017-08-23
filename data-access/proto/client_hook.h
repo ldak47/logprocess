@@ -2,8 +2,10 @@
 #define DATA_ACCESS_MINOS_CLIENT_HOOK_H
 #include "minos.pb.h"
 #include "transmit.pb.h"
+#include "manage.pb.h"
 #include "pull_rpc_client.h"
 #include "push_rpc_client.h"
+#include "manage_rpc_client.h"
 
 namespace RpcAdaptClient {
     namespace PushDataRpcClient {
@@ -96,6 +98,95 @@ namespace RpcAdaptClient {
                            rpc_timeout_);
             }
 
+        private:
+            int rpc_timeout_;
+        };
+    };
+
+    namespace ManageRpcClient {
+        class ManageClientHook : public RpcClient<manage::ManageService::Stub> {
+        public:
+            ManageClientHook(const std::string &server_addr, int rpc_timeout): RpcClient<manage::ManageService::Stub>(server_addr), rpc_timeout_(rpc_timeout) {}
+            virtual ~ManageClientHook(){}
+
+            bool SetLogFilterConfig(const manage::SetLogFilterConfigRequest *request,
+                                    manage::SetLogFilterConfigResponse *response,
+                                    std::function<void (sofa::pbrpc::RpcController *cntl, const manage::SetLogFilterConfigRequest *, manage::SetLogFilterConfigResponse *)> cb = NULL) {
+                return SendRequest(&manage::ManageService::Stub::SetLogFilterConfig,
+                                   request,
+                                   response,
+                                   cb,
+                                   "SetLogFilterConfig",
+                                   rpc_timeout_);
+            }
+
+            bool GetLogFilterConfig (const manage::GetLogFilterConfigRequest *request,
+                                     manage::GetLogFilterConfigResponse *response,
+                                     std::function<void (sofa::pbrpc::RpcController *cntl, const manage::GetLogFilterConfigRequest *, manage::GetLogFilterConfigResponse *)> cb = NULL) {
+                return SendRequest(&manage::ManageService::Stub::GetLogFilterConfig,
+                                   request,
+                                   response,
+                                   cb,
+                                   "GetLogFilterConfig",
+                                   rpc_timeout_);
+            }
+
+            bool SetLogFieldConfig (const manage::SetLogFieldConfigRequest *request,
+                                    manage::SetLogFieldConfigResponse *response,
+                                    std::function<void (sofa::pbrpc::RpcController *cntl, const manage::SetLogFieldConfigRequest *, manage::SetLogFieldConfigResponse *)> cb = NULL) {
+                return SendRequest(&manage::ManageService::Stub::SetLogFieldConfig, 
+                                   request,
+                                   response,
+                                   cb,
+                                   "SetLogFieldConfig",
+                                   rpc_timeout_);
+            }
+
+            bool GetLogFieldConfig (const manage::GetLogFieldConfigRequest *request,
+                                    manage::GetLogFieldConfigResponse *response,
+                                    std::function<void (sofa::pbrpc::RpcController *cntl, const manage::GetLogFieldConfigRequest *, manage::GetLogFieldConfigResponse *)> cb = NULL) {
+                return SendRequest(&manage::ManageService::Stub::GetLogFieldConfig,
+                                   request,
+                                   response,
+                                   cb,
+                                   "GetLogFieldConfig",
+                                   rpc_timeout_);
+            }
+
+            bool GetLogTransmitStat (const manage::GetLogTransmitStatRequest *request,
+                                     manage::GetLogTransmitStatResponse *response,
+                                     std::function<void (sofa::pbrpc::RpcController *cntl, const manage::GetLogTransmitStatRequest *, manage::GetLogTransmitStatResponse *)> cb = NULL) {
+                return SendRequest(&manage::ManageService::Stub::GetLogTransmitStat,
+                                   request,
+                                   response,
+                                   cb,
+                                   "GetLogTransmitStat",
+                                   rpc_timeout_);
+            }
+            
+            bool PullSwitchConfig (const manage::PullSwitchConfigRequest *request,
+                                   manage::PullSwitchConfigResponse *response,
+                                   std::function<void (sofa::pbrpc::RpcController *cntl, const manage::PullSwitchConfigRequest *, manage::PullSwitchConfigResponse *)> cb = NULL) {
+
+                return SendRequest(&manage::ManageService::Stub::PullSwitchConfig,
+                                   request,
+                                   response,
+                                   cb,
+                                   "PullSwitchConfig",
+                                   rpc_timeout_);
+            }
+
+            bool Retransmit (const manage::RetransmitRequest *request,
+                             manage::RetransmitResponse *response,
+                             std::function<void (sofa::pbrpc::RpcController *cntl, const manage::RetransmitRequest *, manage::RetransmitResponse *)> cb = NULL) {
+                
+                return SendRequest(&manage::ManageService::Stub::Retransmit,
+                                   request,
+                                   response,
+                                   cb,
+                                   "Retransmit",
+                                   rpc_timeout_);
+            }
         private:
             int rpc_timeout_;
         };

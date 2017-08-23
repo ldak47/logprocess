@@ -3,14 +3,21 @@ syntax = "proto2";
 package manage;
 option cc_generic_services = true;
 
+message MapEntry {
+    required string Key = 1;
+    required string Value = 2;
+}
+
 message FiledConfig {
-    required string field = 1;
-    required string regex = 2;
+    required string Field = 1;
+    required string Regex = 2;
+    required bool Istrans = 3;
 }
 
 message SetLogFieldConfigRequest {
-    required string application = 1;
-    repeated FiledConfig fieldconfigs = 2;
+    required string Application = 1;
+    required bool Op = 2;
+    optional FiledConfig Fieldconfigs = 3;
 }
 
 message SetLogFieldConfigResponse {
@@ -19,13 +26,13 @@ message SetLogFieldConfigResponse {
         FAILED = 1;
     }
 
-    required Res_Status status = 1;
-    optional string error = 2;
+    required Res_Status Status = 1;
+    optional string Error = 2;
 }
 
 message GetLogFieldConfigRequest {
-    optional string application = 1;
-    optional string field = 2;
+    required string Application = 1;
+    optional string Field = 2;
 }
 
 message GetLogFieldConfigResponse {
@@ -34,16 +41,16 @@ message GetLogFieldConfigResponse {
         FAILED = 1;
     }
 
-    required Res_Status status = 1;
-    optional string error = 2;
-    repeated FiledConfig fieldconfigs = 3;
+    required Res_Status Status = 1;
+    optional string Error = 2;
+    repeated FiledConfig Fieldconfigs = 3;
 }
 
 message GetLogTransmitStatRequest {
-    optional string application = 1;
-    optional bool logtype = 2; //0:notice 1:warning
-    required int64 startime = 3;
-    required int64 endtime = 4;
+    optional string Application = 1;
+    optional bool Logtype = 2; //0:notice 1:warning
+    required int64 Startime = 3;
+    required int64 Endtime = 4;
 }
 
 message GetLogTransmitStatResponse {
@@ -52,13 +59,95 @@ message GetLogTransmitStatResponse {
         FAILED = 1;
     }
 
-    required Res_Status status = 1;
-    optional string error = 2;
-    required int64 num = 3; 
+    required Res_Status Status = 1;
+    optional string Error = 2;
+    repeated MapEntry cnt = 3; 
+}
+
+message AddLogTransmitStatRequest {
+    required string Application = 1;
+    required string Srcid = 2;
+}
+
+message AddLogTransmitStatResponse {
+    enum Res_Status {
+        SUCCEED = 0;
+        FAILED = 1;
+    }
+
+    required Res_Status Status = 1;
+    optional string Error = 2;
+}
+
+message SetLogFilterConfigRequest {
+    required bool Op = 1;   //0:del 1:add or update
+    required string Srcid = 2;
+}
+
+message SetLogFilterConfigResponse {
+    enum Res_Status {
+        SUCCEED = 0;
+        FAILED = 1;
+    }
+
+    required Res_Status Status = 1;
+    optional string Error = 2;
+}
+
+message GetLogFilterConfigRequest {
+    optional bool Application = 1;
+}
+
+message GetLogFilterConfigResponse {
+    enum Res_Status {
+        SUCCEED = 0;
+        FAILED = 1;
+    }
+
+    required Res_Status Status = 1;
+    optional string Error = 2;
+    repeated string Srcids = 3;
+}
+
+message PullSwitchConfigRequest {
+    required bool op = 1;       //true:enable false disable
+    required uint32 idx = 2;    //0:old 1:new
+}
+
+message PullSwitchConfigResponse {
+    enum Res_Status {
+        SUCCEED = 0;
+        FAILED = 1;
+    }
+
+    required Res_Status Status = 1;
+    optional string Error = 2;
+}
+
+message RetransmitRequest {
+    required bool type = 1;
+    required string package = 2;
+}
+
+message RetransmitResponse {
+    enum Res_Status {
+        SUCCEED = 0;
+        FAILED = 1;
+    }
+
+    required Res_Status Status = 1;
+    optional string Error = 2;
 }
 
 service ManageService {
+    rpc SetLogFilterConfig(SetLogFilterConfigRequest) returns(SetLogFilterConfigResponse);
+    rpc GetLogFilterConfig(GetLogFilterConfigRequest) returns(GetLogFilterConfigResponse);
+
     rpc SetLogFieldConfig(SetLogFieldConfigRequest) returns(SetLogFieldConfigResponse);
     rpc GetLogFieldConfig(GetLogFieldConfigRequest) returns(GetLogFieldConfigResponse);
+
     rpc GetLogTransmitStat(GetLogTransmitStatRequest) returns(GetLogTransmitStatResponse);
+    rpc AddLogTransmitStat(AddLogTransmitStatRequest) returns(AddLogTransmitStatResponse);
+    rpc PullSwitchConfig(PullSwitchConfigRequest) returns(PullSwitchConfigResponse);
+    rpc Retransmit(RetransmitRequest) returns(RetransmitResponse);
 }

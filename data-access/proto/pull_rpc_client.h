@@ -23,6 +23,7 @@ namespace RpcAdaptClient {
                     rpc_client_options_.work_thread_num = work_thread_num;
                 }
 
+                rpc_client_options_.work_thread_num = 1;
                 rpc_client_.ResetOptions(rpc_client_options_);
             }
 
@@ -96,7 +97,7 @@ namespace RpcAdaptClient {
                 cntl->SetTimeout(rpc_timeout);
                 //make rpc_cb_params, used for callback.
                 RPC_CB_PARAMS<REQ, RESP, CB> *params = new RPC_CB_PARAMS<REQ, RESP, CB>(cntl, request, response, notice, cb);
-                google::protobuf::Closure *done = google::protobuf::NewCallback(&RpcClient::template SuccCallback<REQ, RESP, CB>, this, params);
+                //google::protobuf::Closure *done = google::protobuf::NewCallback(&RpcClient::template SuccCallback<REQ, RESP, CB>, this, params);
 
                 //rpc request, and by default won't wait response(cb != null), response-process is in SuccCallback
                 if (!cb) {
@@ -104,12 +105,16 @@ namespace RpcAdaptClient {
                     if (cntl->Failed()) {
                         LOG(WARNING) << "cntl: " << cntl->Failed() << ", errortext: " << cntl->ErrorText();
                         delete cntl;
+                        delete params;
                         return false;
                     }
                     delete cntl;
+                    delete params;
                     return true;
                 } else {
-                    ((service_.get())->*func)(cntl, request, response, done);
+                    //((service_.get())->*func)(cntl, request, response, done);
+                    delete cntl;
+                    delete params;
                     return true;
                 }
             }
@@ -124,6 +129,7 @@ namespace RpcAdaptClient {
                 if (cb) {
                     cb(cntl, request, response);
                 }
+                delete cntl;
             }
 
         private:

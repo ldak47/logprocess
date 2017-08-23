@@ -96,7 +96,7 @@ namespace RpcAdaptClient {
                 cntl->SetTimeout(rpc_timeout);
                 //make rpc_cb_params, used for callback.
                 RPC_CB_PARAMS<REQ, RESP, CB> *params = new RPC_CB_PARAMS<REQ, RESP, CB>(cntl, request, response, notice, cb);
-                google::protobuf::Closure *done = google::protobuf::NewCallback(&RpcClient::template SuccCallback<REQ, RESP, CB>, this, params);
+                //google::protobuf::Closure *done = google::protobuf::NewCallback(&RpcClient::template SuccCallback<REQ, RESP, CB>, this, params);
 
                 //rpc request, and by default won't wait response(cb != null), response-process is in SuccCallback
                 if (!cb) {
@@ -104,12 +104,16 @@ namespace RpcAdaptClient {
                     if (cntl->Failed()) {
                         LOG(WARNING) << "cntl: " << cntl->Failed() << ", errortext: " << cntl->ErrorText();
                         delete cntl;
+                        delete params;
                         return false;
                     }
                     delete cntl;
+                    delete params;
                     return true;
                 } else {
-                    ((service_.get())->*func)(cntl, request, response, done);
+                    //((service_.get())->*func)(cntl, request, response, done);
+                    delete cntl;
+                    delete params;
                     return true;
                 }
             }
@@ -131,4 +135,4 @@ namespace RpcAdaptClient {
             std::string server_addr_;
         };//class RpcClient
     };//namespace PullDataRpcClient
-};
+};//RpcAdaptClient

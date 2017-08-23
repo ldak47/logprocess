@@ -35,6 +35,7 @@ void  protobuf_AddDesc_manage_2eproto();
 void protobuf_AssignDesc_manage_2eproto();
 void protobuf_ShutdownFile_manage_2eproto();
 
+class MapEntry;
 class FiledConfig;
 class SetLogFieldConfigRequest;
 class SetLogFieldConfigResponse;
@@ -42,6 +43,16 @@ class GetLogFieldConfigRequest;
 class GetLogFieldConfigResponse;
 class GetLogTransmitStatRequest;
 class GetLogTransmitStatResponse;
+class AddLogTransmitStatRequest;
+class AddLogTransmitStatResponse;
+class SetLogFilterConfigRequest;
+class SetLogFilterConfigResponse;
+class GetLogFilterConfigRequest;
+class GetLogFilterConfigResponse;
+class PullSwitchConfigRequest;
+class PullSwitchConfigResponse;
+class RetransmitRequest;
+class RetransmitResponse;
 
 enum SetLogFieldConfigResponse_Res_Status {
   SetLogFieldConfigResponse_Res_Status_SUCCEED = 0,
@@ -100,7 +111,201 @@ inline bool GetLogTransmitStatResponse_Res_Status_Parse(
   return ::google::protobuf::internal::ParseNamedEnum<GetLogTransmitStatResponse_Res_Status>(
     GetLogTransmitStatResponse_Res_Status_descriptor(), name, value);
 }
+enum AddLogTransmitStatResponse_Res_Status {
+  AddLogTransmitStatResponse_Res_Status_SUCCEED = 0,
+  AddLogTransmitStatResponse_Res_Status_FAILED = 1
+};
+bool AddLogTransmitStatResponse_Res_Status_IsValid(int value);
+const AddLogTransmitStatResponse_Res_Status AddLogTransmitStatResponse_Res_Status_Res_Status_MIN = AddLogTransmitStatResponse_Res_Status_SUCCEED;
+const AddLogTransmitStatResponse_Res_Status AddLogTransmitStatResponse_Res_Status_Res_Status_MAX = AddLogTransmitStatResponse_Res_Status_FAILED;
+const int AddLogTransmitStatResponse_Res_Status_Res_Status_ARRAYSIZE = AddLogTransmitStatResponse_Res_Status_Res_Status_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* AddLogTransmitStatResponse_Res_Status_descriptor();
+inline const ::std::string& AddLogTransmitStatResponse_Res_Status_Name(AddLogTransmitStatResponse_Res_Status value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    AddLogTransmitStatResponse_Res_Status_descriptor(), value);
+}
+inline bool AddLogTransmitStatResponse_Res_Status_Parse(
+    const ::std::string& name, AddLogTransmitStatResponse_Res_Status* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<AddLogTransmitStatResponse_Res_Status>(
+    AddLogTransmitStatResponse_Res_Status_descriptor(), name, value);
+}
+enum SetLogFilterConfigResponse_Res_Status {
+  SetLogFilterConfigResponse_Res_Status_SUCCEED = 0,
+  SetLogFilterConfigResponse_Res_Status_FAILED = 1
+};
+bool SetLogFilterConfigResponse_Res_Status_IsValid(int value);
+const SetLogFilterConfigResponse_Res_Status SetLogFilterConfigResponse_Res_Status_Res_Status_MIN = SetLogFilterConfigResponse_Res_Status_SUCCEED;
+const SetLogFilterConfigResponse_Res_Status SetLogFilterConfigResponse_Res_Status_Res_Status_MAX = SetLogFilterConfigResponse_Res_Status_FAILED;
+const int SetLogFilterConfigResponse_Res_Status_Res_Status_ARRAYSIZE = SetLogFilterConfigResponse_Res_Status_Res_Status_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* SetLogFilterConfigResponse_Res_Status_descriptor();
+inline const ::std::string& SetLogFilterConfigResponse_Res_Status_Name(SetLogFilterConfigResponse_Res_Status value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    SetLogFilterConfigResponse_Res_Status_descriptor(), value);
+}
+inline bool SetLogFilterConfigResponse_Res_Status_Parse(
+    const ::std::string& name, SetLogFilterConfigResponse_Res_Status* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<SetLogFilterConfigResponse_Res_Status>(
+    SetLogFilterConfigResponse_Res_Status_descriptor(), name, value);
+}
+enum GetLogFilterConfigResponse_Res_Status {
+  GetLogFilterConfigResponse_Res_Status_SUCCEED = 0,
+  GetLogFilterConfigResponse_Res_Status_FAILED = 1
+};
+bool GetLogFilterConfigResponse_Res_Status_IsValid(int value);
+const GetLogFilterConfigResponse_Res_Status GetLogFilterConfigResponse_Res_Status_Res_Status_MIN = GetLogFilterConfigResponse_Res_Status_SUCCEED;
+const GetLogFilterConfigResponse_Res_Status GetLogFilterConfigResponse_Res_Status_Res_Status_MAX = GetLogFilterConfigResponse_Res_Status_FAILED;
+const int GetLogFilterConfigResponse_Res_Status_Res_Status_ARRAYSIZE = GetLogFilterConfigResponse_Res_Status_Res_Status_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* GetLogFilterConfigResponse_Res_Status_descriptor();
+inline const ::std::string& GetLogFilterConfigResponse_Res_Status_Name(GetLogFilterConfigResponse_Res_Status value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    GetLogFilterConfigResponse_Res_Status_descriptor(), value);
+}
+inline bool GetLogFilterConfigResponse_Res_Status_Parse(
+    const ::std::string& name, GetLogFilterConfigResponse_Res_Status* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<GetLogFilterConfigResponse_Res_Status>(
+    GetLogFilterConfigResponse_Res_Status_descriptor(), name, value);
+}
+enum PullSwitchConfigResponse_Res_Status {
+  PullSwitchConfigResponse_Res_Status_SUCCEED = 0,
+  PullSwitchConfigResponse_Res_Status_FAILED = 1
+};
+bool PullSwitchConfigResponse_Res_Status_IsValid(int value);
+const PullSwitchConfigResponse_Res_Status PullSwitchConfigResponse_Res_Status_Res_Status_MIN = PullSwitchConfigResponse_Res_Status_SUCCEED;
+const PullSwitchConfigResponse_Res_Status PullSwitchConfigResponse_Res_Status_Res_Status_MAX = PullSwitchConfigResponse_Res_Status_FAILED;
+const int PullSwitchConfigResponse_Res_Status_Res_Status_ARRAYSIZE = PullSwitchConfigResponse_Res_Status_Res_Status_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* PullSwitchConfigResponse_Res_Status_descriptor();
+inline const ::std::string& PullSwitchConfigResponse_Res_Status_Name(PullSwitchConfigResponse_Res_Status value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    PullSwitchConfigResponse_Res_Status_descriptor(), value);
+}
+inline bool PullSwitchConfigResponse_Res_Status_Parse(
+    const ::std::string& name, PullSwitchConfigResponse_Res_Status* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<PullSwitchConfigResponse_Res_Status>(
+    PullSwitchConfigResponse_Res_Status_descriptor(), name, value);
+}
+enum RetransmitResponse_Res_Status {
+  RetransmitResponse_Res_Status_SUCCEED = 0,
+  RetransmitResponse_Res_Status_FAILED = 1
+};
+bool RetransmitResponse_Res_Status_IsValid(int value);
+const RetransmitResponse_Res_Status RetransmitResponse_Res_Status_Res_Status_MIN = RetransmitResponse_Res_Status_SUCCEED;
+const RetransmitResponse_Res_Status RetransmitResponse_Res_Status_Res_Status_MAX = RetransmitResponse_Res_Status_FAILED;
+const int RetransmitResponse_Res_Status_Res_Status_ARRAYSIZE = RetransmitResponse_Res_Status_Res_Status_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* RetransmitResponse_Res_Status_descriptor();
+inline const ::std::string& RetransmitResponse_Res_Status_Name(RetransmitResponse_Res_Status value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    RetransmitResponse_Res_Status_descriptor(), value);
+}
+inline bool RetransmitResponse_Res_Status_Parse(
+    const ::std::string& name, RetransmitResponse_Res_Status* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<RetransmitResponse_Res_Status>(
+    RetransmitResponse_Res_Status_descriptor(), name, value);
+}
 // ===================================================================
+
+class MapEntry : public ::google::protobuf::Message {
+ public:
+  MapEntry();
+  virtual ~MapEntry();
+
+  MapEntry(const MapEntry& from);
+
+  inline MapEntry& operator=(const MapEntry& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const MapEntry& default_instance();
+
+  void Swap(MapEntry* other);
+
+  // implements Message ----------------------------------------------
+
+  MapEntry* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const MapEntry& from);
+  void MergeFrom(const MapEntry& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required string Key = 1;
+  inline bool has_key() const;
+  inline void clear_key();
+  static const int kKeyFieldNumber = 1;
+  inline const ::std::string& key() const;
+  inline void set_key(const ::std::string& value);
+  inline void set_key(const char* value);
+  inline void set_key(const char* value, size_t size);
+  inline ::std::string* mutable_key();
+  inline ::std::string* release_key();
+  inline void set_allocated_key(::std::string* key);
+
+  // required string Value = 2;
+  inline bool has_value() const;
+  inline void clear_value();
+  static const int kValueFieldNumber = 2;
+  inline const ::std::string& value() const;
+  inline void set_value(const ::std::string& value);
+  inline void set_value(const char* value);
+  inline void set_value(const char* value, size_t size);
+  inline ::std::string* mutable_value();
+  inline ::std::string* release_value();
+  inline void set_allocated_value(::std::string* value);
+
+  // @@protoc_insertion_point(class_scope:manage.MapEntry)
+ private:
+  inline void set_has_key();
+  inline void clear_has_key();
+  inline void set_has_value();
+  inline void clear_has_value();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::std::string* key_;
+  ::std::string* value_;
+  friend void  protobuf_AddDesc_manage_2eproto();
+  friend void protobuf_AssignDesc_manage_2eproto();
+  friend void protobuf_ShutdownFile_manage_2eproto();
+
+  void InitAsDefaultInstance();
+  static MapEntry* default_instance_;
+};
+// -------------------------------------------------------------------
 
 class FiledConfig : public ::google::protobuf::Message {
  public:
@@ -155,7 +360,7 @@ class FiledConfig : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required string field = 1;
+  // required string Field = 1;
   inline bool has_field() const;
   inline void clear_field();
   static const int kFieldFieldNumber = 1;
@@ -167,7 +372,7 @@ class FiledConfig : public ::google::protobuf::Message {
   inline ::std::string* release_field();
   inline void set_allocated_field(::std::string* field);
 
-  // required string regex = 2;
+  // required string Regex = 2;
   inline bool has_regex() const;
   inline void clear_regex();
   static const int kRegexFieldNumber = 2;
@@ -179,12 +384,21 @@ class FiledConfig : public ::google::protobuf::Message {
   inline ::std::string* release_regex();
   inline void set_allocated_regex(::std::string* regex);
 
+  // required bool Istrans = 3;
+  inline bool has_istrans() const;
+  inline void clear_istrans();
+  static const int kIstransFieldNumber = 3;
+  inline bool istrans() const;
+  inline void set_istrans(bool value);
+
   // @@protoc_insertion_point(class_scope:manage.FiledConfig)
  private:
   inline void set_has_field();
   inline void clear_has_field();
   inline void set_has_regex();
   inline void clear_has_regex();
+  inline void set_has_istrans();
+  inline void clear_has_istrans();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
@@ -192,6 +406,7 @@ class FiledConfig : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::std::string* field_;
   ::std::string* regex_;
+  bool istrans_;
   friend void  protobuf_AddDesc_manage_2eproto();
   friend void protobuf_AssignDesc_manage_2eproto();
   friend void protobuf_ShutdownFile_manage_2eproto();
@@ -254,7 +469,7 @@ class SetLogFieldConfigRequest : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required string application = 1;
+  // required string Application = 1;
   inline bool has_application() const;
   inline void clear_application();
   static const int kApplicationFieldNumber = 1;
@@ -266,29 +481,38 @@ class SetLogFieldConfigRequest : public ::google::protobuf::Message {
   inline ::std::string* release_application();
   inline void set_allocated_application(::std::string* application);
 
-  // repeated .manage.FiledConfig fieldconfigs = 2;
-  inline int fieldconfigs_size() const;
+  // required bool Op = 2;
+  inline bool has_op() const;
+  inline void clear_op();
+  static const int kOpFieldNumber = 2;
+  inline bool op() const;
+  inline void set_op(bool value);
+
+  // optional .manage.FiledConfig Fieldconfigs = 3;
+  inline bool has_fieldconfigs() const;
   inline void clear_fieldconfigs();
-  static const int kFieldconfigsFieldNumber = 2;
-  inline const ::manage::FiledConfig& fieldconfigs(int index) const;
-  inline ::manage::FiledConfig* mutable_fieldconfigs(int index);
-  inline ::manage::FiledConfig* add_fieldconfigs();
-  inline const ::google::protobuf::RepeatedPtrField< ::manage::FiledConfig >&
-      fieldconfigs() const;
-  inline ::google::protobuf::RepeatedPtrField< ::manage::FiledConfig >*
-      mutable_fieldconfigs();
+  static const int kFieldconfigsFieldNumber = 3;
+  inline const ::manage::FiledConfig& fieldconfigs() const;
+  inline ::manage::FiledConfig* mutable_fieldconfigs();
+  inline ::manage::FiledConfig* release_fieldconfigs();
+  inline void set_allocated_fieldconfigs(::manage::FiledConfig* fieldconfigs);
 
   // @@protoc_insertion_point(class_scope:manage.SetLogFieldConfigRequest)
  private:
   inline void set_has_application();
   inline void clear_has_application();
+  inline void set_has_op();
+  inline void clear_has_op();
+  inline void set_has_fieldconfigs();
+  inline void clear_has_fieldconfigs();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
   ::std::string* application_;
-  ::google::protobuf::RepeatedPtrField< ::manage::FiledConfig > fieldconfigs_;
+  ::manage::FiledConfig* fieldconfigs_;
+  bool op_;
   friend void  protobuf_AddDesc_manage_2eproto();
   friend void protobuf_AssignDesc_manage_2eproto();
   friend void protobuf_ShutdownFile_manage_2eproto();
@@ -375,14 +599,14 @@ class SetLogFieldConfigResponse : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required .manage.SetLogFieldConfigResponse.Res_Status status = 1;
+  // required .manage.SetLogFieldConfigResponse.Res_Status Status = 1;
   inline bool has_status() const;
   inline void clear_status();
   static const int kStatusFieldNumber = 1;
   inline ::manage::SetLogFieldConfigResponse_Res_Status status() const;
   inline void set_status(::manage::SetLogFieldConfigResponse_Res_Status value);
 
-  // optional string error = 2;
+  // optional string Error = 2;
   inline bool has_error() const;
   inline void clear_error();
   static const int kErrorFieldNumber = 2;
@@ -469,7 +693,7 @@ class GetLogFieldConfigRequest : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // optional string application = 1;
+  // required string Application = 1;
   inline bool has_application() const;
   inline void clear_application();
   static const int kApplicationFieldNumber = 1;
@@ -481,7 +705,7 @@ class GetLogFieldConfigRequest : public ::google::protobuf::Message {
   inline ::std::string* release_application();
   inline void set_allocated_application(::std::string* application);
 
-  // optional string field = 2;
+  // optional string Field = 2;
   inline bool has_field() const;
   inline void clear_field();
   static const int kFieldFieldNumber = 2;
@@ -592,14 +816,14 @@ class GetLogFieldConfigResponse : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required .manage.GetLogFieldConfigResponse.Res_Status status = 1;
+  // required .manage.GetLogFieldConfigResponse.Res_Status Status = 1;
   inline bool has_status() const;
   inline void clear_status();
   static const int kStatusFieldNumber = 1;
   inline ::manage::GetLogFieldConfigResponse_Res_Status status() const;
   inline void set_status(::manage::GetLogFieldConfigResponse_Res_Status value);
 
-  // optional string error = 2;
+  // optional string Error = 2;
   inline bool has_error() const;
   inline void clear_error();
   static const int kErrorFieldNumber = 2;
@@ -611,7 +835,7 @@ class GetLogFieldConfigResponse : public ::google::protobuf::Message {
   inline ::std::string* release_error();
   inline void set_allocated_error(::std::string* error);
 
-  // repeated .manage.FiledConfig fieldconfigs = 3;
+  // repeated .manage.FiledConfig Fieldconfigs = 3;
   inline int fieldconfigs_size() const;
   inline void clear_fieldconfigs();
   static const int kFieldconfigsFieldNumber = 3;
@@ -699,7 +923,7 @@ class GetLogTransmitStatRequest : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // optional string application = 1;
+  // optional string Application = 1;
   inline bool has_application() const;
   inline void clear_application();
   static const int kApplicationFieldNumber = 1;
@@ -711,21 +935,21 @@ class GetLogTransmitStatRequest : public ::google::protobuf::Message {
   inline ::std::string* release_application();
   inline void set_allocated_application(::std::string* application);
 
-  // optional bool logtype = 2;
+  // optional bool Logtype = 2;
   inline bool has_logtype() const;
   inline void clear_logtype();
   static const int kLogtypeFieldNumber = 2;
   inline bool logtype() const;
   inline void set_logtype(bool value);
 
-  // required int64 startime = 3;
+  // required int64 Startime = 3;
   inline bool has_startime() const;
   inline void clear_startime();
   static const int kStartimeFieldNumber = 3;
   inline ::google::protobuf::int64 startime() const;
   inline void set_startime(::google::protobuf::int64 value);
 
-  // required int64 endtime = 4;
+  // required int64 Endtime = 4;
   inline bool has_endtime() const;
   inline void clear_endtime();
   static const int kEndtimeFieldNumber = 4;
@@ -837,14 +1061,14 @@ class GetLogTransmitStatResponse : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required .manage.GetLogTransmitStatResponse.Res_Status status = 1;
+  // required .manage.GetLogTransmitStatResponse.Res_Status Status = 1;
   inline bool has_status() const;
   inline void clear_status();
   static const int kStatusFieldNumber = 1;
   inline ::manage::GetLogTransmitStatResponse_Res_Status status() const;
   inline void set_status(::manage::GetLogTransmitStatResponse_Res_Status value);
 
-  // optional string error = 2;
+  // optional string Error = 2;
   inline bool has_error() const;
   inline void clear_error();
   static const int kErrorFieldNumber = 2;
@@ -856,12 +1080,17 @@ class GetLogTransmitStatResponse : public ::google::protobuf::Message {
   inline ::std::string* release_error();
   inline void set_allocated_error(::std::string* error);
 
-  // required int64 num = 3;
-  inline bool has_num() const;
-  inline void clear_num();
-  static const int kNumFieldNumber = 3;
-  inline ::google::protobuf::int64 num() const;
-  inline void set_num(::google::protobuf::int64 value);
+  // repeated .manage.MapEntry cnt = 3;
+  inline int cnt_size() const;
+  inline void clear_cnt();
+  static const int kCntFieldNumber = 3;
+  inline const ::manage::MapEntry& cnt(int index) const;
+  inline ::manage::MapEntry* mutable_cnt(int index);
+  inline ::manage::MapEntry* add_cnt();
+  inline const ::google::protobuf::RepeatedPtrField< ::manage::MapEntry >&
+      cnt() const;
+  inline ::google::protobuf::RepeatedPtrField< ::manage::MapEntry >*
+      mutable_cnt();
 
   // @@protoc_insertion_point(class_scope:manage.GetLogTransmitStatResponse)
  private:
@@ -869,15 +1098,13 @@ class GetLogTransmitStatResponse : public ::google::protobuf::Message {
   inline void clear_has_status();
   inline void set_has_error();
   inline void clear_has_error();
-  inline void set_has_num();
-  inline void clear_has_num();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
   ::std::string* error_;
-  ::google::protobuf::int64 num_;
+  ::google::protobuf::RepeatedPtrField< ::manage::MapEntry > cnt_;
   int status_;
   friend void  protobuf_AddDesc_manage_2eproto();
   friend void protobuf_AssignDesc_manage_2eproto();
@@ -885,6 +1112,1068 @@ class GetLogTransmitStatResponse : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static GetLogTransmitStatResponse* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class AddLogTransmitStatRequest : public ::google::protobuf::Message {
+ public:
+  AddLogTransmitStatRequest();
+  virtual ~AddLogTransmitStatRequest();
+
+  AddLogTransmitStatRequest(const AddLogTransmitStatRequest& from);
+
+  inline AddLogTransmitStatRequest& operator=(const AddLogTransmitStatRequest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const AddLogTransmitStatRequest& default_instance();
+
+  void Swap(AddLogTransmitStatRequest* other);
+
+  // implements Message ----------------------------------------------
+
+  AddLogTransmitStatRequest* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const AddLogTransmitStatRequest& from);
+  void MergeFrom(const AddLogTransmitStatRequest& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required string Application = 1;
+  inline bool has_application() const;
+  inline void clear_application();
+  static const int kApplicationFieldNumber = 1;
+  inline const ::std::string& application() const;
+  inline void set_application(const ::std::string& value);
+  inline void set_application(const char* value);
+  inline void set_application(const char* value, size_t size);
+  inline ::std::string* mutable_application();
+  inline ::std::string* release_application();
+  inline void set_allocated_application(::std::string* application);
+
+  // required string Srcid = 2;
+  inline bool has_srcid() const;
+  inline void clear_srcid();
+  static const int kSrcidFieldNumber = 2;
+  inline const ::std::string& srcid() const;
+  inline void set_srcid(const ::std::string& value);
+  inline void set_srcid(const char* value);
+  inline void set_srcid(const char* value, size_t size);
+  inline ::std::string* mutable_srcid();
+  inline ::std::string* release_srcid();
+  inline void set_allocated_srcid(::std::string* srcid);
+
+  // @@protoc_insertion_point(class_scope:manage.AddLogTransmitStatRequest)
+ private:
+  inline void set_has_application();
+  inline void clear_has_application();
+  inline void set_has_srcid();
+  inline void clear_has_srcid();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::std::string* application_;
+  ::std::string* srcid_;
+  friend void  protobuf_AddDesc_manage_2eproto();
+  friend void protobuf_AssignDesc_manage_2eproto();
+  friend void protobuf_ShutdownFile_manage_2eproto();
+
+  void InitAsDefaultInstance();
+  static AddLogTransmitStatRequest* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class AddLogTransmitStatResponse : public ::google::protobuf::Message {
+ public:
+  AddLogTransmitStatResponse();
+  virtual ~AddLogTransmitStatResponse();
+
+  AddLogTransmitStatResponse(const AddLogTransmitStatResponse& from);
+
+  inline AddLogTransmitStatResponse& operator=(const AddLogTransmitStatResponse& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const AddLogTransmitStatResponse& default_instance();
+
+  void Swap(AddLogTransmitStatResponse* other);
+
+  // implements Message ----------------------------------------------
+
+  AddLogTransmitStatResponse* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const AddLogTransmitStatResponse& from);
+  void MergeFrom(const AddLogTransmitStatResponse& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  typedef AddLogTransmitStatResponse_Res_Status Res_Status;
+  static const Res_Status SUCCEED = AddLogTransmitStatResponse_Res_Status_SUCCEED;
+  static const Res_Status FAILED = AddLogTransmitStatResponse_Res_Status_FAILED;
+  static inline bool Res_Status_IsValid(int value) {
+    return AddLogTransmitStatResponse_Res_Status_IsValid(value);
+  }
+  static const Res_Status Res_Status_MIN =
+    AddLogTransmitStatResponse_Res_Status_Res_Status_MIN;
+  static const Res_Status Res_Status_MAX =
+    AddLogTransmitStatResponse_Res_Status_Res_Status_MAX;
+  static const int Res_Status_ARRAYSIZE =
+    AddLogTransmitStatResponse_Res_Status_Res_Status_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor*
+  Res_Status_descriptor() {
+    return AddLogTransmitStatResponse_Res_Status_descriptor();
+  }
+  static inline const ::std::string& Res_Status_Name(Res_Status value) {
+    return AddLogTransmitStatResponse_Res_Status_Name(value);
+  }
+  static inline bool Res_Status_Parse(const ::std::string& name,
+      Res_Status* value) {
+    return AddLogTransmitStatResponse_Res_Status_Parse(name, value);
+  }
+
+  // accessors -------------------------------------------------------
+
+  // required .manage.AddLogTransmitStatResponse.Res_Status Status = 1;
+  inline bool has_status() const;
+  inline void clear_status();
+  static const int kStatusFieldNumber = 1;
+  inline ::manage::AddLogTransmitStatResponse_Res_Status status() const;
+  inline void set_status(::manage::AddLogTransmitStatResponse_Res_Status value);
+
+  // optional string Error = 2;
+  inline bool has_error() const;
+  inline void clear_error();
+  static const int kErrorFieldNumber = 2;
+  inline const ::std::string& error() const;
+  inline void set_error(const ::std::string& value);
+  inline void set_error(const char* value);
+  inline void set_error(const char* value, size_t size);
+  inline ::std::string* mutable_error();
+  inline ::std::string* release_error();
+  inline void set_allocated_error(::std::string* error);
+
+  // @@protoc_insertion_point(class_scope:manage.AddLogTransmitStatResponse)
+ private:
+  inline void set_has_status();
+  inline void clear_has_status();
+  inline void set_has_error();
+  inline void clear_has_error();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::std::string* error_;
+  int status_;
+  friend void  protobuf_AddDesc_manage_2eproto();
+  friend void protobuf_AssignDesc_manage_2eproto();
+  friend void protobuf_ShutdownFile_manage_2eproto();
+
+  void InitAsDefaultInstance();
+  static AddLogTransmitStatResponse* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class SetLogFilterConfigRequest : public ::google::protobuf::Message {
+ public:
+  SetLogFilterConfigRequest();
+  virtual ~SetLogFilterConfigRequest();
+
+  SetLogFilterConfigRequest(const SetLogFilterConfigRequest& from);
+
+  inline SetLogFilterConfigRequest& operator=(const SetLogFilterConfigRequest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const SetLogFilterConfigRequest& default_instance();
+
+  void Swap(SetLogFilterConfigRequest* other);
+
+  // implements Message ----------------------------------------------
+
+  SetLogFilterConfigRequest* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const SetLogFilterConfigRequest& from);
+  void MergeFrom(const SetLogFilterConfigRequest& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required bool Op = 1;
+  inline bool has_op() const;
+  inline void clear_op();
+  static const int kOpFieldNumber = 1;
+  inline bool op() const;
+  inline void set_op(bool value);
+
+  // required string Srcid = 2;
+  inline bool has_srcid() const;
+  inline void clear_srcid();
+  static const int kSrcidFieldNumber = 2;
+  inline const ::std::string& srcid() const;
+  inline void set_srcid(const ::std::string& value);
+  inline void set_srcid(const char* value);
+  inline void set_srcid(const char* value, size_t size);
+  inline ::std::string* mutable_srcid();
+  inline ::std::string* release_srcid();
+  inline void set_allocated_srcid(::std::string* srcid);
+
+  // @@protoc_insertion_point(class_scope:manage.SetLogFilterConfigRequest)
+ private:
+  inline void set_has_op();
+  inline void clear_has_op();
+  inline void set_has_srcid();
+  inline void clear_has_srcid();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::std::string* srcid_;
+  bool op_;
+  friend void  protobuf_AddDesc_manage_2eproto();
+  friend void protobuf_AssignDesc_manage_2eproto();
+  friend void protobuf_ShutdownFile_manage_2eproto();
+
+  void InitAsDefaultInstance();
+  static SetLogFilterConfigRequest* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class SetLogFilterConfigResponse : public ::google::protobuf::Message {
+ public:
+  SetLogFilterConfigResponse();
+  virtual ~SetLogFilterConfigResponse();
+
+  SetLogFilterConfigResponse(const SetLogFilterConfigResponse& from);
+
+  inline SetLogFilterConfigResponse& operator=(const SetLogFilterConfigResponse& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const SetLogFilterConfigResponse& default_instance();
+
+  void Swap(SetLogFilterConfigResponse* other);
+
+  // implements Message ----------------------------------------------
+
+  SetLogFilterConfigResponse* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const SetLogFilterConfigResponse& from);
+  void MergeFrom(const SetLogFilterConfigResponse& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  typedef SetLogFilterConfigResponse_Res_Status Res_Status;
+  static const Res_Status SUCCEED = SetLogFilterConfigResponse_Res_Status_SUCCEED;
+  static const Res_Status FAILED = SetLogFilterConfigResponse_Res_Status_FAILED;
+  static inline bool Res_Status_IsValid(int value) {
+    return SetLogFilterConfigResponse_Res_Status_IsValid(value);
+  }
+  static const Res_Status Res_Status_MIN =
+    SetLogFilterConfigResponse_Res_Status_Res_Status_MIN;
+  static const Res_Status Res_Status_MAX =
+    SetLogFilterConfigResponse_Res_Status_Res_Status_MAX;
+  static const int Res_Status_ARRAYSIZE =
+    SetLogFilterConfigResponse_Res_Status_Res_Status_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor*
+  Res_Status_descriptor() {
+    return SetLogFilterConfigResponse_Res_Status_descriptor();
+  }
+  static inline const ::std::string& Res_Status_Name(Res_Status value) {
+    return SetLogFilterConfigResponse_Res_Status_Name(value);
+  }
+  static inline bool Res_Status_Parse(const ::std::string& name,
+      Res_Status* value) {
+    return SetLogFilterConfigResponse_Res_Status_Parse(name, value);
+  }
+
+  // accessors -------------------------------------------------------
+
+  // required .manage.SetLogFilterConfigResponse.Res_Status Status = 1;
+  inline bool has_status() const;
+  inline void clear_status();
+  static const int kStatusFieldNumber = 1;
+  inline ::manage::SetLogFilterConfigResponse_Res_Status status() const;
+  inline void set_status(::manage::SetLogFilterConfigResponse_Res_Status value);
+
+  // optional string Error = 2;
+  inline bool has_error() const;
+  inline void clear_error();
+  static const int kErrorFieldNumber = 2;
+  inline const ::std::string& error() const;
+  inline void set_error(const ::std::string& value);
+  inline void set_error(const char* value);
+  inline void set_error(const char* value, size_t size);
+  inline ::std::string* mutable_error();
+  inline ::std::string* release_error();
+  inline void set_allocated_error(::std::string* error);
+
+  // @@protoc_insertion_point(class_scope:manage.SetLogFilterConfigResponse)
+ private:
+  inline void set_has_status();
+  inline void clear_has_status();
+  inline void set_has_error();
+  inline void clear_has_error();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::std::string* error_;
+  int status_;
+  friend void  protobuf_AddDesc_manage_2eproto();
+  friend void protobuf_AssignDesc_manage_2eproto();
+  friend void protobuf_ShutdownFile_manage_2eproto();
+
+  void InitAsDefaultInstance();
+  static SetLogFilterConfigResponse* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class GetLogFilterConfigRequest : public ::google::protobuf::Message {
+ public:
+  GetLogFilterConfigRequest();
+  virtual ~GetLogFilterConfigRequest();
+
+  GetLogFilterConfigRequest(const GetLogFilterConfigRequest& from);
+
+  inline GetLogFilterConfigRequest& operator=(const GetLogFilterConfigRequest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const GetLogFilterConfigRequest& default_instance();
+
+  void Swap(GetLogFilterConfigRequest* other);
+
+  // implements Message ----------------------------------------------
+
+  GetLogFilterConfigRequest* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const GetLogFilterConfigRequest& from);
+  void MergeFrom(const GetLogFilterConfigRequest& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional bool Application = 1;
+  inline bool has_application() const;
+  inline void clear_application();
+  static const int kApplicationFieldNumber = 1;
+  inline bool application() const;
+  inline void set_application(bool value);
+
+  // @@protoc_insertion_point(class_scope:manage.GetLogFilterConfigRequest)
+ private:
+  inline void set_has_application();
+  inline void clear_has_application();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  bool application_;
+  friend void  protobuf_AddDesc_manage_2eproto();
+  friend void protobuf_AssignDesc_manage_2eproto();
+  friend void protobuf_ShutdownFile_manage_2eproto();
+
+  void InitAsDefaultInstance();
+  static GetLogFilterConfigRequest* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class GetLogFilterConfigResponse : public ::google::protobuf::Message {
+ public:
+  GetLogFilterConfigResponse();
+  virtual ~GetLogFilterConfigResponse();
+
+  GetLogFilterConfigResponse(const GetLogFilterConfigResponse& from);
+
+  inline GetLogFilterConfigResponse& operator=(const GetLogFilterConfigResponse& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const GetLogFilterConfigResponse& default_instance();
+
+  void Swap(GetLogFilterConfigResponse* other);
+
+  // implements Message ----------------------------------------------
+
+  GetLogFilterConfigResponse* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const GetLogFilterConfigResponse& from);
+  void MergeFrom(const GetLogFilterConfigResponse& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  typedef GetLogFilterConfigResponse_Res_Status Res_Status;
+  static const Res_Status SUCCEED = GetLogFilterConfigResponse_Res_Status_SUCCEED;
+  static const Res_Status FAILED = GetLogFilterConfigResponse_Res_Status_FAILED;
+  static inline bool Res_Status_IsValid(int value) {
+    return GetLogFilterConfigResponse_Res_Status_IsValid(value);
+  }
+  static const Res_Status Res_Status_MIN =
+    GetLogFilterConfigResponse_Res_Status_Res_Status_MIN;
+  static const Res_Status Res_Status_MAX =
+    GetLogFilterConfigResponse_Res_Status_Res_Status_MAX;
+  static const int Res_Status_ARRAYSIZE =
+    GetLogFilterConfigResponse_Res_Status_Res_Status_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor*
+  Res_Status_descriptor() {
+    return GetLogFilterConfigResponse_Res_Status_descriptor();
+  }
+  static inline const ::std::string& Res_Status_Name(Res_Status value) {
+    return GetLogFilterConfigResponse_Res_Status_Name(value);
+  }
+  static inline bool Res_Status_Parse(const ::std::string& name,
+      Res_Status* value) {
+    return GetLogFilterConfigResponse_Res_Status_Parse(name, value);
+  }
+
+  // accessors -------------------------------------------------------
+
+  // required .manage.GetLogFilterConfigResponse.Res_Status Status = 1;
+  inline bool has_status() const;
+  inline void clear_status();
+  static const int kStatusFieldNumber = 1;
+  inline ::manage::GetLogFilterConfigResponse_Res_Status status() const;
+  inline void set_status(::manage::GetLogFilterConfigResponse_Res_Status value);
+
+  // optional string Error = 2;
+  inline bool has_error() const;
+  inline void clear_error();
+  static const int kErrorFieldNumber = 2;
+  inline const ::std::string& error() const;
+  inline void set_error(const ::std::string& value);
+  inline void set_error(const char* value);
+  inline void set_error(const char* value, size_t size);
+  inline ::std::string* mutable_error();
+  inline ::std::string* release_error();
+  inline void set_allocated_error(::std::string* error);
+
+  // repeated string Srcids = 3;
+  inline int srcids_size() const;
+  inline void clear_srcids();
+  static const int kSrcidsFieldNumber = 3;
+  inline const ::std::string& srcids(int index) const;
+  inline ::std::string* mutable_srcids(int index);
+  inline void set_srcids(int index, const ::std::string& value);
+  inline void set_srcids(int index, const char* value);
+  inline void set_srcids(int index, const char* value, size_t size);
+  inline ::std::string* add_srcids();
+  inline void add_srcids(const ::std::string& value);
+  inline void add_srcids(const char* value);
+  inline void add_srcids(const char* value, size_t size);
+  inline const ::google::protobuf::RepeatedPtrField< ::std::string>& srcids() const;
+  inline ::google::protobuf::RepeatedPtrField< ::std::string>* mutable_srcids();
+
+  // @@protoc_insertion_point(class_scope:manage.GetLogFilterConfigResponse)
+ private:
+  inline void set_has_status();
+  inline void clear_has_status();
+  inline void set_has_error();
+  inline void clear_has_error();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::std::string* error_;
+  ::google::protobuf::RepeatedPtrField< ::std::string> srcids_;
+  int status_;
+  friend void  protobuf_AddDesc_manage_2eproto();
+  friend void protobuf_AssignDesc_manage_2eproto();
+  friend void protobuf_ShutdownFile_manage_2eproto();
+
+  void InitAsDefaultInstance();
+  static GetLogFilterConfigResponse* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class PullSwitchConfigRequest : public ::google::protobuf::Message {
+ public:
+  PullSwitchConfigRequest();
+  virtual ~PullSwitchConfigRequest();
+
+  PullSwitchConfigRequest(const PullSwitchConfigRequest& from);
+
+  inline PullSwitchConfigRequest& operator=(const PullSwitchConfigRequest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const PullSwitchConfigRequest& default_instance();
+
+  void Swap(PullSwitchConfigRequest* other);
+
+  // implements Message ----------------------------------------------
+
+  PullSwitchConfigRequest* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const PullSwitchConfigRequest& from);
+  void MergeFrom(const PullSwitchConfigRequest& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required bool op = 1;
+  inline bool has_op() const;
+  inline void clear_op();
+  static const int kOpFieldNumber = 1;
+  inline bool op() const;
+  inline void set_op(bool value);
+
+  // required uint32 idx = 2;
+  inline bool has_idx() const;
+  inline void clear_idx();
+  static const int kIdxFieldNumber = 2;
+  inline ::google::protobuf::uint32 idx() const;
+  inline void set_idx(::google::protobuf::uint32 value);
+
+  // @@protoc_insertion_point(class_scope:manage.PullSwitchConfigRequest)
+ private:
+  inline void set_has_op();
+  inline void clear_has_op();
+  inline void set_has_idx();
+  inline void clear_has_idx();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  bool op_;
+  ::google::protobuf::uint32 idx_;
+  friend void  protobuf_AddDesc_manage_2eproto();
+  friend void protobuf_AssignDesc_manage_2eproto();
+  friend void protobuf_ShutdownFile_manage_2eproto();
+
+  void InitAsDefaultInstance();
+  static PullSwitchConfigRequest* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class PullSwitchConfigResponse : public ::google::protobuf::Message {
+ public:
+  PullSwitchConfigResponse();
+  virtual ~PullSwitchConfigResponse();
+
+  PullSwitchConfigResponse(const PullSwitchConfigResponse& from);
+
+  inline PullSwitchConfigResponse& operator=(const PullSwitchConfigResponse& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const PullSwitchConfigResponse& default_instance();
+
+  void Swap(PullSwitchConfigResponse* other);
+
+  // implements Message ----------------------------------------------
+
+  PullSwitchConfigResponse* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const PullSwitchConfigResponse& from);
+  void MergeFrom(const PullSwitchConfigResponse& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  typedef PullSwitchConfigResponse_Res_Status Res_Status;
+  static const Res_Status SUCCEED = PullSwitchConfigResponse_Res_Status_SUCCEED;
+  static const Res_Status FAILED = PullSwitchConfigResponse_Res_Status_FAILED;
+  static inline bool Res_Status_IsValid(int value) {
+    return PullSwitchConfigResponse_Res_Status_IsValid(value);
+  }
+  static const Res_Status Res_Status_MIN =
+    PullSwitchConfigResponse_Res_Status_Res_Status_MIN;
+  static const Res_Status Res_Status_MAX =
+    PullSwitchConfigResponse_Res_Status_Res_Status_MAX;
+  static const int Res_Status_ARRAYSIZE =
+    PullSwitchConfigResponse_Res_Status_Res_Status_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor*
+  Res_Status_descriptor() {
+    return PullSwitchConfigResponse_Res_Status_descriptor();
+  }
+  static inline const ::std::string& Res_Status_Name(Res_Status value) {
+    return PullSwitchConfigResponse_Res_Status_Name(value);
+  }
+  static inline bool Res_Status_Parse(const ::std::string& name,
+      Res_Status* value) {
+    return PullSwitchConfigResponse_Res_Status_Parse(name, value);
+  }
+
+  // accessors -------------------------------------------------------
+
+  // required .manage.PullSwitchConfigResponse.Res_Status Status = 1;
+  inline bool has_status() const;
+  inline void clear_status();
+  static const int kStatusFieldNumber = 1;
+  inline ::manage::PullSwitchConfigResponse_Res_Status status() const;
+  inline void set_status(::manage::PullSwitchConfigResponse_Res_Status value);
+
+  // optional string Error = 2;
+  inline bool has_error() const;
+  inline void clear_error();
+  static const int kErrorFieldNumber = 2;
+  inline const ::std::string& error() const;
+  inline void set_error(const ::std::string& value);
+  inline void set_error(const char* value);
+  inline void set_error(const char* value, size_t size);
+  inline ::std::string* mutable_error();
+  inline ::std::string* release_error();
+  inline void set_allocated_error(::std::string* error);
+
+  // @@protoc_insertion_point(class_scope:manage.PullSwitchConfigResponse)
+ private:
+  inline void set_has_status();
+  inline void clear_has_status();
+  inline void set_has_error();
+  inline void clear_has_error();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::std::string* error_;
+  int status_;
+  friend void  protobuf_AddDesc_manage_2eproto();
+  friend void protobuf_AssignDesc_manage_2eproto();
+  friend void protobuf_ShutdownFile_manage_2eproto();
+
+  void InitAsDefaultInstance();
+  static PullSwitchConfigResponse* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class RetransmitRequest : public ::google::protobuf::Message {
+ public:
+  RetransmitRequest();
+  virtual ~RetransmitRequest();
+
+  RetransmitRequest(const RetransmitRequest& from);
+
+  inline RetransmitRequest& operator=(const RetransmitRequest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const RetransmitRequest& default_instance();
+
+  void Swap(RetransmitRequest* other);
+
+  // implements Message ----------------------------------------------
+
+  RetransmitRequest* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const RetransmitRequest& from);
+  void MergeFrom(const RetransmitRequest& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required bool type = 1;
+  inline bool has_type() const;
+  inline void clear_type();
+  static const int kTypeFieldNumber = 1;
+  inline bool type() const;
+  inline void set_type(bool value);
+
+  // required string package = 2;
+  inline bool has_package() const;
+  inline void clear_package();
+  static const int kPackageFieldNumber = 2;
+  inline const ::std::string& package() const;
+  inline void set_package(const ::std::string& value);
+  inline void set_package(const char* value);
+  inline void set_package(const char* value, size_t size);
+  inline ::std::string* mutable_package();
+  inline ::std::string* release_package();
+  inline void set_allocated_package(::std::string* package);
+
+  // @@protoc_insertion_point(class_scope:manage.RetransmitRequest)
+ private:
+  inline void set_has_type();
+  inline void clear_has_type();
+  inline void set_has_package();
+  inline void clear_has_package();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::std::string* package_;
+  bool type_;
+  friend void  protobuf_AddDesc_manage_2eproto();
+  friend void protobuf_AssignDesc_manage_2eproto();
+  friend void protobuf_ShutdownFile_manage_2eproto();
+
+  void InitAsDefaultInstance();
+  static RetransmitRequest* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class RetransmitResponse : public ::google::protobuf::Message {
+ public:
+  RetransmitResponse();
+  virtual ~RetransmitResponse();
+
+  RetransmitResponse(const RetransmitResponse& from);
+
+  inline RetransmitResponse& operator=(const RetransmitResponse& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const RetransmitResponse& default_instance();
+
+  void Swap(RetransmitResponse* other);
+
+  // implements Message ----------------------------------------------
+
+  RetransmitResponse* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const RetransmitResponse& from);
+  void MergeFrom(const RetransmitResponse& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  typedef RetransmitResponse_Res_Status Res_Status;
+  static const Res_Status SUCCEED = RetransmitResponse_Res_Status_SUCCEED;
+  static const Res_Status FAILED = RetransmitResponse_Res_Status_FAILED;
+  static inline bool Res_Status_IsValid(int value) {
+    return RetransmitResponse_Res_Status_IsValid(value);
+  }
+  static const Res_Status Res_Status_MIN =
+    RetransmitResponse_Res_Status_Res_Status_MIN;
+  static const Res_Status Res_Status_MAX =
+    RetransmitResponse_Res_Status_Res_Status_MAX;
+  static const int Res_Status_ARRAYSIZE =
+    RetransmitResponse_Res_Status_Res_Status_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor*
+  Res_Status_descriptor() {
+    return RetransmitResponse_Res_Status_descriptor();
+  }
+  static inline const ::std::string& Res_Status_Name(Res_Status value) {
+    return RetransmitResponse_Res_Status_Name(value);
+  }
+  static inline bool Res_Status_Parse(const ::std::string& name,
+      Res_Status* value) {
+    return RetransmitResponse_Res_Status_Parse(name, value);
+  }
+
+  // accessors -------------------------------------------------------
+
+  // required .manage.RetransmitResponse.Res_Status Status = 1;
+  inline bool has_status() const;
+  inline void clear_status();
+  static const int kStatusFieldNumber = 1;
+  inline ::manage::RetransmitResponse_Res_Status status() const;
+  inline void set_status(::manage::RetransmitResponse_Res_Status value);
+
+  // optional string Error = 2;
+  inline bool has_error() const;
+  inline void clear_error();
+  static const int kErrorFieldNumber = 2;
+  inline const ::std::string& error() const;
+  inline void set_error(const ::std::string& value);
+  inline void set_error(const char* value);
+  inline void set_error(const char* value, size_t size);
+  inline ::std::string* mutable_error();
+  inline ::std::string* release_error();
+  inline void set_allocated_error(::std::string* error);
+
+  // @@protoc_insertion_point(class_scope:manage.RetransmitResponse)
+ private:
+  inline void set_has_status();
+  inline void clear_has_status();
+  inline void set_has_error();
+  inline void clear_has_error();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::std::string* error_;
+  int status_;
+  friend void  protobuf_AddDesc_manage_2eproto();
+  friend void protobuf_AssignDesc_manage_2eproto();
+  friend void protobuf_ShutdownFile_manage_2eproto();
+
+  void InitAsDefaultInstance();
+  static RetransmitResponse* default_instance_;
 };
 // ===================================================================
 
@@ -901,6 +2190,14 @@ class ManageService : public ::google::protobuf::Service {
 
   static const ::google::protobuf::ServiceDescriptor* descriptor();
 
+  virtual void SetLogFilterConfig(::google::protobuf::RpcController* controller,
+                       const ::manage::SetLogFilterConfigRequest* request,
+                       ::manage::SetLogFilterConfigResponse* response,
+                       ::google::protobuf::Closure* done);
+  virtual void GetLogFilterConfig(::google::protobuf::RpcController* controller,
+                       const ::manage::GetLogFilterConfigRequest* request,
+                       ::manage::GetLogFilterConfigResponse* response,
+                       ::google::protobuf::Closure* done);
   virtual void SetLogFieldConfig(::google::protobuf::RpcController* controller,
                        const ::manage::SetLogFieldConfigRequest* request,
                        ::manage::SetLogFieldConfigResponse* response,
@@ -912,6 +2209,18 @@ class ManageService : public ::google::protobuf::Service {
   virtual void GetLogTransmitStat(::google::protobuf::RpcController* controller,
                        const ::manage::GetLogTransmitStatRequest* request,
                        ::manage::GetLogTransmitStatResponse* response,
+                       ::google::protobuf::Closure* done);
+  virtual void AddLogTransmitStat(::google::protobuf::RpcController* controller,
+                       const ::manage::AddLogTransmitStatRequest* request,
+                       ::manage::AddLogTransmitStatResponse* response,
+                       ::google::protobuf::Closure* done);
+  virtual void PullSwitchConfig(::google::protobuf::RpcController* controller,
+                       const ::manage::PullSwitchConfigRequest* request,
+                       ::manage::PullSwitchConfigResponse* response,
+                       ::google::protobuf::Closure* done);
+  virtual void Retransmit(::google::protobuf::RpcController* controller,
+                       const ::manage::RetransmitRequest* request,
+                       ::manage::RetransmitResponse* response,
                        ::google::protobuf::Closure* done);
 
   // implements Service ----------------------------------------------
@@ -942,6 +2251,14 @@ class ManageService_Stub : public ManageService {
 
   // implements ManageService ------------------------------------------
 
+  void SetLogFilterConfig(::google::protobuf::RpcController* controller,
+                       const ::manage::SetLogFilterConfigRequest* request,
+                       ::manage::SetLogFilterConfigResponse* response,
+                       ::google::protobuf::Closure* done);
+  void GetLogFilterConfig(::google::protobuf::RpcController* controller,
+                       const ::manage::GetLogFilterConfigRequest* request,
+                       ::manage::GetLogFilterConfigResponse* response,
+                       ::google::protobuf::Closure* done);
   void SetLogFieldConfig(::google::protobuf::RpcController* controller,
                        const ::manage::SetLogFieldConfigRequest* request,
                        ::manage::SetLogFieldConfigResponse* response,
@@ -953,6 +2270,18 @@ class ManageService_Stub : public ManageService {
   void GetLogTransmitStat(::google::protobuf::RpcController* controller,
                        const ::manage::GetLogTransmitStatRequest* request,
                        ::manage::GetLogTransmitStatResponse* response,
+                       ::google::protobuf::Closure* done);
+  void AddLogTransmitStat(::google::protobuf::RpcController* controller,
+                       const ::manage::AddLogTransmitStatRequest* request,
+                       ::manage::AddLogTransmitStatResponse* response,
+                       ::google::protobuf::Closure* done);
+  void PullSwitchConfig(::google::protobuf::RpcController* controller,
+                       const ::manage::PullSwitchConfigRequest* request,
+                       ::manage::PullSwitchConfigResponse* response,
+                       ::google::protobuf::Closure* done);
+  void Retransmit(::google::protobuf::RpcController* controller,
+                       const ::manage::RetransmitRequest* request,
+                       ::manage::RetransmitResponse* response,
                        ::google::protobuf::Closure* done);
  private:
   ::google::protobuf::RpcChannel* channel_;
@@ -966,9 +2295,165 @@ class ManageService_Stub : public ManageService {
 
 // ===================================================================
 
+// MapEntry
+
+// required string Key = 1;
+inline bool MapEntry::has_key() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void MapEntry::set_has_key() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void MapEntry::clear_has_key() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void MapEntry::clear_key() {
+  if (key_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    key_->clear();
+  }
+  clear_has_key();
+}
+inline const ::std::string& MapEntry::key() const {
+  // @@protoc_insertion_point(field_get:manage.MapEntry.Key)
+  return *key_;
+}
+inline void MapEntry::set_key(const ::std::string& value) {
+  set_has_key();
+  if (key_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    key_ = new ::std::string;
+  }
+  key_->assign(value);
+  // @@protoc_insertion_point(field_set:manage.MapEntry.Key)
+}
+inline void MapEntry::set_key(const char* value) {
+  set_has_key();
+  if (key_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    key_ = new ::std::string;
+  }
+  key_->assign(value);
+  // @@protoc_insertion_point(field_set_char:manage.MapEntry.Key)
+}
+inline void MapEntry::set_key(const char* value, size_t size) {
+  set_has_key();
+  if (key_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    key_ = new ::std::string;
+  }
+  key_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:manage.MapEntry.Key)
+}
+inline ::std::string* MapEntry::mutable_key() {
+  set_has_key();
+  if (key_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    key_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:manage.MapEntry.Key)
+  return key_;
+}
+inline ::std::string* MapEntry::release_key() {
+  clear_has_key();
+  if (key_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = key_;
+    key_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void MapEntry::set_allocated_key(::std::string* key) {
+  if (key_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete key_;
+  }
+  if (key) {
+    set_has_key();
+    key_ = key;
+  } else {
+    clear_has_key();
+    key_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:manage.MapEntry.Key)
+}
+
+// required string Value = 2;
+inline bool MapEntry::has_value() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void MapEntry::set_has_value() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void MapEntry::clear_has_value() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void MapEntry::clear_value() {
+  if (value_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    value_->clear();
+  }
+  clear_has_value();
+}
+inline const ::std::string& MapEntry::value() const {
+  // @@protoc_insertion_point(field_get:manage.MapEntry.Value)
+  return *value_;
+}
+inline void MapEntry::set_value(const ::std::string& value) {
+  set_has_value();
+  if (value_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    value_ = new ::std::string;
+  }
+  value_->assign(value);
+  // @@protoc_insertion_point(field_set:manage.MapEntry.Value)
+}
+inline void MapEntry::set_value(const char* value) {
+  set_has_value();
+  if (value_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    value_ = new ::std::string;
+  }
+  value_->assign(value);
+  // @@protoc_insertion_point(field_set_char:manage.MapEntry.Value)
+}
+inline void MapEntry::set_value(const char* value, size_t size) {
+  set_has_value();
+  if (value_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    value_ = new ::std::string;
+  }
+  value_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:manage.MapEntry.Value)
+}
+inline ::std::string* MapEntry::mutable_value() {
+  set_has_value();
+  if (value_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    value_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:manage.MapEntry.Value)
+  return value_;
+}
+inline ::std::string* MapEntry::release_value() {
+  clear_has_value();
+  if (value_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = value_;
+    value_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void MapEntry::set_allocated_value(::std::string* value) {
+  if (value_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete value_;
+  }
+  if (value) {
+    set_has_value();
+    value_ = value;
+  } else {
+    clear_has_value();
+    value_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:manage.MapEntry.Value)
+}
+
+// -------------------------------------------------------------------
+
 // FiledConfig
 
-// required string field = 1;
+// required string Field = 1;
 inline bool FiledConfig::has_field() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -985,7 +2470,7 @@ inline void FiledConfig::clear_field() {
   clear_has_field();
 }
 inline const ::std::string& FiledConfig::field() const {
-  // @@protoc_insertion_point(field_get:manage.FiledConfig.field)
+  // @@protoc_insertion_point(field_get:manage.FiledConfig.Field)
   return *field_;
 }
 inline void FiledConfig::set_field(const ::std::string& value) {
@@ -994,7 +2479,7 @@ inline void FiledConfig::set_field(const ::std::string& value) {
     field_ = new ::std::string;
   }
   field_->assign(value);
-  // @@protoc_insertion_point(field_set:manage.FiledConfig.field)
+  // @@protoc_insertion_point(field_set:manage.FiledConfig.Field)
 }
 inline void FiledConfig::set_field(const char* value) {
   set_has_field();
@@ -1002,7 +2487,7 @@ inline void FiledConfig::set_field(const char* value) {
     field_ = new ::std::string;
   }
   field_->assign(value);
-  // @@protoc_insertion_point(field_set_char:manage.FiledConfig.field)
+  // @@protoc_insertion_point(field_set_char:manage.FiledConfig.Field)
 }
 inline void FiledConfig::set_field(const char* value, size_t size) {
   set_has_field();
@@ -1010,14 +2495,14 @@ inline void FiledConfig::set_field(const char* value, size_t size) {
     field_ = new ::std::string;
   }
   field_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:manage.FiledConfig.field)
+  // @@protoc_insertion_point(field_set_pointer:manage.FiledConfig.Field)
 }
 inline ::std::string* FiledConfig::mutable_field() {
   set_has_field();
   if (field_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     field_ = new ::std::string;
   }
-  // @@protoc_insertion_point(field_mutable:manage.FiledConfig.field)
+  // @@protoc_insertion_point(field_mutable:manage.FiledConfig.Field)
   return field_;
 }
 inline ::std::string* FiledConfig::release_field() {
@@ -1041,10 +2526,10 @@ inline void FiledConfig::set_allocated_field(::std::string* field) {
     clear_has_field();
     field_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
-  // @@protoc_insertion_point(field_set_allocated:manage.FiledConfig.field)
+  // @@protoc_insertion_point(field_set_allocated:manage.FiledConfig.Field)
 }
 
-// required string regex = 2;
+// required string Regex = 2;
 inline bool FiledConfig::has_regex() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -1061,7 +2546,7 @@ inline void FiledConfig::clear_regex() {
   clear_has_regex();
 }
 inline const ::std::string& FiledConfig::regex() const {
-  // @@protoc_insertion_point(field_get:manage.FiledConfig.regex)
+  // @@protoc_insertion_point(field_get:manage.FiledConfig.Regex)
   return *regex_;
 }
 inline void FiledConfig::set_regex(const ::std::string& value) {
@@ -1070,7 +2555,7 @@ inline void FiledConfig::set_regex(const ::std::string& value) {
     regex_ = new ::std::string;
   }
   regex_->assign(value);
-  // @@protoc_insertion_point(field_set:manage.FiledConfig.regex)
+  // @@protoc_insertion_point(field_set:manage.FiledConfig.Regex)
 }
 inline void FiledConfig::set_regex(const char* value) {
   set_has_regex();
@@ -1078,7 +2563,7 @@ inline void FiledConfig::set_regex(const char* value) {
     regex_ = new ::std::string;
   }
   regex_->assign(value);
-  // @@protoc_insertion_point(field_set_char:manage.FiledConfig.regex)
+  // @@protoc_insertion_point(field_set_char:manage.FiledConfig.Regex)
 }
 inline void FiledConfig::set_regex(const char* value, size_t size) {
   set_has_regex();
@@ -1086,14 +2571,14 @@ inline void FiledConfig::set_regex(const char* value, size_t size) {
     regex_ = new ::std::string;
   }
   regex_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:manage.FiledConfig.regex)
+  // @@protoc_insertion_point(field_set_pointer:manage.FiledConfig.Regex)
 }
 inline ::std::string* FiledConfig::mutable_regex() {
   set_has_regex();
   if (regex_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     regex_ = new ::std::string;
   }
-  // @@protoc_insertion_point(field_mutable:manage.FiledConfig.regex)
+  // @@protoc_insertion_point(field_mutable:manage.FiledConfig.Regex)
   return regex_;
 }
 inline ::std::string* FiledConfig::release_regex() {
@@ -1117,14 +2602,38 @@ inline void FiledConfig::set_allocated_regex(::std::string* regex) {
     clear_has_regex();
     regex_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
-  // @@protoc_insertion_point(field_set_allocated:manage.FiledConfig.regex)
+  // @@protoc_insertion_point(field_set_allocated:manage.FiledConfig.Regex)
+}
+
+// required bool Istrans = 3;
+inline bool FiledConfig::has_istrans() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void FiledConfig::set_has_istrans() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void FiledConfig::clear_has_istrans() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void FiledConfig::clear_istrans() {
+  istrans_ = false;
+  clear_has_istrans();
+}
+inline bool FiledConfig::istrans() const {
+  // @@protoc_insertion_point(field_get:manage.FiledConfig.Istrans)
+  return istrans_;
+}
+inline void FiledConfig::set_istrans(bool value) {
+  set_has_istrans();
+  istrans_ = value;
+  // @@protoc_insertion_point(field_set:manage.FiledConfig.Istrans)
 }
 
 // -------------------------------------------------------------------
 
 // SetLogFieldConfigRequest
 
-// required string application = 1;
+// required string Application = 1;
 inline bool SetLogFieldConfigRequest::has_application() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -1141,7 +2650,7 @@ inline void SetLogFieldConfigRequest::clear_application() {
   clear_has_application();
 }
 inline const ::std::string& SetLogFieldConfigRequest::application() const {
-  // @@protoc_insertion_point(field_get:manage.SetLogFieldConfigRequest.application)
+  // @@protoc_insertion_point(field_get:manage.SetLogFieldConfigRequest.Application)
   return *application_;
 }
 inline void SetLogFieldConfigRequest::set_application(const ::std::string& value) {
@@ -1150,7 +2659,7 @@ inline void SetLogFieldConfigRequest::set_application(const ::std::string& value
     application_ = new ::std::string;
   }
   application_->assign(value);
-  // @@protoc_insertion_point(field_set:manage.SetLogFieldConfigRequest.application)
+  // @@protoc_insertion_point(field_set:manage.SetLogFieldConfigRequest.Application)
 }
 inline void SetLogFieldConfigRequest::set_application(const char* value) {
   set_has_application();
@@ -1158,7 +2667,7 @@ inline void SetLogFieldConfigRequest::set_application(const char* value) {
     application_ = new ::std::string;
   }
   application_->assign(value);
-  // @@protoc_insertion_point(field_set_char:manage.SetLogFieldConfigRequest.application)
+  // @@protoc_insertion_point(field_set_char:manage.SetLogFieldConfigRequest.Application)
 }
 inline void SetLogFieldConfigRequest::set_application(const char* value, size_t size) {
   set_has_application();
@@ -1166,14 +2675,14 @@ inline void SetLogFieldConfigRequest::set_application(const char* value, size_t 
     application_ = new ::std::string;
   }
   application_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:manage.SetLogFieldConfigRequest.application)
+  // @@protoc_insertion_point(field_set_pointer:manage.SetLogFieldConfigRequest.Application)
 }
 inline ::std::string* SetLogFieldConfigRequest::mutable_application() {
   set_has_application();
   if (application_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     application_ = new ::std::string;
   }
-  // @@protoc_insertion_point(field_mutable:manage.SetLogFieldConfigRequest.application)
+  // @@protoc_insertion_point(field_mutable:manage.SetLogFieldConfigRequest.Application)
   return application_;
 }
 inline ::std::string* SetLogFieldConfigRequest::release_application() {
@@ -1197,44 +2706,79 @@ inline void SetLogFieldConfigRequest::set_allocated_application(::std::string* a
     clear_has_application();
     application_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
-  // @@protoc_insertion_point(field_set_allocated:manage.SetLogFieldConfigRequest.application)
+  // @@protoc_insertion_point(field_set_allocated:manage.SetLogFieldConfigRequest.Application)
 }
 
-// repeated .manage.FiledConfig fieldconfigs = 2;
-inline int SetLogFieldConfigRequest::fieldconfigs_size() const {
-  return fieldconfigs_.size();
+// required bool Op = 2;
+inline bool SetLogFieldConfigRequest::has_op() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void SetLogFieldConfigRequest::set_has_op() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void SetLogFieldConfigRequest::clear_has_op() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void SetLogFieldConfigRequest::clear_op() {
+  op_ = false;
+  clear_has_op();
+}
+inline bool SetLogFieldConfigRequest::op() const {
+  // @@protoc_insertion_point(field_get:manage.SetLogFieldConfigRequest.Op)
+  return op_;
+}
+inline void SetLogFieldConfigRequest::set_op(bool value) {
+  set_has_op();
+  op_ = value;
+  // @@protoc_insertion_point(field_set:manage.SetLogFieldConfigRequest.Op)
+}
+
+// optional .manage.FiledConfig Fieldconfigs = 3;
+inline bool SetLogFieldConfigRequest::has_fieldconfigs() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void SetLogFieldConfigRequest::set_has_fieldconfigs() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void SetLogFieldConfigRequest::clear_has_fieldconfigs() {
+  _has_bits_[0] &= ~0x00000004u;
 }
 inline void SetLogFieldConfigRequest::clear_fieldconfigs() {
-  fieldconfigs_.Clear();
+  if (fieldconfigs_ != NULL) fieldconfigs_->::manage::FiledConfig::Clear();
+  clear_has_fieldconfigs();
 }
-inline const ::manage::FiledConfig& SetLogFieldConfigRequest::fieldconfigs(int index) const {
-  // @@protoc_insertion_point(field_get:manage.SetLogFieldConfigRequest.fieldconfigs)
-  return fieldconfigs_.Get(index);
+inline const ::manage::FiledConfig& SetLogFieldConfigRequest::fieldconfigs() const {
+  // @@protoc_insertion_point(field_get:manage.SetLogFieldConfigRequest.Fieldconfigs)
+  return fieldconfigs_ != NULL ? *fieldconfigs_ : *default_instance_->fieldconfigs_;
 }
-inline ::manage::FiledConfig* SetLogFieldConfigRequest::mutable_fieldconfigs(int index) {
-  // @@protoc_insertion_point(field_mutable:manage.SetLogFieldConfigRequest.fieldconfigs)
-  return fieldconfigs_.Mutable(index);
-}
-inline ::manage::FiledConfig* SetLogFieldConfigRequest::add_fieldconfigs() {
-  // @@protoc_insertion_point(field_add:manage.SetLogFieldConfigRequest.fieldconfigs)
-  return fieldconfigs_.Add();
-}
-inline const ::google::protobuf::RepeatedPtrField< ::manage::FiledConfig >&
-SetLogFieldConfigRequest::fieldconfigs() const {
-  // @@protoc_insertion_point(field_list:manage.SetLogFieldConfigRequest.fieldconfigs)
+inline ::manage::FiledConfig* SetLogFieldConfigRequest::mutable_fieldconfigs() {
+  set_has_fieldconfigs();
+  if (fieldconfigs_ == NULL) fieldconfigs_ = new ::manage::FiledConfig;
+  // @@protoc_insertion_point(field_mutable:manage.SetLogFieldConfigRequest.Fieldconfigs)
   return fieldconfigs_;
 }
-inline ::google::protobuf::RepeatedPtrField< ::manage::FiledConfig >*
-SetLogFieldConfigRequest::mutable_fieldconfigs() {
-  // @@protoc_insertion_point(field_mutable_list:manage.SetLogFieldConfigRequest.fieldconfigs)
-  return &fieldconfigs_;
+inline ::manage::FiledConfig* SetLogFieldConfigRequest::release_fieldconfigs() {
+  clear_has_fieldconfigs();
+  ::manage::FiledConfig* temp = fieldconfigs_;
+  fieldconfigs_ = NULL;
+  return temp;
+}
+inline void SetLogFieldConfigRequest::set_allocated_fieldconfigs(::manage::FiledConfig* fieldconfigs) {
+  delete fieldconfigs_;
+  fieldconfigs_ = fieldconfigs;
+  if (fieldconfigs) {
+    set_has_fieldconfigs();
+  } else {
+    clear_has_fieldconfigs();
+  }
+  // @@protoc_insertion_point(field_set_allocated:manage.SetLogFieldConfigRequest.Fieldconfigs)
 }
 
 // -------------------------------------------------------------------
 
 // SetLogFieldConfigResponse
 
-// required .manage.SetLogFieldConfigResponse.Res_Status status = 1;
+// required .manage.SetLogFieldConfigResponse.Res_Status Status = 1;
 inline bool SetLogFieldConfigResponse::has_status() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -1249,17 +2793,17 @@ inline void SetLogFieldConfigResponse::clear_status() {
   clear_has_status();
 }
 inline ::manage::SetLogFieldConfigResponse_Res_Status SetLogFieldConfigResponse::status() const {
-  // @@protoc_insertion_point(field_get:manage.SetLogFieldConfigResponse.status)
+  // @@protoc_insertion_point(field_get:manage.SetLogFieldConfigResponse.Status)
   return static_cast< ::manage::SetLogFieldConfigResponse_Res_Status >(status_);
 }
 inline void SetLogFieldConfigResponse::set_status(::manage::SetLogFieldConfigResponse_Res_Status value) {
   assert(::manage::SetLogFieldConfigResponse_Res_Status_IsValid(value));
   set_has_status();
   status_ = value;
-  // @@protoc_insertion_point(field_set:manage.SetLogFieldConfigResponse.status)
+  // @@protoc_insertion_point(field_set:manage.SetLogFieldConfigResponse.Status)
 }
 
-// optional string error = 2;
+// optional string Error = 2;
 inline bool SetLogFieldConfigResponse::has_error() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -1276,7 +2820,7 @@ inline void SetLogFieldConfigResponse::clear_error() {
   clear_has_error();
 }
 inline const ::std::string& SetLogFieldConfigResponse::error() const {
-  // @@protoc_insertion_point(field_get:manage.SetLogFieldConfigResponse.error)
+  // @@protoc_insertion_point(field_get:manage.SetLogFieldConfigResponse.Error)
   return *error_;
 }
 inline void SetLogFieldConfigResponse::set_error(const ::std::string& value) {
@@ -1285,7 +2829,7 @@ inline void SetLogFieldConfigResponse::set_error(const ::std::string& value) {
     error_ = new ::std::string;
   }
   error_->assign(value);
-  // @@protoc_insertion_point(field_set:manage.SetLogFieldConfigResponse.error)
+  // @@protoc_insertion_point(field_set:manage.SetLogFieldConfigResponse.Error)
 }
 inline void SetLogFieldConfigResponse::set_error(const char* value) {
   set_has_error();
@@ -1293,7 +2837,7 @@ inline void SetLogFieldConfigResponse::set_error(const char* value) {
     error_ = new ::std::string;
   }
   error_->assign(value);
-  // @@protoc_insertion_point(field_set_char:manage.SetLogFieldConfigResponse.error)
+  // @@protoc_insertion_point(field_set_char:manage.SetLogFieldConfigResponse.Error)
 }
 inline void SetLogFieldConfigResponse::set_error(const char* value, size_t size) {
   set_has_error();
@@ -1301,14 +2845,14 @@ inline void SetLogFieldConfigResponse::set_error(const char* value, size_t size)
     error_ = new ::std::string;
   }
   error_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:manage.SetLogFieldConfigResponse.error)
+  // @@protoc_insertion_point(field_set_pointer:manage.SetLogFieldConfigResponse.Error)
 }
 inline ::std::string* SetLogFieldConfigResponse::mutable_error() {
   set_has_error();
   if (error_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     error_ = new ::std::string;
   }
-  // @@protoc_insertion_point(field_mutable:manage.SetLogFieldConfigResponse.error)
+  // @@protoc_insertion_point(field_mutable:manage.SetLogFieldConfigResponse.Error)
   return error_;
 }
 inline ::std::string* SetLogFieldConfigResponse::release_error() {
@@ -1332,14 +2876,14 @@ inline void SetLogFieldConfigResponse::set_allocated_error(::std::string* error)
     clear_has_error();
     error_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
-  // @@protoc_insertion_point(field_set_allocated:manage.SetLogFieldConfigResponse.error)
+  // @@protoc_insertion_point(field_set_allocated:manage.SetLogFieldConfigResponse.Error)
 }
 
 // -------------------------------------------------------------------
 
 // GetLogFieldConfigRequest
 
-// optional string application = 1;
+// required string Application = 1;
 inline bool GetLogFieldConfigRequest::has_application() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -1356,7 +2900,7 @@ inline void GetLogFieldConfigRequest::clear_application() {
   clear_has_application();
 }
 inline const ::std::string& GetLogFieldConfigRequest::application() const {
-  // @@protoc_insertion_point(field_get:manage.GetLogFieldConfigRequest.application)
+  // @@protoc_insertion_point(field_get:manage.GetLogFieldConfigRequest.Application)
   return *application_;
 }
 inline void GetLogFieldConfigRequest::set_application(const ::std::string& value) {
@@ -1365,7 +2909,7 @@ inline void GetLogFieldConfigRequest::set_application(const ::std::string& value
     application_ = new ::std::string;
   }
   application_->assign(value);
-  // @@protoc_insertion_point(field_set:manage.GetLogFieldConfigRequest.application)
+  // @@protoc_insertion_point(field_set:manage.GetLogFieldConfigRequest.Application)
 }
 inline void GetLogFieldConfigRequest::set_application(const char* value) {
   set_has_application();
@@ -1373,7 +2917,7 @@ inline void GetLogFieldConfigRequest::set_application(const char* value) {
     application_ = new ::std::string;
   }
   application_->assign(value);
-  // @@protoc_insertion_point(field_set_char:manage.GetLogFieldConfigRequest.application)
+  // @@protoc_insertion_point(field_set_char:manage.GetLogFieldConfigRequest.Application)
 }
 inline void GetLogFieldConfigRequest::set_application(const char* value, size_t size) {
   set_has_application();
@@ -1381,14 +2925,14 @@ inline void GetLogFieldConfigRequest::set_application(const char* value, size_t 
     application_ = new ::std::string;
   }
   application_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:manage.GetLogFieldConfigRequest.application)
+  // @@protoc_insertion_point(field_set_pointer:manage.GetLogFieldConfigRequest.Application)
 }
 inline ::std::string* GetLogFieldConfigRequest::mutable_application() {
   set_has_application();
   if (application_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     application_ = new ::std::string;
   }
-  // @@protoc_insertion_point(field_mutable:manage.GetLogFieldConfigRequest.application)
+  // @@protoc_insertion_point(field_mutable:manage.GetLogFieldConfigRequest.Application)
   return application_;
 }
 inline ::std::string* GetLogFieldConfigRequest::release_application() {
@@ -1412,10 +2956,10 @@ inline void GetLogFieldConfigRequest::set_allocated_application(::std::string* a
     clear_has_application();
     application_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
-  // @@protoc_insertion_point(field_set_allocated:manage.GetLogFieldConfigRequest.application)
+  // @@protoc_insertion_point(field_set_allocated:manage.GetLogFieldConfigRequest.Application)
 }
 
-// optional string field = 2;
+// optional string Field = 2;
 inline bool GetLogFieldConfigRequest::has_field() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -1432,7 +2976,7 @@ inline void GetLogFieldConfigRequest::clear_field() {
   clear_has_field();
 }
 inline const ::std::string& GetLogFieldConfigRequest::field() const {
-  // @@protoc_insertion_point(field_get:manage.GetLogFieldConfigRequest.field)
+  // @@protoc_insertion_point(field_get:manage.GetLogFieldConfigRequest.Field)
   return *field_;
 }
 inline void GetLogFieldConfigRequest::set_field(const ::std::string& value) {
@@ -1441,7 +2985,7 @@ inline void GetLogFieldConfigRequest::set_field(const ::std::string& value) {
     field_ = new ::std::string;
   }
   field_->assign(value);
-  // @@protoc_insertion_point(field_set:manage.GetLogFieldConfigRequest.field)
+  // @@protoc_insertion_point(field_set:manage.GetLogFieldConfigRequest.Field)
 }
 inline void GetLogFieldConfigRequest::set_field(const char* value) {
   set_has_field();
@@ -1449,7 +2993,7 @@ inline void GetLogFieldConfigRequest::set_field(const char* value) {
     field_ = new ::std::string;
   }
   field_->assign(value);
-  // @@protoc_insertion_point(field_set_char:manage.GetLogFieldConfigRequest.field)
+  // @@protoc_insertion_point(field_set_char:manage.GetLogFieldConfigRequest.Field)
 }
 inline void GetLogFieldConfigRequest::set_field(const char* value, size_t size) {
   set_has_field();
@@ -1457,14 +3001,14 @@ inline void GetLogFieldConfigRequest::set_field(const char* value, size_t size) 
     field_ = new ::std::string;
   }
   field_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:manage.GetLogFieldConfigRequest.field)
+  // @@protoc_insertion_point(field_set_pointer:manage.GetLogFieldConfigRequest.Field)
 }
 inline ::std::string* GetLogFieldConfigRequest::mutable_field() {
   set_has_field();
   if (field_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     field_ = new ::std::string;
   }
-  // @@protoc_insertion_point(field_mutable:manage.GetLogFieldConfigRequest.field)
+  // @@protoc_insertion_point(field_mutable:manage.GetLogFieldConfigRequest.Field)
   return field_;
 }
 inline ::std::string* GetLogFieldConfigRequest::release_field() {
@@ -1488,14 +3032,14 @@ inline void GetLogFieldConfigRequest::set_allocated_field(::std::string* field) 
     clear_has_field();
     field_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
-  // @@protoc_insertion_point(field_set_allocated:manage.GetLogFieldConfigRequest.field)
+  // @@protoc_insertion_point(field_set_allocated:manage.GetLogFieldConfigRequest.Field)
 }
 
 // -------------------------------------------------------------------
 
 // GetLogFieldConfigResponse
 
-// required .manage.GetLogFieldConfigResponse.Res_Status status = 1;
+// required .manage.GetLogFieldConfigResponse.Res_Status Status = 1;
 inline bool GetLogFieldConfigResponse::has_status() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -1510,17 +3054,17 @@ inline void GetLogFieldConfigResponse::clear_status() {
   clear_has_status();
 }
 inline ::manage::GetLogFieldConfigResponse_Res_Status GetLogFieldConfigResponse::status() const {
-  // @@protoc_insertion_point(field_get:manage.GetLogFieldConfigResponse.status)
+  // @@protoc_insertion_point(field_get:manage.GetLogFieldConfigResponse.Status)
   return static_cast< ::manage::GetLogFieldConfigResponse_Res_Status >(status_);
 }
 inline void GetLogFieldConfigResponse::set_status(::manage::GetLogFieldConfigResponse_Res_Status value) {
   assert(::manage::GetLogFieldConfigResponse_Res_Status_IsValid(value));
   set_has_status();
   status_ = value;
-  // @@protoc_insertion_point(field_set:manage.GetLogFieldConfigResponse.status)
+  // @@protoc_insertion_point(field_set:manage.GetLogFieldConfigResponse.Status)
 }
 
-// optional string error = 2;
+// optional string Error = 2;
 inline bool GetLogFieldConfigResponse::has_error() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -1537,7 +3081,7 @@ inline void GetLogFieldConfigResponse::clear_error() {
   clear_has_error();
 }
 inline const ::std::string& GetLogFieldConfigResponse::error() const {
-  // @@protoc_insertion_point(field_get:manage.GetLogFieldConfigResponse.error)
+  // @@protoc_insertion_point(field_get:manage.GetLogFieldConfigResponse.Error)
   return *error_;
 }
 inline void GetLogFieldConfigResponse::set_error(const ::std::string& value) {
@@ -1546,7 +3090,7 @@ inline void GetLogFieldConfigResponse::set_error(const ::std::string& value) {
     error_ = new ::std::string;
   }
   error_->assign(value);
-  // @@protoc_insertion_point(field_set:manage.GetLogFieldConfigResponse.error)
+  // @@protoc_insertion_point(field_set:manage.GetLogFieldConfigResponse.Error)
 }
 inline void GetLogFieldConfigResponse::set_error(const char* value) {
   set_has_error();
@@ -1554,7 +3098,7 @@ inline void GetLogFieldConfigResponse::set_error(const char* value) {
     error_ = new ::std::string;
   }
   error_->assign(value);
-  // @@protoc_insertion_point(field_set_char:manage.GetLogFieldConfigResponse.error)
+  // @@protoc_insertion_point(field_set_char:manage.GetLogFieldConfigResponse.Error)
 }
 inline void GetLogFieldConfigResponse::set_error(const char* value, size_t size) {
   set_has_error();
@@ -1562,14 +3106,14 @@ inline void GetLogFieldConfigResponse::set_error(const char* value, size_t size)
     error_ = new ::std::string;
   }
   error_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:manage.GetLogFieldConfigResponse.error)
+  // @@protoc_insertion_point(field_set_pointer:manage.GetLogFieldConfigResponse.Error)
 }
 inline ::std::string* GetLogFieldConfigResponse::mutable_error() {
   set_has_error();
   if (error_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     error_ = new ::std::string;
   }
-  // @@protoc_insertion_point(field_mutable:manage.GetLogFieldConfigResponse.error)
+  // @@protoc_insertion_point(field_mutable:manage.GetLogFieldConfigResponse.Error)
   return error_;
 }
 inline ::std::string* GetLogFieldConfigResponse::release_error() {
@@ -1593,10 +3137,10 @@ inline void GetLogFieldConfigResponse::set_allocated_error(::std::string* error)
     clear_has_error();
     error_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
-  // @@protoc_insertion_point(field_set_allocated:manage.GetLogFieldConfigResponse.error)
+  // @@protoc_insertion_point(field_set_allocated:manage.GetLogFieldConfigResponse.Error)
 }
 
-// repeated .manage.FiledConfig fieldconfigs = 3;
+// repeated .manage.FiledConfig Fieldconfigs = 3;
 inline int GetLogFieldConfigResponse::fieldconfigs_size() const {
   return fieldconfigs_.size();
 }
@@ -1604,25 +3148,25 @@ inline void GetLogFieldConfigResponse::clear_fieldconfigs() {
   fieldconfigs_.Clear();
 }
 inline const ::manage::FiledConfig& GetLogFieldConfigResponse::fieldconfigs(int index) const {
-  // @@protoc_insertion_point(field_get:manage.GetLogFieldConfigResponse.fieldconfigs)
+  // @@protoc_insertion_point(field_get:manage.GetLogFieldConfigResponse.Fieldconfigs)
   return fieldconfigs_.Get(index);
 }
 inline ::manage::FiledConfig* GetLogFieldConfigResponse::mutable_fieldconfigs(int index) {
-  // @@protoc_insertion_point(field_mutable:manage.GetLogFieldConfigResponse.fieldconfigs)
+  // @@protoc_insertion_point(field_mutable:manage.GetLogFieldConfigResponse.Fieldconfigs)
   return fieldconfigs_.Mutable(index);
 }
 inline ::manage::FiledConfig* GetLogFieldConfigResponse::add_fieldconfigs() {
-  // @@protoc_insertion_point(field_add:manage.GetLogFieldConfigResponse.fieldconfigs)
+  // @@protoc_insertion_point(field_add:manage.GetLogFieldConfigResponse.Fieldconfigs)
   return fieldconfigs_.Add();
 }
 inline const ::google::protobuf::RepeatedPtrField< ::manage::FiledConfig >&
 GetLogFieldConfigResponse::fieldconfigs() const {
-  // @@protoc_insertion_point(field_list:manage.GetLogFieldConfigResponse.fieldconfigs)
+  // @@protoc_insertion_point(field_list:manage.GetLogFieldConfigResponse.Fieldconfigs)
   return fieldconfigs_;
 }
 inline ::google::protobuf::RepeatedPtrField< ::manage::FiledConfig >*
 GetLogFieldConfigResponse::mutable_fieldconfigs() {
-  // @@protoc_insertion_point(field_mutable_list:manage.GetLogFieldConfigResponse.fieldconfigs)
+  // @@protoc_insertion_point(field_mutable_list:manage.GetLogFieldConfigResponse.Fieldconfigs)
   return &fieldconfigs_;
 }
 
@@ -1630,7 +3174,7 @@ GetLogFieldConfigResponse::mutable_fieldconfigs() {
 
 // GetLogTransmitStatRequest
 
-// optional string application = 1;
+// optional string Application = 1;
 inline bool GetLogTransmitStatRequest::has_application() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -1647,7 +3191,7 @@ inline void GetLogTransmitStatRequest::clear_application() {
   clear_has_application();
 }
 inline const ::std::string& GetLogTransmitStatRequest::application() const {
-  // @@protoc_insertion_point(field_get:manage.GetLogTransmitStatRequest.application)
+  // @@protoc_insertion_point(field_get:manage.GetLogTransmitStatRequest.Application)
   return *application_;
 }
 inline void GetLogTransmitStatRequest::set_application(const ::std::string& value) {
@@ -1656,7 +3200,7 @@ inline void GetLogTransmitStatRequest::set_application(const ::std::string& valu
     application_ = new ::std::string;
   }
   application_->assign(value);
-  // @@protoc_insertion_point(field_set:manage.GetLogTransmitStatRequest.application)
+  // @@protoc_insertion_point(field_set:manage.GetLogTransmitStatRequest.Application)
 }
 inline void GetLogTransmitStatRequest::set_application(const char* value) {
   set_has_application();
@@ -1664,7 +3208,7 @@ inline void GetLogTransmitStatRequest::set_application(const char* value) {
     application_ = new ::std::string;
   }
   application_->assign(value);
-  // @@protoc_insertion_point(field_set_char:manage.GetLogTransmitStatRequest.application)
+  // @@protoc_insertion_point(field_set_char:manage.GetLogTransmitStatRequest.Application)
 }
 inline void GetLogTransmitStatRequest::set_application(const char* value, size_t size) {
   set_has_application();
@@ -1672,14 +3216,14 @@ inline void GetLogTransmitStatRequest::set_application(const char* value, size_t
     application_ = new ::std::string;
   }
   application_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:manage.GetLogTransmitStatRequest.application)
+  // @@protoc_insertion_point(field_set_pointer:manage.GetLogTransmitStatRequest.Application)
 }
 inline ::std::string* GetLogTransmitStatRequest::mutable_application() {
   set_has_application();
   if (application_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     application_ = new ::std::string;
   }
-  // @@protoc_insertion_point(field_mutable:manage.GetLogTransmitStatRequest.application)
+  // @@protoc_insertion_point(field_mutable:manage.GetLogTransmitStatRequest.Application)
   return application_;
 }
 inline ::std::string* GetLogTransmitStatRequest::release_application() {
@@ -1703,10 +3247,10 @@ inline void GetLogTransmitStatRequest::set_allocated_application(::std::string* 
     clear_has_application();
     application_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
-  // @@protoc_insertion_point(field_set_allocated:manage.GetLogTransmitStatRequest.application)
+  // @@protoc_insertion_point(field_set_allocated:manage.GetLogTransmitStatRequest.Application)
 }
 
-// optional bool logtype = 2;
+// optional bool Logtype = 2;
 inline bool GetLogTransmitStatRequest::has_logtype() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -1721,16 +3265,16 @@ inline void GetLogTransmitStatRequest::clear_logtype() {
   clear_has_logtype();
 }
 inline bool GetLogTransmitStatRequest::logtype() const {
-  // @@protoc_insertion_point(field_get:manage.GetLogTransmitStatRequest.logtype)
+  // @@protoc_insertion_point(field_get:manage.GetLogTransmitStatRequest.Logtype)
   return logtype_;
 }
 inline void GetLogTransmitStatRequest::set_logtype(bool value) {
   set_has_logtype();
   logtype_ = value;
-  // @@protoc_insertion_point(field_set:manage.GetLogTransmitStatRequest.logtype)
+  // @@protoc_insertion_point(field_set:manage.GetLogTransmitStatRequest.Logtype)
 }
 
-// required int64 startime = 3;
+// required int64 Startime = 3;
 inline bool GetLogTransmitStatRequest::has_startime() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
@@ -1745,16 +3289,16 @@ inline void GetLogTransmitStatRequest::clear_startime() {
   clear_has_startime();
 }
 inline ::google::protobuf::int64 GetLogTransmitStatRequest::startime() const {
-  // @@protoc_insertion_point(field_get:manage.GetLogTransmitStatRequest.startime)
+  // @@protoc_insertion_point(field_get:manage.GetLogTransmitStatRequest.Startime)
   return startime_;
 }
 inline void GetLogTransmitStatRequest::set_startime(::google::protobuf::int64 value) {
   set_has_startime();
   startime_ = value;
-  // @@protoc_insertion_point(field_set:manage.GetLogTransmitStatRequest.startime)
+  // @@protoc_insertion_point(field_set:manage.GetLogTransmitStatRequest.Startime)
 }
 
-// required int64 endtime = 4;
+// required int64 Endtime = 4;
 inline bool GetLogTransmitStatRequest::has_endtime() const {
   return (_has_bits_[0] & 0x00000008u) != 0;
 }
@@ -1769,20 +3313,20 @@ inline void GetLogTransmitStatRequest::clear_endtime() {
   clear_has_endtime();
 }
 inline ::google::protobuf::int64 GetLogTransmitStatRequest::endtime() const {
-  // @@protoc_insertion_point(field_get:manage.GetLogTransmitStatRequest.endtime)
+  // @@protoc_insertion_point(field_get:manage.GetLogTransmitStatRequest.Endtime)
   return endtime_;
 }
 inline void GetLogTransmitStatRequest::set_endtime(::google::protobuf::int64 value) {
   set_has_endtime();
   endtime_ = value;
-  // @@protoc_insertion_point(field_set:manage.GetLogTransmitStatRequest.endtime)
+  // @@protoc_insertion_point(field_set:manage.GetLogTransmitStatRequest.Endtime)
 }
 
 // -------------------------------------------------------------------
 
 // GetLogTransmitStatResponse
 
-// required .manage.GetLogTransmitStatResponse.Res_Status status = 1;
+// required .manage.GetLogTransmitStatResponse.Res_Status Status = 1;
 inline bool GetLogTransmitStatResponse::has_status() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -1797,17 +3341,17 @@ inline void GetLogTransmitStatResponse::clear_status() {
   clear_has_status();
 }
 inline ::manage::GetLogTransmitStatResponse_Res_Status GetLogTransmitStatResponse::status() const {
-  // @@protoc_insertion_point(field_get:manage.GetLogTransmitStatResponse.status)
+  // @@protoc_insertion_point(field_get:manage.GetLogTransmitStatResponse.Status)
   return static_cast< ::manage::GetLogTransmitStatResponse_Res_Status >(status_);
 }
 inline void GetLogTransmitStatResponse::set_status(::manage::GetLogTransmitStatResponse_Res_Status value) {
   assert(::manage::GetLogTransmitStatResponse_Res_Status_IsValid(value));
   set_has_status();
   status_ = value;
-  // @@protoc_insertion_point(field_set:manage.GetLogTransmitStatResponse.status)
+  // @@protoc_insertion_point(field_set:manage.GetLogTransmitStatResponse.Status)
 }
 
-// optional string error = 2;
+// optional string Error = 2;
 inline bool GetLogTransmitStatResponse::has_error() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -1824,7 +3368,7 @@ inline void GetLogTransmitStatResponse::clear_error() {
   clear_has_error();
 }
 inline const ::std::string& GetLogTransmitStatResponse::error() const {
-  // @@protoc_insertion_point(field_get:manage.GetLogTransmitStatResponse.error)
+  // @@protoc_insertion_point(field_get:manage.GetLogTransmitStatResponse.Error)
   return *error_;
 }
 inline void GetLogTransmitStatResponse::set_error(const ::std::string& value) {
@@ -1833,7 +3377,7 @@ inline void GetLogTransmitStatResponse::set_error(const ::std::string& value) {
     error_ = new ::std::string;
   }
   error_->assign(value);
-  // @@protoc_insertion_point(field_set:manage.GetLogTransmitStatResponse.error)
+  // @@protoc_insertion_point(field_set:manage.GetLogTransmitStatResponse.Error)
 }
 inline void GetLogTransmitStatResponse::set_error(const char* value) {
   set_has_error();
@@ -1841,7 +3385,7 @@ inline void GetLogTransmitStatResponse::set_error(const char* value) {
     error_ = new ::std::string;
   }
   error_->assign(value);
-  // @@protoc_insertion_point(field_set_char:manage.GetLogTransmitStatResponse.error)
+  // @@protoc_insertion_point(field_set_char:manage.GetLogTransmitStatResponse.Error)
 }
 inline void GetLogTransmitStatResponse::set_error(const char* value, size_t size) {
   set_has_error();
@@ -1849,14 +3393,14 @@ inline void GetLogTransmitStatResponse::set_error(const char* value, size_t size
     error_ = new ::std::string;
   }
   error_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:manage.GetLogTransmitStatResponse.error)
+  // @@protoc_insertion_point(field_set_pointer:manage.GetLogTransmitStatResponse.Error)
 }
 inline ::std::string* GetLogTransmitStatResponse::mutable_error() {
   set_has_error();
   if (error_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     error_ = new ::std::string;
   }
-  // @@protoc_insertion_point(field_mutable:manage.GetLogTransmitStatResponse.error)
+  // @@protoc_insertion_point(field_mutable:manage.GetLogTransmitStatResponse.Error)
   return error_;
 }
 inline ::std::string* GetLogTransmitStatResponse::release_error() {
@@ -1880,31 +3424,1060 @@ inline void GetLogTransmitStatResponse::set_allocated_error(::std::string* error
     clear_has_error();
     error_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
-  // @@protoc_insertion_point(field_set_allocated:manage.GetLogTransmitStatResponse.error)
+  // @@protoc_insertion_point(field_set_allocated:manage.GetLogTransmitStatResponse.Error)
 }
 
-// required int64 num = 3;
-inline bool GetLogTransmitStatResponse::has_num() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
+// repeated .manage.MapEntry cnt = 3;
+inline int GetLogTransmitStatResponse::cnt_size() const {
+  return cnt_.size();
 }
-inline void GetLogTransmitStatResponse::set_has_num() {
-  _has_bits_[0] |= 0x00000004u;
+inline void GetLogTransmitStatResponse::clear_cnt() {
+  cnt_.Clear();
 }
-inline void GetLogTransmitStatResponse::clear_has_num() {
-  _has_bits_[0] &= ~0x00000004u;
+inline const ::manage::MapEntry& GetLogTransmitStatResponse::cnt(int index) const {
+  // @@protoc_insertion_point(field_get:manage.GetLogTransmitStatResponse.cnt)
+  return cnt_.Get(index);
 }
-inline void GetLogTransmitStatResponse::clear_num() {
-  num_ = GOOGLE_LONGLONG(0);
-  clear_has_num();
+inline ::manage::MapEntry* GetLogTransmitStatResponse::mutable_cnt(int index) {
+  // @@protoc_insertion_point(field_mutable:manage.GetLogTransmitStatResponse.cnt)
+  return cnt_.Mutable(index);
 }
-inline ::google::protobuf::int64 GetLogTransmitStatResponse::num() const {
-  // @@protoc_insertion_point(field_get:manage.GetLogTransmitStatResponse.num)
-  return num_;
+inline ::manage::MapEntry* GetLogTransmitStatResponse::add_cnt() {
+  // @@protoc_insertion_point(field_add:manage.GetLogTransmitStatResponse.cnt)
+  return cnt_.Add();
 }
-inline void GetLogTransmitStatResponse::set_num(::google::protobuf::int64 value) {
-  set_has_num();
-  num_ = value;
-  // @@protoc_insertion_point(field_set:manage.GetLogTransmitStatResponse.num)
+inline const ::google::protobuf::RepeatedPtrField< ::manage::MapEntry >&
+GetLogTransmitStatResponse::cnt() const {
+  // @@protoc_insertion_point(field_list:manage.GetLogTransmitStatResponse.cnt)
+  return cnt_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::manage::MapEntry >*
+GetLogTransmitStatResponse::mutable_cnt() {
+  // @@protoc_insertion_point(field_mutable_list:manage.GetLogTransmitStatResponse.cnt)
+  return &cnt_;
+}
+
+// -------------------------------------------------------------------
+
+// AddLogTransmitStatRequest
+
+// required string Application = 1;
+inline bool AddLogTransmitStatRequest::has_application() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void AddLogTransmitStatRequest::set_has_application() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void AddLogTransmitStatRequest::clear_has_application() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void AddLogTransmitStatRequest::clear_application() {
+  if (application_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    application_->clear();
+  }
+  clear_has_application();
+}
+inline const ::std::string& AddLogTransmitStatRequest::application() const {
+  // @@protoc_insertion_point(field_get:manage.AddLogTransmitStatRequest.Application)
+  return *application_;
+}
+inline void AddLogTransmitStatRequest::set_application(const ::std::string& value) {
+  set_has_application();
+  if (application_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    application_ = new ::std::string;
+  }
+  application_->assign(value);
+  // @@protoc_insertion_point(field_set:manage.AddLogTransmitStatRequest.Application)
+}
+inline void AddLogTransmitStatRequest::set_application(const char* value) {
+  set_has_application();
+  if (application_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    application_ = new ::std::string;
+  }
+  application_->assign(value);
+  // @@protoc_insertion_point(field_set_char:manage.AddLogTransmitStatRequest.Application)
+}
+inline void AddLogTransmitStatRequest::set_application(const char* value, size_t size) {
+  set_has_application();
+  if (application_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    application_ = new ::std::string;
+  }
+  application_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:manage.AddLogTransmitStatRequest.Application)
+}
+inline ::std::string* AddLogTransmitStatRequest::mutable_application() {
+  set_has_application();
+  if (application_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    application_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:manage.AddLogTransmitStatRequest.Application)
+  return application_;
+}
+inline ::std::string* AddLogTransmitStatRequest::release_application() {
+  clear_has_application();
+  if (application_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = application_;
+    application_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void AddLogTransmitStatRequest::set_allocated_application(::std::string* application) {
+  if (application_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete application_;
+  }
+  if (application) {
+    set_has_application();
+    application_ = application;
+  } else {
+    clear_has_application();
+    application_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:manage.AddLogTransmitStatRequest.Application)
+}
+
+// required string Srcid = 2;
+inline bool AddLogTransmitStatRequest::has_srcid() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void AddLogTransmitStatRequest::set_has_srcid() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void AddLogTransmitStatRequest::clear_has_srcid() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void AddLogTransmitStatRequest::clear_srcid() {
+  if (srcid_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    srcid_->clear();
+  }
+  clear_has_srcid();
+}
+inline const ::std::string& AddLogTransmitStatRequest::srcid() const {
+  // @@protoc_insertion_point(field_get:manage.AddLogTransmitStatRequest.Srcid)
+  return *srcid_;
+}
+inline void AddLogTransmitStatRequest::set_srcid(const ::std::string& value) {
+  set_has_srcid();
+  if (srcid_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    srcid_ = new ::std::string;
+  }
+  srcid_->assign(value);
+  // @@protoc_insertion_point(field_set:manage.AddLogTransmitStatRequest.Srcid)
+}
+inline void AddLogTransmitStatRequest::set_srcid(const char* value) {
+  set_has_srcid();
+  if (srcid_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    srcid_ = new ::std::string;
+  }
+  srcid_->assign(value);
+  // @@protoc_insertion_point(field_set_char:manage.AddLogTransmitStatRequest.Srcid)
+}
+inline void AddLogTransmitStatRequest::set_srcid(const char* value, size_t size) {
+  set_has_srcid();
+  if (srcid_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    srcid_ = new ::std::string;
+  }
+  srcid_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:manage.AddLogTransmitStatRequest.Srcid)
+}
+inline ::std::string* AddLogTransmitStatRequest::mutable_srcid() {
+  set_has_srcid();
+  if (srcid_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    srcid_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:manage.AddLogTransmitStatRequest.Srcid)
+  return srcid_;
+}
+inline ::std::string* AddLogTransmitStatRequest::release_srcid() {
+  clear_has_srcid();
+  if (srcid_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = srcid_;
+    srcid_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void AddLogTransmitStatRequest::set_allocated_srcid(::std::string* srcid) {
+  if (srcid_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete srcid_;
+  }
+  if (srcid) {
+    set_has_srcid();
+    srcid_ = srcid;
+  } else {
+    clear_has_srcid();
+    srcid_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:manage.AddLogTransmitStatRequest.Srcid)
+}
+
+// -------------------------------------------------------------------
+
+// AddLogTransmitStatResponse
+
+// required .manage.AddLogTransmitStatResponse.Res_Status Status = 1;
+inline bool AddLogTransmitStatResponse::has_status() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void AddLogTransmitStatResponse::set_has_status() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void AddLogTransmitStatResponse::clear_has_status() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void AddLogTransmitStatResponse::clear_status() {
+  status_ = 0;
+  clear_has_status();
+}
+inline ::manage::AddLogTransmitStatResponse_Res_Status AddLogTransmitStatResponse::status() const {
+  // @@protoc_insertion_point(field_get:manage.AddLogTransmitStatResponse.Status)
+  return static_cast< ::manage::AddLogTransmitStatResponse_Res_Status >(status_);
+}
+inline void AddLogTransmitStatResponse::set_status(::manage::AddLogTransmitStatResponse_Res_Status value) {
+  assert(::manage::AddLogTransmitStatResponse_Res_Status_IsValid(value));
+  set_has_status();
+  status_ = value;
+  // @@protoc_insertion_point(field_set:manage.AddLogTransmitStatResponse.Status)
+}
+
+// optional string Error = 2;
+inline bool AddLogTransmitStatResponse::has_error() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void AddLogTransmitStatResponse::set_has_error() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void AddLogTransmitStatResponse::clear_has_error() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void AddLogTransmitStatResponse::clear_error() {
+  if (error_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    error_->clear();
+  }
+  clear_has_error();
+}
+inline const ::std::string& AddLogTransmitStatResponse::error() const {
+  // @@protoc_insertion_point(field_get:manage.AddLogTransmitStatResponse.Error)
+  return *error_;
+}
+inline void AddLogTransmitStatResponse::set_error(const ::std::string& value) {
+  set_has_error();
+  if (error_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    error_ = new ::std::string;
+  }
+  error_->assign(value);
+  // @@protoc_insertion_point(field_set:manage.AddLogTransmitStatResponse.Error)
+}
+inline void AddLogTransmitStatResponse::set_error(const char* value) {
+  set_has_error();
+  if (error_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    error_ = new ::std::string;
+  }
+  error_->assign(value);
+  // @@protoc_insertion_point(field_set_char:manage.AddLogTransmitStatResponse.Error)
+}
+inline void AddLogTransmitStatResponse::set_error(const char* value, size_t size) {
+  set_has_error();
+  if (error_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    error_ = new ::std::string;
+  }
+  error_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:manage.AddLogTransmitStatResponse.Error)
+}
+inline ::std::string* AddLogTransmitStatResponse::mutable_error() {
+  set_has_error();
+  if (error_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    error_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:manage.AddLogTransmitStatResponse.Error)
+  return error_;
+}
+inline ::std::string* AddLogTransmitStatResponse::release_error() {
+  clear_has_error();
+  if (error_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = error_;
+    error_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void AddLogTransmitStatResponse::set_allocated_error(::std::string* error) {
+  if (error_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete error_;
+  }
+  if (error) {
+    set_has_error();
+    error_ = error;
+  } else {
+    clear_has_error();
+    error_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:manage.AddLogTransmitStatResponse.Error)
+}
+
+// -------------------------------------------------------------------
+
+// SetLogFilterConfigRequest
+
+// required bool Op = 1;
+inline bool SetLogFilterConfigRequest::has_op() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void SetLogFilterConfigRequest::set_has_op() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void SetLogFilterConfigRequest::clear_has_op() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void SetLogFilterConfigRequest::clear_op() {
+  op_ = false;
+  clear_has_op();
+}
+inline bool SetLogFilterConfigRequest::op() const {
+  // @@protoc_insertion_point(field_get:manage.SetLogFilterConfigRequest.Op)
+  return op_;
+}
+inline void SetLogFilterConfigRequest::set_op(bool value) {
+  set_has_op();
+  op_ = value;
+  // @@protoc_insertion_point(field_set:manage.SetLogFilterConfigRequest.Op)
+}
+
+// required string Srcid = 2;
+inline bool SetLogFilterConfigRequest::has_srcid() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void SetLogFilterConfigRequest::set_has_srcid() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void SetLogFilterConfigRequest::clear_has_srcid() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void SetLogFilterConfigRequest::clear_srcid() {
+  if (srcid_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    srcid_->clear();
+  }
+  clear_has_srcid();
+}
+inline const ::std::string& SetLogFilterConfigRequest::srcid() const {
+  // @@protoc_insertion_point(field_get:manage.SetLogFilterConfigRequest.Srcid)
+  return *srcid_;
+}
+inline void SetLogFilterConfigRequest::set_srcid(const ::std::string& value) {
+  set_has_srcid();
+  if (srcid_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    srcid_ = new ::std::string;
+  }
+  srcid_->assign(value);
+  // @@protoc_insertion_point(field_set:manage.SetLogFilterConfigRequest.Srcid)
+}
+inline void SetLogFilterConfigRequest::set_srcid(const char* value) {
+  set_has_srcid();
+  if (srcid_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    srcid_ = new ::std::string;
+  }
+  srcid_->assign(value);
+  // @@protoc_insertion_point(field_set_char:manage.SetLogFilterConfigRequest.Srcid)
+}
+inline void SetLogFilterConfigRequest::set_srcid(const char* value, size_t size) {
+  set_has_srcid();
+  if (srcid_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    srcid_ = new ::std::string;
+  }
+  srcid_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:manage.SetLogFilterConfigRequest.Srcid)
+}
+inline ::std::string* SetLogFilterConfigRequest::mutable_srcid() {
+  set_has_srcid();
+  if (srcid_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    srcid_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:manage.SetLogFilterConfigRequest.Srcid)
+  return srcid_;
+}
+inline ::std::string* SetLogFilterConfigRequest::release_srcid() {
+  clear_has_srcid();
+  if (srcid_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = srcid_;
+    srcid_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void SetLogFilterConfigRequest::set_allocated_srcid(::std::string* srcid) {
+  if (srcid_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete srcid_;
+  }
+  if (srcid) {
+    set_has_srcid();
+    srcid_ = srcid;
+  } else {
+    clear_has_srcid();
+    srcid_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:manage.SetLogFilterConfigRequest.Srcid)
+}
+
+// -------------------------------------------------------------------
+
+// SetLogFilterConfigResponse
+
+// required .manage.SetLogFilterConfigResponse.Res_Status Status = 1;
+inline bool SetLogFilterConfigResponse::has_status() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void SetLogFilterConfigResponse::set_has_status() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void SetLogFilterConfigResponse::clear_has_status() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void SetLogFilterConfigResponse::clear_status() {
+  status_ = 0;
+  clear_has_status();
+}
+inline ::manage::SetLogFilterConfigResponse_Res_Status SetLogFilterConfigResponse::status() const {
+  // @@protoc_insertion_point(field_get:manage.SetLogFilterConfigResponse.Status)
+  return static_cast< ::manage::SetLogFilterConfigResponse_Res_Status >(status_);
+}
+inline void SetLogFilterConfigResponse::set_status(::manage::SetLogFilterConfigResponse_Res_Status value) {
+  assert(::manage::SetLogFilterConfigResponse_Res_Status_IsValid(value));
+  set_has_status();
+  status_ = value;
+  // @@protoc_insertion_point(field_set:manage.SetLogFilterConfigResponse.Status)
+}
+
+// optional string Error = 2;
+inline bool SetLogFilterConfigResponse::has_error() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void SetLogFilterConfigResponse::set_has_error() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void SetLogFilterConfigResponse::clear_has_error() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void SetLogFilterConfigResponse::clear_error() {
+  if (error_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    error_->clear();
+  }
+  clear_has_error();
+}
+inline const ::std::string& SetLogFilterConfigResponse::error() const {
+  // @@protoc_insertion_point(field_get:manage.SetLogFilterConfigResponse.Error)
+  return *error_;
+}
+inline void SetLogFilterConfigResponse::set_error(const ::std::string& value) {
+  set_has_error();
+  if (error_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    error_ = new ::std::string;
+  }
+  error_->assign(value);
+  // @@protoc_insertion_point(field_set:manage.SetLogFilterConfigResponse.Error)
+}
+inline void SetLogFilterConfigResponse::set_error(const char* value) {
+  set_has_error();
+  if (error_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    error_ = new ::std::string;
+  }
+  error_->assign(value);
+  // @@protoc_insertion_point(field_set_char:manage.SetLogFilterConfigResponse.Error)
+}
+inline void SetLogFilterConfigResponse::set_error(const char* value, size_t size) {
+  set_has_error();
+  if (error_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    error_ = new ::std::string;
+  }
+  error_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:manage.SetLogFilterConfigResponse.Error)
+}
+inline ::std::string* SetLogFilterConfigResponse::mutable_error() {
+  set_has_error();
+  if (error_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    error_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:manage.SetLogFilterConfigResponse.Error)
+  return error_;
+}
+inline ::std::string* SetLogFilterConfigResponse::release_error() {
+  clear_has_error();
+  if (error_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = error_;
+    error_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void SetLogFilterConfigResponse::set_allocated_error(::std::string* error) {
+  if (error_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete error_;
+  }
+  if (error) {
+    set_has_error();
+    error_ = error;
+  } else {
+    clear_has_error();
+    error_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:manage.SetLogFilterConfigResponse.Error)
+}
+
+// -------------------------------------------------------------------
+
+// GetLogFilterConfigRequest
+
+// optional bool Application = 1;
+inline bool GetLogFilterConfigRequest::has_application() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void GetLogFilterConfigRequest::set_has_application() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void GetLogFilterConfigRequest::clear_has_application() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void GetLogFilterConfigRequest::clear_application() {
+  application_ = false;
+  clear_has_application();
+}
+inline bool GetLogFilterConfigRequest::application() const {
+  // @@protoc_insertion_point(field_get:manage.GetLogFilterConfigRequest.Application)
+  return application_;
+}
+inline void GetLogFilterConfigRequest::set_application(bool value) {
+  set_has_application();
+  application_ = value;
+  // @@protoc_insertion_point(field_set:manage.GetLogFilterConfigRequest.Application)
+}
+
+// -------------------------------------------------------------------
+
+// GetLogFilterConfigResponse
+
+// required .manage.GetLogFilterConfigResponse.Res_Status Status = 1;
+inline bool GetLogFilterConfigResponse::has_status() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void GetLogFilterConfigResponse::set_has_status() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void GetLogFilterConfigResponse::clear_has_status() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void GetLogFilterConfigResponse::clear_status() {
+  status_ = 0;
+  clear_has_status();
+}
+inline ::manage::GetLogFilterConfigResponse_Res_Status GetLogFilterConfigResponse::status() const {
+  // @@protoc_insertion_point(field_get:manage.GetLogFilterConfigResponse.Status)
+  return static_cast< ::manage::GetLogFilterConfigResponse_Res_Status >(status_);
+}
+inline void GetLogFilterConfigResponse::set_status(::manage::GetLogFilterConfigResponse_Res_Status value) {
+  assert(::manage::GetLogFilterConfigResponse_Res_Status_IsValid(value));
+  set_has_status();
+  status_ = value;
+  // @@protoc_insertion_point(field_set:manage.GetLogFilterConfigResponse.Status)
+}
+
+// optional string Error = 2;
+inline bool GetLogFilterConfigResponse::has_error() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void GetLogFilterConfigResponse::set_has_error() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void GetLogFilterConfigResponse::clear_has_error() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void GetLogFilterConfigResponse::clear_error() {
+  if (error_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    error_->clear();
+  }
+  clear_has_error();
+}
+inline const ::std::string& GetLogFilterConfigResponse::error() const {
+  // @@protoc_insertion_point(field_get:manage.GetLogFilterConfigResponse.Error)
+  return *error_;
+}
+inline void GetLogFilterConfigResponse::set_error(const ::std::string& value) {
+  set_has_error();
+  if (error_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    error_ = new ::std::string;
+  }
+  error_->assign(value);
+  // @@protoc_insertion_point(field_set:manage.GetLogFilterConfigResponse.Error)
+}
+inline void GetLogFilterConfigResponse::set_error(const char* value) {
+  set_has_error();
+  if (error_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    error_ = new ::std::string;
+  }
+  error_->assign(value);
+  // @@protoc_insertion_point(field_set_char:manage.GetLogFilterConfigResponse.Error)
+}
+inline void GetLogFilterConfigResponse::set_error(const char* value, size_t size) {
+  set_has_error();
+  if (error_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    error_ = new ::std::string;
+  }
+  error_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:manage.GetLogFilterConfigResponse.Error)
+}
+inline ::std::string* GetLogFilterConfigResponse::mutable_error() {
+  set_has_error();
+  if (error_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    error_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:manage.GetLogFilterConfigResponse.Error)
+  return error_;
+}
+inline ::std::string* GetLogFilterConfigResponse::release_error() {
+  clear_has_error();
+  if (error_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = error_;
+    error_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void GetLogFilterConfigResponse::set_allocated_error(::std::string* error) {
+  if (error_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete error_;
+  }
+  if (error) {
+    set_has_error();
+    error_ = error;
+  } else {
+    clear_has_error();
+    error_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:manage.GetLogFilterConfigResponse.Error)
+}
+
+// repeated string Srcids = 3;
+inline int GetLogFilterConfigResponse::srcids_size() const {
+  return srcids_.size();
+}
+inline void GetLogFilterConfigResponse::clear_srcids() {
+  srcids_.Clear();
+}
+inline const ::std::string& GetLogFilterConfigResponse::srcids(int index) const {
+  // @@protoc_insertion_point(field_get:manage.GetLogFilterConfigResponse.Srcids)
+  return srcids_.Get(index);
+}
+inline ::std::string* GetLogFilterConfigResponse::mutable_srcids(int index) {
+  // @@protoc_insertion_point(field_mutable:manage.GetLogFilterConfigResponse.Srcids)
+  return srcids_.Mutable(index);
+}
+inline void GetLogFilterConfigResponse::set_srcids(int index, const ::std::string& value) {
+  // @@protoc_insertion_point(field_set:manage.GetLogFilterConfigResponse.Srcids)
+  srcids_.Mutable(index)->assign(value);
+}
+inline void GetLogFilterConfigResponse::set_srcids(int index, const char* value) {
+  srcids_.Mutable(index)->assign(value);
+  // @@protoc_insertion_point(field_set_char:manage.GetLogFilterConfigResponse.Srcids)
+}
+inline void GetLogFilterConfigResponse::set_srcids(int index, const char* value, size_t size) {
+  srcids_.Mutable(index)->assign(
+    reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:manage.GetLogFilterConfigResponse.Srcids)
+}
+inline ::std::string* GetLogFilterConfigResponse::add_srcids() {
+  return srcids_.Add();
+}
+inline void GetLogFilterConfigResponse::add_srcids(const ::std::string& value) {
+  srcids_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add:manage.GetLogFilterConfigResponse.Srcids)
+}
+inline void GetLogFilterConfigResponse::add_srcids(const char* value) {
+  srcids_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add_char:manage.GetLogFilterConfigResponse.Srcids)
+}
+inline void GetLogFilterConfigResponse::add_srcids(const char* value, size_t size) {
+  srcids_.Add()->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_add_pointer:manage.GetLogFilterConfigResponse.Srcids)
+}
+inline const ::google::protobuf::RepeatedPtrField< ::std::string>&
+GetLogFilterConfigResponse::srcids() const {
+  // @@protoc_insertion_point(field_list:manage.GetLogFilterConfigResponse.Srcids)
+  return srcids_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::std::string>*
+GetLogFilterConfigResponse::mutable_srcids() {
+  // @@protoc_insertion_point(field_mutable_list:manage.GetLogFilterConfigResponse.Srcids)
+  return &srcids_;
+}
+
+// -------------------------------------------------------------------
+
+// PullSwitchConfigRequest
+
+// required bool op = 1;
+inline bool PullSwitchConfigRequest::has_op() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void PullSwitchConfigRequest::set_has_op() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void PullSwitchConfigRequest::clear_has_op() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void PullSwitchConfigRequest::clear_op() {
+  op_ = false;
+  clear_has_op();
+}
+inline bool PullSwitchConfigRequest::op() const {
+  // @@protoc_insertion_point(field_get:manage.PullSwitchConfigRequest.op)
+  return op_;
+}
+inline void PullSwitchConfigRequest::set_op(bool value) {
+  set_has_op();
+  op_ = value;
+  // @@protoc_insertion_point(field_set:manage.PullSwitchConfigRequest.op)
+}
+
+// required uint32 idx = 2;
+inline bool PullSwitchConfigRequest::has_idx() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void PullSwitchConfigRequest::set_has_idx() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void PullSwitchConfigRequest::clear_has_idx() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void PullSwitchConfigRequest::clear_idx() {
+  idx_ = 0u;
+  clear_has_idx();
+}
+inline ::google::protobuf::uint32 PullSwitchConfigRequest::idx() const {
+  // @@protoc_insertion_point(field_get:manage.PullSwitchConfigRequest.idx)
+  return idx_;
+}
+inline void PullSwitchConfigRequest::set_idx(::google::protobuf::uint32 value) {
+  set_has_idx();
+  idx_ = value;
+  // @@protoc_insertion_point(field_set:manage.PullSwitchConfigRequest.idx)
+}
+
+// -------------------------------------------------------------------
+
+// PullSwitchConfigResponse
+
+// required .manage.PullSwitchConfigResponse.Res_Status Status = 1;
+inline bool PullSwitchConfigResponse::has_status() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void PullSwitchConfigResponse::set_has_status() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void PullSwitchConfigResponse::clear_has_status() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void PullSwitchConfigResponse::clear_status() {
+  status_ = 0;
+  clear_has_status();
+}
+inline ::manage::PullSwitchConfigResponse_Res_Status PullSwitchConfigResponse::status() const {
+  // @@protoc_insertion_point(field_get:manage.PullSwitchConfigResponse.Status)
+  return static_cast< ::manage::PullSwitchConfigResponse_Res_Status >(status_);
+}
+inline void PullSwitchConfigResponse::set_status(::manage::PullSwitchConfigResponse_Res_Status value) {
+  assert(::manage::PullSwitchConfigResponse_Res_Status_IsValid(value));
+  set_has_status();
+  status_ = value;
+  // @@protoc_insertion_point(field_set:manage.PullSwitchConfigResponse.Status)
+}
+
+// optional string Error = 2;
+inline bool PullSwitchConfigResponse::has_error() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void PullSwitchConfigResponse::set_has_error() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void PullSwitchConfigResponse::clear_has_error() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void PullSwitchConfigResponse::clear_error() {
+  if (error_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    error_->clear();
+  }
+  clear_has_error();
+}
+inline const ::std::string& PullSwitchConfigResponse::error() const {
+  // @@protoc_insertion_point(field_get:manage.PullSwitchConfigResponse.Error)
+  return *error_;
+}
+inline void PullSwitchConfigResponse::set_error(const ::std::string& value) {
+  set_has_error();
+  if (error_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    error_ = new ::std::string;
+  }
+  error_->assign(value);
+  // @@protoc_insertion_point(field_set:manage.PullSwitchConfigResponse.Error)
+}
+inline void PullSwitchConfigResponse::set_error(const char* value) {
+  set_has_error();
+  if (error_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    error_ = new ::std::string;
+  }
+  error_->assign(value);
+  // @@protoc_insertion_point(field_set_char:manage.PullSwitchConfigResponse.Error)
+}
+inline void PullSwitchConfigResponse::set_error(const char* value, size_t size) {
+  set_has_error();
+  if (error_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    error_ = new ::std::string;
+  }
+  error_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:manage.PullSwitchConfigResponse.Error)
+}
+inline ::std::string* PullSwitchConfigResponse::mutable_error() {
+  set_has_error();
+  if (error_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    error_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:manage.PullSwitchConfigResponse.Error)
+  return error_;
+}
+inline ::std::string* PullSwitchConfigResponse::release_error() {
+  clear_has_error();
+  if (error_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = error_;
+    error_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void PullSwitchConfigResponse::set_allocated_error(::std::string* error) {
+  if (error_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete error_;
+  }
+  if (error) {
+    set_has_error();
+    error_ = error;
+  } else {
+    clear_has_error();
+    error_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:manage.PullSwitchConfigResponse.Error)
+}
+
+// -------------------------------------------------------------------
+
+// RetransmitRequest
+
+// required bool type = 1;
+inline bool RetransmitRequest::has_type() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void RetransmitRequest::set_has_type() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void RetransmitRequest::clear_has_type() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void RetransmitRequest::clear_type() {
+  type_ = false;
+  clear_has_type();
+}
+inline bool RetransmitRequest::type() const {
+  // @@protoc_insertion_point(field_get:manage.RetransmitRequest.type)
+  return type_;
+}
+inline void RetransmitRequest::set_type(bool value) {
+  set_has_type();
+  type_ = value;
+  // @@protoc_insertion_point(field_set:manage.RetransmitRequest.type)
+}
+
+// required string package = 2;
+inline bool RetransmitRequest::has_package() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void RetransmitRequest::set_has_package() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void RetransmitRequest::clear_has_package() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void RetransmitRequest::clear_package() {
+  if (package_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    package_->clear();
+  }
+  clear_has_package();
+}
+inline const ::std::string& RetransmitRequest::package() const {
+  // @@protoc_insertion_point(field_get:manage.RetransmitRequest.package)
+  return *package_;
+}
+inline void RetransmitRequest::set_package(const ::std::string& value) {
+  set_has_package();
+  if (package_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    package_ = new ::std::string;
+  }
+  package_->assign(value);
+  // @@protoc_insertion_point(field_set:manage.RetransmitRequest.package)
+}
+inline void RetransmitRequest::set_package(const char* value) {
+  set_has_package();
+  if (package_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    package_ = new ::std::string;
+  }
+  package_->assign(value);
+  // @@protoc_insertion_point(field_set_char:manage.RetransmitRequest.package)
+}
+inline void RetransmitRequest::set_package(const char* value, size_t size) {
+  set_has_package();
+  if (package_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    package_ = new ::std::string;
+  }
+  package_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:manage.RetransmitRequest.package)
+}
+inline ::std::string* RetransmitRequest::mutable_package() {
+  set_has_package();
+  if (package_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    package_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:manage.RetransmitRequest.package)
+  return package_;
+}
+inline ::std::string* RetransmitRequest::release_package() {
+  clear_has_package();
+  if (package_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = package_;
+    package_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void RetransmitRequest::set_allocated_package(::std::string* package) {
+  if (package_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete package_;
+  }
+  if (package) {
+    set_has_package();
+    package_ = package;
+  } else {
+    clear_has_package();
+    package_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:manage.RetransmitRequest.package)
+}
+
+// -------------------------------------------------------------------
+
+// RetransmitResponse
+
+// required .manage.RetransmitResponse.Res_Status Status = 1;
+inline bool RetransmitResponse::has_status() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void RetransmitResponse::set_has_status() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void RetransmitResponse::clear_has_status() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void RetransmitResponse::clear_status() {
+  status_ = 0;
+  clear_has_status();
+}
+inline ::manage::RetransmitResponse_Res_Status RetransmitResponse::status() const {
+  // @@protoc_insertion_point(field_get:manage.RetransmitResponse.Status)
+  return static_cast< ::manage::RetransmitResponse_Res_Status >(status_);
+}
+inline void RetransmitResponse::set_status(::manage::RetransmitResponse_Res_Status value) {
+  assert(::manage::RetransmitResponse_Res_Status_IsValid(value));
+  set_has_status();
+  status_ = value;
+  // @@protoc_insertion_point(field_set:manage.RetransmitResponse.Status)
+}
+
+// optional string Error = 2;
+inline bool RetransmitResponse::has_error() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void RetransmitResponse::set_has_error() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void RetransmitResponse::clear_has_error() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void RetransmitResponse::clear_error() {
+  if (error_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    error_->clear();
+  }
+  clear_has_error();
+}
+inline const ::std::string& RetransmitResponse::error() const {
+  // @@protoc_insertion_point(field_get:manage.RetransmitResponse.Error)
+  return *error_;
+}
+inline void RetransmitResponse::set_error(const ::std::string& value) {
+  set_has_error();
+  if (error_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    error_ = new ::std::string;
+  }
+  error_->assign(value);
+  // @@protoc_insertion_point(field_set:manage.RetransmitResponse.Error)
+}
+inline void RetransmitResponse::set_error(const char* value) {
+  set_has_error();
+  if (error_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    error_ = new ::std::string;
+  }
+  error_->assign(value);
+  // @@protoc_insertion_point(field_set_char:manage.RetransmitResponse.Error)
+}
+inline void RetransmitResponse::set_error(const char* value, size_t size) {
+  set_has_error();
+  if (error_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    error_ = new ::std::string;
+  }
+  error_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:manage.RetransmitResponse.Error)
+}
+inline ::std::string* RetransmitResponse::mutable_error() {
+  set_has_error();
+  if (error_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    error_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:manage.RetransmitResponse.Error)
+  return error_;
+}
+inline ::std::string* RetransmitResponse::release_error() {
+  clear_has_error();
+  if (error_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = error_;
+    error_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void RetransmitResponse::set_allocated_error(::std::string* error) {
+  if (error_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete error_;
+  }
+  if (error) {
+    set_has_error();
+    error_ = error;
+  } else {
+    clear_has_error();
+    error_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:manage.RetransmitResponse.Error)
 }
 
 
@@ -1930,6 +4503,31 @@ template <> struct is_proto_enum< ::manage::GetLogTransmitStatResponse_Res_Statu
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::manage::GetLogTransmitStatResponse_Res_Status>() {
   return ::manage::GetLogTransmitStatResponse_Res_Status_descriptor();
+}
+template <> struct is_proto_enum< ::manage::AddLogTransmitStatResponse_Res_Status> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::manage::AddLogTransmitStatResponse_Res_Status>() {
+  return ::manage::AddLogTransmitStatResponse_Res_Status_descriptor();
+}
+template <> struct is_proto_enum< ::manage::SetLogFilterConfigResponse_Res_Status> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::manage::SetLogFilterConfigResponse_Res_Status>() {
+  return ::manage::SetLogFilterConfigResponse_Res_Status_descriptor();
+}
+template <> struct is_proto_enum< ::manage::GetLogFilterConfigResponse_Res_Status> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::manage::GetLogFilterConfigResponse_Res_Status>() {
+  return ::manage::GetLogFilterConfigResponse_Res_Status_descriptor();
+}
+template <> struct is_proto_enum< ::manage::PullSwitchConfigResponse_Res_Status> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::manage::PullSwitchConfigResponse_Res_Status>() {
+  return ::manage::PullSwitchConfigResponse_Res_Status_descriptor();
+}
+template <> struct is_proto_enum< ::manage::RetransmitResponse_Res_Status> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::manage::RetransmitResponse_Res_Status>() {
+  return ::manage::RetransmitResponse_Res_Status_descriptor();
 }
 
 }  // namespace google
