@@ -142,6 +142,78 @@ process_adapt.cc.s:
 	cd /home/work/data-access && $(MAKE) -f src/process/CMakeFiles/dataprocess.dir/build.make src/process/CMakeFiles/dataprocess.dir/process_adapt.cc.s
 .PHONY : process_adapt.cc.s
 
+process_check_action.o: process_check_action.cc.o
+.PHONY : process_check_action.o
+
+# target to build an object file
+process_check_action.cc.o:
+	cd /home/work/data-access && $(MAKE) -f src/process/CMakeFiles/dataprocess.dir/build.make src/process/CMakeFiles/dataprocess.dir/process_check_action.cc.o
+.PHONY : process_check_action.cc.o
+
+process_check_action.i: process_check_action.cc.i
+.PHONY : process_check_action.i
+
+# target to preprocess a source file
+process_check_action.cc.i:
+	cd /home/work/data-access && $(MAKE) -f src/process/CMakeFiles/dataprocess.dir/build.make src/process/CMakeFiles/dataprocess.dir/process_check_action.cc.i
+.PHONY : process_check_action.cc.i
+
+process_check_action.s: process_check_action.cc.s
+.PHONY : process_check_action.s
+
+# target to generate assembly for a file
+process_check_action.cc.s:
+	cd /home/work/data-access && $(MAKE) -f src/process/CMakeFiles/dataprocess.dir/build.make src/process/CMakeFiles/dataprocess.dir/process_check_action.cc.s
+.PHONY : process_check_action.cc.s
+
+process_chklist.o: process_chklist.cc.o
+.PHONY : process_chklist.o
+
+# target to build an object file
+process_chklist.cc.o:
+	cd /home/work/data-access && $(MAKE) -f src/process/CMakeFiles/dataprocess.dir/build.make src/process/CMakeFiles/dataprocess.dir/process_chklist.cc.o
+.PHONY : process_chklist.cc.o
+
+process_chklist.i: process_chklist.cc.i
+.PHONY : process_chklist.i
+
+# target to preprocess a source file
+process_chklist.cc.i:
+	cd /home/work/data-access && $(MAKE) -f src/process/CMakeFiles/dataprocess.dir/build.make src/process/CMakeFiles/dataprocess.dir/process_chklist.cc.i
+.PHONY : process_chklist.cc.i
+
+process_chklist.s: process_chklist.cc.s
+.PHONY : process_chklist.s
+
+# target to generate assembly for a file
+process_chklist.cc.s:
+	cd /home/work/data-access && $(MAKE) -f src/process/CMakeFiles/dataprocess.dir/build.make src/process/CMakeFiles/dataprocess.dir/process_chklist.cc.s
+.PHONY : process_chklist.cc.s
+
+process_chklist_item.o: process_chklist_item.cc.o
+.PHONY : process_chklist_item.o
+
+# target to build an object file
+process_chklist_item.cc.o:
+	cd /home/work/data-access && $(MAKE) -f src/process/CMakeFiles/dataprocess.dir/build.make src/process/CMakeFiles/dataprocess.dir/process_chklist_item.cc.o
+.PHONY : process_chklist_item.cc.o
+
+process_chklist_item.i: process_chklist_item.cc.i
+.PHONY : process_chklist_item.i
+
+# target to preprocess a source file
+process_chklist_item.cc.i:
+	cd /home/work/data-access && $(MAKE) -f src/process/CMakeFiles/dataprocess.dir/build.make src/process/CMakeFiles/dataprocess.dir/process_chklist_item.cc.i
+.PHONY : process_chklist_item.cc.i
+
+process_chklist_item.s: process_chklist_item.cc.s
+.PHONY : process_chklist_item.s
+
+# target to generate assembly for a file
+process_chklist_item.cc.s:
+	cd /home/work/data-access && $(MAKE) -f src/process/CMakeFiles/dataprocess.dir/build.make src/process/CMakeFiles/dataprocess.dir/process_chklist_item.cc.s
+.PHONY : process_chklist_item.cc.s
+
 process_impl.o: process_impl.cc.o
 .PHONY : process_impl.o
 
@@ -190,6 +262,150 @@ process_main.cc.s:
 	cd /home/work/data-access && $(MAKE) -f src/process/CMakeFiles/dataprocess.dir/build.make src/process/CMakeFiles/dataprocess.dir/process_main.cc.s
 .PHONY : process_main.cc.s
 
+process_sort.o: process_sort.cc.o
+.PHONY : process_sort.o
+
+# target to build an object file
+process_sort.cc.o:
+	cd /home/work/data-access && $(MAKE) -f src/process/CMakeFiles/dataprocess.dir/build.make src/process/CMakeFiles/dataprocess.dir/process_sort.cc.o
+.PHONY : process_sort.cc.o
+
+process_sort.i: process_sort.cc.i
+.PHONY : process_sort.i
+
+# target to preprocess a source file
+process_sort.cc.i:
+	cd /home/work/data-access && $(MAKE) -f src/process/CMakeFiles/dataprocess.dir/build.make src/process/CMakeFiles/dataprocess.dir/process_sort.cc.i
+.PHONY : process_sort.cc.i
+
+process_sort.s: process_sort.cc.s
+.PHONY : process_sort.s
+
+# target to generate assembly for a file
+process_sort.cc.s:
+	cd /home/work/data-access && $(MAKE) -f src/process/CMakeFiles/dataprocess.dir/build.make src/process/CMakeFiles/dataprocess.dir/process_sort.cc.s
+.PHONY : process_sort.cc.s
+
+process_stat.o: process_stat.cc.o
+.PHONY : process_stat.o
+
+# target to build an object file
+process_stat.cc.o:
+	cd /home/work/data-access && $(MAKE) -f src/process/CMakeFiles/dataprocess.dir/build.make src/process/CMakeFiles/dataprocess.dir/process_stat.cc.o
+.PHONY : process_stat.cc.o
+
+process_stat.i: process_stat.cc.i
+.PHONY : process_stat.i
+
+# target to preprocess a source file
+process_stat.cc.i:
+	cd /home/work/data-access && $(MAKE) -f src/process/CMakeFiles/dataprocess.dir/build.make src/process/CMakeFiles/dataprocess.dir/process_stat.cc.i
+.PHONY : process_stat.cc.i
+
+process_stat.s: process_stat.cc.s
+.PHONY : process_stat.s
+
+# target to generate assembly for a file
+process_stat.cc.s:
+	cd /home/work/data-access && $(MAKE) -f src/process/CMakeFiles/dataprocess.dir/build.make src/process/CMakeFiles/dataprocess.dir/process_stat.cc.s
+.PHONY : process_stat.cc.s
+
+process_stat_cookie_stat.o: process_stat_cookie_stat.cc.o
+.PHONY : process_stat_cookie_stat.o
+
+# target to build an object file
+process_stat_cookie_stat.cc.o:
+	cd /home/work/data-access && $(MAKE) -f src/process/CMakeFiles/dataprocess.dir/build.make src/process/CMakeFiles/dataprocess.dir/process_stat_cookie_stat.cc.o
+.PHONY : process_stat_cookie_stat.cc.o
+
+process_stat_cookie_stat.i: process_stat_cookie_stat.cc.i
+.PHONY : process_stat_cookie_stat.i
+
+# target to preprocess a source file
+process_stat_cookie_stat.cc.i:
+	cd /home/work/data-access && $(MAKE) -f src/process/CMakeFiles/dataprocess.dir/build.make src/process/CMakeFiles/dataprocess.dir/process_stat_cookie_stat.cc.i
+.PHONY : process_stat_cookie_stat.cc.i
+
+process_stat_cookie_stat.s: process_stat_cookie_stat.cc.s
+.PHONY : process_stat_cookie_stat.s
+
+# target to generate assembly for a file
+process_stat_cookie_stat.cc.s:
+	cd /home/work/data-access && $(MAKE) -f src/process/CMakeFiles/dataprocess.dir/build.make src/process/CMakeFiles/dataprocess.dir/process_stat_cookie_stat.cc.s
+.PHONY : process_stat_cookie_stat.cc.s
+
+process_stat_query_freq.o: process_stat_query_freq.cc.o
+.PHONY : process_stat_query_freq.o
+
+# target to build an object file
+process_stat_query_freq.cc.o:
+	cd /home/work/data-access && $(MAKE) -f src/process/CMakeFiles/dataprocess.dir/build.make src/process/CMakeFiles/dataprocess.dir/process_stat_query_freq.cc.o
+.PHONY : process_stat_query_freq.cc.o
+
+process_stat_query_freq.i: process_stat_query_freq.cc.i
+.PHONY : process_stat_query_freq.i
+
+# target to preprocess a source file
+process_stat_query_freq.cc.i:
+	cd /home/work/data-access && $(MAKE) -f src/process/CMakeFiles/dataprocess.dir/build.make src/process/CMakeFiles/dataprocess.dir/process_stat_query_freq.cc.i
+.PHONY : process_stat_query_freq.cc.i
+
+process_stat_query_freq.s: process_stat_query_freq.cc.s
+.PHONY : process_stat_query_freq.s
+
+# target to generate assembly for a file
+process_stat_query_freq.cc.s:
+	cd /home/work/data-access && $(MAKE) -f src/process/CMakeFiles/dataprocess.dir/build.make src/process/CMakeFiles/dataprocess.dir/process_stat_query_freq.cc.s
+.PHONY : process_stat_query_freq.cc.s
+
+process_storage.o: process_storage.cc.o
+.PHONY : process_storage.o
+
+# target to build an object file
+process_storage.cc.o:
+	cd /home/work/data-access && $(MAKE) -f src/process/CMakeFiles/dataprocess.dir/build.make src/process/CMakeFiles/dataprocess.dir/process_storage.cc.o
+.PHONY : process_storage.cc.o
+
+process_storage.i: process_storage.cc.i
+.PHONY : process_storage.i
+
+# target to preprocess a source file
+process_storage.cc.i:
+	cd /home/work/data-access && $(MAKE) -f src/process/CMakeFiles/dataprocess.dir/build.make src/process/CMakeFiles/dataprocess.dir/process_storage.cc.i
+.PHONY : process_storage.cc.i
+
+process_storage.s: process_storage.cc.s
+.PHONY : process_storage.s
+
+# target to generate assembly for a file
+process_storage.cc.s:
+	cd /home/work/data-access && $(MAKE) -f src/process/CMakeFiles/dataprocess.dir/build.make src/process/CMakeFiles/dataprocess.dir/process_storage.cc.s
+.PHONY : process_storage.cc.s
+
+process_top.o: process_top.cc.o
+.PHONY : process_top.o
+
+# target to build an object file
+process_top.cc.o:
+	cd /home/work/data-access && $(MAKE) -f src/process/CMakeFiles/dataprocess.dir/build.make src/process/CMakeFiles/dataprocess.dir/process_top.cc.o
+.PHONY : process_top.cc.o
+
+process_top.i: process_top.cc.i
+.PHONY : process_top.i
+
+# target to preprocess a source file
+process_top.cc.i:
+	cd /home/work/data-access && $(MAKE) -f src/process/CMakeFiles/dataprocess.dir/build.make src/process/CMakeFiles/dataprocess.dir/process_top.cc.i
+.PHONY : process_top.cc.i
+
+process_top.s: process_top.cc.s
+.PHONY : process_top.s
+
+# target to generate assembly for a file
+process_top.cc.s:
+	cd /home/work/data-access && $(MAKE) -f src/process/CMakeFiles/dataprocess.dir/build.make src/process/CMakeFiles/dataprocess.dir/process_top.cc.s
+.PHONY : process_top.cc.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -202,12 +418,39 @@ help:
 	@echo "... process_adapt.o"
 	@echo "... process_adapt.i"
 	@echo "... process_adapt.s"
+	@echo "... process_check_action.o"
+	@echo "... process_check_action.i"
+	@echo "... process_check_action.s"
+	@echo "... process_chklist.o"
+	@echo "... process_chklist.i"
+	@echo "... process_chklist.s"
+	@echo "... process_chklist_item.o"
+	@echo "... process_chklist_item.i"
+	@echo "... process_chklist_item.s"
 	@echo "... process_impl.o"
 	@echo "... process_impl.i"
 	@echo "... process_impl.s"
 	@echo "... process_main.o"
 	@echo "... process_main.i"
 	@echo "... process_main.s"
+	@echo "... process_sort.o"
+	@echo "... process_sort.i"
+	@echo "... process_sort.s"
+	@echo "... process_stat.o"
+	@echo "... process_stat.i"
+	@echo "... process_stat.s"
+	@echo "... process_stat_cookie_stat.o"
+	@echo "... process_stat_cookie_stat.i"
+	@echo "... process_stat_cookie_stat.s"
+	@echo "... process_stat_query_freq.o"
+	@echo "... process_stat_query_freq.i"
+	@echo "... process_stat_query_freq.s"
+	@echo "... process_storage.o"
+	@echo "... process_storage.i"
+	@echo "... process_storage.s"
+	@echo "... process_top.o"
+	@echo "... process_top.i"
+	@echo "... process_top.s"
 .PHONY : help
 
 

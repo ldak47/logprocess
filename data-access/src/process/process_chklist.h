@@ -1,6 +1,7 @@
 #ifndef DATAACCESS_PROCESS_CHECKLIST_H
 #define DATAACCESS_PROCESS_CHECKLIST_H
 #include "process_chklist_base.h"
+#include "process_check_action.h"
 #include <string>
 #include <regex>
 
@@ -56,17 +57,35 @@ public:
     virtual bool check(const process::TransmitRequest *request);
 };
 
-class checklist_res_srcid : public checklist_base<process::SrcidConfig> {
+class checklist_sid : public checklist_base<process::SidConfig> {
     std::vector<std::string> fieldname;
 public:
-    checklist_res_srcid() {}
-    virtual ~checklist_res_srcid(){}
-    
-    virtual void init(const std::vector<process::SrcidConfig> &cfg);
+    checklist_sid() {}
+    virtual ~checklist_sid(){}
+
+    virtual void init(const std::vector<process::SidConfig> &cfg);
     virtual bool check(const process::TransmitRequest *request);
 };
 
+class checklist_resno : public checklist_base<process::ResnoConfig> {
+    std::vector<std::string> fieldname;
+public:
+    checklist_resno() {}
+    virtual ~checklist_resno(){}
+    
+    virtual void init(const std::vector<process::ResnoConfig> &cfg);
+    virtual bool check(const process::TransmitRequest *request);
+};
 
+class checklist_type : public checklist_base<process::TypeConfig> {
+    std::vector<std::string> fieldname;
+public:
+    checklist_type() {}
+    virtual ~checklist_type(){}
+
+    virtual void init(const std::vector<process::TypeConfig> &cfg);
+    virtual bool check(const process::TransmitRequest *request);
+};
 
 
 };

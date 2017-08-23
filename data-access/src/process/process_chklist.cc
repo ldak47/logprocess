@@ -10,28 +10,22 @@ void checklist_srcid::init (const std::vector<process::SrcidConfig> &cfg) {
 }
     
 bool checklist_srcid::check (const process::TransmitRequest *request) {
-    std::string srcid("");
+    std::string _srcid("");
     for (size_t i = 0; i < request->values_size(); i++) {
         process::MapEntry kv = request->values(i);
         if (kv.key() == fieldname[0]) {
-            srcid = kv.value();
+            _srcid = kv.value();
             break;
         }
     }
-    if (srcid == "") {
+    if (_srcid == "") {
         return false;
     }
     
     for (auto i: cfg_) {
-        std::string _srcid = i.srcid();
-        process::CondType cond = i.cond();
-        
-        if (cond == process::condEqual) {
-            if (_srcid == srcid) {
-                return true;
-            }
-        } else {
-            continue;
+        bool res = srcid_check(_srcid, i);
+        if (res) {
+            return res;
         }
     }
 
@@ -44,52 +38,22 @@ void checklist_seword::init (const std::vector<process::ScanCondSeWord> &cfg) {
 }
 
 bool checklist_seword::check (const process::TransmitRequest *request) {
-    std::string query("");
+    std::string _query("");
     for (size_t i = 0; i < request->values_size(); i++) {
         process::MapEntry kv = request->values(i);
         if (kv.key() == fieldname[0]) {
-            query = kv.value();
+            _query = kv.value();
             break;
         }
     }
-    if (query == "") {
+    if (_query == "") {
         return false;
     }
     
     for (auto i: cfg_) {
-        std::string searchword = i.searchword();
-        process::CondType cond = i.cond();
-
-        if (cond == process::condEqual && query == searchword) {
-            return true;
-        } else if (cond == process::condNotEqual && query != searchword) {
-            return true;
-        } else if (cond == process::condIn && query.find(searchword) != std::string::npos) {
-            return true;
-        } else if (cond == process::condNotIn && query.find(searchword) == std::string::npos) {
-            return true;
-        } else if (cond == process::condIsFront && query.find(searchword) != std::string::npos) {
-            std::string regstr = "^" + searchword + "\.+";
-            std::regex reg(regstr.c_str());
-            try {
-                std::smatch res;
-                if (regex_search(query, res, reg)) {
-                    return true;
-                }
-            } catch (...) {
-                continue;
-            }
-        } else if (cond == condIsBehind && query.find(searchword) != std::string::npos) {
-            std::string regstr = "\.+" + searchword + "$";
-            std::regex reg(regstr.c_str());
-            try {
-                std::smatch res;
-                if (regex_search(query, res, reg)) {
-                    return true;
-                }
-            } catch (...) {
-                continue;
-            }
+        bool res = seword_check(_query, i);
+        if (res) {
+            return res;
         }
     }
 
@@ -114,16 +78,9 @@ bool checklist_lbs::check (const process::TransmitRequest *request) {
     }
     
     for (auto i: cfg_) {
-        std::string prov = i.province();
-        std::string city = i.city();
-        process::CondType cond = i.cond();
-
-        if (cond == process::condNotExist && _prov == "" && _city == "") {
-            return true;
-        } else if (cond == process::condPartEqual && (_prov == "" || _city != "")) {
-            return true;
-        } else if (cond == process::condEqual && _prov == prov && _city == city) {
-            return true;
+        bool res = lbs_check(_prov, _city, i);
+        if (res) {
+            return res;
         }
     }
 
@@ -141,17 +98,14 @@ bool checklist_cookie::check (const process::TransmitRequest *request) {
         process::MapEntry kv = request->values(i);
         if (kv.key() == fieldname[0]) {
             _cookie = kv.value();
+            break;
         }
     }
     
     for (auto i: cfg_) {
-        std::string cookie = i.cookie();
-        process::CondType cond = i.cond();
-
-        if (cond == process::condNotExist && _cookie == "") {
-            return true;
-        } else if (cond == process::condEqual && _cookie == cookie) {
-            return true;
+        bool res = cookie_check(_cookie, i);
+        if (res) {
+            return res;
         }
     }
 
@@ -169,6 +123,7 @@ bool checklist_cluster::check (const process::TransmitRequest *request) {
         process::MapEntry kv = request->values(i);
         if (kv.key() == fieldname[0]) {
             _cluster = kv.value();
+            break;
         }
     }
     
@@ -177,48 +132,88 @@ bool checklist_cluster::check (const process::TransmitRequest *request) {
     }
 
     for (auto i: cfg_) {
-        std::string cluster = i.cluster();
-        process::CondType cond = i.cond();
-
-        if (cond == process::condEqual && cluster == _cluster) {
-            return true;
-        } else if (cond == process::condNotEqual && cluster != _cluster) {
-            return true;
+        bool res = cluster_check(_cluster, i);
+        if (res) {
+            return res;
         }
     }
 
     return false;
 }
 
-void checklist_res_srcid::init (const std::vector<process::SrcidConfig> &cfg) {
-    checklist_base<process::SrcidConfig>::init(cfg);
-    fieldname = {"res_srcid"};
+void checklist_resno::init (const std::vector<process::ResnoConfig> &cfg) {
+    checklist_base<process::ResnoConfig>::init(cfg);
+    fieldname = {"resno"};
 }
 
-bool checklist_res_srcid::check (const process::TransmitRequest *request) {
-    std::string _res_srcid("");
+bool checklist_resno::check (const process::TransmitRequest *request) {
+    std::string _resno("");
     for (size_t i = 0; i < request->values_size(); i++) {
         process::MapEntry kv = request->values(i);
         if (kv.key() == fieldname[0]) {
-            _res_srcid = kv.value();
+            _resno = kv.value();
+            break;
         }
     }
 
     for (auto i: cfg_) {
-        std::string res_srcid = i.srcid();
-        process::CondType cond = i.cond();
-
-        if (cond == process::condNotEqual && _res_srcid == "") {
-            return true;
-        } else if (cond == process::condExist && _res_srcid == res_srcid) {
-            return true;
-        } else if (cond == process::condNotEqual && _res_srcid != res_srcid) {
-            return true;
+        bool res = resno_check(_resno, i);
+        if (res) {
+            return res;
         }
     }
 
     return false;
 }
 
+void checklist_sid::init (const std::vector<process::SidConfig> &cfg) {
+    checklist_base<process::SidConfig>::init(cfg);
+    fieldname = {"sid"};
+}
+
+bool checklist_sid::check (const process::TransmitRequest *request) {
+    std::string _sid("");
+    for (size_t i = 0; i < request->values_size(); i++) {
+        process::MapEntry kv = request->values(i);
+        if (kv.key() == fieldname[0]) {
+            _sid = kv.value();
+            break;
+        }
+    }
+
+    for (auto i: cfg_) {
+        bool res = sid_check(_sid, i);
+        if (res) {
+            return res;
+        }
+    }
+
+    return false;
+}
+
+void checklist_type::init (const std::vector<process::TypeConfig> &cfg) {
+    checklist_base<process::TypeConfig>::init(cfg);
+    fieldname = {"type"};
+}
+
+bool checklist_type::check (const process::TransmitRequest *request) {
+    std::string _type("");
+    for (size_t i = 0; i < request->values_size(); i++) {
+        process::MapEntry kv = request->values(i);
+        if (kv.key() == fieldname[0]) {
+            _type = kv.value();
+            break;
+        }
+    }
+
+    for (auto i: cfg_) {
+        bool res = type_check(_type, i);
+        if (res) {
+            return res;
+        }
+    }
+
+    return false;
+}
 
 };

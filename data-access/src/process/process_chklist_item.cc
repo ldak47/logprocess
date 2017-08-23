@@ -11,6 +11,7 @@ bool checklist_item::addrule_srcid (const std::vector<process::SrcidConfig> &src
     srcid_chk_->init(src_cfg);
     std::function<bool (const process::TransmitRequest *)> func = std::bind(&checklist_srcid::check, srcid_chk_.get(), std::placeholders::_1);
     chk_.push_back(func);
+    srcid_desc = src_cfg;
     return true;
 }
 
@@ -23,6 +24,7 @@ bool checklist_item::addrule_seword (const std::vector<process::ScanCondSeWord> 
     seword_chk_->init(seword_cfg);
     std::function<bool (const process::TransmitRequest *)> func = std::bind(&checklist_seword::check, seword_chk_.get(), std::placeholders::_1);
     chk_.push_back(func);
+    seword_desc = seword_cfg;
     return true;
 }
 
@@ -35,6 +37,7 @@ bool checklist_item::addrule_lbs (const std::vector<process::LocationInfo> &lbs_
     lbs_chk_->init(lbs_cfg);
     std::function<bool (const process::TransmitRequest *)> func = std::bind(&checklist_lbs::check, lbs_chk_.get(), std::placeholders::_1);
     chk_.push_back(func);
+    lbs_desc = lbs_cfg;
     return true;
 }
 
@@ -47,6 +50,7 @@ bool checklist_item::addrule_cookie (const std::vector<process::CookieConfig> &c
     cookie_chk_->init(cookie_cfg);
     std::function<bool (const process::TransmitRequest *)> func = std::bind(&checklist_cookie::check, cookie_chk_.get(), std::placeholders::_1);
     chk_.push_back(func);
+    cookie_desc = cookie_cfg;
     return true;
 }
     
@@ -59,34 +63,61 @@ bool checklist_item::addrule_cluster (const std::vector<process::ClusterConfig> 
     cluster_chk_->init(cluster_cfg);
     std::function<bool (const process::TransmitRequest *)> func = std::bind(&checklist_cluster::check, cluster_chk_.get(), std::placeholders::_1);
     chk_.push_back(func);
+    cluster_desc = cluster_cfg;
     return true;
 }
 
-bool checklist_item::addrule_res_srcid (const std::vector<process::SrcidConfig> &res_src_cfg) {
-    res_srcid_chk_.reset(new checklist_res_srcid());
-    if (!res_srcid_chk_.get()) {
+bool checklist_item::addrule_sid (const std::vector<process::SidConfig> &sid_cfg) {
+    sid_chk_.reset(new checklist_sid());
+    if (!sid_chk_.get()) {
+        return false;
+    }
+
+    sid_chk_->init(sid_cfg);
+    std::function<bool (const process::TransmitRequest *)> func = std::bind(&checklist_sid::check, sid_chk_.get(), std::placeholders::_1);
+    chk_.push_back(func);
+    sid_desc = sid_cfg;
+    return true;
+}
+
+bool checklist_item::addrule_resno (const std::vector<process::ResnoConfig> &resno_cfg) {
+    resno_chk_.reset(new checklist_resno());
+    if (!resno_chk_.get()) {
         return false;
     }
     
-    res_srcid_chk_->init(res_src_cfg);
-    std::function<bool (const process::TransmitRequest *)> func = std::bind(&checklist_res_srcid::check, res_srcid_chk_.get(), std::placeholders::_1);
+    resno_chk_->init(resno_cfg);
+    std::function<bool (const process::TransmitRequest *)> func = std::bind(&checklist_resno::check, resno_chk_.get(), std::placeholders::_1);
     chk_.push_back(func);
+    resno_desc = resno_cfg;
     return true;
 }
 
-bool checklist_item::check (const process::TransmitRequest *request) {
+bool checklist_item::addrule_type (const std::vector<process::TypeConfig> &type_cfg) {
+    type_chk_.reset(new checklist_type());
+    if (!type_chk_.get()) {
+        return false;
+    }
+
+    type_chk_->init(type_cfg);
+    std::function<bool (const process::TransmitRequest *)> func = std::bind(&checklist_type::check, type_chk_.get(), std::placeholders::_1);
+    chk_.push_back(func);
+    type_desc = type_cfg;
+    return true;
+}
+
+//every checklist entrance(return false: no abnormal, return true: abnormal)
+bool checklist_item::check (const process::TransmitRequest *request, std::string &descript) {
+    descript = "";
     for (auto& i: chk_) {
         if (false == i((process::TransmitRequest *)request)) {
+            //descript = description_;
             return false;
         }
     }
 
+    descript = description_;
     return true;
 }
-
-
-
-
-
 
 };

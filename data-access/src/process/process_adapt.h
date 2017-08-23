@@ -12,11 +12,24 @@ namespace dataprocess {
         std::string server_addr_;
         std::unique_ptr<sofa::pbrpc::RpcServer> rpc_server_;
         
-        bool Init(const libconfig::Setting &cfg, const std::vector<std::string> &types, int port);
+        bool Init(const libconfig::Setting &cfg, 
+                  const libconfig::Setting &rdscfg, 
+                  const std::vector<std::string> &types, 
+                  int port,
+                  const std::string &accessid,
+                  const std::string &dbpath,
+                  const std::string &plathttpaddr);
     public:
-        ProcessAdapt(const libconfig::Setting &cfg, const std::string &port, const std::vector<std::string> &types);
+        ProcessAdapt(const libconfig::Setting &cfg, 
+                     const libconfig::Setting &rdscfg, 
+                     const std::string &accessid, 
+                     const std::string &server_addr,
+                     const std::string &port, 
+                     const std::string &dbpath, 
+                     const std::vector<std::string> &types,
+                     const std::string &plathttpaddr);
         ~ProcessAdapt();
-        bool Start(const libconfig::Setting &cfg, const std::string &port);
+        bool Start(const libconfig::Setting &cfg, const std::string &port, const std::string &accessid, const std::string &dbpath);
         bool GetErrFlag(){return err_flag_;}
 
         void Transmit(::google::protobuf::RpcController *cntl,
