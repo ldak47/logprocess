@@ -149,14 +149,14 @@ TEST(test_proto, test_process) {
 
 TEST(test, get) {
     std::unique_ptr<RpcAdaptClient::PushDataRpcClient::PushClientHook> client;
-    client.reset(new RpcAdaptClient::PushDataRpcClient::PushClientHook("127.0.0.1:20014", 3000));
+    client.reset(new RpcAdaptClient::PushDataRpcClient::PushClientHook("127.0.0.1:20000", 3000));
     
     process::GetLogProcessStatRequest request;
     process::GetLogProcessStatResponse response;
     std::string application = "express";
     request.set_application(application);
-    request.set_startime(-61613462272);
-    request.set_endtime(-61613461972);
+    request.set_startime(1500447900);
+    request.set_endtime(1500462420);
 
     bool res = client->GetLogProcessStat(&request, &response, 0);
     EXPECT_EQ(res, true);

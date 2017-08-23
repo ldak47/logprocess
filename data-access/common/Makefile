@@ -118,6 +118,126 @@ common/fast:
 	cd /home/work/data-access && $(MAKE) -f common/CMakeFiles/common.dir/build.make common/CMakeFiles/common.dir/build
 .PHONY : common/fast
 
+consistent_hash.o: consistent_hash.cc.o
+.PHONY : consistent_hash.o
+
+# target to build an object file
+consistent_hash.cc.o:
+	cd /home/work/data-access && $(MAKE) -f common/CMakeFiles/common.dir/build.make common/CMakeFiles/common.dir/consistent_hash.cc.o
+.PHONY : consistent_hash.cc.o
+
+consistent_hash.i: consistent_hash.cc.i
+.PHONY : consistent_hash.i
+
+# target to preprocess a source file
+consistent_hash.cc.i:
+	cd /home/work/data-access && $(MAKE) -f common/CMakeFiles/common.dir/build.make common/CMakeFiles/common.dir/consistent_hash.cc.i
+.PHONY : consistent_hash.cc.i
+
+consistent_hash.s: consistent_hash.cc.s
+.PHONY : consistent_hash.s
+
+# target to generate assembly for a file
+consistent_hash.cc.s:
+	cd /home/work/data-access && $(MAKE) -f common/CMakeFiles/common.dir/build.make common/CMakeFiles/common.dir/consistent_hash.cc.s
+.PHONY : consistent_hash.cc.s
+
+curl.o: curl.cc.o
+.PHONY : curl.o
+
+# target to build an object file
+curl.cc.o:
+	cd /home/work/data-access && $(MAKE) -f common/CMakeFiles/common.dir/build.make common/CMakeFiles/common.dir/curl.cc.o
+.PHONY : curl.cc.o
+
+curl.i: curl.cc.i
+.PHONY : curl.i
+
+# target to preprocess a source file
+curl.cc.i:
+	cd /home/work/data-access && $(MAKE) -f common/CMakeFiles/common.dir/build.make common/CMakeFiles/common.dir/curl.cc.i
+.PHONY : curl.cc.i
+
+curl.s: curl.cc.s
+.PHONY : curl.s
+
+# target to generate assembly for a file
+curl.cc.s:
+	cd /home/work/data-access && $(MAKE) -f common/CMakeFiles/common.dir/build.make common/CMakeFiles/common.dir/curl.cc.s
+.PHONY : curl.cc.s
+
+redis.o: redis.cc.o
+.PHONY : redis.o
+
+# target to build an object file
+redis.cc.o:
+	cd /home/work/data-access && $(MAKE) -f common/CMakeFiles/common.dir/build.make common/CMakeFiles/common.dir/redis.cc.o
+.PHONY : redis.cc.o
+
+redis.i: redis.cc.i
+.PHONY : redis.i
+
+# target to preprocess a source file
+redis.cc.i:
+	cd /home/work/data-access && $(MAKE) -f common/CMakeFiles/common.dir/build.make common/CMakeFiles/common.dir/redis.cc.i
+.PHONY : redis.cc.i
+
+redis.s: redis.cc.s
+.PHONY : redis.s
+
+# target to generate assembly for a file
+redis.cc.s:
+	cd /home/work/data-access && $(MAKE) -f common/CMakeFiles/common.dir/build.make common/CMakeFiles/common.dir/redis.cc.s
+.PHONY : redis.cc.s
+
+rocksdb.o: rocksdb.cc.o
+.PHONY : rocksdb.o
+
+# target to build an object file
+rocksdb.cc.o:
+	cd /home/work/data-access && $(MAKE) -f common/CMakeFiles/common.dir/build.make common/CMakeFiles/common.dir/rocksdb.cc.o
+.PHONY : rocksdb.cc.o
+
+rocksdb.i: rocksdb.cc.i
+.PHONY : rocksdb.i
+
+# target to preprocess a source file
+rocksdb.cc.i:
+	cd /home/work/data-access && $(MAKE) -f common/CMakeFiles/common.dir/build.make common/CMakeFiles/common.dir/rocksdb.cc.i
+.PHONY : rocksdb.cc.i
+
+rocksdb.s: rocksdb.cc.s
+.PHONY : rocksdb.s
+
+# target to generate assembly for a file
+rocksdb.cc.s:
+	cd /home/work/data-access && $(MAKE) -f common/CMakeFiles/common.dir/build.make common/CMakeFiles/common.dir/rocksdb.cc.s
+.PHONY : rocksdb.cc.s
+
+skiplist2.o: skiplist2.cc.o
+.PHONY : skiplist2.o
+
+# target to build an object file
+skiplist2.cc.o:
+	cd /home/work/data-access && $(MAKE) -f common/CMakeFiles/common.dir/build.make common/CMakeFiles/common.dir/skiplist2.cc.o
+.PHONY : skiplist2.cc.o
+
+skiplist2.i: skiplist2.cc.i
+.PHONY : skiplist2.i
+
+# target to preprocess a source file
+skiplist2.cc.i:
+	cd /home/work/data-access && $(MAKE) -f common/CMakeFiles/common.dir/build.make common/CMakeFiles/common.dir/skiplist2.cc.i
+.PHONY : skiplist2.cc.i
+
+skiplist2.s: skiplist2.cc.s
+.PHONY : skiplist2.s
+
+# target to generate assembly for a file
+skiplist2.cc.s:
+	cd /home/work/data-access && $(MAKE) -f common/CMakeFiles/common.dir/build.make common/CMakeFiles/common.dir/skiplist2.cc.s
+.PHONY : skiplist2.cc.s
+
 thread_pool.o: thread_pool.cc.o
 .PHONY : thread_pool.o
 
@@ -141,6 +261,54 @@ thread_pool.s: thread_pool.cc.s
 thread_pool.cc.s:
 	cd /home/work/data-access && $(MAKE) -f common/CMakeFiles/common.dir/build.make common/CMakeFiles/common.dir/thread_pool.cc.s
 .PHONY : thread_pool.cc.s
+
+time_trans.o: time_trans.cc.o
+.PHONY : time_trans.o
+
+# target to build an object file
+time_trans.cc.o:
+	cd /home/work/data-access && $(MAKE) -f common/CMakeFiles/common.dir/build.make common/CMakeFiles/common.dir/time_trans.cc.o
+.PHONY : time_trans.cc.o
+
+time_trans.i: time_trans.cc.i
+.PHONY : time_trans.i
+
+# target to preprocess a source file
+time_trans.cc.i:
+	cd /home/work/data-access && $(MAKE) -f common/CMakeFiles/common.dir/build.make common/CMakeFiles/common.dir/time_trans.cc.i
+.PHONY : time_trans.cc.i
+
+time_trans.s: time_trans.cc.s
+.PHONY : time_trans.s
+
+# target to generate assembly for a file
+time_trans.cc.s:
+	cd /home/work/data-access && $(MAKE) -f common/CMakeFiles/common.dir/build.make common/CMakeFiles/common.dir/time_trans.cc.s
+.PHONY : time_trans.cc.s
+
+trie.o: trie.cc.o
+.PHONY : trie.o
+
+# target to build an object file
+trie.cc.o:
+	cd /home/work/data-access && $(MAKE) -f common/CMakeFiles/common.dir/build.make common/CMakeFiles/common.dir/trie.cc.o
+.PHONY : trie.cc.o
+
+trie.i: trie.cc.i
+.PHONY : trie.i
+
+# target to preprocess a source file
+trie.cc.i:
+	cd /home/work/data-access && $(MAKE) -f common/CMakeFiles/common.dir/build.make common/CMakeFiles/common.dir/trie.cc.i
+.PHONY : trie.cc.i
+
+trie.s: trie.cc.s
+.PHONY : trie.s
+
+# target to generate assembly for a file
+trie.cc.s:
+	cd /home/work/data-access && $(MAKE) -f common/CMakeFiles/common.dir/build.make common/CMakeFiles/common.dir/trie.cc.s
+.PHONY : trie.cc.s
 
 util.o: util.cc.o
 .PHONY : util.o
@@ -175,9 +343,30 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... common"
+	@echo "... consistent_hash.o"
+	@echo "... consistent_hash.i"
+	@echo "... consistent_hash.s"
+	@echo "... curl.o"
+	@echo "... curl.i"
+	@echo "... curl.s"
+	@echo "... redis.o"
+	@echo "... redis.i"
+	@echo "... redis.s"
+	@echo "... rocksdb.o"
+	@echo "... rocksdb.i"
+	@echo "... rocksdb.s"
+	@echo "... skiplist2.o"
+	@echo "... skiplist2.i"
+	@echo "... skiplist2.s"
 	@echo "... thread_pool.o"
 	@echo "... thread_pool.i"
 	@echo "... thread_pool.s"
+	@echo "... time_trans.o"
+	@echo "... time_trans.i"
+	@echo "... time_trans.s"
+	@echo "... trie.o"
+	@echo "... trie.i"
+	@echo "... trie.s"
 	@echo "... util.o"
 	@echo "... util.i"
 	@echo "... util.s"

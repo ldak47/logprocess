@@ -8,6 +8,8 @@
 
 namespace common {
 
+unsigned int FNV1_32_HASH (const std::string &str);
+    
 class ConsistentHash {
     std::vector<std::string> servers_;
     std::map<int, std::string> server_nodes_vnodes_;

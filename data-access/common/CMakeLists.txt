@@ -1,5 +1,5 @@
 
-set(COMMON_SRC thread_pool.cc util.cc rocksdb.cc redis.cc consistent_hash.cc time_trans.cc)
+set(COMMON_SRC thread_pool.cc util.cc rocksdb.cc redis.cc consistent_hash.cc time_trans.cc trie.cc skiplist2.cc curl.cc)
 
 include_directories(${COMMON_DIR})
 include_directories(${THIRDPARTY_INCLUDE_DIR})
@@ -12,3 +12,4 @@ target_link_libraries(common rt)
 target_link_libraries(common z)
 target_link_libraries(common rocksdb)
 target_link_libraries(common hiredis)
+target_link_libraries(common curl)
