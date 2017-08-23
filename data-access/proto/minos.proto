@@ -116,9 +116,9 @@ message SetPartitionGroupProgressRequest {
 
 // get partition_group progress
 message GetPartitionGroupProgressRequest {
-    optional int32 topic_id = 1; // required
-    optional int64 partition_group_id = 2; // required
-    optional UserAccountMessage account = 3; // required
+    optional int32 Topic_id = 1; // required
+    optional int64 Partition_group_id = 2; // required
+    optional UserAccountMessage Account = 3; // required
 }
 
 message GetPartitionGroupProgressResponse {
