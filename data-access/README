@@ -1,0 +1,14 @@
+1. document is logprocess_document.zip, at this dirent
+
+2. code struct:
+    2.1 src/
+        2.1.1 preprocess/: code for master node, which responses includeing "consume log from baidu-minos mqueue; pv-stat; produce into LockFreeQueue/resend to other master node when high pressuring; consume from LockFreeQueue; parse by fields; filter; send to slave-nodes"; most configuration could be managed by sofa-pbrpc(so is http because sofa-pbrpc's protocol translate). 
+        2.1.2 process/: code for slage node, which responses includeing "receive structed-logdata from master node; user-defind monitor and alarmer; user-define stater; storager(to rocksdb);" most configuration and query or select coule be requested by sofa-pbrpc(so is http)
+        2.1.3 platform/: code for platform, most about business. use beego to implemnt a simple MVV web-service, and use go-coroutine to implement almost-concurrent request all master-nodes(now 40, maybe up to 100 or more) or all slave-nodes(now 400, maybe up to 1000 or more). could set config or request log data by multiple dimension from all nodes fast from platform.
+    2.2 proto/: proto define. include interface code between rpc-level and adapt-level.
+    2.3 test/:  all gtests for data-struct and thirdparty used in code.
+    2.4 common/:  data-struct used in code.
+    2.5 thirdparty/:  thirdparty
+
+3. run:
+    based on CMake, cmake . && make, but some dependent need modify path to yourself...
