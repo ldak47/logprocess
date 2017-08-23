@@ -1,6 +1,8 @@
 #include "gtest/gtest.h"
 #include "glog/logging.h"
 #include <string>
+#include <vector>
+#include <map>
 
 //typedef std::tuple<bool, char, int, float, double> res_tp;
 using res_tp = std::tuple<bool, char, int, float, double>;
@@ -13,9 +15,17 @@ res_tp Function1 () {
 }
 
 res_tp Function2 () {
+    std::vector<res_tp> tuples;
+    std::map<std::string, res_tp> tuplemap;
     res_tp result;
     res_tp tmpres(true, 'b', 2, 2.1, 10000.1);
+    res_tp tmpres2(false, 'b', 2, 2.1, 10000.1);
     result = tmpres;
+
+    tuples.push_back(tmpres);
+    tuples.push_back(tmpres2);
+    tuplemap.insert(make_pair("1", tmpres));
+    tuplemap.insert(make_pair("2", tmpres2));
     return result;
 }
 

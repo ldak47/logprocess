@@ -3,6 +3,7 @@
 #include "glog/logging.h"
 #include <string>
 #include <regex>
+#include "timer.h"
 #include "libconfig.h++"
 
 std::string testnotice = "NOTICE: 17-06-22 16:46:47 errno[0] logId[3661423901] uri[/aese/index.php/api/search] user[127.0.0.1  ] refer[http://www.baidu.com]  cluster[nj03] tm_anti[0.02] baiduid[] cookieid[97F6589AC87B6D9EA78F81C92DEEE3DA] query[东营天气预报] ps_sid[] wise_sid[] sid[104493,100185,116336,104381,117189,116694,107317,117270,116810,117235,117119,117086,116996,117171,116992,117136,116309,115545,116689,116892,116387,115350,114276,115136,116412,116522,110085,117027,100458] net_type[1] mobile_browser[qq] mobile_browser_id[2] mobile_browser_version[6.3] srcid[4186] city_name[东营] province_name[山东] dspName[iphone] dsp[] tm_load_conf[0.22] crd[] tm_rewrite_group[0.03] So_ChangjingStrategy[0_pm | 0_mq | -1_mq] tm_stage_func[0.08 | 0.06 | 0.15] tm_rewrite_cardid[0.2] rw_cards[47033,47034,46019] tm_rewrite_srcida[0.21] make_query[0.09] make_query_fail[47034_17990_make_queryxiaoqi_make_fun] tm_gen_para[0.01] ral_req[So_GssSearch_东营天气预报_wisexmlnew_17990] tm_add_req_m[0.96] tm_add_req[1.11] null_res[So_GssSearch$$$gssSo_GssSearch东营天气预报wisexmlnew$$$47034_17990_ori_query:17990] exv[So_GssSearch$$$gssSo_GssSearch东营天气预报wisexmlnew$$$47034_17990_ori_query:17990] tm_get_res[18.1] ral_res[] tm_merge_res[0.01] tm_group_srcid[0.26] tm_get_card_res[19.23] tm_do_search[20] errmes[null cardid reuslt for main cardid 47034] resno[9] qid[12286720758457292737]";
@@ -43,10 +44,13 @@ TEST(test_regex, test_notice) {
         return;
     }
     const libconfig::Setting &root = cfg.getRoot();
-        
+    common::TimeCalcer tc;
+    
     std::regex reg(" srcid\\[(\\d+)\\] ");
     std::smatch res;
     regex_search(testnotice, res, reg);
+    double tm = tc.Calc();
+    LOG(INFO) << std::fixed << "cost " << tm;
     LOG(INFO) << "srcid: " << res.str(1);
 
     reg = (" sid\\[([0-9,]*)\\] ");
@@ -116,6 +120,7 @@ TEST(test_regex, test_notice) {
     regex_search(testnotice2, res, reg);
     std::string resno = res.str(1);
     LOG(INFO) << "resno: " << res.str(1) << ", " << resno.length();
+
 
 }
 
