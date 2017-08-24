@@ -105,6 +105,62 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
+test/CMakeFiles/cli_access.dir/rule:
+	cd /home/work/data-access && $(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/cli_access.dir/rule
+.PHONY : test/CMakeFiles/cli_access.dir/rule
+
+# Convenience name for target.
+cli_access: test/CMakeFiles/cli_access.dir/rule
+.PHONY : cli_access
+
+# fast build rule for target.
+cli_access/fast:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/cli_access.dir/build.make test/CMakeFiles/cli_access.dir/build
+.PHONY : cli_access/fast
+
+# Convenience name for target.
+test/CMakeFiles/test_access_proto.dir/rule:
+	cd /home/work/data-access && $(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/test_access_proto.dir/rule
+.PHONY : test/CMakeFiles/test_access_proto.dir/rule
+
+# Convenience name for target.
+test_access_proto: test/CMakeFiles/test_access_proto.dir/rule
+.PHONY : test_access_proto
+
+# fast build rule for target.
+test_access_proto/fast:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_access_proto.dir/build.make test/CMakeFiles/test_access_proto.dir/build
+.PHONY : test_access_proto/fast
+
+# Convenience name for target.
+test/CMakeFiles/test_bitmap.dir/rule:
+	cd /home/work/data-access && $(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/test_bitmap.dir/rule
+.PHONY : test/CMakeFiles/test_bitmap.dir/rule
+
+# Convenience name for target.
+test_bitmap: test/CMakeFiles/test_bitmap.dir/rule
+.PHONY : test_bitmap
+
+# fast build rule for target.
+test_bitmap/fast:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_bitmap.dir/build.make test/CMakeFiles/test_bitmap.dir/build
+.PHONY : test_bitmap/fast
+
+# Convenience name for target.
+test/CMakeFiles/test_consistent.dir/rule:
+	cd /home/work/data-access && $(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/test_consistent.dir/rule
+.PHONY : test/CMakeFiles/test_consistent.dir/rule
+
+# Convenience name for target.
+test_consistent: test/CMakeFiles/test_consistent.dir/rule
+.PHONY : test_consistent
+
+# fast build rule for target.
+test_consistent/fast:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_consistent.dir/build.make test/CMakeFiles/test_consistent.dir/build
+.PHONY : test_consistent/fast
+
+# Convenience name for target.
 test/CMakeFiles/test_constexpr.dir/rule:
 	cd /home/work/data-access && $(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/test_constexpr.dir/rule
 .PHONY : test/CMakeFiles/test_constexpr.dir/rule
@@ -147,6 +203,34 @@ test_container_swap/fast:
 .PHONY : test_container_swap/fast
 
 # Convenience name for target.
+test/CMakeFiles/test_cregex.dir/rule:
+	cd /home/work/data-access && $(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/test_cregex.dir/rule
+.PHONY : test/CMakeFiles/test_cregex.dir/rule
+
+# Convenience name for target.
+test_cregex: test/CMakeFiles/test_cregex.dir/rule
+.PHONY : test_cregex
+
+# fast build rule for target.
+test_cregex/fast:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_cregex.dir/build.make test/CMakeFiles/test_cregex.dir/build
+.PHONY : test_cregex/fast
+
+# Convenience name for target.
+test/CMakeFiles/test_curl.dir/rule:
+	cd /home/work/data-access && $(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/test_curl.dir/rule
+.PHONY : test/CMakeFiles/test_curl.dir/rule
+
+# Convenience name for target.
+test_curl: test/CMakeFiles/test_curl.dir/rule
+.PHONY : test_curl
+
+# fast build rule for target.
+test_curl/fast:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_curl.dir/build.make test/CMakeFiles/test_curl.dir/build
+.PHONY : test_curl/fast
+
+# Convenience name for target.
 test/CMakeFiles/test_decltype.dir/rule:
 	cd /home/work/data-access && $(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/test_decltype.dir/rule
 .PHONY : test/CMakeFiles/test_decltype.dir/rule
@@ -161,6 +245,20 @@ test_decltype/fast:
 .PHONY : test_decltype/fast
 
 # Convenience name for target.
+test/CMakeFiles/test_factory.dir/rule:
+	cd /home/work/data-access && $(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/test_factory.dir/rule
+.PHONY : test/CMakeFiles/test_factory.dir/rule
+
+# Convenience name for target.
+test_factory: test/CMakeFiles/test_factory.dir/rule
+.PHONY : test_factory
+
+# fast build rule for target.
+test_factory/fast:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_factory.dir/build.make test/CMakeFiles/test_factory.dir/build
+.PHONY : test_factory/fast
+
+# Convenience name for target.
 test/CMakeFiles/test_function.dir/rule:
 	cd /home/work/data-access && $(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/test_function.dir/rule
 .PHONY : test/CMakeFiles/test_function.dir/rule
@@ -173,6 +271,34 @@ test_function: test/CMakeFiles/test_function.dir/rule
 test_function/fast:
 	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_function.dir/build.make test/CMakeFiles/test_function.dir/build
 .PHONY : test_function/fast
+
+# Convenience name for target.
+test/CMakeFiles/test_health.dir/rule:
+	cd /home/work/data-access && $(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/test_health.dir/rule
+.PHONY : test/CMakeFiles/test_health.dir/rule
+
+# Convenience name for target.
+test_health: test/CMakeFiles/test_health.dir/rule
+.PHONY : test_health
+
+# fast build rule for target.
+test_health/fast:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_health.dir/build.make test/CMakeFiles/test_health.dir/build
+.PHONY : test_health/fast
+
+# Convenience name for target.
+test/CMakeFiles/test_heap.dir/rule:
+	cd /home/work/data-access && $(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/test_heap.dir/rule
+.PHONY : test/CMakeFiles/test_heap.dir/rule
+
+# Convenience name for target.
+test_heap: test/CMakeFiles/test_heap.dir/rule
+.PHONY : test_heap
+
+# fast build rule for target.
+test_heap/fast:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_heap.dir/build.make test/CMakeFiles/test_heap.dir/build
+.PHONY : test_heap/fast
 
 # Convenience name for target.
 test/CMakeFiles/test_initializer.dir/rule:
@@ -203,6 +329,20 @@ test_libconfig/fast:
 .PHONY : test_libconfig/fast
 
 # Convenience name for target.
+test/CMakeFiles/test_lockfree.dir/rule:
+	cd /home/work/data-access && $(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/test_lockfree.dir/rule
+.PHONY : test/CMakeFiles/test_lockfree.dir/rule
+
+# Convenience name for target.
+test_lockfree: test/CMakeFiles/test_lockfree.dir/rule
+.PHONY : test_lockfree
+
+# fast build rule for target.
+test_lockfree/fast:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_lockfree.dir/build.make test/CMakeFiles/test_lockfree.dir/build
+.PHONY : test_lockfree/fast
+
+# Convenience name for target.
 test/CMakeFiles/test_move.dir/rule:
 	cd /home/work/data-access && $(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/test_move.dir/rule
 .PHONY : test/CMakeFiles/test_move.dir/rule
@@ -215,6 +355,34 @@ test_move: test/CMakeFiles/test_move.dir/rule
 test_move/fast:
 	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_move.dir/build.make test/CMakeFiles/test_move.dir/build
 .PHONY : test_move/fast
+
+# Convenience name for target.
+test/CMakeFiles/test_mutex.dir/rule:
+	cd /home/work/data-access && $(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/test_mutex.dir/rule
+.PHONY : test/CMakeFiles/test_mutex.dir/rule
+
+# Convenience name for target.
+test_mutex: test/CMakeFiles/test_mutex.dir/rule
+.PHONY : test_mutex
+
+# fast build rule for target.
+test_mutex/fast:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_mutex.dir/build.make test/CMakeFiles/test_mutex.dir/build
+.PHONY : test_mutex/fast
+
+# Convenience name for target.
+test/CMakeFiles/test_noncopyable.dir/rule:
+	cd /home/work/data-access && $(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/test_noncopyable.dir/rule
+.PHONY : test/CMakeFiles/test_noncopyable.dir/rule
+
+# Convenience name for target.
+test_noncopyable: test/CMakeFiles/test_noncopyable.dir/rule
+.PHONY : test_noncopyable
+
+# fast build rule for target.
+test_noncopyable/fast:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_noncopyable.dir/build.make test/CMakeFiles/test_noncopyable.dir/build
+.PHONY : test_noncopyable/fast
 
 # Convenience name for target.
 test/CMakeFiles/test_proto.dir/rule:
@@ -259,6 +427,20 @@ test_rangeiter/fast:
 .PHONY : test_rangeiter/fast
 
 # Convenience name for target.
+test/CMakeFiles/test_redis.dir/rule:
+	cd /home/work/data-access && $(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/test_redis.dir/rule
+.PHONY : test/CMakeFiles/test_redis.dir/rule
+
+# Convenience name for target.
+test_redis: test/CMakeFiles/test_redis.dir/rule
+.PHONY : test_redis
+
+# fast build rule for target.
+test_redis/fast:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_redis.dir/build.make test/CMakeFiles/test_redis.dir/build
+.PHONY : test_redis/fast
+
+# Convenience name for target.
 test/CMakeFiles/test_regex.dir/rule:
 	cd /home/work/data-access && $(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/test_regex.dir/rule
 .PHONY : test/CMakeFiles/test_regex.dir/rule
@@ -271,6 +453,48 @@ test_regex: test/CMakeFiles/test_regex.dir/rule
 test_regex/fast:
 	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_regex.dir/build.make test/CMakeFiles/test_regex.dir/build
 .PHONY : test_regex/fast
+
+# Convenience name for target.
+test/CMakeFiles/test_rocksdb.dir/rule:
+	cd /home/work/data-access && $(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/test_rocksdb.dir/rule
+.PHONY : test/CMakeFiles/test_rocksdb.dir/rule
+
+# Convenience name for target.
+test_rocksdb: test/CMakeFiles/test_rocksdb.dir/rule
+.PHONY : test_rocksdb
+
+# fast build rule for target.
+test_rocksdb/fast:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_rocksdb.dir/build.make test/CMakeFiles/test_rocksdb.dir/build
+.PHONY : test_rocksdb/fast
+
+# Convenience name for target.
+test/CMakeFiles/test_singleton.dir/rule:
+	cd /home/work/data-access && $(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/test_singleton.dir/rule
+.PHONY : test/CMakeFiles/test_singleton.dir/rule
+
+# Convenience name for target.
+test_singleton: test/CMakeFiles/test_singleton.dir/rule
+.PHONY : test_singleton
+
+# fast build rule for target.
+test_singleton/fast:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_singleton.dir/build.make test/CMakeFiles/test_singleton.dir/build
+.PHONY : test_singleton/fast
+
+# Convenience name for target.
+test/CMakeFiles/test_skiplist.dir/rule:
+	cd /home/work/data-access && $(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/test_skiplist.dir/rule
+.PHONY : test/CMakeFiles/test_skiplist.dir/rule
+
+# Convenience name for target.
+test_skiplist: test/CMakeFiles/test_skiplist.dir/rule
+.PHONY : test_skiplist
+
+# fast build rule for target.
+test_skiplist/fast:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_skiplist.dir/build.make test/CMakeFiles/test_skiplist.dir/build
+.PHONY : test_skiplist/fast
 
 # Convenience name for target.
 test/CMakeFiles/test_static_assert.dir/rule:
@@ -301,6 +525,48 @@ test_test/fast:
 .PHONY : test_test/fast
 
 # Convenience name for target.
+test/CMakeFiles/test_threadpool.dir/rule:
+	cd /home/work/data-access && $(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/test_threadpool.dir/rule
+.PHONY : test/CMakeFiles/test_threadpool.dir/rule
+
+# Convenience name for target.
+test_threadpool: test/CMakeFiles/test_threadpool.dir/rule
+.PHONY : test_threadpool
+
+# fast build rule for target.
+test_threadpool/fast:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_threadpool.dir/build.make test/CMakeFiles/test_threadpool.dir/build
+.PHONY : test_threadpool/fast
+
+# Convenience name for target.
+test/CMakeFiles/test_topk.dir/rule:
+	cd /home/work/data-access && $(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/test_topk.dir/rule
+.PHONY : test/CMakeFiles/test_topk.dir/rule
+
+# Convenience name for target.
+test_topk: test/CMakeFiles/test_topk.dir/rule
+.PHONY : test_topk
+
+# fast build rule for target.
+test_topk/fast:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_topk.dir/build.make test/CMakeFiles/test_topk.dir/build
+.PHONY : test_topk/fast
+
+# Convenience name for target.
+test/CMakeFiles/test_trie.dir/rule:
+	cd /home/work/data-access && $(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/test_trie.dir/rule
+.PHONY : test/CMakeFiles/test_trie.dir/rule
+
+# Convenience name for target.
+test_trie: test/CMakeFiles/test_trie.dir/rule
+.PHONY : test_trie
+
+# fast build rule for target.
+test_trie/fast:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_trie.dir/build.make test/CMakeFiles/test_trie.dir/build
+.PHONY : test_trie/fast
+
+# Convenience name for target.
 test/CMakeFiles/test_tuple.dir/rule:
 	cd /home/work/data-access && $(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/test_tuple.dir/rule
 .PHONY : test/CMakeFiles/test_tuple.dir/rule
@@ -327,6 +593,102 @@ test_virtual: test/CMakeFiles/test_virtual.dir/rule
 test_virtual/fast:
 	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_virtual.dir/build.make test/CMakeFiles/test_virtual.dir/build
 .PHONY : test_virtual/fast
+
+cli_access.o: cli_access.cc.o
+.PHONY : cli_access.o
+
+# target to build an object file
+cli_access.cc.o:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/cli_access.dir/build.make test/CMakeFiles/cli_access.dir/cli_access.cc.o
+.PHONY : cli_access.cc.o
+
+cli_access.i: cli_access.cc.i
+.PHONY : cli_access.i
+
+# target to preprocess a source file
+cli_access.cc.i:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/cli_access.dir/build.make test/CMakeFiles/cli_access.dir/cli_access.cc.i
+.PHONY : cli_access.cc.i
+
+cli_access.s: cli_access.cc.s
+.PHONY : cli_access.s
+
+# target to generate assembly for a file
+cli_access.cc.s:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/cli_access.dir/build.make test/CMakeFiles/cli_access.dir/cli_access.cc.s
+.PHONY : cli_access.cc.s
+
+test_access_proto.o: test_access_proto.cc.o
+.PHONY : test_access_proto.o
+
+# target to build an object file
+test_access_proto.cc.o:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_access_proto.dir/build.make test/CMakeFiles/test_access_proto.dir/test_access_proto.cc.o
+.PHONY : test_access_proto.cc.o
+
+test_access_proto.i: test_access_proto.cc.i
+.PHONY : test_access_proto.i
+
+# target to preprocess a source file
+test_access_proto.cc.i:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_access_proto.dir/build.make test/CMakeFiles/test_access_proto.dir/test_access_proto.cc.i
+.PHONY : test_access_proto.cc.i
+
+test_access_proto.s: test_access_proto.cc.s
+.PHONY : test_access_proto.s
+
+# target to generate assembly for a file
+test_access_proto.cc.s:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_access_proto.dir/build.make test/CMakeFiles/test_access_proto.dir/test_access_proto.cc.s
+.PHONY : test_access_proto.cc.s
+
+test_bitmap.o: test_bitmap.cc.o
+.PHONY : test_bitmap.o
+
+# target to build an object file
+test_bitmap.cc.o:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_bitmap.dir/build.make test/CMakeFiles/test_bitmap.dir/test_bitmap.cc.o
+.PHONY : test_bitmap.cc.o
+
+test_bitmap.i: test_bitmap.cc.i
+.PHONY : test_bitmap.i
+
+# target to preprocess a source file
+test_bitmap.cc.i:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_bitmap.dir/build.make test/CMakeFiles/test_bitmap.dir/test_bitmap.cc.i
+.PHONY : test_bitmap.cc.i
+
+test_bitmap.s: test_bitmap.cc.s
+.PHONY : test_bitmap.s
+
+# target to generate assembly for a file
+test_bitmap.cc.s:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_bitmap.dir/build.make test/CMakeFiles/test_bitmap.dir/test_bitmap.cc.s
+.PHONY : test_bitmap.cc.s
+
+test_consistent.o: test_consistent.cc.o
+.PHONY : test_consistent.o
+
+# target to build an object file
+test_consistent.cc.o:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_consistent.dir/build.make test/CMakeFiles/test_consistent.dir/test_consistent.cc.o
+.PHONY : test_consistent.cc.o
+
+test_consistent.i: test_consistent.cc.i
+.PHONY : test_consistent.i
+
+# target to preprocess a source file
+test_consistent.cc.i:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_consistent.dir/build.make test/CMakeFiles/test_consistent.dir/test_consistent.cc.i
+.PHONY : test_consistent.cc.i
+
+test_consistent.s: test_consistent.cc.s
+.PHONY : test_consistent.s
+
+# target to generate assembly for a file
+test_consistent.cc.s:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_consistent.dir/build.make test/CMakeFiles/test_consistent.dir/test_consistent.cc.s
+.PHONY : test_consistent.cc.s
 
 test_constexpr.o: test_constexpr.cc.o
 .PHONY : test_constexpr.o
@@ -400,6 +762,54 @@ test_container_swap.cc.s:
 	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_container_swap.dir/build.make test/CMakeFiles/test_container_swap.dir/test_container_swap.cc.s
 .PHONY : test_container_swap.cc.s
 
+test_cregex.o: test_cregex.cc.o
+.PHONY : test_cregex.o
+
+# target to build an object file
+test_cregex.cc.o:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_cregex.dir/build.make test/CMakeFiles/test_cregex.dir/test_cregex.cc.o
+.PHONY : test_cregex.cc.o
+
+test_cregex.i: test_cregex.cc.i
+.PHONY : test_cregex.i
+
+# target to preprocess a source file
+test_cregex.cc.i:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_cregex.dir/build.make test/CMakeFiles/test_cregex.dir/test_cregex.cc.i
+.PHONY : test_cregex.cc.i
+
+test_cregex.s: test_cregex.cc.s
+.PHONY : test_cregex.s
+
+# target to generate assembly for a file
+test_cregex.cc.s:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_cregex.dir/build.make test/CMakeFiles/test_cregex.dir/test_cregex.cc.s
+.PHONY : test_cregex.cc.s
+
+test_curl.o: test_curl.cc.o
+.PHONY : test_curl.o
+
+# target to build an object file
+test_curl.cc.o:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_curl.dir/build.make test/CMakeFiles/test_curl.dir/test_curl.cc.o
+.PHONY : test_curl.cc.o
+
+test_curl.i: test_curl.cc.i
+.PHONY : test_curl.i
+
+# target to preprocess a source file
+test_curl.cc.i:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_curl.dir/build.make test/CMakeFiles/test_curl.dir/test_curl.cc.i
+.PHONY : test_curl.cc.i
+
+test_curl.s: test_curl.cc.s
+.PHONY : test_curl.s
+
+# target to generate assembly for a file
+test_curl.cc.s:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_curl.dir/build.make test/CMakeFiles/test_curl.dir/test_curl.cc.s
+.PHONY : test_curl.cc.s
+
 test_decltype.o: test_decltype.cc.o
 .PHONY : test_decltype.o
 
@@ -423,6 +833,78 @@ test_decltype.s: test_decltype.cc.s
 test_decltype.cc.s:
 	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_decltype.dir/build.make test/CMakeFiles/test_decltype.dir/test_decltype.cc.s
 .PHONY : test_decltype.cc.s
+
+test_factory.o: test_factory.cc.o
+.PHONY : test_factory.o
+
+# target to build an object file
+test_factory.cc.o:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_factory.dir/build.make test/CMakeFiles/test_factory.dir/test_factory.cc.o
+.PHONY : test_factory.cc.o
+
+test_factory.i: test_factory.cc.i
+.PHONY : test_factory.i
+
+# target to preprocess a source file
+test_factory.cc.i:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_factory.dir/build.make test/CMakeFiles/test_factory.dir/test_factory.cc.i
+.PHONY : test_factory.cc.i
+
+test_factory.s: test_factory.cc.s
+.PHONY : test_factory.s
+
+# target to generate assembly for a file
+test_factory.cc.s:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_factory.dir/build.make test/CMakeFiles/test_factory.dir/test_factory.cc.s
+.PHONY : test_factory.cc.s
+
+test_health.o: test_health.cc.o
+.PHONY : test_health.o
+
+# target to build an object file
+test_health.cc.o:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_health.dir/build.make test/CMakeFiles/test_health.dir/test_health.cc.o
+.PHONY : test_health.cc.o
+
+test_health.i: test_health.cc.i
+.PHONY : test_health.i
+
+# target to preprocess a source file
+test_health.cc.i:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_health.dir/build.make test/CMakeFiles/test_health.dir/test_health.cc.i
+.PHONY : test_health.cc.i
+
+test_health.s: test_health.cc.s
+.PHONY : test_health.s
+
+# target to generate assembly for a file
+test_health.cc.s:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_health.dir/build.make test/CMakeFiles/test_health.dir/test_health.cc.s
+.PHONY : test_health.cc.s
+
+test_heap.o: test_heap.cc.o
+.PHONY : test_heap.o
+
+# target to build an object file
+test_heap.cc.o:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_heap.dir/build.make test/CMakeFiles/test_heap.dir/test_heap.cc.o
+.PHONY : test_heap.cc.o
+
+test_heap.i: test_heap.cc.i
+.PHONY : test_heap.i
+
+# target to preprocess a source file
+test_heap.cc.i:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_heap.dir/build.make test/CMakeFiles/test_heap.dir/test_heap.cc.i
+.PHONY : test_heap.cc.i
+
+test_heap.s: test_heap.cc.s
+.PHONY : test_heap.s
+
+# target to generate assembly for a file
+test_heap.cc.s:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_heap.dir/build.make test/CMakeFiles/test_heap.dir/test_heap.cc.s
+.PHONY : test_heap.cc.s
 
 test_initializer.o: test_initializer.cc.o
 .PHONY : test_initializer.o
@@ -496,6 +978,30 @@ test_libconfig.cc.s:
 	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_libconfig.dir/build.make test/CMakeFiles/test_libconfig.dir/test_libconfig.cc.s
 .PHONY : test_libconfig.cc.s
 
+test_lockfree.o: test_lockfree.cc.o
+.PHONY : test_lockfree.o
+
+# target to build an object file
+test_lockfree.cc.o:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_lockfree.dir/build.make test/CMakeFiles/test_lockfree.dir/test_lockfree.cc.o
+.PHONY : test_lockfree.cc.o
+
+test_lockfree.i: test_lockfree.cc.i
+.PHONY : test_lockfree.i
+
+# target to preprocess a source file
+test_lockfree.cc.i:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_lockfree.dir/build.make test/CMakeFiles/test_lockfree.dir/test_lockfree.cc.i
+.PHONY : test_lockfree.cc.i
+
+test_lockfree.s: test_lockfree.cc.s
+.PHONY : test_lockfree.s
+
+# target to generate assembly for a file
+test_lockfree.cc.s:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_lockfree.dir/build.make test/CMakeFiles/test_lockfree.dir/test_lockfree.cc.s
+.PHONY : test_lockfree.cc.s
+
 test_move.o: test_move.cc.o
 .PHONY : test_move.o
 
@@ -519,6 +1025,54 @@ test_move.s: test_move.cc.s
 test_move.cc.s:
 	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_move.dir/build.make test/CMakeFiles/test_move.dir/test_move.cc.s
 .PHONY : test_move.cc.s
+
+test_mutex.o: test_mutex.cc.o
+.PHONY : test_mutex.o
+
+# target to build an object file
+test_mutex.cc.o:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_mutex.dir/build.make test/CMakeFiles/test_mutex.dir/test_mutex.cc.o
+.PHONY : test_mutex.cc.o
+
+test_mutex.i: test_mutex.cc.i
+.PHONY : test_mutex.i
+
+# target to preprocess a source file
+test_mutex.cc.i:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_mutex.dir/build.make test/CMakeFiles/test_mutex.dir/test_mutex.cc.i
+.PHONY : test_mutex.cc.i
+
+test_mutex.s: test_mutex.cc.s
+.PHONY : test_mutex.s
+
+# target to generate assembly for a file
+test_mutex.cc.s:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_mutex.dir/build.make test/CMakeFiles/test_mutex.dir/test_mutex.cc.s
+.PHONY : test_mutex.cc.s
+
+test_noncopyable.o: test_noncopyable.cc.o
+.PHONY : test_noncopyable.o
+
+# target to build an object file
+test_noncopyable.cc.o:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_noncopyable.dir/build.make test/CMakeFiles/test_noncopyable.dir/test_noncopyable.cc.o
+.PHONY : test_noncopyable.cc.o
+
+test_noncopyable.i: test_noncopyable.cc.i
+.PHONY : test_noncopyable.i
+
+# target to preprocess a source file
+test_noncopyable.cc.i:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_noncopyable.dir/build.make test/CMakeFiles/test_noncopyable.dir/test_noncopyable.cc.i
+.PHONY : test_noncopyable.cc.i
+
+test_noncopyable.s: test_noncopyable.cc.s
+.PHONY : test_noncopyable.s
+
+# target to generate assembly for a file
+test_noncopyable.cc.s:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_noncopyable.dir/build.make test/CMakeFiles/test_noncopyable.dir/test_noncopyable.cc.s
+.PHONY : test_noncopyable.cc.s
 
 test_proto.o: test_proto.cc.o
 .PHONY : test_proto.o
@@ -592,6 +1146,30 @@ test_rangeiter.cc.s:
 	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_rangeiter.dir/build.make test/CMakeFiles/test_rangeiter.dir/test_rangeiter.cc.s
 .PHONY : test_rangeiter.cc.s
 
+test_redis.o: test_redis.cc.o
+.PHONY : test_redis.o
+
+# target to build an object file
+test_redis.cc.o:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_redis.dir/build.make test/CMakeFiles/test_redis.dir/test_redis.cc.o
+.PHONY : test_redis.cc.o
+
+test_redis.i: test_redis.cc.i
+.PHONY : test_redis.i
+
+# target to preprocess a source file
+test_redis.cc.i:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_redis.dir/build.make test/CMakeFiles/test_redis.dir/test_redis.cc.i
+.PHONY : test_redis.cc.i
+
+test_redis.s: test_redis.cc.s
+.PHONY : test_redis.s
+
+# target to generate assembly for a file
+test_redis.cc.s:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_redis.dir/build.make test/CMakeFiles/test_redis.dir/test_redis.cc.s
+.PHONY : test_redis.cc.s
+
 test_regex.o: test_regex.cc.o
 .PHONY : test_regex.o
 
@@ -615,6 +1193,78 @@ test_regex.s: test_regex.cc.s
 test_regex.cc.s:
 	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_regex.dir/build.make test/CMakeFiles/test_regex.dir/test_regex.cc.s
 .PHONY : test_regex.cc.s
+
+test_rocksdb.o: test_rocksdb.cc.o
+.PHONY : test_rocksdb.o
+
+# target to build an object file
+test_rocksdb.cc.o:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_rocksdb.dir/build.make test/CMakeFiles/test_rocksdb.dir/test_rocksdb.cc.o
+.PHONY : test_rocksdb.cc.o
+
+test_rocksdb.i: test_rocksdb.cc.i
+.PHONY : test_rocksdb.i
+
+# target to preprocess a source file
+test_rocksdb.cc.i:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_rocksdb.dir/build.make test/CMakeFiles/test_rocksdb.dir/test_rocksdb.cc.i
+.PHONY : test_rocksdb.cc.i
+
+test_rocksdb.s: test_rocksdb.cc.s
+.PHONY : test_rocksdb.s
+
+# target to generate assembly for a file
+test_rocksdb.cc.s:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_rocksdb.dir/build.make test/CMakeFiles/test_rocksdb.dir/test_rocksdb.cc.s
+.PHONY : test_rocksdb.cc.s
+
+test_singleton.o: test_singleton.cc.o
+.PHONY : test_singleton.o
+
+# target to build an object file
+test_singleton.cc.o:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_singleton.dir/build.make test/CMakeFiles/test_singleton.dir/test_singleton.cc.o
+.PHONY : test_singleton.cc.o
+
+test_singleton.i: test_singleton.cc.i
+.PHONY : test_singleton.i
+
+# target to preprocess a source file
+test_singleton.cc.i:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_singleton.dir/build.make test/CMakeFiles/test_singleton.dir/test_singleton.cc.i
+.PHONY : test_singleton.cc.i
+
+test_singleton.s: test_singleton.cc.s
+.PHONY : test_singleton.s
+
+# target to generate assembly for a file
+test_singleton.cc.s:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_singleton.dir/build.make test/CMakeFiles/test_singleton.dir/test_singleton.cc.s
+.PHONY : test_singleton.cc.s
+
+test_skiplist.o: test_skiplist.cc.o
+.PHONY : test_skiplist.o
+
+# target to build an object file
+test_skiplist.cc.o:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_skiplist.dir/build.make test/CMakeFiles/test_skiplist.dir/test_skiplist.cc.o
+.PHONY : test_skiplist.cc.o
+
+test_skiplist.i: test_skiplist.cc.i
+.PHONY : test_skiplist.i
+
+# target to preprocess a source file
+test_skiplist.cc.i:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_skiplist.dir/build.make test/CMakeFiles/test_skiplist.dir/test_skiplist.cc.i
+.PHONY : test_skiplist.cc.i
+
+test_skiplist.s: test_skiplist.cc.s
+.PHONY : test_skiplist.s
+
+# target to generate assembly for a file
+test_skiplist.cc.s:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_skiplist.dir/build.make test/CMakeFiles/test_skiplist.dir/test_skiplist.cc.s
+.PHONY : test_skiplist.cc.s
 
 test_static_assert.o: test_static_assert.cc.o
 .PHONY : test_static_assert.o
@@ -663,6 +1313,78 @@ test_test.s: test_test.cc.s
 test_test.cc.s:
 	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_test.dir/build.make test/CMakeFiles/test_test.dir/test_test.cc.s
 .PHONY : test_test.cc.s
+
+test_threadpool.o: test_threadpool.cc.o
+.PHONY : test_threadpool.o
+
+# target to build an object file
+test_threadpool.cc.o:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_threadpool.dir/build.make test/CMakeFiles/test_threadpool.dir/test_threadpool.cc.o
+.PHONY : test_threadpool.cc.o
+
+test_threadpool.i: test_threadpool.cc.i
+.PHONY : test_threadpool.i
+
+# target to preprocess a source file
+test_threadpool.cc.i:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_threadpool.dir/build.make test/CMakeFiles/test_threadpool.dir/test_threadpool.cc.i
+.PHONY : test_threadpool.cc.i
+
+test_threadpool.s: test_threadpool.cc.s
+.PHONY : test_threadpool.s
+
+# target to generate assembly for a file
+test_threadpool.cc.s:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_threadpool.dir/build.make test/CMakeFiles/test_threadpool.dir/test_threadpool.cc.s
+.PHONY : test_threadpool.cc.s
+
+test_topk.o: test_topk.cc.o
+.PHONY : test_topk.o
+
+# target to build an object file
+test_topk.cc.o:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_topk.dir/build.make test/CMakeFiles/test_topk.dir/test_topk.cc.o
+.PHONY : test_topk.cc.o
+
+test_topk.i: test_topk.cc.i
+.PHONY : test_topk.i
+
+# target to preprocess a source file
+test_topk.cc.i:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_topk.dir/build.make test/CMakeFiles/test_topk.dir/test_topk.cc.i
+.PHONY : test_topk.cc.i
+
+test_topk.s: test_topk.cc.s
+.PHONY : test_topk.s
+
+# target to generate assembly for a file
+test_topk.cc.s:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_topk.dir/build.make test/CMakeFiles/test_topk.dir/test_topk.cc.s
+.PHONY : test_topk.cc.s
+
+test_trie.o: test_trie.cc.o
+.PHONY : test_trie.o
+
+# target to build an object file
+test_trie.cc.o:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_trie.dir/build.make test/CMakeFiles/test_trie.dir/test_trie.cc.o
+.PHONY : test_trie.cc.o
+
+test_trie.i: test_trie.cc.i
+.PHONY : test_trie.i
+
+# target to preprocess a source file
+test_trie.cc.i:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_trie.dir/build.make test/CMakeFiles/test_trie.dir/test_trie.cc.i
+.PHONY : test_trie.cc.i
+
+test_trie.s: test_trie.cc.s
+.PHONY : test_trie.s
+
+# target to generate assembly for a file
+test_trie.cc.s:
+	cd /home/work/data-access && $(MAKE) -f test/CMakeFiles/test_trie.dir/build.make test/CMakeFiles/test_trie.dir/test_trie.cc.s
+.PHONY : test_trie.cc.s
 
 test_tuple.o: test_tuple.cc.o
 .PHONY : test_tuple.o
@@ -723,19 +1445,50 @@ help:
 	@echo "... test_constexpr"
 	@echo "... test_regex"
 	@echo "... test_ptr"
+	@echo "... test_trie"
 	@echo "... test_tuple"
+	@echo "... test_access_proto"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... test_rocksdb"
+	@echo "... test_noncopyable"
+	@echo "... test_lockfree"
 	@echo "... test_rangeiter"
 	@echo "... test_proto"
+	@echo "... test_threadpool"
+	@echo "... cli_access"
 	@echo "... test_libconfig"
+	@echo "... test_skiplist"
+	@echo "... test_cregex"
+	@echo "... test_bitmap"
+	@echo "... test_heap"
 	@echo "... test_virtual"
 	@echo "... test_move"
 	@echo "... test_construct_reuse"
 	@echo "... test_function"
 	@echo "... test_container_swap"
+	@echo "... test_health"
+	@echo "... test_redis"
+	@echo "... test_curl"
 	@echo "... test_test"
+	@echo "... test_factory"
 	@echo "... test_decltype"
+	@echo "... test_consistent"
+	@echo "... test_mutex"
+	@echo "... test_singleton"
+	@echo "... test_topk"
+	@echo "... cli_access.o"
+	@echo "... cli_access.i"
+	@echo "... cli_access.s"
+	@echo "... test_access_proto.o"
+	@echo "... test_access_proto.i"
+	@echo "... test_access_proto.s"
+	@echo "... test_bitmap.o"
+	@echo "... test_bitmap.i"
+	@echo "... test_bitmap.s"
+	@echo "... test_consistent.o"
+	@echo "... test_consistent.i"
+	@echo "... test_consistent.s"
 	@echo "... test_constexpr.o"
 	@echo "... test_constexpr.i"
 	@echo "... test_constexpr.s"
@@ -745,9 +1498,24 @@ help:
 	@echo "... test_container_swap.o"
 	@echo "... test_container_swap.i"
 	@echo "... test_container_swap.s"
+	@echo "... test_cregex.o"
+	@echo "... test_cregex.i"
+	@echo "... test_cregex.s"
+	@echo "... test_curl.o"
+	@echo "... test_curl.i"
+	@echo "... test_curl.s"
 	@echo "... test_decltype.o"
 	@echo "... test_decltype.i"
 	@echo "... test_decltype.s"
+	@echo "... test_factory.o"
+	@echo "... test_factory.i"
+	@echo "... test_factory.s"
+	@echo "... test_health.o"
+	@echo "... test_health.i"
+	@echo "... test_health.s"
+	@echo "... test_heap.o"
+	@echo "... test_heap.i"
+	@echo "... test_heap.s"
 	@echo "... test_initializer.o"
 	@echo "... test_initializer.i"
 	@echo "... test_initializer.s"
@@ -757,9 +1525,18 @@ help:
 	@echo "... test_libconfig.o"
 	@echo "... test_libconfig.i"
 	@echo "... test_libconfig.s"
+	@echo "... test_lockfree.o"
+	@echo "... test_lockfree.i"
+	@echo "... test_lockfree.s"
 	@echo "... test_move.o"
 	@echo "... test_move.i"
 	@echo "... test_move.s"
+	@echo "... test_mutex.o"
+	@echo "... test_mutex.i"
+	@echo "... test_mutex.s"
+	@echo "... test_noncopyable.o"
+	@echo "... test_noncopyable.i"
+	@echo "... test_noncopyable.s"
 	@echo "... test_proto.o"
 	@echo "... test_proto.i"
 	@echo "... test_proto.s"
@@ -769,15 +1546,36 @@ help:
 	@echo "... test_rangeiter.o"
 	@echo "... test_rangeiter.i"
 	@echo "... test_rangeiter.s"
+	@echo "... test_redis.o"
+	@echo "... test_redis.i"
+	@echo "... test_redis.s"
 	@echo "... test_regex.o"
 	@echo "... test_regex.i"
 	@echo "... test_regex.s"
+	@echo "... test_rocksdb.o"
+	@echo "... test_rocksdb.i"
+	@echo "... test_rocksdb.s"
+	@echo "... test_singleton.o"
+	@echo "... test_singleton.i"
+	@echo "... test_singleton.s"
+	@echo "... test_skiplist.o"
+	@echo "... test_skiplist.i"
+	@echo "... test_skiplist.s"
 	@echo "... test_static_assert.o"
 	@echo "... test_static_assert.i"
 	@echo "... test_static_assert.s"
 	@echo "... test_test.o"
 	@echo "... test_test.i"
 	@echo "... test_test.s"
+	@echo "... test_threadpool.o"
+	@echo "... test_threadpool.i"
+	@echo "... test_threadpool.s"
+	@echo "... test_topk.o"
+	@echo "... test_topk.i"
+	@echo "... test_topk.s"
+	@echo "... test_trie.o"
+	@echo "... test_trie.i"
+	@echo "... test_trie.s"
 	@echo "... test_tuple.o"
 	@echo "... test_tuple.i"
 	@echo "... test_tuple.s"
